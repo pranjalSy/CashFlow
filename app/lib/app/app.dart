@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../core/config/flavor.dart';
+import '../core/theme/app_theme.dart';
+import 'theme_preview.dart';
 
 class CashFlowApp extends StatelessWidget {
-  const CashFlowApp({super.key});
+  const CashFlowApp({super.key, this.themeMode = ThemeMode.system});
+
+  /// Follows the phone setting until Settings → Theme exists (T14).
+  final ThemeMode themeMode;
 
   @override
   Widget build(BuildContext context) {
@@ -11,33 +16,10 @@ class CashFlowApp extends StatelessWidget {
     return MaterialApp(
       title: config.appName,
       debugShowCheckedModeBanner: config.isDev,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF5AB7F1)),
-        scaffoldBackgroundColor: const Color(0xFFFAFCFF),
-      ),
-      home: const _PlaceholderHome(),
-    );
-  }
-}
-
-/// Temporary screen until the real Home screen (T10) is built.
-class _PlaceholderHome extends StatelessWidget {
-  const _PlaceholderHome();
-
-  @override
-  Widget build(BuildContext context) {
-    final config = FlavorConfig.instance;
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(config.appName, style: Theme.of(context).textTheme.headlineMedium),
-            const SizedBox(height: 8),
-            Text('Flavor: ${config.flavor.name}'),
-          ],
-        ),
-      ),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: themeMode,
+      home: const ThemePreview(),
     );
   }
 }

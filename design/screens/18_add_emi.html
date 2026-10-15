@@ -1,0 +1,107 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18 Add EMI</title><style>
+body{margin:0;padding:28px 16px;background:#E9EEF6;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1F2A37}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#5B6B7F;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#5B6B7F;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#F2F8FC;box-shadow:0 0 0 8px #1F2A37;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg{display:flex;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#5B6B7F}
+.seg span.on.e{background:#C62828;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(31,42,55,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#8A97A8;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#5B6B7F;background:rgba(255,255,255,.75);border:1px solid #E6EBF3;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(31,42,55,.22)}
+.kb{position:relative;margin-top:auto;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(31,42,55,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#5B6B7F}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #F0F3F8}
+.ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#8A97A8;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#9AA7B8}
+label{display:block;font-size:12px;font-weight:700;color:#5B6B7F;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:#fff;border:1.5px solid #E6EBF3;font-size:14px;font-weight:700;color:#5B6B7F}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#5B6B7F;background:#EEF2F8}
+.sc.on{background:#1F2A37;color:#fff}
+.req{font-size:10px;font-weight:700;color:#8A97A8;background:#EEF2F8;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#3B5BDB;background:#EDF1FD;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#C62828;background:#FFF8F8}
+.err{color:#C62828;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#3B5BDB}
+
+.top h2{margin:0;font-size:18px}
+.body2{position:relative;padding:12px 16px 0}
+.nm{display:flex;align-items:center;gap:11px;background:#fff;border-radius:20px;padding:10px 12px;box-shadow:0 6px 18px -10px rgba(31,42,55,.14)}
+.ei{width:40px;height:40px;border-radius:13px;background:#EDF1FD;display:flex;align-items:center;justify-content:center;flex:none}
+.nmt{flex:1}.nmt small,.fl small{display:block;font-size:11px;font-weight:600;color:#8A97A8}.nmt b{font-size:15.5px}
+.lend{font-size:12px;font-weight:700;color:#5B6B7F;background:#F2F5FA;border-radius:999px;padding:5px 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.fl{background:#fff;border-radius:18px;padding:10px 12px;box-shadow:0 6px 18px -10px rgba(31,42,55,.12)}.fl.w{margin-top:8px}
+.fv{display:flex;align-items:baseline;gap:4px;margin-top:2px}.fv b{font-size:16px;font-variant-numeric:tabular-nums}.fv em{font-style:normal;font-size:12px;color:#8A97A8;font-weight:600}
+.loan{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:10px 14px;border-radius:16px;background:#EDF1FD;color:#2B4BC7;font-size:13px;font-weight:600}.loan b{font-size:16px}
+.kn{display:flex;align-items:center;justify-content:space-between;margin-top:14px}.kn small{font-size:12px;font-weight:700;color:#5B6B7F}
+.seg4{display:flex;background:#E6ECF6;border-radius:999px;padding:3px}.seg4 span{padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:700;color:#5B6B7F}.seg4 span.on{background:#3B5BDB;color:#fff}
+.res{margin-top:10px;border-radius:22px;padding:14px;background:#1F2A37;color:#fff}
+.res.bad{background:#FFF5F5;border:1.5px solid #F2C2C2;color:#1F2A37}
+.rt small{font-size:12px;color:#B9C4DA;font-weight:600}.rt b{display:block;font-size:26px;letter-spacing:-.5px;font-variant-numeric:tabular-nums}.rt b em{font-style:normal;font-size:13px;color:#B9C4DA;font-weight:600;margin-left:4px}
+.rg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}
+.rg small{display:block;font-size:10.5px;color:#B9C4DA}.rg b{font-size:12.5px;font-variant-numeric:tabular-nums}
+.bp{display:flex;gap:6px;font-size:12px;color:#5B6B7F;line-height:1.45;margin:8px 0 0}.bp svg{flex:none;margin-top:1px}
+.cta{margin:auto 16px 20px}
+.p{background:#3B5BDB;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+</style></head><body>
+<div class="h">18 &middot; Add EMI</div><p class="sub">EMI tab ke "+" se "Add EMI"</p>
+<div class="row"><div><div class="phone" style="--c:#3B5BDB;--t:#EDF1FD"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="top"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><h2>Add EMI</h2><div style="width:40px"></div></div>
+<div class="body2">
+<div class="nm"><div class="ei"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B4BC7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-7h5l3 7M10 10l-1-3H7M15 10l2-3h2"/></svg></div><div class="nmt"><small>Name</small><b>Bike loan</b></div><span class="lend">HDFC</span></div>
+<div class="grid2"><div class="fl"><small>Item price</small><div class="fv"><b>&#8377;1,10,000</b></div></div><div class="fl"><small>Down payment</small><div class="fv"><b>&#8377;20,000</b></div></div></div>
+<div class="loan"><span>Loan amount</span><b>&#8377;90,000</b></div>
+<div class="grid2"><div class="fl"><small>Interest (yearly)</small><div class="fv"><b>12</b><em>%</em></div></div><div class="fl"><small>First EMI</small><div class="fv"><b>5 Jul 2026</b></div></div></div>
+<div class="kn"><small>I know the</small><div class="seg4"><span class="on">Months</span><span class="">EMI amount</span></div></div><div class="fl w"><small>Number of months</small><div class="fv"><b>12</b><em>months</em></div></div><div class="res"><div class="rt"><small>Your EMI</small><b>&#8377;7,996.39<em>/month</em></b></div>
+<div class="rg"><div><small>Total interest</small><b>&#8377;5,956.69</b></div><div><small>Total to pay</small><b>&#8377;95,956.69</b></div><div><small>Last EMI</small><b>5 Jun 2027</b></div></div></div>
+</div>
+<div class="cta"><button class="p">Save EMI</button></div></div><p class="cap">Months pata hai: EMI apne aap</p></div><div><div class="phone" style="--c:#3B5BDB;--t:#EDF1FD"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="top"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><h2>Add EMI</h2><div style="width:40px"></div></div>
+<div class="body2">
+<div class="nm"><div class="ei"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B4BC7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-7h5l3 7M10 10l-1-3H7M15 10l2-3h2"/></svg></div><div class="nmt"><small>Name</small><b>Bike loan</b></div><span class="lend">HDFC</span></div>
+<div class="grid2"><div class="fl"><small>Item price</small><div class="fv"><b>&#8377;1,10,000</b></div></div><div class="fl"><small>Down payment</small><div class="fv"><b>&#8377;20,000</b></div></div></div>
+<div class="loan"><span>Loan amount</span><b>&#8377;90,000</b></div>
+<div class="grid2"><div class="fl"><small>Interest (yearly)</small><div class="fv"><b>12</b><em>%</em></div></div><div class="fl"><small>First EMI</small><div class="fv"><b>5 Jul 2026</b></div></div></div>
+<div class="kn"><small>I know the</small><div class="seg4"><span class="">Months</span><span class="on">EMI amount</span></div></div><div class="fl w"><small>EMI amount</small><div class="fv"><b>&#8377;8,500</b><em>/month</em></div></div><div class="res"><div class="rt"><small>It will take</small><b>12 months</b></div>
+<div class="rg"><div><small>Last EMI</small><b>&#8377;2,112.98</b></div><div><small>Total interest</small><b>&#8377;5,612.98</b></div><div><small>Ends</small><b>5 Jun 2027</b></div></div></div>
+</div>
+<div class="cta"><button class="p">Save EMI</button></div></div><p class="cap">EMI amount pata hai: months apne aap</p></div><div><div class="phone" style="--c:#3B5BDB;--t:#EDF1FD"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="top"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><h2>Add EMI</h2><div style="width:40px"></div></div>
+<div class="body2">
+<div class="nm"><div class="ei"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2B4BC7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-7h5l3 7M10 10l-1-3H7M15 10l2-3h2"/></svg></div><div class="nmt"><small>Name</small><b>Bike loan</b></div><span class="lend">HDFC</span></div>
+<div class="grid2"><div class="fl"><small>Item price</small><div class="fv"><b>&#8377;1,10,000</b></div></div><div class="fl"><small>Down payment</small><div class="fv"><b>&#8377;20,000</b></div></div></div>
+<div class="loan"><span>Loan amount</span><b>&#8377;90,000</b></div>
+<div class="grid2"><div class="fl"><small>Interest (yearly)</small><div class="fv"><b>12</b><em>%</em></div></div><div class="fl"><small>First EMI</small><div class="fv"><b>5 Jul 2026</b></div></div></div>
+<div class="kn"><small>I know the</small><div class="seg4"><span class="">Months</span><span class="on">EMI amount</span></div></div><div class="fl w"><small>EMI amount</small><div class="fv"><b>&#8377;800</b><em>/month</em></div></div><div class="res bad"><div class="rt"><small style="color:#C62828">Not possible</small><b style="color:#C62828;font-size:17px">EMI is less than the monthly interest</b></div>
+<p class="bp"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg> Interest alone is &#8377;900 a month on &#8377;90,000 at 12%. Enter more than &#8377;900, or choose months.</p></div>
+</div>
+<div class="cta"><button class="p">Save EMI</button></div></div><p class="cap">EMI bahut kam: "Not possible"</p></div></div>
+<div class="notes"><b>Fields:</b> Name (+ icon), Lender (optional), Item price, Down payment (optional), Loan amount (apne aap = price &minus; down payment, ya seedha loan amount likho), Interest yearly %, First EMI date (EMI har mahine isi tareekh; 29/30/31 ho to mahine ka aakhri din).<br>
+<b>"I know the":</b> Months ya EMI amount, ek daalo, doosra turant calculate. Dono baad mein edit ho sakte hain.<br>
+<b>Result card:</b> EMI/month (ya kitne months), total interest, total to pay, aakhri EMI. Number badalte hi live update.<br>
+<b>Calculation:</b> reducing balance. &#8377;90,000, 12%, 12 months = <b>&#8377;7,996.39</b> (brief ka reference). 0% interest = loan &divide; months. EMI se months nikalne par aakhri EMI chhoti.<br>
+<b>Not possible:</b> EMI monthly interest se kam ho to laal card aur saaf wajah. Save button grey nahi hota (app ka rule); dabane par card halka hilta hai aur save nahi hota.<br>
+<b>Save:</b> saari installments apne aap ban jati hain; EMI list mein progress "0 of 12 paid".</div></body></html>

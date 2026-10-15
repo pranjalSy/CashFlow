@@ -1,0 +1,169 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 Person detail (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329}
+.glow{position:absolute;left:0;right:0;top:0;height:320px;background:radial-gradient(60% 50% at 50% 10%,#0D1330 0,transparent 75%),radial-gradient(40% 40% at 95% 20%,#241F45 0,transparent 70%)}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.scroll{position:relative;height:690px;overflow:hidden;padding:0 16px}
+.top{display:flex;justify-content:space-between;padding:10px 0 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(22,22,26,0.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.bk.xs{width:34px;height:34px;border-radius:12px;background:#1C1C21;box-shadow:none}
+.who{text-align:center;margin-top:-18px}
+.big{width:72px;height:72px;margin:0 auto;border-radius:50%;background:#1E2A55;color:#8EA2FF;font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 10px 24px -10px rgba(43,75,199,.5)}
+.who h1{font-size:22px;margin:10px 0 2px;letter-spacing:-.4px}.who p{margin:0;font-size:13px;color:#A3B1C4}
+.net{margin-top:16px;background:#4263EB;color:#fff;border-radius:24px;padding:16px 18px;box-shadow:0 14px 30px -12px rgba(43,75,199,.7)}
+.net.owe{background:#BE185D;box-shadow:0 14px 30px -12px rgba(163,22,90,.6)}
+.net.ok{background:#15803D;box-shadow:0 14px 30px -12px rgba(21,128,61,.7)}
+.net small{font-size:13px;opacity:.85}.net b{display:block;font-size:32px;letter-spacing:-.8px;margin:2px 0;font-variant-numeric:tabular-nums}.net span{font-size:12px;opacity:.85}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.ac{display:flex;flex-direction:column;align-items:center;gap:5px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:18px;padding:11px 0;box-shadow:0 6px 18px -10px rgba(0,0,0,.15)}
+.ac span{font-size:12.5px;font-weight:700}
+.lab{font-size:12px;font-weight:700;color:#7D8BA0;margin:18px 4px 8px;letter-spacing:.3px}
+.loan{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:13px;margin-bottom:10px;box-shadow:0 6px 18px -10px rgba(0,0,0,.14)}
+.lh{display:flex;align-items:center;gap:10px}
+.li{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.lm{flex:1;min-width:0}.lm b{display:block;font-size:15px;white-space:nowrap}.lm small{font-size:11.5px;color:#93A2B6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tags{display:flex;align-items:center;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;border-radius:999px;padding:4px 8px;white-space:nowrap}
+.tag.due{background:#3A2516;color:#FB923C}.tag.ok{background:#15301F;color:#4ADE80}
+.bell{width:28px;height:28px;border-radius:50%;background:#1C1C21;display:flex;align-items:center;justify-content:center}.bell.on{background:#1E2A55}
+.bar{height:7px;border-radius:7px;background:#1C1C21;margin:12px 0 6px;overflow:hidden}.bar i{display:block;height:100%;border-radius:7px}
+.bl{display:flex;justify-content:space-between;font-size:11.5px;color:#A3B1C4;font-weight:600}
+.rp{display:flex;align-items:center;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid #1C1C21}
+.dot{width:8px;height:8px;border-radius:50%;margin:0 15px}
+.rpm{flex:1}.rpm b{display:block;font-size:13px}.rpm small{font-size:11px;color:#93A2B6}.sa{font-size:13.5px;white-space:nowrap}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:32px 32px 0 0;padding:10px 16px 22px;box-shadow:0 -12px 40px -10px rgba(0,0,0,.3)}
+.handle{width:36px;height:4px;border-radius:4px;background:#26262D;margin:0 auto 10px}
+.shh{display:flex;align-items:center;justify-content:space-between}.shh h3{margin:0;font-size:18px}
+.ramt{display:flex;align-items:center;justify-content:center;gap:4px;margin:14px 0 2px;color:#F472B6}
+.ramt span{font-size:24px;font-weight:600}.ramt b{font-size:42px;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.caret{width:3px;height:36px;background:#BE185D;border-radius:2px}
+.rinfo{text-align:center;color:#FB923C;font-size:12.5px;font-weight:600;margin:0 0 12px}
+.pm.on{border-color:#F472B6;color:#F472B6;background:#3A1A2E}
+.snack{position:absolute;left:12px;right:12px;bottom:22px;z-index:9;background:#4263EB;color:#fff;border-radius:24px;padding:14px;box-shadow:0 18px 40px -12px rgba(59,91,219,.75)}
+.sn1{display:flex;gap:12px;align-items:flex-start}.sn1 b{display:block;font-size:14px;line-height:1.35}.sn1 small{display:block;font-size:12.5px;color:#1E2A55;margin-top:3px;line-height:1.4}
+.sni{width:36px;height:36px;border-radius:12px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;flex:none}
+.snb{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.snb span{padding:9px 14px;border-radius:999px;font-size:13px;font-weight:700}
+.snk{position:absolute;left:6px;right:6px;bottom:19px;z-index:9;display:flex;align-items:center;gap:10px;height:54px;padding:0 8px 0 10px;border-radius:18px;background:#4263EB;color:#fff;overflow:hidden;box-shadow:0 12px 28px -10px rgba(59,91,219,.75)}
+.ski{width:28px;height:28px;border-radius:9px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;flex:none}
+.skt{flex:1;min-width:0;line-height:1.2}.skt b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.skt small{font-size:11.5px;color:#1E2A55}
+.sky{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);color:#7C93FF;font-size:13px;font-weight:700;border-radius:999px;padding:7px 14px;flex:none}
+.skx{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:none}
+.skt5{position:absolute;left:0;bottom:0;height:2px;width:62%;background:rgba(22,22,26,0.85)}
+.tmr{height:3px;border-radius:3px;background:rgba(255,255,255,.25);margin-top:12px;overflow:hidden}.tmr i{display:block;height:100%;width:62%;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:3px}
+.calc{margin-top:12px;background:#151519;border:1px solid #26262D;border-radius:18px;padding:4px 12px}
+.cl{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:13px;color:#C9D3E0}.cl span{display:flex;align-items:center;gap:6px}.cl b{font-variant-numeric:tabular-nums}
+.cl.tot{border-top:1px dashed #26262D;font-weight:700;color:#E8EDF5}
+.later{display:flex;justify-content:space-between;align-items:center;margin:-2px 0 10px;padding:10px 12px;border-radius:16px;background:#33220F;color:#FDBA74;font-size:12.5px;font-weight:600}.later span{color:#7C93FF;font-weight:700}
+.no{color:#3A475D}.yes{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);color:#7C93FF}
+.snack.anchored{left:4px;right:4px;bottom:14px}
+.p.done{background:#15803D;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -8px rgba(21,128,61,.6)}
+.sx{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center}
+.sn1{padding-right:26px}
+label{display:block;font-size:12px;font-weight:700;color:#A3B1C4;margin:10px 4px 8px}
+.req{font-size:10px;font-weight:700;color:#7D8BA0;background:#1C1C21;border-radius:999px;padding:2px 7px;margin-left:4px}
+.pick{display:flex;align-items:center;gap:10px;background:#151519;border:1px solid #26262D;border-radius:18px;padding:10px 12px}
+.chg{font-size:13px;font-weight:700;color:#7C93FF}
+.quick{display:flex;gap:8px;margin-top:10px}.q{padding:8px 12px;border-radius:999px;background:#1C1C21;font-size:12.5px;font-weight:700;color:#A3B1C4}.q.on{background:#15301F;color:#4ADE80;box-shadow:inset 0 0 0 1.5px #4ADE80}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{height:44px;border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#A3B1C4}
+.p{width:100%;height:54px;margin-top:12px;border-radius:999px;border:0;background:#BE185D;color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px rgba(163,22,90,.6)}
+.notes{max-width:760px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body>
+<div class="h">14 &middot; Person detail</div><p class="sub">Contacts tab ya Home mein udhar entry par tap karne par</p>
+<div class="row"><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="scroll"><div class="top"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></div></div>
+<div class="who"><div class="big">RS</div><h1>Rahul Sharma</h1><p>+91 98250 44321</p></div>
+<div class="net"><small>Rahul owes you</small><b>&#8377;3,000</b><span>Lent &#8377;5,000 &middot; Repaid &#8377;2,000</span></div>
+<div class="acts"><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Lent</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Borrowed</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg><span>Repayment</span></div></div>
+<div class="lab">History</div>
+<div class="loan"><div class="lh"><div class="li" style="background:#1E2A55"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+<div class="lm"><b>Lent &#8377;5,000</b><small>1 Oct &middot; UPI &middot; Trip advance</small></div><div class="tags"><span class="tag due"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg> Due 25 Oct</span><span class="bell on"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span></div></div>
+<div class="bar"><i style="width:40%;background:#4263EB"></i></div>
+<div class="bl"><span>&#8377;2,000 of &#8377;5,000 repaid</span><span>&#8377;3,000 left</span></div><div class="rp"><span class="dot" style="background:#15803D"></span><div class="rpm"><b>Repayment received</b><small>10 Oct &middot; Cash</small></div><b class="sa" style="color:#4ADE80">+&#8377;2,000</b></div></div>
+<div class="loan"><div class="lh"><div class="li" style="background:#3A1A2E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+<div class="lm"><b>Borrowed &#8377;1,000</b><small>12 Sep &middot; Cash</small></div><div class="tags"><span class="tag ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Settled</span></div></div>
+<div class="bar"><i style="width:100%;background:#15803D"></i></div>
+<div class="bl"><span>&#8377;1,000 of &#8377;1,000 paid back</span><span></span></div><div class="rp"><span class="dot" style="background:#BE185D"></span><div class="rpm"><b>Repayment paid</b><small>20 Sep &middot; UPI</small></div><b class="sa" style="color:#F472B6">&minus;&#8377;1,000</b></div></div>
+<div style="height:40px"></div></div></div><p class="cap">Rahul Sharma ki saari entries</p></div></div>
+<div class="h" style="margin-top:34px;font-size:18px">Example: Rahul se &#8377;3,000 liye the, aapne &#8377;5,000 diye</div><p class="sub">Extra paisa = naya udhar? User se poochte hain</p>
+<div class="row"><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="scroll"><div class="top"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></div></div>
+<div class="who"><div class="big">RS</div><h1>Rahul Sharma</h1><p>+91 98250 44321</p></div>
+<div class="net owe"><small>You owe Rahul</small><b>&#8377;3,000</b><span>Borrowed &#8377;3,000 &middot; Paid back &#8377;0</span></div>
+<div class="acts"><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Lent</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Borrowed</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg><span>Repayment</span></div></div>
+<div class="lab">History</div><div class="loan"><div class="lh"><div class="li" style="background:#3A1A2E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+<div class="lm"><b>Borrowed &#8377;3,000</b><small>2 Oct &middot; Cash</small></div><div class="tags"><span class="tag ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Settled</span></div></div>
+<div class="bar"><i style="width:100%;background:#15803D"></i></div>
+<div class="bl"><span>&#8377;3,000 of &#8377;3,000 paid back</span><span></span></div><div class="rp"><span class="dot" style="background:#BE185D"></span><div class="rpm"><b>Paid back</b><small>14 Oct &middot; UPI &middot; paid &#8377;5,000</small></div><b class="sa" style="color:#F472B6">&minus;&#8377;3,000</b></div></div><div style="height:40px"></div></div><div class="scrim"></div><div class="sheet"><div class="handle"></div>
+<div class="shh"><h3>Pay back Rahul</h3><div class="bk xs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+<div class="ramt"><span>&minus; &#8377;</span><b>5,000</b><span class="caret"></span></div>
+<p class="rinfo">&#8377;3,000 left on this udhar &middot; &#8377;2,000 extra</p>
+<label>For which udhar</label><div class="pick"><div class="li" style="background:#3A1A2E"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div><div class="lm"><b>Borrowed &#8377;3,000 &middot; 2 Oct</b><small>&#8377;3,000 left</small></div><span class="chg">Change</span></div>
+<label>Paid via <span class="req">Required</span></label><div class="pay"><span class="pm">Cash</span><span class="pm on">Online</span></div>
+<div class="calc"><div class="cl"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Clears your udhar</span><b>&#8377;3,000</b></div>
+<div class="cl"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Extra, you can add as lent</span><b style="color:#8EA2FF">&#8377;2,000</b></div>
+<div class="cl tot"><span>Total paid</span><b>&#8377;5,000</b></div></div>
+<button class="p">Save payment</button></div></div><p class="cap">1 &middot; &#8377;5,000 daale (&#8377;2,000 extra)</p></div><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="scroll"><div class="top"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></div></div>
+<div class="who"><div class="big">RS</div><h1>Rahul Sharma</h1><p>+91 98250 44321</p></div>
+<div class="net owe"><small>You owe Rahul</small><b>&#8377;3,000</b><span>Borrowed &#8377;3,000 &middot; Paid back &#8377;0</span></div>
+<div class="acts"><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Lent</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Borrowed</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg><span>Repayment</span></div></div>
+<div class="lab">History</div><div class="loan"><div class="lh"><div class="li" style="background:#3A1A2E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+<div class="lm"><b>Borrowed &#8377;3,000</b><small>2 Oct &middot; Cash</small></div><div class="tags"><span class="tag ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Settled</span></div></div>
+<div class="bar"><i style="width:100%;background:#15803D"></i></div>
+<div class="bl"><span>&#8377;3,000 of &#8377;3,000 paid back</span><span></span></div><div class="rp"><span class="dot" style="background:#BE185D"></span><div class="rpm"><b>Paid back</b><small>14 Oct &middot; UPI &middot; paid &#8377;5,000</small></div><b class="sa" style="color:#F472B6">&minus;&#8377;3,000</b></div></div><div style="height:40px"></div></div><div class="scrim"></div><div class="sheet"><div class="snk"><div class="ski"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="skt"><b>Paid Rahul &#8377;2,000 extra</b><small>Add it as lent?</small></div><span class="sky">Yes</span><span class="skx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span><i class="skt5"></i></div><div class="handle"></div>
+<div class="shh"><h3>Pay back Rahul</h3><div class="bk xs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div>
+<div class="ramt"><span>&minus; &#8377;</span><b>5,000</b><span class="caret"></span></div>
+<p class="rinfo">&#8377;3,000 left on this udhar &middot; &#8377;2,000 extra</p>
+<label>For which udhar</label><div class="pick"><div class="li" style="background:#3A1A2E"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div><div class="lm"><b>Borrowed &#8377;3,000 &middot; 2 Oct</b><small>&#8377;3,000 left</small></div><span class="chg">Change</span></div>
+<label>Paid via <span class="req">Required</span></label><div class="pay"><span class="pm">Cash</span><span class="pm on">Online</span></div>
+<div class="calc"><div class="cl"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Clears your udhar</span><b>&#8377;3,000</b></div>
+<div class="cl"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Extra, you can add as lent</span><b style="color:#8EA2FF">&#8377;2,000</b></div>
+<div class="cl tot"><span>Total paid</span><b>&#8377;5,000</b></div></div>
+<button class="p done"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Payment saved</button></div></div><p class="cap">2 &middot; Save: sheet khuli, neeche sheet ke upar snackbar (5 sec)</p></div><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="scroll"><div class="top"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></div></div>
+<div class="who"><div class="big">RS</div><h1>Rahul Sharma</h1><p>+91 98250 44321</p></div>
+<div class="net ok"><small>All settled with Rahul</small><b>&#8377;0</b><span>Borrowed &#8377;3,000 &middot; Paid back &#8377;3,000</span></div>
+<div class="acts"><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>Lent</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Borrowed</span></div><div class="ac"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg><span>Repayment</span></div></div>
+<div class="lab">History</div><div class="loan"><div class="lh"><div class="li" style="background:#3A1A2E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div>
+<div class="lm"><b>Borrowed &#8377;3,000</b><small>2 Oct &middot; Cash</small></div><div class="tags"><span class="tag ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Settled</span></div></div>
+<div class="bar"><i style="width:100%;background:#15803D"></i></div>
+<div class="bl"><span>&#8377;3,000 of &#8377;3,000 paid back</span><span></span></div><div class="rp"><span class="dot" style="background:#BE185D"></span><div class="rpm"><b>Paid back</b><small>14 Oct &middot; UPI &middot; paid &#8377;5,000</small></div><b class="sa" style="color:#F472B6">&minus;&#8377;3,000</b></div></div><div class="later">&#8377;2,000 extra not added <span>Add as lent</span></div><div style="height:40px"></div></div></div><p class="cap">3 &middot; Snackbar gaya, sheet band: sirf Settled</p></div></div>
+<div class="notes"><b>Net card:</b> ek nazar mein: "Rahul owes you &#8377;3,000" (blue) ya "You owe Amit &#8377;2,000" (pink). Neeche hisaab: Lent, Repaid.<br>
+<b>3 button:</b> Lent, Borrowed, Repayment. Isi person ke liye form khulta hai, naam pehle se bhara.<br>
+<b>History:</b> har udhar ek card: amount, date, payment, note; progress bar ("&#8377;2,000 of &#8377;5,000 repaid", "&#8377;3,000 left"); due tag (7 din se kam = orange); &#128276; reminder on/off (Premium). Card ke andar uske saare repayments. Pura chukta = green bar + "Settled".<br>
+<b>Repayment:</b> kis udhar ke liye (apne aap sabse purana khula udhar), "Full" / "Half" ek tap mein. Received/Paid apne aap (lent = received, borrowed = paid).<br>
+<b>Zyada repayment:</b> allowed. "Save payment" ke theek upar hisaab: &#8377;3,000 udhar chukane mein, &#8377;2,000 extra, total &#8377;5,000. Save karte hi &#8377;3,000 wala udhar <b>Settled</b>.<br>
+<b>Save ke baad:</b> sheet band nahi hoti; button green "Payment saved" ho jata hai aur <b>sheet ke upar</b> snackbar aata hai.<br>
+<b>Snackbar (5 sec):</b> compact, ek line (54px): icon, "Paid Rahul &#8377;2,000 extra &middot; Add it as lent?", Yes, &times;. Brand blue rang. Neeche 2px timer line. User &times; dabakar ya neeche/side swipe karke turant hata sakta hai.<br>
+&nbsp;&bull; Udhar liya tha, zyada diya: <i>"You paid Rahul &#8377;2,000 extra. Add &#8377;2,000 as udhar you gave to Rahul?"</i> &rarr; Yes = naya <b>Lent &#8377;2,000</b>.<br>
+&nbsp;&bull; Udhar diya tha, zyada mila: <i>"Rahul paid you &#8377;2,000 extra. Add &#8377;2,000 as money you borrowed from Rahul?"</i> &rarr; Yes = naya <b>Borrowed &#8377;2,000</b>.<br>
+&nbsp;&bull; <b>Yes dabaya:</b> naya Lent &#8377;2,000 ban jata hai, phir sheet band.<br>
+&nbsp;&bull; <b>Yes nahi dabaya / &times;:</b> 5 sec baad snackbar gayab, phir sheet band. Sirf &#8377;3,000 Settled, koi naya udhar nahi. Settled card par chhota "&#8377;2,000 extra not added &middot; Add as lent" rehta hai, taaki baad mein bhi add kar sako (dobara poochte nahi).<br>
+<b>&middot;&middot;&middot; menu:</b> naam badlo, due date badhao (purana record rehta hai), person hatao. Call button nahi (aapki list ke hisaab se).<br>
+<b>Swipe:</b> history cards par bhi Edit / Delete (Home jaisa).</div></body></html>

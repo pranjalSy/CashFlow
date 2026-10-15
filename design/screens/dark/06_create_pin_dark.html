@@ -1,0 +1,63 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>06 Create PIN (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:320px;height:690px;border-radius:46px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329;display:flex;flex-direction:column}
+.glow{position:absolute;inset:0;background:radial-gradient(60% 30% at 50% 8%,#0D1330 0,transparent 70%),radial-gradient(40% 20% at 10% 25%,#241F45 0,transparent 70%)}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 28px 0;font-size:12px;font-weight:600}
+.nav{position:relative;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(22,22,26,0.8);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.steps{display:flex;gap:6px}.steps i{width:22px;height:5px;border-radius:5px;background:#26262D}.steps i.on{background:#4263EB}
+.body{position:relative;padding:4px 20px 0;text-align:center}
+.badge{width:68px;height:68px;margin:8px auto 14px;border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px -8px rgba(59,91,219,.35)}
+h1{font-size:25px;letter-spacing:-.6px;margin:0 0 6px;font-weight:700}.sub2{margin:0 0 22px;color:#A3B1C4;font-size:14px}
+.dots{display:flex;gap:18px;justify-content:center}
+.dots i{width:16px;height:16px;border-radius:50%;border:2px solid #B9C4DA;box-sizing:border-box}
+.dots i.on{background:#4263EB;border-color:#7C93FF;transform:scale(1.08)}
+.dots.bad i{background:#DC2626;border-color:#F87171}
+.hint{font-size:12px;color:#A3B1C4;margin:16px 0 0}.emsg{color:#F87171;font-size:13px;margin:16px 0 0;font-weight:500}
+.bottom{position:relative;margin-top:auto;padding:0 18px 18px}
+.safe{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;color:#4ADE80;margin:0 0 10px;font-weight:500}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.k{height:58px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 2px 0 rgba(0,0,0,.05)}
+.k b{font-size:24px;font-weight:600;line-height:1}.k small{font-size:9px;letter-spacing:1.5px;color:#7D8BA0;margin-top:2px}
+.k.press{background:#1E2A55;transform:scale(.96)}
+.k.empty{background:transparent;box-shadow:none}.k.ghost{background:transparent;box-shadow:none}
+.notes{max-width:700px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body>
+<div class="h">06 &middot; Create PIN + Confirm PIN</div><p class="sub">Language ke baad (step 1 of 2, 2 of 2)</p>
+<div class="row"><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="nav"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div><div class="steps"><i class="on"></i><i class=""></i></div><div style="width:40px"></div></div>
+<div class="body"><div class="badge"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+<h1>Create your PIN</h1><p class="sub2">You&#39;ll use this 4-digit PIN to open CashFlow.</p><div class="dots"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></div><p class="hint">Avoid easy PINs like 1234 or 0000</p></div>
+<div class="bottom"><p class="safe"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Stored only on this phone, never sent anywhere</p><div class="pad"><div class="k"><b>1</b><small>&nbsp;</small></div><div class="k"><b>2</b><small>ABC</small></div><div class="k"><b>3</b><small>DEF</small></div><div class="k"><b>4</b><small>GHI</small></div><div class="k"><b>5</b><small>JKL</small></div><div class="k"><b>6</b><small>MNO</small></div><div class="k"><b>7</b><small>PQRS</small></div><div class="k press"><b>8</b><small>TUV</small></div><div class="k"><b>9</b><small>WXYZ</small></div><div class="k empty"></div><div class="k"><b>0</b><small>&nbsp;</small></div><div class="k ghost"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 6H9l-6 6 6 6h12a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/><path d="M13 10l4 4M17 10l-4 4"/></svg></div></div></div></div><p class="cap">Create: 2 digit daale, "8" daba hua</p></div>
+<div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="nav"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div><div class="steps"><i class="on"></i><i class="on"></i></div><div style="width:40px"></div></div>
+<div class="body"><div class="badge"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+<h1>Confirm your PIN</h1><p class="sub2">Enter the same PIN again.</p><div class="dots bad"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><p class="emsg">PINs don&#39;t match. Try again.</p></div>
+<div class="bottom"><p class="safe"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Stored only on this phone, never sent anywhere</p><div class="pad"><div class="k"><b>1</b><small>&nbsp;</small></div><div class="k"><b>2</b><small>ABC</small></div><div class="k"><b>3</b><small>DEF</small></div><div class="k"><b>4</b><small>GHI</small></div><div class="k"><b>5</b><small>JKL</small></div><div class="k"><b>6</b><small>MNO</small></div><div class="k"><b>7</b><small>PQRS</small></div><div class="k"><b>8</b><small>TUV</small></div><div class="k"><b>9</b><small>WXYZ</small></div><div class="k empty"></div><div class="k"><b>0</b><small>&nbsp;</small></div><div class="k ghost"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 6H9l-6 6 6 6h12a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/><path d="M13 10l4 4M17 10l-4 4"/></svg></div></div></div></div><p class="cap">Confirm: PIN match nahi hua</p></div></div>
+<div class="notes"><b>Keypad:</b> app ka apna number pad, bade buttons (58px), har tap par halka haptic + button thoda dabta hai. Phone ka keyboard nahi khulta, isliye PIN screen record/keyboard apps tak nahi jaata.<br>
+<b>Dots:</b> digit daalte hi dot blue hokar halka sa pop. 4 digit hote hi apne aap Confirm step par (yahan button nahi, PIN ke liye ye standard hai).<br>
+<b>Easy PIN:</b> 1234, 0000, 1111 jaise PIN par chhota message: "This PIN is easy to guess. Use it anyway?"<br>
+<b>Galat confirm:</b> dots laal + shake, phir khaali; 2 baar galat to wapas Create step.<br>
+<b>Privacy:</b> PIN sirf phone par (salted hash), server par kabhi nahi. Screenshot block (secure screen).</div></body></html>

@@ -1,0 +1,156 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>26 Paywall (Premium) (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(22,22,26,0.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.seg{display:flex;background:rgba(22,22,26,0.7);border:1px solid rgba(22,22,26,0.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#A3B1C4}
+.seg span.on.e{background:#DC2626;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(0,0,0,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#7D8BA0;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#A3B1C4;background:rgba(22,22,26,0.75);border:1px solid #26262D;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-top:1px solid #26262D;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(0,0,0,.22)}
+.kb{position:relative;margin-top:auto;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-top:1px solid #26262D;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(0,0,0,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#A3B1C4}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#1C1C21;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #1C1C21}
+.ri{width:34px;height:34px;border-radius:11px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#7D8BA0;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#6F7E93}
+label{display:block;font-size:12px;font-weight:700;color:#A3B1C4;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;font-size:14px;font-weight:700;color:#A3B1C4}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#A3B1C4;background:#1C1C21}
+.sc.on{background:#232329;color:#fff}
+.req{font-size:10px;font-weight:700;color:#7D8BA0;background:#1C1C21;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#7C93FF;background:#1E2A55;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#F87171;background:#2E1C22}
+.err{color:#F87171;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.top{z-index:2}.tt{text-align:center;min-width:0}.tt h2{margin:0;font-size:18px}.tt small{display:block;font-size:12px;color:#93A2B6;font-weight:600}
+.bk-w{width:40px;display:flex;justify-content:center}
+.sc2{position:relative;flex:1;overflow:hidden;padding:12px 16px 0}
+.tgl{width:44px;height:26px;border-radius:999px;background:#3A475D;position:relative;flex:none;display:inline-block}
+.tgl i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.tgl.on{background:#4263EB}.tgl.on i{left:21px}
+.grp{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12);margin-bottom:12px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0}.li+.li{border-top:1px solid #1C1C21}
+.li .ri{width:34px;height:34px;border-radius:11px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.li .lt{flex:1;min-width:0}.li .lt b{display:block;font-size:14.5px;font-weight:600}.li .lt small{display:block;font-size:11.5px;color:#93A2B6}
+.li .lv{font-size:13px;color:#A3B1C4;font-weight:600;white-space:nowrap}
+.gl{font-size:12px;font-weight:700;color:#7D8BA0;margin:14px 6px 8px;letter-spacing:.3px}
+.scrim{position:absolute;inset:0;z-index:4;background:rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:30px 30px 0 0;padding:8px 18px 20px;box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.hd{width:40px;height:5px;border-radius:5px;background:#26262D;margin:0 auto 14px}
+.pop{position:absolute;left:18px;right:18px;z-index:5;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:30px;padding:20px 18px 18px;text-align:center;box-shadow:0 24px 50px -16px rgba(17,24,39,.5)}
+.pop small.k1{font-size:12px;font-weight:700;color:#FB923C}.pop h3{margin:4px 0;font-size:20px;letter-spacing:-.3px}.pop p{margin:0;font-size:13px;color:#A3B1C4}
+.pico{width:60px;height:60px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.btn{height:50px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px Inter,"Segoe UI",Arial;width:100%}
+.btn.g{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.btn.b{background:#4263EB;color:#fff;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+.btn.s{background:#1C1C21;color:#E8EDF5}.btn.r{background:#3A1D22;color:#F87171}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pad-s{gap:6px}.pad-s .k{height:42px;border-radius:12px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:#A3B1C4;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.chip.on{background:#4263EB;border-color:#7C93FF;color:#fff}
+.hint{display:flex;gap:6px;font-size:11.5px;color:#93A2B6;line-height:1.45;margin:6px 4px 0}.hint svg{flex:none;margin-top:1px}
+.cta2{position:relative;z-index:2;margin:auto 16px 20px}
+.notes .q{color:#FBBF24}
+
+.intro2{margin-top:12px;text-align:center;font-size:13px;font-weight:600;color:#8A6A2E;background:#33260F;border-radius:999px;padding:6px 10px}.intro2 b{font-size:16px;color:#FBBF24}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.plan{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;border-radius:18px;padding:10px 12px;display:flex;flex-direction:column;gap:1px}
+.plan.on{border:2px solid #FBBF24;background:#2A200C}
+.plan b{font-size:13.5px}.pp{font-size:20px;font-weight:700;letter-spacing:-.4px}.pp em{font-style:normal;font-size:12px;color:#7D8BA0;font-weight:600}.plan small{font-size:11px;color:#93A2B6}
+.rad{position:absolute;top:10px;right:10px;width:18px;height:18px;border-radius:50%;border:1.8px solid #3A475D;display:flex;align-items:center;justify-content:center}
+.plan.on .rad{border-color:#FBBF24}.rad i{width:9px;height:9px;border-radius:50%;background:#B45309}
+.save{position:absolute;top:-10px;left:10px;background:#15803D;color:#fff;font-size:10px;font-weight:700;border-radius:999px;padding:2px 8px}
+.top{justify-content:space-between}.rs{font-size:13.5px;font-weight:700;color:#A3B1C4}
+.crown{width:64px;height:64px;border-radius:22px;margin:0 auto 10px;background:linear-gradient(135deg,#F59E0B,#FBBF24);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(180,83,9,.7)}
+.crown.sm{width:48px;height:48px;border-radius:16px;margin-bottom:6px}.crown.big{width:88px;height:88px;border-radius:30px}
+.pt{text-align:center;margin:0;font-size:24px;letter-spacing:-.5px}.ps{text-align:center;margin:4px 20px 10px;font-size:13.5px;color:#A3B1C4;line-height:1.5}.ps b{color:#E8EDF5}
+.fts{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:4px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12)}
+.ft{display:flex;align-items:center;gap:11px;padding:6px 0}.ft+.ft{border-top:1px solid #1C1C21}
+.fti{width:30px;height:30px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.ft b{display:block;font-size:14px}.ft small{font-size:11.5px;color:#93A2B6}
+.price{position:relative;margin-top:16px;padding:12px 16px 10px!important;border:2px solid #FBBF24;background:#33260F;border-radius:22px;padding:14px 16px 12px;text-align:center}
+.off{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#B45309;color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.pr{display:flex;align-items:baseline;justify-content:center;gap:6px}.pr b{font-size:28px;letter-spacing:-1px;color:#FBBF24}.pr span{font-size:14px;font-weight:600}
+.price small{font-size:12px;color:#8A6A2E}
+.btn.gold{background:#B45309;color:#fff;box-shadow:0 10px 22px -8px rgba(180,83,9,.7)}
+.fine{text-align:center;font-size:11px;color:#7D8BA0;margin:8px 6px 0;line-height:1.45}
+.fk1{height:120px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);margin-bottom:10px}.fk2{height:60px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);margin-bottom:10px}
+.lk{position:relative;width:62px;height:62px;border-radius:20px;background:#3A1A2E;margin:4px auto 10px;display:flex;align-items:center;justify-content:center}
+.lk .cr{position:absolute;right:-6px;top:-6px;width:24px;height:24px;border-radius:50%;background:#B45309;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.dh{margin:0;font-size:20px}.dp{margin:6px 14px 0;font-size:13px;color:#A3B1C4;line-height:1.5}
+.mini{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}.mini span{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#C9D3E0}
+.lnk{font-size:13px;margin:12px 0 0;color:#6F7E93}.lnk u{text-decoration:none;color:#7C93FF;font-weight:700}
+.wl{position:relative;flex:1;padding:80px 18px 0;text-align:center}
+.conf{position:absolute;inset:0}.conf i{position:absolute;width:9px;height:14px;border-radius:3px}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body><div class="h">26 &middot; Paywall (Premium)</div><p class="sub">Locked feature ya Settings ke plan card se</p><div class="row"><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#33260F 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><span class="rs">Restore</span></div>
+<div class="sc2" style="padding-top:4px">
+<div class="crown sm"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/></svg></div>
+<h2 class="pt">CashFlow Premium</h2><p class="ps">Never miss udhar, an EMI or a bill.</p>
+<div class="fts"><div class="ft"><div class="fti" style="background:#1E2A55"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><div class="lt"><b>Reminders</b></div></div><div class="ft"><div class="fti" style="background:#3A1A2E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div><div class="lt"><b>Due dates on udhar</b></div></div><div class="ft"><div class="fti" style="background:#33300F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><div class="lt"><b>EMI &amp; Bills</b></div></div><div class="ft"><div class="fti" style="background:#15301F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><div class="lt"><b>Charts &amp; Budget</b></div></div><div class="ft"><div class="fti" style="background:#10313A"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></div><div class="lt"><b>Export &amp; Search</b></div></div></div>
+<div class="intro2"><b>&#8377;1</b> for the first 3 months &middot; then choose</div>
+<div class="plans"><div class="plan on"><span class="rad"><i></i></span><b>Monthly</b><span class="pp">&#8377;20<em>/month</em></span><small>Cancel anytime</small></div>
+<div class="plan"><span class="save">Save 17%</span><span class="rad"></span><b>Yearly</b><span class="pp">&#8377;200<em>/year</em></span><small>&#8377;16.7/month</small></div></div>
+</div><div class="cta2"><button class="btn gold">Start for &#8377;1</button>
+<p class="fine">Then &#8377;20/month from 14 Jan 2027. We remind you 3 days before. Cancel in Play Store.</p></div></div><p class="cap">Poori Premium screen</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div><div class="tt"><h2>Lent</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2"><div class="fk1"></div><div class="fk2"></div><div class="fk2"></div></div><div class="scrim"></div><div class="sheet" style="text-align:center"><div class="hd"></div>
+<div class="lk"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg><span class="cr"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/></svg></span></div>
+<h3 class="dh">Due dates are Premium</h3>
+<p class="dp">Set when Rahul should pay back, and get a reminder before the day.</p>
+<div class="mini"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Due dates</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Reminders</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> EMI &amp; Bills</span></div>
+<button class="btn gold" style="margin-top:16px">Try Premium &middot; &#8377;1 for 3 months</button>
+<p class="lnk"><u>See all features</u> &middot; <u>Not now</u></p>
+<p class="fine">Your entry is saved without a due date.</p></div></div><p class="cap">Locked cheez par tap: chhoti sheet</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#33260F 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="conf"><i style="left:12%;top:70px;background:#91A7FF;transform:rotate(20deg)"></i><i style="left:28%;top:40px;background:#3A1A2E;transform:rotate(-15deg)"></i><i style="left:70%;top:50px;background:#FDE68A;transform:rotate(35deg)"></i><i style="left:85%;top:90px;background:#B2F2BB;transform:rotate(-30deg)"></i><i style="left:20%;top:150px;background:#FDE68A;transform:rotate(10deg)"></i><i style="left:78%;top:170px;background:#91A7FF;transform:rotate(50deg)"></i><i style="left:50%;top:30px;background:#B2F2BB;transform:rotate(0deg)"></i></div><div class="wl">
+<div class="crown big"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/></svg></div>
+<h2 class="pt">You're Premium!</h2><p class="ps">&#8377;1 for 3 months is active.<br>Next charge &#8377;20 on <b>14 Jan 2027</b>.</p>
+<div class="grp" style="text-align:left;margin-top:20px">
+<div class="li"><div class="ri" style="background:#1E2A55"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><div class="lt"><b>Reminders are on</b><small>For your 2 udhar with due dates</small></div></div>
+<div class="li"><div class="ri" style="background:#33300F"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><div class="lt"><b>EMI &amp; Bills unlocked</b><small>Add your first EMI or bill</small></div></div></div>
+</div><div class="cta2"><button class="btn b">Continue</button></div></div><p class="cap">Kharidne ke baad</p></div></div><div class="notes"><b>Price:</b> launch offer <b>&#8377;1 for 3 months</b>, phir user chunta hai <b>Monthly &#8377;20</b> (pehle se chuna) ya <b>Yearly &#8377;200</b> (17% bachat) (owner decision). Button ke neeche saaf likha: kis date se &#8377;20 lagega, 3 din pehle reminder, Play Store se cancel. Koi chhupi baat nahi.<br>
+<b>Premium mein kya (5 lines):</b> Reminders, Udhar par due date, EMI &amp; Bills, Charts &amp; Budget, Export &amp; Search. Free mein jo hai (income, expense, udhar, sync, app lock) wo hamesha free.<br>
+<b>Do tarah se khulta hai:</b><br>
+&nbsp;&bull; <b>Chhoti sheet:</b> jab user kisi Premium cheez par tap kare (jaise Add Lent mein Due date). Sirf usi cheez ki baat, "See all features" se poori screen. Entry bina due date save ho jaati hai (decision G3).<br>
+&nbsp;&bull; <b>Poori screen:</b> Settings plan card, locked tabs (Charts, EMI &amp; Bills) ka Try Premium button.<br>
+<b>Payment:</b> "Start for &#8377;1" = Google Play ka apna payment sheet (hum card/UPI nahi dekhte). Server check karta hai ki payment asli hai (brief: trust).<br>
+<b>Restore:</b> upar right; naye phone par purani subscription wapas.<br>
+<b>Kharidne ke baad:</b> "You're Premium!", agla charge kab, aur jo turant chalu hua (purane udhar ke reminders, EMI &amp; Bills).<br>
+<b>Rang:</b> Premium ka amber <span style="color:#FBBF24;font-weight:700">#FBBF24</span> (decision A3), baaki app ke blue se alag taaki Premium pehchana jaye.<br>
+<b>Plan khatam:</b> user Free ban jata hai, data sab rehta hai, reminders band, Premium screens sirf dekh sakte hain (read-only).</div></body></html>

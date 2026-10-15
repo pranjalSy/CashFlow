@@ -1,0 +1,136 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>20 Add bill</title><style>
+body{margin:0;padding:28px 16px;background:#E9EEF6;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1F2A37}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#5B6B7F;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#5B6B7F;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#F2F8FC;box-shadow:0 0 0 8px #1F2A37;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg{display:flex;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#5B6B7F}
+.seg span.on.e{background:#C62828;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(31,42,55,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#8A97A8;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#5B6B7F;background:rgba(255,255,255,.75);border:1px solid #E6EBF3;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(31,42,55,.22)}
+.kb{position:relative;margin-top:auto;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(31,42,55,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#5B6B7F}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #F0F3F8}
+.ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#8A97A8;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#9AA7B8}
+label{display:block;font-size:12px;font-weight:700;color:#5B6B7F;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:#fff;border:1.5px solid #E6EBF3;font-size:14px;font-weight:700;color:#5B6B7F}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#5B6B7F;background:#EEF2F8}
+.sc.on{background:#1F2A37;color:#fff}
+.req{font-size:10px;font-weight:700;color:#8A97A8;background:#EEF2F8;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#3B5BDB;background:#EDF1FD;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#C62828;background:#FFF8F8}
+.err{color:#C62828;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#3B5BDB}
+
+.top{z-index:2}.tt{text-align:center;min-width:0}.tt h2{margin:0;font-size:18px}.tt small{display:block;font-size:12px;color:#6B7C8F;font-weight:600}
+.bk-w{width:40px;display:flex;justify-content:center}
+.sc2{position:relative;flex:1;overflow:hidden;padding:12px 16px 0}
+.tgl{width:44px;height:26px;border-radius:999px;background:#D5DCE7;position:relative;flex:none;display:inline-block}
+.tgl i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(31,42,55,.25)}
+.tgl.on{background:#3B5BDB}.tgl.on i{left:21px}
+.grp{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0}.li+.li{border-top:1px solid #F0F3F8}
+.li .ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.li .lt{flex:1;min-width:0}.li .lt b{display:block;font-size:14.5px;font-weight:600}.li .lt small{display:block;font-size:11.5px;color:#6B7C8F}
+.li .lv{font-size:13px;color:#5B6B7F;font-weight:600;white-space:nowrap}
+.gl{font-size:12px;font-weight:700;color:#8A97A8;margin:14px 6px 8px;letter-spacing:.3px}
+.scrim{position:absolute;inset:0;z-index:4;background:rgba(17,24,39,.42);backdrop-filter:blur(8px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:#fff;border-radius:30px 30px 0 0;padding:8px 18px 20px;box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.hd{width:40px;height:5px;border-radius:5px;background:#DCE3EE;margin:0 auto 14px}
+.pop{position:absolute;left:18px;right:18px;z-index:5;background:#fff;border-radius:30px;padding:20px 18px 18px;text-align:center;box-shadow:0 24px 50px -16px rgba(17,24,39,.5)}
+.pop small.k1{font-size:12px;font-weight:700;color:#C2410C}.pop h3{margin:4px 0;font-size:20px;letter-spacing:-.3px}.pop p{margin:0;font-size:13px;color:#5B6B7F}
+.pico{width:60px;height:60px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.btn{height:50px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px Inter,"Segoe UI",Arial;width:100%}
+.btn.g{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.btn.b{background:#3B5BDB;color:#fff;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+.btn.s{background:#F2F5FA;color:#1F2A37}.btn.r{background:#FDEEEE;color:#C62828}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pad-s{gap:6px}.pad-s .k{height:42px;border-radius:12px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:#5B6B7F;background:#fff;border:1.5px solid #E6EBF3;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.chip.on{background:#3B5BDB;border-color:#3B5BDB;color:#fff}
+.hint{display:flex;gap:6px;font-size:11.5px;color:#6B7C8F;line-height:1.45;margin:6px 4px 0}.hint svg{flex:none;margin-top:1px}
+.cta2{position:relative;z-index:2;margin:auto 16px 20px}
+.notes .q{color:#B45309}
+
+.q1{margin:4px 4px 2px;font-size:22px;letter-spacing:-.4px}.q2{margin:0 4px 14px;font-size:13px;color:#6B7C8F}
+.tys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ty{background:#fff;border-radius:18px;padding:10px 4px 9px;display:flex;flex-direction:column;align-items:center;gap:6px;border:1.5px solid transparent;box-shadow:0 6px 18px -10px rgba(31,42,55,.14)}
+.ty.on{border-color:#3B5BDB}.ty span{font-size:11.5px;font-weight:600;text-align:center}
+.tyi{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.nmc{display:flex;align-items:center;gap:11px;background:#fff;border-radius:20px;padding:10px 12px;margin-bottom:10px;box-shadow:0 6px 18px -10px rgba(31,42,55,.14)}
+.nmc .lt{flex:1}.ei{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.chg{font-size:12px;font-weight:700;color:#3B5BDB;background:#EDF1FD;border-radius:999px;padding:5px 10px}
+small.fs{display:block;font-size:11px;font-weight:600;color:#8A97A8}.v{font-size:15px;font-weight:600}.ph{font-size:14.5px;color:#9AA7B8}
+.li{padding:9px 0}.grp .li .lt b{font-size:14px}
+.lb2{font-size:12px;font-weight:700;color:#5B6B7F;margin:4px 4px 8px}
+.chips{flex-wrap:nowrap;gap:5px}.chip.sm{font-size:11.5px;padding:7px 8px}
+.gps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.chip.gp{text-align:center;font-size:14px;padding:8px 0}.un{font-weight:600;color:#9AA7B8}
+.nx{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#2B4BC7;margin:-4px 6px 12px}
+.fake{padding:60px 16px}.f1{height:150px;border-radius:24px;background:#3B5BDB;opacity:.9}.f2{height:70px;border-radius:20px;background:#fff;margin-top:10px}
+.pq2{margin:14px 0 10px;font-size:16px;font-weight:700}
+.opts{display:flex;flex-direction:column;gap:8px}
+.o{height:50px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:700;background:#F2F5FA}
+.o.yes{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.pop .pf{margin-top:10px;font-size:11.5px;color:#8A97A8}
+.sgs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sg{border:1.5px solid #E6EBF3;border-radius:16px;padding:9px 4px;display:flex;flex-direction:column;align-items:center}
+.sg b{font-size:15px;font-variant-numeric:tabular-nums}.sg small{font-size:11px;color:#8A97A8}
+.sg.on{border-color:#15803D;background:#EAF6EF}.sg.on b{color:#15803D}
+.oth{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px 0 2px;height:38px;border-radius:12px;border:1.5px dashed #C9D3E3;font-size:13px;font-weight:700;color:#3B5BDB}
+.lb3{font-size:12px;font-weight:700;color:#5B6B7F;text-align:left;margin:10px 2px 6px}
+.minipay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.minipay .pm{height:42px;border-radius:12px;font-size:13.5px;gap:6px}
+.pm.on{border-color:#15803D;color:#15803D;background:#EAF6EF}
+.sub3{margin:8px 0 12px}
+</style></head><body><div class="h">20 &middot; Add bill</div><p class="sub">EMI &amp; Bills tab &rarr; "+" &rarr; Add bill (Premium)</p><div class="row"><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div><div class="tt"><h2>Add bill</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2">
+<h3 class="q1">Which bill?</h3><p class="q2">Pick a type. You can change the name later.</p>
+<div class="tys"><div class="ty on"><div class="tyi" style="background:#FEF9E3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><span>Electricity</span></div><div class="ty"><div class="tyi" style="background:#FFF1E6"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-3.5 2-5 1 1.5 1.5 2 2.5 2C11.5 8 11 5.5 12 3z"/></svg></div><span>Gas</span></div><div class="ty"><div class="tyi" style="background:#EAF6EF"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div><span>Mobile</span></div><div class="ty"><div class="tyi" style="background:#E6F6F9"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0"/><circle cx="12" cy="19.5" r="1"/></svg></div><span>Internet</span></div><div class="ty"><div class="tyi" style="background:#F1ECFE"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B3FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2.5"/><path d="M8 21h8M12 17v4"/></svg></div><span>DTH / Cable</span></div><div class="ty"><div class="tyi" style="background:#EDF1FD"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B4BC7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></svg></div><span>Water</span></div><div class="ty"><div class="tyi" style="background:#FCEDF3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A3165A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></div><span>Insurance</span></div><div class="ty"><div class="tyi" style="background:#F2F5FA"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg></div><span>Other</span></div></div>
+<div class="gl">Popular in Gujarat</div>
+<div class="grp"><div class="li"><div class="ri" style="background:#FEF9E3"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><div class="lt"><b>Torrent Power</b><small>Electricity &middot; every 2 months</small></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9AA7B8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+<div class="li"><div class="ri" style="background:#FFF1E6"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-3.5 2-5 1 1.5 1.5 2 2.5 2C11.5 8 11 5.5 12 3z"/></svg></div><div class="lt"><b>Adani Total Gas</b><small>Gas &middot; every 2 months</small></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9AA7B8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+</div></div><p class="cap">1. Bill ka type chuno</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Add bill</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2">
+<div class="nmc"><div class="ei" style="background:#FEF9E3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><div class="lt"><small class="fs">Electricity bill</small><span class="v">Torrent Power</span></div><span class="chg">Change</span></div>
+<div class="grp"><div class="li"><div class="ri"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16a3.4 3.4 0 0 1 6.4 0M14.5 10h4M14.5 13.5h3"/></svg></div><div class="lt"><small class="fs">Customer ID (optional)</small><span class="ph">Add for your reference</span></div></div></div>
+<div class="lb2">Comes every <span class="un">(months)</span></div><div class="gps"><span class="chip gp">1</span><span class="chip gp on">2</span><span class="chip gp">3</span><span class="chip gp">6</span><span class="chip gp">12</span></div>
+<div class="grp" style="margin-top:10px"><div class="li"><div class="ri"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div><div class="lt"><small class="fs">Next due date</small><span class="v">15 Nov 2026</span></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA7B8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+<div class="nx"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2B4BC7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg> Then 15 Jan, 15 Mar, 15 May&hellip;</div>
+<div class="grp"><div class="li"><div class="ri"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h11M7 9h11M15 4c3 0 3 10-3 10H8l8 7"/></svg></div><div class="lt"><small class="fs">Usual amount (optional)</small><span class="v">&#8377;1,500</span></div></div></div>
+<div class="lb2">Remind me</div><div class="chips"><span class="chip sm">On due day</span><span class="chip sm on">3 days before</span><span class="chip sm">7 days before</span></div>
+</div><div class="cta2"><button class="btn b">Save bill</button></div></div><p class="cap">2. Kitne mahine mein + due date</p></div></div><div class="row" style=margin-top:28px><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="fake"><div class="f1"></div><div class="f2"></div><div class="f2"></div><div class="f2"></div></div><div class="scrim"></div><div class="pop" style="top:150px"><div class="pico" style="background:#FEF9E3"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><small class="k1">Bill due today</small><h3>Electricity &middot; Torrent</h3><p>Due 15 Nov &middot; comes every 2 months</p><div class="pq2">Did you pay this bill?</div>
+<div class="opts"><span class="o yes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Yes, paid</span><span class="o">Not yet</span></div>
+<p class="pf">Not yet = we ask again tomorrow</p></div></div><p class="cap">3. Due ke din: Pay kiya?</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="fake"><div class="f1"></div><div class="f2"></div><div class="f2"></div><div class="f2"></div></div><div class="scrim"></div><div class="pop" style="top:70px"><div class="pico" style="background:#FEF9E3"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><small class="k1">Bill due today</small><h3>Electricity &middot; Torrent</h3><p>Due 15 Nov &middot; comes every 2 months</p><div class="pq2">How much was it?</div>
+<div class="sgs"><div class="sg on"><b>&#8377;1,840</b><small>Sep bill</small></div><div class="sg"><b>&#8377;1,520</b><small>Jul bill</small></div><div class="sg"><b>&#8377;1,690</b><small>May bill</small></div></div>
+<div class="oth"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg> Other amount</div>
+<div class="lb3">Paid via</div>
+<div class="minipay"><span class="pm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg> Cash</span><span class="pm on"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg> Online</span></div>
+<div class="sub3"><span class="sc on">UPI</span><span class="sc">Card</span><span class="sc">Bank</span></div>
+<button class="btn g"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Save &#8377;1,840</button>
+<p class="pf">Added to Expenses &middot; Bills</p></div></div><p class="cap">4. Yes: amount ek tap mein + payment</p></div></div><div class="notes"><b>Step 1, Bill type:</b> Electricity, Gas, Mobile, Internet, DTH / Cable, Water, Insurance, Other. Har type ka apna icon aur rang. Neeche "Popular" providers (Torrent Power, Adani Total Gas&hellip;) jinka gap pehle se bhara (2 months).<br>
+<b>Step 2, Form:</b> provider ka naam, Customer ID (optional, sirf yaad ke liye), <b>Comes every</b> 1 / 2 / 3 / 6 / 12 months, <b>Next due date</b>. Neeche preview: "Then 15 Jan, 15 Mar, 15 May&hellip;" taaki user ko pakka pata ho. Usual amount optional, Remind me (on due day / 3 / 7 days before).<br>
+<b>Popup + notification:</b> due ke din (aur reminder wale din) notification; app kholne par popup "Did you pay this bill?". <b>Not yet</b> = kal phir poochega (jab tak pay na ho).<br>
+<b>Yes, paid:</b> pichle 3 bill ke amount <b>suggestion</b> mein (mahine ke naam ke saath), sabse naya pehle se chuna. Sahi ho to bas Save; alag ho to "Other amount" (number pad). Paid via compulsory (pichli baar wala chuna). Save = <b>Expense &middot; Bills</b> category mein entry, ek saath.<br>
+<b>Pehli baar:</b> suggestion nahi hote, to "Usual amount" (agar daala) chip mein, warna seedha number pad.<br>
+<b>Agla bill:</b> pay hote hi agli due date apne aap (15 Nov + 2 months = 15 Jan). Due date ek baar badli to aage ki dates usi se.<br>
+<b>Pehle wale design se badla:</b> Monthly/Yearly switch ki jagah "Comes every N months"; "Same amount" switch hata diya (suggestions se kaam ho jata hai).</div></body></html>

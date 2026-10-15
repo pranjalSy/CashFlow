@@ -1,0 +1,170 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>25 Devices &amp; new login approval (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(22,22,26,0.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.seg{display:flex;background:rgba(22,22,26,0.7);border:1px solid rgba(22,22,26,0.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#A3B1C4}
+.seg span.on.e{background:#DC2626;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(0,0,0,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#7D8BA0;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#A3B1C4;background:rgba(22,22,26,0.75);border:1px solid #26262D;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-top:1px solid #26262D;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(0,0,0,.22)}
+.kb{position:relative;margin-top:auto;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-top:1px solid #26262D;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(0,0,0,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#A3B1C4}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#1C1C21;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #1C1C21}
+.ri{width:34px;height:34px;border-radius:11px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#7D8BA0;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#6F7E93}
+label{display:block;font-size:12px;font-weight:700;color:#A3B1C4;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;font-size:14px;font-weight:700;color:#A3B1C4}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#A3B1C4;background:#1C1C21}
+.sc.on{background:#232329;color:#fff}
+.req{font-size:10px;font-weight:700;color:#7D8BA0;background:#1C1C21;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#7C93FF;background:#1E2A55;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#F87171;background:#2E1C22}
+.err{color:#F87171;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.top{z-index:2}.tt{text-align:center;min-width:0}.tt h2{margin:0;font-size:18px}.tt small{display:block;font-size:12px;color:#93A2B6;font-weight:600}
+.bk-w{width:40px;display:flex;justify-content:center}
+.sc2{position:relative;flex:1;overflow:hidden;padding:12px 16px 0}
+.tgl{width:44px;height:26px;border-radius:999px;background:#3A475D;position:relative;flex:none;display:inline-block}
+.tgl i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.tgl.on{background:#4263EB}.tgl.on i{left:21px}
+.grp{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12);margin-bottom:12px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0}.li+.li{border-top:1px solid #1C1C21}
+.li .ri{width:34px;height:34px;border-radius:11px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.li .lt{flex:1;min-width:0}.li .lt b{display:block;font-size:14.5px;font-weight:600}.li .lt small{display:block;font-size:11.5px;color:#93A2B6}
+.li .lv{font-size:13px;color:#A3B1C4;font-weight:600;white-space:nowrap}
+.gl{font-size:12px;font-weight:700;color:#7D8BA0;margin:14px 6px 8px;letter-spacing:.3px}
+.scrim{position:absolute;inset:0;z-index:4;background:rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:30px 30px 0 0;padding:8px 18px 20px;box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.hd{width:40px;height:5px;border-radius:5px;background:#26262D;margin:0 auto 14px}
+.pop{position:absolute;left:18px;right:18px;z-index:5;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:30px;padding:20px 18px 18px;text-align:center;box-shadow:0 24px 50px -16px rgba(17,24,39,.5)}
+.pop small.k1{font-size:12px;font-weight:700;color:#FB923C}.pop h3{margin:4px 0;font-size:20px;letter-spacing:-.3px}.pop p{margin:0;font-size:13px;color:#A3B1C4}
+.pico{width:60px;height:60px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.btn{height:50px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px Inter,"Segoe UI",Arial;width:100%}
+.btn.g{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.btn.b{background:#4263EB;color:#fff;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+.btn.s{background:#1C1C21;color:#E8EDF5}.btn.r{background:#3A1D22;color:#F87171}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pad-s{gap:6px}.pad-s .k{height:42px;border-radius:12px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:#A3B1C4;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.chip.on{background:#4263EB;border-color:#7C93FF;color:#fff}
+.hint{display:flex;gap:6px;font-size:11.5px;color:#93A2B6;line-height:1.45;margin:6px 4px 0}.hint svg{flex:none;margin-top:1px}
+.cta2{position:relative;z-index:2;margin:auto 16px 20px}
+.notes .q{color:#FBBF24}
+
+.dh2{margin:0;font-size:19px}.dp2{margin:6px 6px 0;font-size:13px;color:#A3B1C4;line-height:1.5}
+.dn2{width:80px;height:80px;border-radius:50%;background:#15803D;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(21,128,61,.7)}
+.intro{display:flex;gap:10px;align-items:flex-start;background:#1E2A55;border-radius:18px;padding:12px}.intro p{margin:0;font-size:12.5px;color:#C9D3E0;line-height:1.5}.intro svg{flex:none}
+.dv{display:flex;align-items:center;gap:11px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:20px;padding:12px;margin-bottom:8px;box-shadow:0 6px 18px -10px rgba(0,0,0,.12)}
+.di{width:42px;height:42px;border-radius:14px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.dv .lt{flex:1;min-width:0}.dv b{display:block;font-size:14.5px}.dv small{font-size:11.5px;color:#93A2B6}
+.this{font-size:10px;font-weight:700;color:#4ADE80;background:#15301F;border-radius:999px;padding:2px 7px;margin-left:4px;vertical-align:2px}
+.rm{font-size:12.5px;font-weight:700;color:#F87171;background:#3A1D22;border-radius:999px;padding:6px 11px}
+.fake{padding:60px 16px}.f1{height:150px;border-radius:24px;background:#4263EB;opacity:.9}.f2{height:70px;border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);margin-top:10px}
+.nd{display:inline-flex;flex-direction:column;background:#151519;border:1px solid #26262D;border-radius:16px;padding:9px 18px;margin:8px 0 10px}.nd b{font-size:15px}.nd span{font-size:12px;color:#93A2B6}
+.pop .pf{margin-top:12px!important;font-size:11.5px!important;color:#7D8BA0!important;line-height:1.45}
+.btn.r{background:#3A1D22;color:#F87171}
+.wt{position:relative;flex:1;text-align:center;padding:60px 24px 0}
+.ring2{width:132px;height:132px;margin:0 auto 22px;border-radius:50%;background:radial-gradient(circle,#0D1330 0,#0D1330 50%,rgba(30,42,85,.4) 51%,rgba(30,42,85,.4) 70%,transparent 71%);display:flex;align-items:center;justify-content:center}
+.ri2{width:76px;height:76px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -12px rgba(59,91,219,.5)}
+.ri2.sm{width:64px;height:64px;border-radius:20px;margin:18px auto 14px}
+.wt h2,.ch{margin:0;font-size:23px;letter-spacing:-.4px}.wt p,.cp{font-size:14px;color:#A3B1C4;line-height:1.55;margin:8px 0 0}.wt p b,.cp b{color:#E8EDF5}
+.tmr{display:inline-flex;align-items:center;gap:6px;margin-top:16px;background:#3A2516;color:#FB923C;font-size:13px;border-radius:999px;padding:7px 13px}
+.safe{display:flex;gap:8px;align-items:center;text-align:left;margin-top:26px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:16px;padding:11px 13px;font-size:12.5px;color:#A3B1C4;box-shadow:0 6px 18px -10px rgba(0,0,0,.12)}.safe svg{flex:none}
+.sw{text-align:center;font-size:13px;color:#93A2B6;margin:12px 0 0}.sw u,.cp u{color:#7C93FF;text-decoration:none;font-weight:700}
+.btn.s{font-size:14px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);box-shadow:0 6px 18px -10px rgba(0,0,0,.18)}
+.codes{display:flex;gap:8px;justify-content:center;margin:22px 0 12px}
+.cbx{width:40px;height:52px;border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}
+.cbx.f{border-color:#3A475D}.cbx.cur{border:2px solid #7C93FF;box-shadow:0 0 0 4px rgba(59,91,219,.12)}
+.cp.sm{font-size:12px;color:#7D8BA0}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body><div class="h">25 &middot; Devices &amp; new login approval</div><p class="sub">Settings &rarr; Devices, aur naye phone par login</p><div class="row"><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Devices</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2">
+<div class="intro"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg><p>Only phones you approve can see your data. Remove any phone you don't use.</p></div>
+<div class="gl">Logged in &middot; 2</div>
+<div class="dv"><div class="di" style="background:#1E2A55"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div><div class="lt"><b>Realme 9 <span class="this">This phone</span></b><small>Android 14 &middot; active now</small></div></div>
+<div class="dv"><div class="di"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="3"/><path d="M11 18h2"/></svg></div><div class="lt"><b>Galaxy Tab A8 </b><small>Android 13 &middot; 2 days ago</small></div><span class="rm">Remove</span></div>
+<div class="gl">Recent sign-in requests</div>
+<div class="grp"><div class="li"><div class="ri" style="background:#3A1D22"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><div class="lt"><b>Redmi Note 12</b><small>Blocked &middot; 3 Oct, 10:22 pm</small></div></div>
+<div class="li"><div class="ri" style="background:#15301F"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div class="lt"><b>Galaxy Tab A8</b><small>Approved from Realme 9 &middot; 12 Aug</small></div></div></div>
+</div></div><p class="cap">Settings &rarr; Devices</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="fake"><div class="f1"></div><div class="f2"></div><div class="f2"></div><div class="f2"></div></div><div class="scrim"></div><div class="pop" style="top:120px"><div class="pico" style="background:#3A2516"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+<small class="k1">New login</small><h3>Was this you?</h3>
+<div class="nd"><b>Redmi Note 12</b><span>Android 13 &middot; just now</span></div>
+<p>Someone is trying to log in to your CashFlow account on this phone.</p>
+<div class="bt2" style="margin-top:16px"><button class="btn r"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg> No, block</button><button class="btn g"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Yes, it's me</button></div>
+<p class="pf">No = that phone is signed out at once and sees nothing.</p></div></div><p class="cap">Purane phone par: Was this you?</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="wt">
+<div class="ring2"><div class="ri2"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div></div>
+<h2>Approve this phone</h2>
+<p>Open CashFlow on your other phone <b>Realme 9</b> and tap <b>&ldquo;Yes, it's me&rdquo;</b>.</p>
+<div class="tmr"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Request expires in <b>9:12</b></div>
+<div class="safe"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="3"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span>Your data stays hidden on this phone until you approve.</span></div>
+</div><div class="cta2"><button class="btn s"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg> No other phone? Use email code</button><p class="sw">Not you? <u>Log out</u></p></div></div><p class="cap">Naye phone par: approval ka intezaar</p></div></div><div class="row" style=margin-top:28px><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Email code</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2" style="text-align:center">
+<div class="ri2 sm"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></div>
+<h2 class="ch">Check your email</h2><p class="cp">We sent a 6-digit code to<br><b>pr&bull;&bull;&bull;&bull;&bull;@gmail.com</b></p>
+<div class="codes"><span class="cbx f">4</span><span class="cbx f">8</span><span class="cbx f">2</span><span class="cbx f">9</span><span class="cbx cur"></span><span class="cbx"></span></div>
+<p class="cp sm">Code works for 15 minutes &middot; 5 tries</p>
+<p class="cp"><u>Resend code</u> in 0:42</p>
+</div><div class="cta2"><button class="btn b">Approve this phone</button></div></div><p class="cap">Purana phone nahi? Email code</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="fake"><div class="f1"></div><div class="f2"></div><div class="f2"></div><div class="f2"></div></div><div class="scrim"></div><div class="sheet"><div class="hd"></div>
+<div style="text-align:center"><div class="pico" style="background:#3A1D22;width:52px;height:52px;border-radius:17px;margin:0 auto 8px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+<h3 class="dh2">Lost your old phone?</h3><p class="dp2">You logged in with an email code. Sign out any phone you don't have anymore.</p></div>
+<div class="dv" style="box-shadow:none;border:1.5px solid #26262D;margin-top:12px"><div class="di"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div><div class="lt"><b>Realme 9</b><small>Android 14 &middot; 3 days ago</small></div><span class="rm">Sign out</span></div>
+<div class="dv" style="box-shadow:none;border:1.5px solid #26262D"><div class="di"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="3"/><path d="M11 18h2"/></svg></div><div class="lt"><b>Galaxy Tab A8</b><small>Android 13 &middot; 2 days ago</small></div><span class="rm">Sign out</span></div>
+<button class="btn s" style="margin-top:6px">Not now, all my phones are safe</button></div></div><p class="cap">Email se aaye: purana phone sign out karo?</p></div></div><div class="row" style=margin-top:28px><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Sign out Realme 9</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2" style="text-align:center">
+<div class="ri2 sm"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></div>
+<h2 class="ch">Confirm with email code</h2><p class="cp">To sign out <b>Realme 9</b>, enter the code we sent to<br><b>pr&bull;&bull;&bull;&bull;&bull;@gmail.com</b></p>
+<div class="codes"><span class="cbx f">5</span><span class="cbx f">7</span><span class="cbx f">1</span><span class="cbx f">9</span><span class="cbx f">0</span><span class="cbx f">3</span></div>
+<p class="cp sm">Code works for 15 minutes &middot; 5 tries</p>
+</div><div class="cta2"><button class="btn" style="background:#DC2626;color:#fff;box-shadow:0 10px 22px -8px rgba(198,40,40,.7)">Sign out Realme 9</button></div></div><p class="cap">Sign out ke liye bhi email code</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="wt" style="padding-top:110px">
+<div class="dn2"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+<h2>Realme 9 is signed out</h2>
+<p>It can't open your account anymore.</p>
+<div class="grp" style="text-align:left;margin-top:20px">
+<div class="li"><div class="ri" style="background:#15301F"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></div><div class="lt"><b>Data on that phone gets erased</b><small>As soon as it connects to the internet</small></div></div>
+<div class="li"><div class="ri" style="background:#1E2A55"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="3"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div><div class="lt"><b>Until then it stays locked</b><small>Encrypted and behind your PIN</small></div></div></div>
+</div><div class="cta2"><button class="btn b">Done</button></div></div><p class="cap">Kho gaya phone sign out</p></div></div><div class="notes"><b>Rule (brief 5.10):</b> naye phone par login <b>pending</b> rehta hai aur koi data nahi dikhta jab tak purana phone approve na kare. Ye check server par hota hai, sirf app mein nahi.<br>
+<b>Purana phone:</b> notification "New login from Redmi Note 12. Was this you?". Tap = app khulta hai (pehle PIN/fingerprint), phir ye popup. <b>Yes</b> = naya phone approve, data sync shuru. <b>No</b> = naya phone sign out, kuch nahi dikhta, aur Devices mein "Blocked" record.<br>
+<b>Naya phone:</b> "Approve this phone" screen, kaunse phone par jaana hai uska naam, 10 minute ka timer (khatam = phir se login). Approve hote hi apne aap aage (Home + data).<br>
+<b>Email code:</b> purana phone kho gaya / band hai to 6-digit code email par. 15 minute valid, 5 try. Email aadha chhupa (pr&bull;&bull;&bull;&bull;&bull;@gmail.com).<br>
+<b>Devices list:</b> saare logged-in phones, "This phone" tag, last active. <b>Remove</b> = email code ke baad us phone ka sign out. Neeche pichli requests: Approved / Blocked.<br>
+<b>Phone kho gaya (owner idea):</b> naye phone par email code se login karte hi sheet "Lost your old phone?" aur baaki phones ki list. Kisi par <b>Sign out</b> = email par naya code, code daalo, wo phone turant sign out. Wo phone jab bhi internet se judega, server mana karega aur app us phone ka <b>saara data mita dega</b>. Tab tak data encrypted aur PIN ke peeche.<br>
+<b>Devices list se Remove:</b> kisi bhi phone se karo, hamesha email code maangta hai (koi chura kar baaki phones band na kar sake).<br>
+<b>Pehla phone:</b> account ka pehla phone apne aap trusted (koi approval nahi).<br>
+<b>Privacy:</b> sirf device ka naam aur Android version; location nahi dikhate.</div></body></html>

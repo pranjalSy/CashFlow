@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 Language (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI","Nirmala UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:320px;height:690px;border-radius:46px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329;display:flex;flex-direction:column}
+.glow{position:absolute;inset:0;background:radial-gradient(60% 30% at 10% 0%,#0D1330 0,transparent 70%),radial-gradient(50% 25% at 100% 5%,#241F45 0,transparent 70%)}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 28px 0;font-size:12px;font-weight:600}
+.head{position:relative;padding:22px 20px 12px}
+.head h1{font-size:26px;letter-spacing:-.6px;margin:0 0 6px;font-weight:700}
+.head p{margin:0 0 16px;color:#A3B1C4;font-size:13px}
+.search{display:flex;align-items:center;gap:10px;height:50px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:16px;padding:0 14px;border:1px solid #26262D;box-shadow:0 4px 14px -6px rgba(0,0,0,.08)}
+.search .ph{color:#7D8BA0;font-size:15px}.search .q{font-size:15px}.caret{width:2px;height:20px;background:#4263EB;margin-left:-8px}
+.search .x{margin-left:auto;width:22px;height:22px;border-radius:50%;background:#000000;color:#A3B1C4;font-size:11px;display:flex;align-items:center;justify-content:center}
+.list{position:relative;flex:1;overflow:hidden;padding:4px 20px 0}
+.it{display:flex;align-items:center;gap:12px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:18px;padding:11px 14px;margin-bottom:8px;border:1.5px solid transparent}
+.it.on{border-color:#7C93FF;background:#1E2A55}
+.gl{width:40px;height:40px;border-radius:12px;background:#1E2A55;color:#7C93FF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex:none}
+.it.on .gl{background:#4263EB;color:#fff}
+.nm{flex:1}.nm b{display:block;font-size:16px;font-weight:600}.nm small{color:#A3B1C4;font-size:12px}
+.rd{width:24px;height:24px;border-radius:50%;border:2px solid #26262D;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff}
+.soon{font-size:11px;font-weight:600;color:#A3B1C4;background:#1C1C21;border-radius:999px;padding:4px 9px}.it.off .nm,.it.off .gl{opacity:.55}
+.rd.on{background:#4263EB;border-color:#7C93FF}
+.bar{position:absolute;left:0;right:0;bottom:0;padding:14px 20px 22px;background:rgba(17,24,39,.78);backdrop-filter:blur(20px) saturate(180%);border-top:1px solid rgba(22,22,26,0.8)}
+.bar button{width:100%;height:54px;border:0;border-radius:999px;background:#4263EB;color:#fff;font:600 16px Inter,"Segoe UI",Arial;box-shadow:0 8px 20px -6px rgba(59,91,219,.55)}
+.bar p{text-align:center;font-size:12px;color:#A3B1C4;margin:10px 0 0}
+.empty{text-align:center;color:#A3B1C4;font-size:14px;padding:30px 10px}
+.notes{max-width:700px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body>
+<div class="h">03 &middot; Choose language</div><p class="sub">Login ke baad, ek baar</p>
+<div class="row">
+<div><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="head"><h1>Choose your language</h1>
+<p>भाषा चुनें &middot; ભાષા પસંદ કરો &middot; ভাষা বেছে নিন</p>
+<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="ph">Search language</span></div></div>
+<div class="list"><div class="it on"><div class="gl">A</div><div class="nm"><b>English</b><small>English</small></div><span class="rd on">&#10003;</span></div><div class="it"><div class="gl">अ</div><div class="nm"><b>हिन्दी</b><small>Hindi</small></div><span class="rd"></span></div><div class="it"><div class="gl">અ</div><div class="nm"><b>ગુજરાતી</b><small>Gujarati</small></div><span class="rd"></span></div><div class="it off"><div class="gl">म</div><div class="nm"><b>मराठी</b><small>Marathi</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">অ</div><div class="nm"><b>বাংলা</b><small>Bengali</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">அ</div><div class="nm"><b>தமிழ்</b><small>Tamil</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">అ</div><div class="nm"><b>తెలుగు</b><small>Telugu</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">ಅ</div><div class="nm"><b>ಕನ್ನಡ</b><small>Kannada</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">അ</div><div class="nm"><b>മലയാളം</b><small>Malayalam</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">ਅ</div><div class="nm"><b>ਪੰਜਾਬੀ</b><small>Punjabi</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">ଅ</div><div class="nm"><b>ଓଡ଼ିଆ</b><small>Odia</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">অ</div><div class="nm"><b>অসমীয়া</b><small>Assamese</small></div><span class="soon">Coming soon</span></div><div class="it off"><div class="gl">ا</div><div class="nm"><b>اردو</b><small>Urdu</small></div><span class="soon">Coming soon</span></div><div style="height:110px"></div></div>
+<div class="bar"><button>Continue</button><p>You can change this anytime in Settings</p></div></div></div><p class="cap">Default: English selected</p></div>
+<div><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="head"><h1>Choose your language</h1>
+<p>भाषा चुनें &middot; ભાષા પસંદ કરો &middot; ভাষা বেছে নিন</p>
+<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="q">guj</span><span class="caret"></span><span class="x">&#10005;</span></div></div>
+<div class="list"><div class="it on"><div class="gl">અ</div><div class="nm"><b>ગુજરાતી</b><small>Gujarati</small></div><span class="rd on">&#10003;</span></div><div style="height:110px"></div></div>
+<div class="bar"><button>Continue</button><p>You can change this anytime in Settings</p></div></div></div><p class="cap">Search "guj" &rarr; Gujarati chuna</p></div>
+</div>
+<div class="notes"><b>Search:</b> English naam aur apni script dono se dhoondh sakte hain ("guj", "ગુજ", "hindi", "हिं").<br>
+<b>Select:</b> tap karte hi card blue border + check, halka haptic. Language chunte hi heading usi bhasha mein badal jati hai, taaki user ko turant preview mile.<br>
+<b>Neeche ka bar:</b> glass, list uske peeche scroll hoti hai. "Continue" hamesha dikhta hai (English default hai, isliye kabhi disabled nahi).<br>
+<b>Launch:</b> English, Hindi, Gujarati chalu. Baaki bhashayein "Coming soon" (tap karne par chhota message: "Jaldi aa rahi hai"). Order: bolne walon ki sankhya ke hisaab se.</div>
+</body></html>

@@ -1,0 +1,121 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>27 Delete account</title><style>
+body{margin:0;padding:28px 16px;background:#E9EEF6;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1F2A37}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#5B6B7F;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#5B6B7F;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#F2F8FC;box-shadow:0 0 0 8px #1F2A37;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg{display:flex;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#5B6B7F}
+.seg span.on.e{background:#C62828;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(31,42,55,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#8A97A8;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#5B6B7F;background:rgba(255,255,255,.75);border:1px solid #E6EBF3;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(31,42,55,.22)}
+.kb{position:relative;margin-top:auto;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(31,42,55,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#5B6B7F}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #F0F3F8}
+.ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#8A97A8;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#9AA7B8}
+label{display:block;font-size:12px;font-weight:700;color:#5B6B7F;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:#fff;border:1.5px solid #E6EBF3;font-size:14px;font-weight:700;color:#5B6B7F}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#5B6B7F;background:#EEF2F8}
+.sc.on{background:#1F2A37;color:#fff}
+.req{font-size:10px;font-weight:700;color:#8A97A8;background:#EEF2F8;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#3B5BDB;background:#EDF1FD;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#C62828;background:#FFF8F8}
+.err{color:#C62828;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#3B5BDB}
+
+.top{z-index:2}.tt{text-align:center;min-width:0}.tt h2{margin:0;font-size:18px}.tt small{display:block;font-size:12px;color:#6B7C8F;font-weight:600}
+.bk-w{width:40px;display:flex;justify-content:center}
+.sc2{position:relative;flex:1;overflow:hidden;padding:12px 16px 0}
+.tgl{width:44px;height:26px;border-radius:999px;background:#D5DCE7;position:relative;flex:none;display:inline-block}
+.tgl i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(31,42,55,.25)}
+.tgl.on{background:#3B5BDB}.tgl.on i{left:21px}
+.grp{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0}.li+.li{border-top:1px solid #F0F3F8}
+.li .ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.li .lt{flex:1;min-width:0}.li .lt b{display:block;font-size:14.5px;font-weight:600}.li .lt small{display:block;font-size:11.5px;color:#6B7C8F}
+.li .lv{font-size:13px;color:#5B6B7F;font-weight:600;white-space:nowrap}
+.gl{font-size:12px;font-weight:700;color:#8A97A8;margin:14px 6px 8px;letter-spacing:.3px}
+.scrim{position:absolute;inset:0;z-index:4;background:rgba(17,24,39,.42);backdrop-filter:blur(8px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:#fff;border-radius:30px 30px 0 0;padding:8px 18px 20px;box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.hd{width:40px;height:5px;border-radius:5px;background:#DCE3EE;margin:0 auto 14px}
+.pop{position:absolute;left:18px;right:18px;z-index:5;background:#fff;border-radius:30px;padding:20px 18px 18px;text-align:center;box-shadow:0 24px 50px -16px rgba(17,24,39,.5)}
+.pop small.k1{font-size:12px;font-weight:700;color:#C2410C}.pop h3{margin:4px 0;font-size:20px;letter-spacing:-.3px}.pop p{margin:0;font-size:13px;color:#5B6B7F}
+.pico{width:60px;height:60px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.btn{height:50px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px Inter,"Segoe UI",Arial;width:100%}
+.btn.g{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.btn.b{background:#3B5BDB;color:#fff;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+.btn.s{background:#F2F5FA;color:#1F2A37}.btn.r{background:#FDEEEE;color:#C62828}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pad-s{gap:6px}.pad-s .k{height:42px;border-radius:12px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:#5B6B7F;background:#fff;border:1.5px solid #E6EBF3;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.chip.on{background:#3B5BDB;border-color:#3B5BDB;color:#fff}
+.hint{display:flex;gap:6px;font-size:11.5px;color:#6B7C8F;line-height:1.45;margin:6px 4px 0}.hint svg{flex:none;margin-top:1px}
+.cta2{position:relative;z-index:2;margin:auto 16px 20px}
+.notes .q{color:#B45309}
+
+.cta2{margin-bottom:14px}
+.wi{width:50px;height:50px;border-radius:17px;background:#FDEEEE;margin:0 auto 8px;display:flex;align-items:center;justify-content:center}
+.pt{text-align:center;margin:0;font-size:22px;letter-spacing:-.4px}.ps{text-align:center;margin:4px 16px 10px;font-size:13.5px;color:#5B6B7F;line-height:1.5}.ps b{color:#1F2A37}
+.ps.sm{font-size:12.5px;color:#8A97A8;margin-top:14px}
+.dl{display:flex;gap:10px;align-items:flex-start;padding:5px 0}.dl+.dl{border-top:1px solid #F0F3F8}
+.dl svg{flex:none;margin-top:3px;background:#FDEEEE;border-radius:50%;padding:3px;box-sizing:content-box}
+.dl b{display:block;font-size:14px}.dl small{font-size:11.5px;color:#6B7C8F}
+.exp{display:flex;align-items:center;gap:10px;background:#EDF1FD;border-radius:18px;padding:11px 13px;margin-bottom:10px}.exp div{flex:1}
+.exp b{display:block;font-size:14px;color:#2B4BC7}.exp small{font-size:11.5px;color:#5B6B7F}
+.subw{display:flex;gap:9px;align-items:flex-start;background:#FFF8EB;border:1px solid #F5DDB0;border-radius:16px;padding:10px 12px;font-size:12px;color:#5B4A2A;line-height:1.45}.subw svg{flex:none;margin-top:1px}
+.btn.r2{background:#FDEEEE;color:#C62828}
+.lnk{text-align:center;font-size:13.5px;margin:12px 0 0}.lnk u{text-decoration:none;color:#3B5BDB;font-weight:700}
+.inp{display:flex;align-items:center;gap:4px;height:56px;border-radius:18px;background:#fff;padding:0 14px;box-shadow:0 0 0 2px #C62828,0 8px 20px -10px rgba(198,40,40,.4)}
+.inp span:first-child{font-size:20px;font-weight:700;color:#C62828}.inp .caret{display:block;width:2px;height:24px;background:#C62828}
+.okc{margin-left:auto;width:24px;height:24px;border-radius:50%;background:#C62828;display:flex;align-items:center;justify-content:center}
+.hint{margin:10px 4px 0}
+.acc{display:flex;align-items:center;gap:11px;margin-top:22px;background:#fff;border-radius:18px;padding:11px 12px;box-shadow:0 6px 18px -10px rgba(31,42,55,.12)}
+.acc b{display:block;font-size:14px}.acc small{font-size:11.5px;color:#6B7C8F}
+.pav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#5C7CFA,#3B5BDB);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.wl{position:relative;flex:1;padding:90px 18px 0;text-align:center}
+.dn{width:80px;height:80px;border-radius:50%;background:#15803D;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(21,128,61,.7)}
+</style></head><body><div class="h">27 &middot; Delete account</div><p class="sub">Settings &rarr; Delete account</p><div class="row"><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#FBE3E3 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Delete account</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2">
+<div class="wi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></div>
+<h2 class="pt">This deletes everything</h2><p class="ps">From your phone <b>and</b> from the cloud. It can't be undone.</p>
+<div class="grp" style="padding:6px 14px"><div class="dl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><div><b>All entries</b><small>Income, expenses, udhar, repayments</small></div></div><div class="dl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><div><b>EMI &amp; bills</b><small>With all installments and history</small></div></div><div class="dl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><div><b>People you added</b><small>Names and numbers used in entries</small></div></div><div class="dl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><div><b>All your phones</b><small>Every device is signed out</small></div></div></div>
+<div class="exp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><div><b>Export your data first</b><small>Keep a PDF or CSV copy</small></div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+<div class="subw"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/></svg><span>Premium is billed by Google Play. <b>Cancel it in Play Store</b>, deleting the account does not stop it.</span></div>
+</div><div class="cta2"><button class="btn r2">Continue</button><p class="lnk" style="margin-top:8px"><u>Keep my account</u></p></div></div><p class="cap">1. Kya kya hatega, saaf</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#FBE3E3 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Delete account</h2></div><div class="bk-w"><div style="width:40px"></div></div></div><div class="sc2">
+<h2 class="pt" style="text-align:left;margin:8px 4px 4px">Type Delete to confirm</h2>
+<p class="ps" style="text-align:left;margin:0 4px 16px">This makes sure nobody deletes it by mistake.</p>
+<div class="inp"><span>Delete</span><i class="caret"></i><span class="okc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+<p class="hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="3"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg> Next you enter your PIN or use fingerprint.</p>
+<div class="acc"><div class="pav">P</div><div><b>Pranjal Paghadal</b><small>pr&bull;&bull;&bull;&bull;&bull;@gmail.com &middot; 214 entries</small></div></div>
+</div><div class="cta2"><button class="btn" style="background:#C62828;color:#fff;box-shadow:0 10px 22px -8px rgba(198,40,40,.7)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg> Delete forever</button></div></div><p class="cap">2. Delete type karo, phir PIN</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="wl">
+<div class="dn"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+<h2 class="pt">Account deleted</h2>
+<p class="ps">All your data is removed from this phone and from our servers.</p>
+<div class="grp" style="text-align:left;margin-top:18px"><div class="li"><div class="ri" style="background:#EAF6EF"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></div><div class="lt"><b>Nothing is kept</b><small>Backups clear within 7 days</small></div></div></div>
+<p class="ps sm">Thanks for using CashFlow.</p>
+</div><div class="cta2"><button class="btn s" style="background:#fff;box-shadow:0 6px 18px -10px rgba(31,42,55,.2)">Close app</button></div></div><p class="cap">3. Ho gaya</p></div></div><div class="notes"><b>Step 1:</b> saaf list ki kya hatega (entries, udhar, EMI/bills, log, saare phones sign out), phone <b>aur</b> cloud dono se, wapas nahi aata. Upar "Export your data first" (screen 22). Premium wale ko yaad: Google Play ki subscription Play Store se cancel karo, account delete karne se billing band nahi hoti. "Keep my account" se wapas.<br>
+<b>Step 2:</b> "Delete" type karo (galti se na ho; chhota/bada letter koi bhi chalega), phir PIN ya fingerprint (koi aur aadmi phone uthakar delete na kar sake). Tab tak "Delete forever" laal par kaam nahi karta, dabane par message.<br>
+<b>Step 3:</b> server par saara data hatta hai, phone ka local data aur keys bhi mit jaati hain. "Account deleted" screen, phir app band / Welcome screen.<br>
+<b>Offline ho to:</b> delete ke liye internet zaroori; "Connect to the internet to delete your account".<br>
+<b>Backups:</b> purane backup (H3) mein bhi 7 din mein hat jaata hai; ye privacy policy mein bhi likhna hoga.<br>
+<b>Turant delete (owner decision):</b> koi waiting time / undo nahi. Delete forever dabate hi account aur data hat jata hai.</div></body></html>

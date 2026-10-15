@@ -1,0 +1,122 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>23 Search (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(22,22,26,0.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.seg{display:flex;background:rgba(22,22,26,0.7);border:1px solid rgba(22,22,26,0.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#A3B1C4}
+.seg span.on.e{background:#DC2626;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(0,0,0,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#7D8BA0;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#A3B1C4;background:rgba(22,22,26,0.75);border:1px solid #26262D;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-top:1px solid #26262D;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(0,0,0,.22)}
+.kb{position:relative;margin-top:auto;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-top:1px solid #26262D;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(0,0,0,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#A3B1C4}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#1C1C21;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #1C1C21}
+.ri{width:34px;height:34px;border-radius:11px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#7D8BA0;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#6F7E93}
+label{display:block;font-size:12px;font-weight:700;color:#A3B1C4;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;font-size:14px;font-weight:700;color:#A3B1C4}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#A3B1C4;background:#1C1C21}
+.sc.on{background:#232329;color:#fff}
+.req{font-size:10px;font-weight:700;color:#7D8BA0;background:#1C1C21;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#7C93FF;background:#1E2A55;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#F87171;background:#2E1C22}
+.err{color:#F87171;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.top{z-index:2}.tt{text-align:center;min-width:0}.tt h2{margin:0;font-size:18px}.tt small{display:block;font-size:12px;color:#93A2B6;font-weight:600}
+.bk-w{width:40px;display:flex;justify-content:center}
+.sc2{position:relative;flex:1;overflow:hidden;padding:12px 16px 0}
+.tgl{width:44px;height:26px;border-radius:999px;background:#3A475D;position:relative;flex:none;display:inline-block}
+.tgl i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.tgl.on{background:#4263EB}.tgl.on i{left:21px}
+.grp{background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(0,0,0,.12);margin-bottom:12px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0}.li+.li{border-top:1px solid #1C1C21}
+.li .ri{width:34px;height:34px;border-radius:11px;background:#1C1C21;display:flex;align-items:center;justify-content:center;flex:none}
+.li .lt{flex:1;min-width:0}.li .lt b{display:block;font-size:14.5px;font-weight:600}.li .lt small{display:block;font-size:11.5px;color:#93A2B6}
+.li .lv{font-size:13px;color:#A3B1C4;font-weight:600;white-space:nowrap}
+.gl{font-size:12px;font-weight:700;color:#7D8BA0;margin:14px 6px 8px;letter-spacing:.3px}
+.scrim{position:absolute;inset:0;z-index:4;background:rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:30px 30px 0 0;padding:8px 18px 20px;box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.hd{width:40px;height:5px;border-radius:5px;background:#26262D;margin:0 auto 14px}
+.pop{position:absolute;left:18px;right:18px;z-index:5;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:30px;padding:20px 18px 18px;text-align:center;box-shadow:0 24px 50px -16px rgba(17,24,39,.5)}
+.pop small.k1{font-size:12px;font-weight:700;color:#FB923C}.pop h3{margin:4px 0;font-size:20px;letter-spacing:-.3px}.pop p{margin:0;font-size:13px;color:#A3B1C4}
+.pico{width:60px;height:60px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.btn{height:50px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px Inter,"Segoe UI",Arial;width:100%}
+.btn.g{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.btn.b{background:#4263EB;color:#fff;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+.btn.s{background:#1C1C21;color:#E8EDF5}.btn.r{background:#3A1D22;color:#F87171}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pad-s{gap:6px}.pad-s .k{height:42px;border-radius:12px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:#A3B1C4;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.chip.on{background:#4263EB;border-color:#7C93FF;color:#fff}
+.hint{display:flex;gap:6px;font-size:11.5px;color:#93A2B6;line-height:1.45;margin:6px 4px 0}.hint svg{flex:none;margin-top:1px}
+.cta2{position:relative;z-index:2;margin:auto 16px 20px}
+.notes .q{color:#FBBF24}
+
+.sb{display:flex;align-items:center;gap:10px;margin:4px 0 10px}
+.sbx{flex:1;display:flex;align-items:center;gap:8px;height:46px;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);padding:0 12px;box-shadow:0 0 0 2px #7C93FF,0 8px 20px -10px rgba(59,91,219,.5)}
+.sbx .ph{flex:1;font-size:14.5px;color:#6F7E93}.sbx .q{font-size:15px;font-weight:600}.sbx .caret{display:block;width:2px;height:20px;background:#4263EB;flex:none;margin-left:-6px}
+.sbx .q+.caret{margin-left:-6px}.sbx .cx{margin-left:auto;width:20px;height:20px;border-radius:50%;background:#6F7E93;display:flex;align-items:center;justify-content:center}
+.cn{font-size:14px;font-weight:700;color:#7C93FF}
+.fl{flex-wrap:nowrap;gap:5px}.fl .chip{font-size:12px;padding:7px 11px}
+.rc{display:flex;align-items:center;gap:10px;padding:11px 0;font-size:14.5px}.rc+.rc{border-top:1px solid #1C1C21}.rc span{flex:1}
+.tips{background:#1E2A55;border-radius:20px;padding:12px 14px;display:flex;flex-direction:column;gap:5px}.tips b{font-size:13px;color:#8EA2FF}.tips span{font-size:12.5px;color:#C9D3E0}
+.pp,.tx{display:flex;align-items:center;gap:11px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:18px;padding:10px 12px;margin-bottom:8px;box-shadow:0 6px 18px -10px rgba(0,0,0,.12)}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;flex:none}
+.ei{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.tl{flex:1;min-width:0}.tl b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tl small{display:block;font-size:11.5px;color:#93A2B6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa{text-align:right}.pa b{display:block;font-size:14px}.pa small{font-size:11px;color:#7D8BA0}
+.ta{font-size:14px;white-space:nowrap;font-variant-numeric:tabular-nums}
+mark{background:#4A3F0F;color:inherit;border-radius:4px;padding:0 2px}
+.gl{display:flex;justify-content:space-between}.tot{font-weight:600;color:#6F7E93}
+.emp{text-align:center;margin-top:70px}.ebx{width:84px;height:84px;border-radius:28px;background:#1E2A55;margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+.emp b{font-size:16px}.emp p{font-size:13px;color:#93A2B6;margin:6px 30px 14px;line-height:1.5}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body><div class="h">23 &middot; Search</div><p class="sub">Home header mein search icon se (Premium)</p><div class="row"><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="sc2"><div class="sb"><div class="sbx"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="ph">Search entries and people</span></div><span class="cn">Cancel</span></div><div class="chips fl"><span class="chip on">All</span><span class="chip">Expense</span><span class="chip">Income</span><span class="chip">Udhar</span><span class="chip">People</span></div><div class="gl">Recent</div><div class="grp"><div class="rc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7D8BA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 8v4l3 2"/></svg><span>Rahul</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6F7E93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><div class="rc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7D8BA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 8v4l3 2"/></svg><span>Swiggy</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6F7E93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><div class="rc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7D8BA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 8v4l3 2"/></svg><span>Petrol</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6F7E93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><div class="rc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7D8BA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 8v4l3 2"/></svg><span>Rent</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6F7E93" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div></div><div class="tips"><b>Try searching</b><span>A name &middot; &ldquo;Rahul&rdquo;</span><span>A note or title &middot; &ldquo;dinner&rdquo;</span><span>An amount &middot; &ldquo;2000&rdquo;</span></div></div></div><p class="cap">Khulte hi: recent searches</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="sc2"><div class="sb"><div class="sbx"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="q">Rahul</span><i class="caret"></i><span class="cx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><span class="cn">Cancel</span></div><div class="chips fl"><span class="chip on">All</span><span class="chip">Expense</span><span class="chip">Income</span><span class="chip">Udhar</span><span class="chip">People</span></div>
+<div class="gl">People &middot; 2</div><div class="pp"><div class="av" style="background:#1E2A55;color:#8EA2FF">RS</div><div class="tl"><b><mark>Rahul</mark> Sharma</b><small>+91 98765 43210</small></div><div class="pa"><b style="color:#8EA2FF">&#8377;3,000</b><small>owes you</small></div></div>
+<div class="pp"><div class="av" style="background:#3A1A2E;color:#F472B6">RP</div><div class="tl"><b><mark>Rahul</mark> Patel</b><small>Settled</small></div><div class="pa"><b style="color:#A3B1C4">&#8377;0</b><small>all clear</small></div></div><div class="gl">Entries &middot; 4 <span class="tot">All time</span></div><div class="tx"><div class="ei" style="background:#3A2516"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18M16 3c-2 2-2 7 0 9v9"/></svg></div><div class="tl"><b>Dinner with <mark>Rahul</mark></b><small>12 Oct &middot; Food &middot; UPI</small></div><b class="ta" style="color:#F87171">&minus;&#8377;1,240</b></div><div class="tx"><div class="ei" style="background:#1E2A55"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8EA2FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg></div><div class="tl"><b>Lent to <mark>Rahul</mark> Sharma</b><small>1 Oct &middot; Udhar &middot; Cash</small></div><b class="ta" style="color:#8EA2FF">&#8377;5,000</b></div><div class="tx"><div class="ei" style="background:#15301F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/></svg></div><div class="tl"><b>Repayment from <mark>Rahul</mark> Sharma</b><small>8 Oct &middot; Udhar &middot; UPI</small></div><b class="ta" style="color:#4ADE80">+&#8377;2,000</b></div><div class="tx"><div class="ei" style="background:#2A2347"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B3FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 4v16M16 4v16M3 9h5M3 15h5M16 9h5M16 15h5"/></svg></div><div class="tl"><b>Movie</b><small>20 Sep &middot; Fun &middot; note: with <mark>Rahul</mark></small></div><b class="ta" style="color:#F87171">&minus;&#8377;600</b></div></div></div><p class="cap">Naam se search: people + entries</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#0D1330 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="sc2"><div class="sb"><div class="sbx"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3B1C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="q">zomato</span><i class="caret"></i><span class="cx"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div><span class="cn">Cancel</span></div><div class="chips fl"><span class="chip">All</span><span class="chip on">Expense</span><span class="chip">Income</span><span class="chip">Udhar</span><span class="chip">People</span></div>
+<div class="emp"><div class="ebx"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#91A7FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><b>No results for &ldquo;zomato&rdquo;</b>
+<p>No expense has this word in the title, note or category.</p><span class="chip">Search in All</span></div></div></div><p class="cap">Kuch nahi mila</p></div></div><div class="notes"><b>Kahan se:</b> Home header mein avatar ke paas search icon. (owner approved; Home 10 mein month picker ke left mein gol search button). Free user ko Premium sheet.<br>
+<b>Kya dhoondhta hai (brief):</b> saari entries (title, note, category, payment) aur log (naam, number). Amount bhi: "2000" likho to &#8377;2,000 wali entries.<br>
+<b>Filters:</b> All / Expense / Income / Udhar / People. Results turant aate hain (type karte hi), sab phone ke andar (offline bhi chalta hai).<br>
+<b>Results:</b> pehle People (kitna lena/dena), phir Entries naye se purane. Mila hua shabd peeli highlight mein. Person par tap = Person detail; entry par tap = edit screen; udhar entry par tap = us person ki detail.<br>
+<b>Recent:</b> pichhli 4 searches (&times; se hatao). Pehli baar kuch tips.<br>
+<b>Kuch nahi mila:</b> saaf message, aur filter laga ho to "Search in All".</div></body></html>

@@ -1,0 +1,79 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>05 Verify email (dark)</title><style>
+body{margin:0;padding:28px 16px;background:#000000;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#E8EDF5}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#A3B1C4;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#A3B1C4;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:320px;height:690px;border-radius:46px;overflow:hidden;background:#000000;box-shadow:0 0 0 8px #232329;display:flex;flex-direction:column}
+.glow{position:absolute;inset:0;background:radial-gradient(60% 30% at 50% 8%,#0D1330 0,transparent 70%),radial-gradient(40% 20% at 90% 20%,#3A1A2E 0,transparent 70%)}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 28px 0;font-size:12px;font-weight:600}
+.nav{position:relative;padding:10px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(22,22,26,0.8);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.body{position:relative;padding:8px 20px 0;text-align:center}
+.badge{position:relative;width:76px;height:76px;margin:6px auto 16px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px -8px rgba(59,91,219,.35)}
+.ping{position:absolute;top:14px;right:14px;width:12px;height:12px;border-radius:50%;background:#F06595;box-shadow:0 0 0 3px #fff}
+h1{font-size:26px;letter-spacing:-.6px;margin:0 0 6px;font-weight:700}.sub2{margin:0;color:#A3B1C4;font-size:14px}
+.mail{display:inline-flex;align-items:center;gap:10px;margin:8px 0 22px;font-size:15px;font-weight:600}
+.ed{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:#7C93FF;background:#1E2A55;border-radius:999px;padding:4px 10px}
+.otp{display:flex;gap:8px;justify-content:center}
+.bx{position:relative;width:42px;height:54px;border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border:1.5px solid #26262D;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.bx.fill{border-color:#3B4C8C}.bx.act{border-color:#7C93FF;box-shadow:0 0 0 4px rgba(59,91,219,.12)}
+.bx.bad{border-color:#F87171;background:#2E1C22;color:#F87171}
+.caret{width:2px;height:24px;background:#4263EB;border-radius:2px}
+.timer{font-size:13px;color:#A3B1C4;margin:16px 0 0}.timer b{color:#E8EDF5}.link{color:#7C93FF;font-weight:600}
+.emsg{color:#F87171;font-size:13px;margin:14px 0 0;font-weight:500}
+.cta{position:relative;margin:auto 20px 22px}
+button{width:100%;height:54px;border-radius:999px;font:600 15px Inter,"Segoe UI",Arial;display:flex;align-items:center;justify-content:center;gap:10px}
+.p{background:#4263EB;color:#fff;border:0;box-shadow:0 8px 20px -6px rgba(59,91,219,.55)}.p.dim{background:#3B4C8C;box-shadow:none}
+.g{margin-top:10px;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);color:#E8EDF5;border:1px solid #26262D}
+.legal{text-align:center;font-size:12px;color:#A3B1C4;margin:12px 0 0}
+.notes{max-width:700px;margin:28px auto 0;background:linear-gradient(160deg,rgba(255,255,255,.085),rgba(255,255,255,.035));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.10);border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#7C93FF}
+
+.phone:not(.lock){background:
+ radial-gradient(70% 34% at 10% 0%,rgba(66,99,235,.55) 0,transparent 72%),
+ radial-gradient(60% 30% at 100% 10%,rgba(139,92,246,.42) 0,transparent 72%),
+ radial-gradient(55% 26% at 60% 42%,rgba(236,72,153,.20) 0,transparent 72%),
+ radial-gradient(70% 22% at 50% 105%,rgba(66,99,235,.28) 0,transparent 75%),#000!important}
+.glow{display:none!important}
+/* solid surfaces: sheets, popups, keypads, menus, snackbars */
+.sheet,.kb,.kbs,.pop,.cf,.mi,.menu .mi,.lockc,.plan-sheet{background:#141418!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 -10px 40px -12px rgba(0,0,0,.9)!important}
+.pill{background:linear-gradient(180deg,rgba(40,40,48,.55),rgba(20,20,24,.55))!important;backdrop-filter:blur(26px) saturate(180%)!important;
+ border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px -12px rgba(0,0,0,.9)!important}
+.tab.on{background:rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)!important}
+.fab:not(.close){background:linear-gradient(135deg,#7C93FF,#4263EB)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 14px 34px -8px rgba(66,99,235,.85)!important}
+.ch.on,.chip.on{background:linear-gradient(135deg,#5C7CFA,#4263EB)!important;border-color:transparent!important;color:#fff!important}
+body{background:#000!important}
+.phone[style*="--c:#DC2626"] .amt{color:#F87171!important}.phone[style*="--c:#15803D"] .amt{color:#4ADE80!important}
+.notes{background:#111114!important;backdrop-filter:none!important;box-shadow:inset 0 0 0 1px #26262D!important}
+</style></head><body>
+<div class="h">05 &middot; Verify email</div><p class="sub">Create account ke baad</p>
+<div class="row"><div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="nav"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
+<div class="body">
+<div class="badge"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg><span class="ping"></span></div>
+<h1>Check your email</h1>
+<p class="sub2">We sent a 6-digit code to</p>
+<div class="mail">pranjal@gmail.com <span class="ed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg> Change</span></div>
+<div class="otp"><div class="bx fill">4</div><div class="bx fill">8</div><div class="bx fill">2</div><div class="bx act"><span class="caret"></span></div><div class="bx"></div><div class="bx"></div></div><p class="timer">Resend code in <b>0:42</b></p>
+</div>
+<div class="cta"><button class="p dim">Verify</button>
+<button class="g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg><span>Open email app</span></button>
+<p class="legal">Code is valid for 15 minutes. Check spam if you don&#39;t see it.</p></div></div><p class="cap">Code type ho raha hai</p></div>
+<div><div class="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="nav"><div class="bk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
+<div class="body">
+<div class="badge"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg><span class="ping"></span></div>
+<h1>Check your email</h1>
+<p class="sub2">We sent a 6-digit code to</p>
+<div class="mail">pranjal@gmail.com <span class="ed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7C93FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg> Change</span></div>
+<div class="otp"><div class="bx fill bad">4</div><div class="bx fill bad">8</div><div class="bx fill bad">2</div><div class="bx fill bad">9</div><div class="bx fill bad">1</div><div class="bx fill bad">3</div></div><p class="emsg">That code doesn&#39;t match. 3 tries left.</p><p class="timer"><span class="link">Resend code</span></p>
+</div>
+<div class="cta"><button class="p">Verify</button>
+<button class="g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8EDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg><span>Open email app</span></button>
+<p class="legal">Code is valid for 15 minutes. Check spam if you don&#39;t see it.</p></div></div><p class="cap">Galat code</p></div></div>
+<div class="notes"><b>Verify button:</b> 6 digit poore hone tak halka (inactive). Poore hote hi blue ho jata hai; verify tabhi hoga jab user <b>Verify</b> dabaye. Email ka code copy karke paste karo to sab boxes ek saath bhar jaate hain.<br>
+<b>Galat code:</b> boxes laal + halka sa hilna (shake 200ms), message mein bache hue tries. 5 galat tries ke baad naya code mangna padega.<br>
+<b>Resend:</b> 60 sec timer, phir "Resend code" link. Code 15 min tak valid.<br>
+<b>Sahi code (Verify dabane ke baad):</b> boxes green, chhota tick animation, phir Language screen.<br>
+<b>Change:</b> email galat likha ho to "Change" se wapas Create account par.</div></body></html>

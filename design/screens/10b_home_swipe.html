@@ -1,0 +1,258 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>10b Swipe demo</title>
+<style>
+body{margin:0;padding:28px 16px;background:#E9EEF6;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1F2A37}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#5B6B7F;margin:0 0 22px;font-size:14px}
+.wrap{display:flex;flex-wrap:wrap;gap:32px;justify-content:center;align-items:flex-start}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#F2F8FC;box-shadow:0 0 0 8px #1F2A37;user-select:none}
+.glow{position:absolute;left:0;right:0;top:0;height:300px;background:radial-gradient(60% 60% at 10% 0%,#DCE6FF 0,transparent 70%),radial-gradient(55% 55% at 100% 10%,#E9E3FF 0,transparent 70%)}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.list{position:relative;padding:8px 16px 0;height:650px;overflow-y:auto;scrollbar-width:none}
+.sec{display:flex;align-items:center;gap:8px;margin:10px 2px 4px}.sec b{font-size:18px}
+.day{font-size:12px;font-weight:600;color:#5B6B7F;margin:14px 4px 8px}
+.sw{position:relative;margin-bottom:8px;border-radius:20px;transition:height .28s cubic-bezier(.2,.8,.3,1),margin .28s}
+.acts{position:absolute;top:0;bottom:0;right:0;display:flex;gap:8px;justify-content:flex-end;align-items:stretch;pointer-events:none}
+.btn{width:0;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#fff;font-size:11px;font-weight:700;overflow:hidden;opacity:0;cursor:pointer;transition:width .3s cubic-bezier(.2,1.2,.35,1),opacity .2s}
+.btn svg{transform:scale(.6);transition:transform .2s}
+.btn.edit{background:#3B5BDB}.btn.del{background:#C62828}
+.sw.open .acts,.sw.dragging .acts{pointer-events:auto}
+.card{position:relative;display:flex;align-items:center;gap:11px;padding:12px;background:#fff;border-radius:20px;box-shadow:0 6px 18px -10px rgba(31,42,55,.14);touch-action:pan-y;will-change:transform;transition:transform .34s cubic-bezier(.2,1.15,.35,1);cursor:grab}
+.sw.dragging .card,.sw.dragging .btn{transition:none}
+.ic{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700;font-size:13px}
+.m{flex:1;min-width:0}.m b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.m small{font-size:11.5px;color:#6B7C8F;white-space:nowrap}
+.a{font-size:14.5px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.toast{position:absolute;left:16px;right:16px;bottom:26px;display:flex;align-items:center;gap:10px;background:#1F2A37;color:#fff;border-radius:18px;padding:12px 14px;font-size:13px;transition:transform .35s cubic-bezier(.2,1.2,.35,1),opacity .2s}
+.toast.show{transform:none}.toast span{flex:1}.toast u{color:#91A7FF;text-decoration:none;font-weight:700;cursor:pointer}
+.side{max-width:420px;background:#fff;border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.65}
+.side b{color:#3B5BDB}.side h3{margin:0 0 8px;font-size:16px}.side ol{padding-left:18px;margin:6px 0 12px}
+.hint{display:inline-block;background:#EDF1FD;color:#2B4BC7;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600}
+.tg{display:inline-flex;background:#DDE4F0;border-radius:999px;padding:4px;margin:0 0 18px}
+.tg span{padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;color:#5B6B7F;cursor:pointer}
+.tg span.on{background:#fff;color:#1F2A37;box-shadow:0 2px 8px rgba(31,42,55,.12)}
+.phone.soft .btn.edit{background:linear-gradient(180deg,rgba(110,138,250,.94),rgba(59,91,219,.84));box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 0 0 1px rgba(255,255,255,.22),0 8px 18px -8px rgba(59,91,219,.6)}
+.phone.soft .btn.del{background:linear-gradient(180deg,rgba(232,89,89,.94),rgba(198,40,40,.84));box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 0 0 1px rgba(255,255,255,.2),0 8px 18px -8px rgba(198,40,40,.6)}
+.navwrap{position:absolute;left:14px;right:14px;bottom:18px;display:flex;align-items:center;gap:8px;z-index:5}
+.pill{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;height:62px;border-radius:999px;padding:0 6px;background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 1px rgba(255,255,255,.9),0 12px 34px -8px rgba(31,42,55,.18)}
+.tab{height:48px;min-width:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:7px}
+.tab.on{background:#fff;padding:0 14px;box-shadow:0 4px 14px -4px rgba(31,42,55,.18)}.tab.on span{font-size:14px;font-weight:700}
+.fab{width:60px;height:60px;border-radius:50%;background:#3B5BDB;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;box-shadow:0 12px 26px -8px rgba(59,91,219,.65);transition:transform .35s cubic-bezier(.2,1.3,.4,1),background .25s}
+.fab.x{transform:rotate(45deg);background:#1F2A37}
+.scr{position:absolute;inset:0;background:rgba(17,24,39,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s;z-index:4}
+.scr.show{opacity:1;pointer-events:auto}
+.menu{position:absolute;right:14px;bottom:92px;width:178px;display:flex;flex-direction:column;gap:8px;transform-origin:bottom right;transform:scale(.3) translateY(20px);opacity:0;pointer-events:none;transition:transform .38s cubic-bezier(.2,1.25,.35,1),opacity .2s;z-index:6}
+.menu.show{transform:none;opacity:1;pointer-events:auto}
+.mi{display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 8px 0 16px;border-radius:22px;background:#FFFFFF;border:1px solid #EEF1F6;box-shadow:0 10px 24px -10px rgba(31,42,55,.35);cursor:pointer;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .3s cubic-bezier(.2,1.2,.35,1),background .15s}
+.mi:hover{background:#fff}.mi span{font-size:15px;font-weight:600}
+.menu.show .mi{opacity:1;transform:none}
+.menu.show .mi:nth-child(4){transition-delay:0ms}.menu.show .mi:nth-child(3){transition-delay:30ms}.menu.show .mi:nth-child(2){transition-delay:60ms}.menu.show .mi:nth-child(1){transition-delay:90ms}
+.mic{width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.toast{z-index:7;bottom:96px;opacity:0;pointer-events:none;transform:translateY(16px)}
+.toast.show{opacity:1;pointer-events:auto;transform:none}
+.cf{position:absolute;left:0;right:0;bottom:0;z-index:9;background:#fff;border-radius:30px 30px 0 0;padding:8px 18px 22px;text-align:center;transform:translateY(105%);transition:transform .34s cubic-bezier(.2,1.1,.35,1);box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.cf.show{transform:none}.cf .hd{width:40px;height:5px;border-radius:5px;background:#DCE3EE;margin:0 auto 14px}
+.cfi{width:56px;height:56px;border-radius:18px;background:#FDEEEE;margin:0 auto 10px;display:flex;align-items:center;justify-content:center}
+.cf h3{margin:0;font-size:19px}.cf p{margin:6px 8px 0;font-size:13px;color:#5B6B7F;line-height:1.5}
+.cfe{display:flex;align-items:center;gap:10px;text-align:left;background:#F7FAFD;border-radius:16px;padding:10px 12px;margin:14px 0 16px}
+.cfe .m b{font-size:14px}
+.cfb{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cfb span{height:50px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;cursor:pointer}
+.cfb .no{background:#F2F5FA}.cfb .yes{background:#C62828;color:#fff;box-shadow:0 10px 22px -8px rgba(198,40,40,.7)}
+.scr2{position:absolute;inset:0;z-index:8;background:rgba(17,24,39,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}.scr2.show{opacity:1;pointer-events:auto}
+</style></head><body>
+<div class="h">10b &middot; Swipe + &quot;+&quot; menu (try karke dekho)</div>
+<p class="sub">Mouse se card ko pakad kar left kheencho (phone par ungli se)</p>
+<div class="tg" id="tg"><span data-v="solid">Solid</span><span class="on" data-v="soft">Soft glass (final)</span></div>
+<div class="wrap">
+<div class="phone soft" id="phone"><div class="glow"></div>
+<div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div>
+<div class="list" id="list">
+<div class="sec"><b>Transactions</b></div>
+<div class="day">Today &middot; 14 Oct</div>
+<div id="today"></div>
+<div class="day">Yesterday &middot; 13 Oct</div>
+<div id="yday"></div>
+<div style="height:80px"></div>
+</div>
+<div class="scr" id="scr"></div>
+<div class="menu" id="menu"><div class="mi" data-t="Expense"><span>Expense</span><div class="mic" style="background:#FDEEEE"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></div></div><div class="mi" data-t="Income"><span>Income</span><div class="mic" style="background:#EAF6EF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7L7 17M7 9v8h8"/></svg></div></div><div class="mi" data-t="Lent"><span>Lent</span><div class="mic" style="background:#EDF1FD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B4BC7" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div></div><div class="mi" data-t="Borrowed"><span>Borrowed</span><div class="mic" style="background:#FCEDF3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3165A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></div></div></div>
+<div class="navwrap"><div class="pill"><div class="tab on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a2 2 0 0 1-2 2h-3v-6H9v6H6a2 2 0 0 1-2-2z"/></svg><span>Home</span></div><div class="tab"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6B7C8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg></div><div class="tab"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6B7C8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9h9"/><path d="M20.5 15A9 9 0 1 1 9 3.5"/></svg></div><div class="tab"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6B7C8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div></div>
+<div class="fab" id="fab"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div></div>
+<div class="toast" id="toast"><span id="tmsg"></span><u id="undo">Undo</u></div>
+<div class="scr2" id="scr2"></div>
+<div class="cf" id="cf"><div class="hd"></div><div class="cfi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C62828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></div>
+<h3>Delete this entry?</h3><p>It will be removed from your balance and charts.</p>
+<div class="cfe" id="cfe"></div>
+<div class="cfb"><span class="no" id="cfno">Cancel</span><span class="yes" id="cfyes">Delete</span></div></div>
+</div>
+<div class="side">
+<h3>Kaise kaam karta hai</h3>
+<ol>
+<li><b>Normal:</b> card ke peeche kuch nahi dikhta.</li>
+<li><b>Thoda kheencho:</b> Edit aur Delete buttons ungli ke saath dheere dheere bade hote hain (icon bhi grow hota hai).</li>
+<li><b>Aadhe se kam chhodo:</b> card spring se wapas.</li>
+<li><b>Thoda zyada chhodo:</b> card khula rehta hai, dono buttons dikhte hain.</li>
+<li><b>Bahut zor se / poora kheencho (60%+):</b> Delete button poora phail jata hai, halka haptic, chhodte hi <b>confirm sheet</b> "Delete this entry?" (Cancel / Delete). Delete button par tap karne par bhi yahi sheet.</li>
+<li><b>Delete dabaya:</b> entry hatti hai + neeche <b>Undo</b> (5 sec). <b>Cancel:</b> card wapas apni jagah.</li>
+<li><b>Udhar entry par tap</b> (Rahul, Amit): us person ki detail screen khulti hai.</li>
+<li><b>&quot;+&quot; dabao:</b> right side mein chhota glass menu (Expense, Income, Lent, Borrowed). Bahar tap = band.</li>
+</ol>
+<p><span class="hint">Ek waqt mein ek hi card khula</span> &nbsp;<span class="hint">Kahin bhi aur tap ya scroll = band</span></p>
+<p style="margin:12px 0 0">Owner decision: full swipe par bhi <b>confirm</b> poochte hain, taaki galti se delete na ho. Delete ke baad bhi 5 sec Undo; server par sirf "deleted" mark hota hai.</p>
+</div>
+</div>
+<script>
+const ICON = {
+  edit: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>',
+  del: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
+  chev: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>'
+};
+const G = '#15803D', R = '#C62828', B = '#2B4BC7', P = '#A3165A';
+const data = {
+  today: [
+    {ic: '&#128188;', t: 'Salary', m: 'Salary &middot; Online &middot; 9:15 AM', a: '+&#8377;45,000', c: G, bg: '#EAF6EF'},
+    {ic: 'RS', t: 'Rahul Sharma', m: 'Lent &middot; Due 25 Oct &middot; UPI', a: '&#8377;3,000', c: B, bg: '#EDF1FD', person: true},
+    {ic: '&#128722;', t: 'Groceries', m: 'Food &middot; UPI &middot; 6:40 PM', a: '&minus;&#8377;2,450', c: R, bg: '#FDEEEE'}
+  ],
+  yday: [
+    {ic: '&#127968;', t: 'House rent', m: 'Rent &middot; Bank &middot; 11:20 AM', a: '&minus;&#8377;12,000', c: R, bg: '#FDEEEE'},
+    {ic: 'AP', t: 'Amit Patel', m: 'Borrowed &middot; Due 20 Oct &middot; Cash', a: '&#8377;2,000', c: P, bg: '#FCEDF3', person: true},
+    {ic: '&#128187;', t: 'Freelance project', m: 'Work &middot; Online &middot; 4:12 PM', a: '+&#8377;18,000', c: G, bg: '#EAF6EF'},
+    {ic: '&#9889;', t: 'Electricity bill', m: 'Bills &middot; UPI &middot; 8:05 PM', a: '&minus;&#8377;1,840', c: R, bg: '#FDEEEE'}
+  ]
+};
+const BTN = 68, GAP = 8, OPEN = BTN * 2 + GAP * 2;
+let openSw = null, lastDeleted = null, toastTimer = null, swallowTap = false;
+
+function build(id) {
+  const box = document.getElementById(id);
+  data[id].forEach(d => {
+    const sw = document.createElement('div');
+    sw.className = 'sw';
+    sw.innerHTML = `<div class="acts"><div class="btn edit">${ICON.edit}Edit</div><div class="btn del">${ICON.del}Delete</div></div>
+      <div class="card"><div class="ic" style="background:${d.bg};color:${d.c}">${d.ic}</div>
+      <div class="m"><b>${d.t}</b><small>${d.m}</small></div><div class="a" style="color:${d.c}">${d.a}</div></div>`;
+    box.appendChild(sw);
+    wire(sw, d);
+  });
+}
+
+function setReveal(sw, r) {
+  const card = sw.querySelector('.card'), w = card.offsetWidth;
+  const edit = sw.querySelector('.edit'), del = sw.querySelector('.del');
+  card.style.transform = `translateX(${-r}px)`;
+  const full = r > w * 0.6;
+  const room = Math.max(0, r - GAP);
+  let ew, dw;
+  if (full) { ew = 0; dw = room; }
+  else { const each = Math.max(0, (room - GAP) / 2); ew = Math.min(each, BTN + 20); dw = Math.max(each, room - GAP - ew); }
+  edit.style.width = ew + 'px'; del.style.width = dw + 'px';
+  edit.style.opacity = Math.min(1, ew / 50); del.style.opacity = Math.min(1, dw / 50);
+  const sc = Math.min(1, 0.6 + r / 220);
+  edit.querySelector('svg').style.transform = `scale(${sc})`;
+  del.querySelector('svg').style.transform = `scale(${sc})`;
+  if (full !== sw._full) { sw._full = full; if (full && navigator.vibrate) navigator.vibrate(12); }
+}
+
+function close(sw) { if (!sw) return; sw.classList.remove('open'); setReveal(sw, 0); if (openSw === sw) openSw = null; }
+
+function remove(sw, d) {
+  const card = sw.querySelector('.card');
+  card.style.transform = `translateX(${-card.offsetWidth - 40}px)`;
+  sw.querySelector('.edit').style.width = '0px';
+  sw.querySelector('.del').style.width = card.offsetWidth + 'px';
+  setTimeout(() => { sw.style.height = sw.offsetHeight + 'px'; requestAnimationFrame(() => { sw.style.height = '0px'; sw.style.marginBottom = '0px'; sw.style.opacity = '0'; }); }, 180);
+  lastDeleted = {sw, d};
+  toast(`"${d.t}" deleted`, true);
+  if (openSw === sw) openSw = null;
+}
+
+function restore() {
+  if (!lastDeleted) return;
+  const {sw} = lastDeleted; lastDeleted = null;
+  sw.style.height = ''; sw.style.marginBottom = ''; sw.style.opacity = '';
+  sw.classList.remove('open'); setReveal(sw, 0);
+  hideToast();
+}
+
+function toast(msg, undo) {
+  document.getElementById('tmsg').innerHTML = msg;
+  document.getElementById('undo').style.display = undo ? '' : 'none';
+  const t = document.getElementById('toast'); t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(hideToast, undo ? 5000 : 2200);
+}
+function hideToast() { document.getElementById('toast').classList.remove('show'); }
+document.getElementById('undo').onclick = restore;
+
+function wire(sw, d) {
+  const card = sw.querySelector('.card');
+  let x0 = 0, y0 = 0, base = 0, r = 0, dragging = false, moved = false;
+  card.addEventListener('pointerdown', e => {
+    x0 = e.clientX; y0 = e.clientY; base = sw.classList.contains('open') ? OPEN : 0; r = base; dragging = false; moved = false;
+    card.setPointerCapture(e.pointerId);
+  });
+  card.addEventListener('pointermove', e => {
+    if (!card.hasPointerCapture(e.pointerId)) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    if (!dragging) {
+      if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) return;
+      dragging = true; moved = true; sw.classList.add('dragging');
+      if (openSw && openSw !== sw) close(openSw);
+    }
+    r = Math.max(0, base - dx);
+    const w = card.offsetWidth;
+    if (r > w) r = w + (r - w) * 0.2;
+    setReveal(sw, r);
+  });
+  const end = e => {
+    if (card.hasPointerCapture && e.pointerId !== undefined && card.hasPointerCapture(e.pointerId)) card.releasePointerCapture(e.pointerId);
+    sw.classList.remove('dragging');
+    if (!moved) {
+      if (swallowTap) { swallowTap = false; return; }
+      if (sw.classList.contains('open')) { close(sw); return; }
+      if (openSw) { close(openSw); return; }
+      if (d.person) toast(`Opening <b>${d.t}</b> &rsaquo; all udhar entries`, false);
+      else toast(`Opening <b>${d.t}</b> details`, false);
+      return;
+    }
+    const w = card.offsetWidth;
+    if (r > w * 0.6) { sw.classList.add('open'); openSw = sw; askDelete(sw, d); }
+    else if (r > 60) { sw.classList.add('open'); openSw = sw; setReveal(sw, OPEN); }
+    else close(sw);
+  };
+  card.addEventListener('pointerup', end);
+  card.addEventListener('pointercancel', end);
+  sw.querySelector('.edit').addEventListener('click', () => { close(sw); toast(`Edit <b>${d.t}</b>`, false); });
+  sw.querySelector('.del').addEventListener('click', () => askDelete(sw, d));
+}
+document.addEventListener('pointerdown', e => {
+  swallowTap = false;
+  if (pending || e.target.closest('.cf')) return;
+  if (openSw && !openSw.contains(e.target)) { close(openSw); swallowTap = true; }
+}, true);
+document.getElementById('list').addEventListener('scroll', () => { if (openSw) close(openSw); }, {passive: true});
+document.querySelectorAll('#tg span').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#tg span').forEach(x => x.classList.toggle('on', x === b));
+  document.getElementById('phone').classList.toggle('soft', b.dataset.v === 'soft');
+});
+const fab = document.getElementById('fab'), menu = document.getElementById('menu'), scr = document.getElementById('scr');
+function setMenu(on) { menu.classList.toggle('show', on); scr.classList.toggle('show', on); fab.classList.toggle('x', on); }
+fab.onclick = () => setMenu(!menu.classList.contains('show'));
+scr.onclick = () => setMenu(false);
+menu.querySelectorAll('.mi').forEach(m => m.onclick = () => { setMenu(false); toast(`Add <b>${m.dataset.t}</b> screen`, false); });
+let pending = null;
+function askDelete(sw, d) {
+  pending = {sw, d};
+  document.getElementById('cfe').innerHTML = `<div class="ic" style="background:${d.bg};color:${d.c}">${d.ic}</div><div class="m"><b>${d.t}</b><small>${d.m}</small></div><div class="a" style="color:${d.c}">${d.a}</div>`;
+  document.getElementById('cf').classList.add('show'); document.getElementById('scr2').classList.add('show');
+}
+function closeAsk(keep) {
+  document.getElementById('cf').classList.remove('show'); document.getElementById('scr2').classList.remove('show');
+  if (!pending) return; const {sw, d} = pending; pending = null;
+  if (keep) remove(sw, d); else close(sw);
+}
+document.getElementById('cfyes').onclick = () => closeAsk(true);
+document.getElementById('cfno').onclick = () => closeAsk(false);
+document.getElementById('scr2').onclick = () => closeAsk(false);
+build('today'); build('yday');
+</script>
+</body></html>

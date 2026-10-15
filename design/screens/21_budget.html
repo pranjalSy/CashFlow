@@ -1,0 +1,143 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>21 Budget</title><style>
+body{margin:0;padding:28px 16px;background:#E9EEF6;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1F2A37}
+.h{font-size:22px;margin:0 0 4px;font-weight:700}.sub{color:#5B6B7F;margin:0 0 22px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}.cap{text-align:center;color:#5B6B7F;font-size:13px;margin:12px 0 0}
+.phone{position:relative;width:340px;height:720px;border-radius:48px;overflow:hidden;background:#F2F8FC;box-shadow:0 0 0 8px #1F2A37;display:flex;flex-direction:column}
+.glow{position:absolute;left:0;right:0;top:0;height:300px}
+.status{position:relative;display:flex;justify-content:space-between;padding:16px 30px 0;font-size:12px;font-weight:600}
+.top{position:relative;display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.bk{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg{display:flex;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:4px;box-shadow:0 2px 10px rgba(31,42,55,.06)}
+.seg span{padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:#5B6B7F}
+.seg span.on.e{background:#C62828;color:#fff;box-shadow:0 4px 12px -4px rgba(198,40,40,.6)}.seg span.on.i{background:#15803D;color:#fff;box-shadow:0 4px 12px -4px rgba(21,128,61,.6)}
+.amt{position:relative;display:flex;align-items:center;justify-content:center;gap:2px;margin:22px 0 10px;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt .sg{font-size:30px;font-weight:600;margin-right:4px}.amt .rs{font-size:30px;font-weight:600}.amt .num{font-size:52px;font-weight:700;letter-spacing:-1.5px}
+.caret{width:3px;height:44px;border-radius:2px;margin-left:4px}
+.catrow{position:relative;display:flex;justify-content:center}
+.cat{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:6px 12px 6px 6px;font-size:14px;font-weight:600;box-shadow:0 4px 14px -6px rgba(31,42,55,.15)}
+.ci{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center}.dd{color:#8A97A8;font-size:11px}
+.quick{position:relative;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 18px 0}
+.qc{font-size:12px;font-weight:600;color:#5B6B7F;background:rgba(255,255,255,.75);border:1px solid #E6EBF3;border-radius:999px;padding:6px 11px}
+.kbs{position:absolute;left:0;right:0;bottom:0;z-index:3;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -10px 34px -10px rgba(31,42,55,.22)}
+.kb{position:relative;margin-top:auto;background:#FFFFFF;border-top:1px solid #E6EBF3;border-radius:28px 28px 0 0;padding:10px 14px 18px;box-shadow:0 -8px 30px -10px rgba(31,42,55,.12)}
+.kbbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}.kbbar span{font-size:13px;color:#5B6B7F}
+.mini{width:auto;height:36px;padding:0 18px;border-radius:999px;border:0;background:var(--c);color:#fff;font:600 14px Inter,"Segoe UI",Arial}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.k{height:52px;border-radius:16px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600}.k.g{background:transparent}
+.form{position:relative;padding:18px 16px 0}
+.card{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.r{display:flex;align-items:center;gap:12px;padding:10px 0}.r+.r{border-top:1px solid #F0F3F8}
+.ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.rl{flex:1;min-width:0}.rl small{display:block;font-size:11px;color:#8A97A8;font-weight:600}.rl .v{font-size:15px;font-weight:600}.rl .ph{font-size:15px;color:#9AA7B8}
+label{display:block;font-size:12px;font-weight:700;color:#5B6B7F;margin:2px 4px 8px}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pm{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:16px;background:#fff;border:1.5px solid #E6EBF3;font-size:14px;font-weight:700;color:#5B6B7F}
+.sub3{display:flex;gap:6px;margin:8px 0 12px}
+.sc{flex:1;text-align:center;padding:8px 0;border-radius:12px;font-size:13px;font-weight:600;color:#5B6B7F;background:#EEF2F8}
+.sc.on{background:#1F2A37;color:#fff}
+.req{font-size:10px;font-weight:700;color:#8A97A8;background:#EEF2F8;border-radius:999px;padding:2px 7px;margin-left:4px;letter-spacing:.2px}
+.now{font-style:normal;font-size:10px;font-weight:700;color:#3B5BDB;background:#EDF1FD;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.pay.bad .pm{border-color:#C62828;background:#FFF8F8}
+.err{color:#C62828;font-size:12px;font-weight:600;margin:6px 4px 12px}
+.cta{position:relative;margin:auto 16px 22px}
+.p{width:100%;height:56px;border-radius:999px;border:0;background:var(--c);color:#fff;font:700 16px Inter,"Segoe UI",Arial;box-shadow:0 10px 22px -8px var(--c)}
+.notes{max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:18px 20px;font-size:14px;line-height:1.6}.notes b{color:#3B5BDB}
+
+.top{z-index:2}.tt{text-align:center;min-width:0}.tt h2{margin:0;font-size:18px}.tt small{display:block;font-size:12px;color:#6B7C8F;font-weight:600}
+.bk-w{width:40px;display:flex;justify-content:center}
+.sc2{position:relative;flex:1;overflow:hidden;padding:12px 16px 0}
+.tgl{width:44px;height:26px;border-radius:999px;background:#D5DCE7;position:relative;flex:none;display:inline-block}
+.tgl i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(31,42,55,.25)}
+.tgl.on{background:#3B5BDB}.tgl.on i{left:21px}
+.grp{background:#fff;border-radius:22px;padding:2px 14px;box-shadow:0 6px 20px -10px rgba(31,42,55,.12);margin-bottom:12px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0}.li+.li{border-top:1px solid #F0F3F8}
+.li .ri{width:34px;height:34px;border-radius:11px;background:#F2F5FA;display:flex;align-items:center;justify-content:center;flex:none}
+.li .lt{flex:1;min-width:0}.li .lt b{display:block;font-size:14.5px;font-weight:600}.li .lt small{display:block;font-size:11.5px;color:#6B7C8F}
+.li .lv{font-size:13px;color:#5B6B7F;font-weight:600;white-space:nowrap}
+.gl{font-size:12px;font-weight:700;color:#8A97A8;margin:14px 6px 8px;letter-spacing:.3px}
+.scrim{position:absolute;inset:0;z-index:4;background:rgba(17,24,39,.42);backdrop-filter:blur(8px)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:#fff;border-radius:30px 30px 0 0;padding:8px 18px 20px;box-shadow:0 -14px 40px -12px rgba(17,24,39,.35)}
+.hd{width:40px;height:5px;border-radius:5px;background:#DCE3EE;margin:0 auto 14px}
+.pop{position:absolute;left:18px;right:18px;z-index:5;background:#fff;border-radius:30px;padding:20px 18px 18px;text-align:center;box-shadow:0 24px 50px -16px rgba(17,24,39,.5)}
+.pop small.k1{font-size:12px;font-weight:700;color:#C2410C}.pop h3{margin:4px 0;font-size:20px;letter-spacing:-.3px}.pop p{margin:0;font-size:13px;color:#5B6B7F}
+.pico{width:60px;height:60px;margin:0 auto 10px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.btn{height:50px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;gap:6px;font:700 15px Inter,"Segoe UI",Arial;width:100%}
+.btn.g{background:#15803D;color:#fff;box-shadow:0 10px 22px -8px rgba(21,128,61,.7)}
+.btn.b{background:#3B5BDB;color:#fff;box-shadow:0 10px 22px -8px rgba(59,91,219,.7)}
+.btn.s{background:#F2F5FA;color:#1F2A37}.btn.r{background:#FDEEEE;color:#C62828}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pad-s{gap:6px}.pad-s .k{height:42px;border-radius:12px;font-size:19px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;font-weight:700;color:#5B6B7F;background:#fff;border:1.5px solid #E6EBF3;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.chip.on{background:#3B5BDB;border-color:#3B5BDB;color:#fff}
+.hint{display:flex;gap:6px;font-size:11.5px;color:#6B7C8F;line-height:1.45;margin:6px 4px 0}.hint svg{flex:none;margin-top:1px}
+.cta2{position:relative;z-index:2;margin:auto 16px 20px}
+.notes .q{color:#B45309}
+
+.mon{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 10px}.mon b{font-size:14px}
+.ov{background:#fff;border-radius:24px;padding:16px;box-shadow:0 10px 26px -12px rgba(31,42,55,.18)}
+.ovt{display:flex;justify-content:space-between;align-items:center}.ovt small{font-size:12px;color:#6B7C8F;font-weight:600}
+.ovt b{display:block;font-size:28px;letter-spacing:-.6px;font-variant-numeric:tabular-nums}.ovt span{font-size:12.5px;color:#6B7C8F}
+.ring{width:62px;height:62px;border-radius:50%;background:conic-gradient(#C2410C calc(var(--p)*1%),#EEF2F8 0);display:flex;align-items:center;justify-content:center;position:relative}
+.ring:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#fff}.ring span{position:relative;font-size:14px;font-weight:700;color:#C2410C}
+.ovb{margin-top:12px}.ovf{display:flex;justify-content:space-between;font-size:12px;color:#5B6B7F;margin-top:8px}.ovf b{color:#1F2A37}
+.bb{height:7px;border-radius:7px;background:#EEF2F8;overflow:hidden}.bb i{display:block;height:100%;border-radius:7px}
+.bc{background:#fff;border-radius:20px;padding:11px 12px;margin-bottom:8px;box-shadow:0 6px 18px -10px rgba(31,42,55,.12)}
+.bh{display:flex;align-items:center;gap:10px;margin-bottom:9px}.ei{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.bt{flex:1}.bt b{display:block;font-size:14px}.bt small{font-size:11.5px;color:#6B7C8F;font-variant-numeric:tabular-nums}.bp{font-size:14px;font-weight:700}
+.st{display:block;font-size:11.5px;font-weight:700;margin-top:6px}
+.add{display:flex;align-items:center;justify-content:center;gap:6px;height:44px;border-radius:16px;border:1.5px dashed #C9D3E3;color:#3B5BDB;font-size:13.5px;font-weight:700}
+.shh{display:flex;align-items:center;gap:10px}.shh b{display:block;font-size:17px}.shh small{font-size:12px;color:#6B7C8F}
+.samt{display:flex;align-items:center;justify-content:center;gap:3px;margin:10px 0 8px;font-size:24px;font-weight:600;color:#1F2A37}.samt b{font-size:40px;letter-spacing:-1px}
+.samt .caret{display:block;width:3px;height:34px;background:#3B5BDB;border-radius:2px}
+.sugg{display:flex;gap:6px;justify-content:center;margin-bottom:10px}.sugg .chip{font-size:11.5px;padding:6px 10px}
+.li2{display:flex;align-items:center;justify-content:space-between;background:#F7FAFD;border-radius:16px;padding:9px 12px;margin-bottom:10px}
+.li2 b{display:block;font-size:14px}.li2 small{font-size:11.5px;color:#6B7C8F}
+.phone.lock{background:linear-gradient(160deg,#5C7CFA 0%,#3B5BDB 45%,#A3165A 120%);padding:0 0 0}
+.clk{text-align:center;color:#fff;margin:26px 0 22px}.clk small{font-size:14px;opacity:.9}.clk b{display:block;font-size:68px;font-weight:600;letter-spacing:-2px;line-height:1}
+.nt{display:flex;gap:10px;margin:0 12px 8px;background:rgba(255,255,255,.88);border-radius:22px;padding:11px 12px;backdrop-filter:blur(10px)}
+.ni{width:34px;height:34px;border-radius:10px;overflow:hidden;flex:none;background:#3B5BDB}.ni img{width:34px;height:34px}
+.nb{flex:1;min-width:0}.nh{display:flex;justify-content:space-between;font-size:11.5px;color:#5B6B7F}.nh b{font-weight:600}
+.ntt{display:block;font-size:13.5px;margin-top:2px}.nb p{margin:1px 0 0;font-size:12.5px;color:#334155}
+.hidden-n{margin-top:18px}.hidden-n small{display:block;color:#fff;font-size:12px;font-weight:600;margin:0 18px 6px;opacity:.9}
+</style></head><body><div class="h">21 &middot; Budget</div><p class="sub">Charts screen ke upar &quot;Budget&quot; card se (Premium)</p><div class="row"><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Budget</h2></div><div class="bk-w"><div class="bk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div></div></div><div class="sc2">
+<div class="mon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><b>October 2026</b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+<div class="ov"><div class="ovt"><div><small>Spent this month</small><b>&#8377;28,500</b><span>of &#8377;35,000</span></div>
+<div class="ring" style="--p:81"><span>81%</span></div></div>
+<div class="ovb"><div class="bb"><i style="width:81%;background:#C2410C"></i></div></div><div class="ovf"><span><b>&#8377;6,500</b> left</span><span>17 days &middot; &#8377;382/day</span></div></div>
+<div class="gl">Category limits</div><div class="bc"><div class="bh"><div class="ei" style="background:#FFF1E6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18M16 3c-2 2-2 7 0 9v9"/></svg></div>
+<div class="bt"><b>Food</b><small>&#8377;4,200 of &#8377;5,000</small></div><div class="bp" style="color:#C2410C">84%</div></div><div class="bb"><i style="width:84%;background:#C2410C"></i></div><span class="st" style="color:#C2410C">&#8377;800 left</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#FCEDF3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3165A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg></div>
+<div class="bt"><b>Shopping</b><small>&#8377;6,800 of &#8377;6,000</small></div><div class="bp" style="color:#C62828">113%</div></div><div class="bb"><i style="width:100%;background:#C62828"></i></div><span class="st" style="color:#C62828">&#8377;800 over</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#FEF9E3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+<div class="bt"><b>Bills</b><small>&#8377;3,939 of &#8377;4,500</small></div><div class="bp" style="color:#C2410C">88%</div></div><div class="bb"><i style="width:88%;background:#C2410C"></i></div><span class="st" style="color:#C2410C">&#8377;561 left</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#E6F6F9"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v3H3zM5 11h14"/><circle cx="7.5" cy="16" r=".5"/><circle cx="16.5" cy="16" r=".5"/></svg></div>
+<div class="bt"><b>Travel</b><small>&#8377;1,200 of &#8377;3,000</small></div><div class="bp" style="color:#15803D">40%</div></div><div class="bb"><i style="width:40%;background:#15803D"></i></div><span class="st" style="color:#5B6B7F">&#8377;1,800 left</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#F1ECFE"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B3FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 4v16M16 4v16M3 9h5M3 15h5M16 9h5M16 15h5"/></svg></div>
+<div class="bt"><b>Fun</b><small>&#8377;900 of &#8377;2,000</small></div><div class="bp" style="color:#15803D">45%</div></div><div class="bb"><i style="width:45%;background:#15803D"></i></div><span class="st" style="color:#5B6B7F">&#8377;1,100 left</span></div>
+<div class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Add category limit</div>
+</div></div><p class="cap">Is mahine ka budget</p></div><div><div class="phone"><div class="glow" style="background:radial-gradient(70% 40% at 50% 0%,#E4EAFD 0,transparent 75%)"></div><div class="status"><span>9:41</span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="top"><div class="bk-w"><div class="bk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div></div><div class="tt"><h2>Budget</h2></div><div class="bk-w"><div class="bk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div></div></div><div class="sc2">
+<div class="mon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><b>October 2026</b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B6B7F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+<div class="ov"><div class="ovt"><div><small>Spent this month</small><b>&#8377;28,500</b><span>of &#8377;35,000</span></div>
+<div class="ring" style="--p:81"><span>81%</span></div></div>
+<div class="ovb"><div class="bb"><i style="width:81%;background:#C2410C"></i></div></div><div class="ovf"><span><b>&#8377;6,500</b> left</span><span>17 days &middot; &#8377;382/day</span></div></div>
+<div class="gl">Category limits</div><div class="bc"><div class="bh"><div class="ei" style="background:#FFF1E6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18M16 3c-2 2-2 7 0 9v9"/></svg></div>
+<div class="bt"><b>Food</b><small>&#8377;4,200 of &#8377;5,000</small></div><div class="bp" style="color:#C2410C">84%</div></div><div class="bb"><i style="width:84%;background:#C2410C"></i></div><span class="st" style="color:#C2410C">&#8377;800 left</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#FCEDF3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3165A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg></div>
+<div class="bt"><b>Shopping</b><small>&#8377;6,800 of &#8377;6,000</small></div><div class="bp" style="color:#C62828">113%</div></div><div class="bb"><i style="width:100%;background:#C62828"></i></div><span class="st" style="color:#C62828">&#8377;800 over</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#FEF9E3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CA8A04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+<div class="bt"><b>Bills</b><small>&#8377;3,939 of &#8377;4,500</small></div><div class="bp" style="color:#C2410C">88%</div></div><div class="bb"><i style="width:88%;background:#C2410C"></i></div><span class="st" style="color:#C2410C">&#8377;561 left</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#E6F6F9"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v3H3zM5 11h14"/><circle cx="7.5" cy="16" r=".5"/><circle cx="16.5" cy="16" r=".5"/></svg></div>
+<div class="bt"><b>Travel</b><small>&#8377;1,200 of &#8377;3,000</small></div><div class="bp" style="color:#15803D">40%</div></div><div class="bb"><i style="width:40%;background:#15803D"></i></div><span class="st" style="color:#5B6B7F">&#8377;1,800 left</span></div><div class="bc"><div class="bh"><div class="ei" style="background:#F1ECFE"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B3FC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 4v16M16 4v16M3 9h5M3 15h5M16 9h5M16 15h5"/></svg></div>
+<div class="bt"><b>Fun</b><small>&#8377;900 of &#8377;2,000</small></div><div class="bp" style="color:#15803D">45%</div></div><div class="bb"><i style="width:45%;background:#15803D"></i></div><span class="st" style="color:#5B6B7F">&#8377;1,100 left</span></div>
+<div class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B5BDB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Add category limit</div>
+</div><div class="scrim"></div><div class="sheet"><div class="hd"></div>
+<div class="shh"><div class="ei" style="background:#FFF1E6"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18M16 3c-2 2-2 7 0 9v9"/></svg></div><div><b>Food limit</b><small>Every month</small></div></div>
+<div class="samt">&#8377;<b>5,000</b><i class="caret"></i></div>
+<div class="sugg"><span class="chip">Avg 3 months &middot; &#8377;4,650</span><span class="chip">&#8377;4,000</span><span class="chip">&#8377;6,000</span></div>
+<div class="li2"><div><b>Alert me</b><small>At 80% and 100%</small></div><span class="tgl on"><i></i></span></div>
+<div class="pad pad-s"><div class="k">1</div><div class="k">2</div><div class="k">3</div><div class="k">4</div><div class="k">5</div><div class="k">6</div><div class="k">7</div><div class="k">8</div><div class="k">9</div><div class="k">.</div><div class="k">0</div><div class="k g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F2A37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 6H9l-6 6 6 6h12a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/><path d="M13 10l4 4M17 10l-4 4"/></svg></div></div>
+<div class="bt2" style="margin-top:10px"><button class="btn r">Remove</button><button class="btn b">Save limit</button></div></div></div><p class="cap">Category par tap: limit set karo</p></div><div><div class="phone lock"><div class="status" style="color:#fff"><span></span><span>&#9679;&#9679;&#9679; &#9646;</span></div><div class="clk"><small>Wednesday, 14 October</small><b>9:41</b></div><div class="nt"><div class="ni"><img src="../logo/png/cashflow_app_icon_48.png" onerror="this.style.display='none'"></div>
+<div class="nb"><div class="nh"><b>CashFlow</b><span>now</span></div><b class="ntt" style="color:#1F2A37">Shopping budget crossed</b><p>You spent &#8377;6,800 of &#8377;6,000 this month.</p></div></div><div class="nt"><div class="ni"><img src="../logo/png/cashflow_app_icon_48.png" onerror="this.style.display='none'"></div>
+<div class="nb"><div class="nh"><b>CashFlow</b><span>2h ago</span></div><b class="ntt" style="color:#1F2A37">80% of Food budget used</b><p>&#8377;800 left for 17 days.</p></div></div><div class="hidden-n"><small>With "Hide amounts in notifications" on:</small><div class="nt"><div class="ni"><img src="../logo/png/cashflow_app_icon_48.png" onerror="this.style.display='none'"></div>
+<div class="nb"><div class="nh"><b>CashFlow</b><span>2h ago</span></div><b class="ntt" style="color:#1F2A37">80% of Food budget used</b><p>Open CashFlow to see details.</p></div></div></div></div><p class="cap">80% aur 100% par alert</p></div></div><div class="notes"><b>Kahan se:</b> Charts screen ke upar "Budget" card (aur Settings mein bhi).<br>
+<b>Upar card:</b> is mahine kitna kharch, kul limit, ring mein %. Neeche "&#8377;6,500 left &middot; 17 days &middot; &#8377;382/day" (roz kitna kharch kar sakte ho). Month picker se pichle mahine bhi dekho.<br>
+<b>Rang ka rule (brief):</b> 80% se kam <b style="color:#15803D">green</b>, 80&ndash;99% <b style="color:#C2410C">orange</b>, 100%+ <b style="color:#C62828">laal</b> + "&#8377;800 over".<br>
+<b>Category limits:</b> har category ki apni limit aur bar. Tap = limit sheet. "Add category limit" se nayi.<br>
+<b>Limit sheet (solid white):</b> amount number pad se, suggestions (pichle 3 mahine ka average, round numbers), "Alert me" on/off, Remove, Save. Limit har mahine same rehti hai.<br>
+<b>Pehli baar:</b> koi budget nahi to ek card "Set a monthly budget" + pichle 3 mahine ke average ka suggestion.<br>
+<b>Alerts:</b> 80% aur 100% par ek ek notification (ek mahine mein ek baar hi). "Hide amounts in notifications" on ho to amount nahi dikhta.<br>
+<b>Kya ginte hain:</b> sirf Expense entries (udhar nahi, EMI/bill payment expense ke roop mein gine jaate hain).</div></body></html>
