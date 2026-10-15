@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../core/config/flavor.dart';
+import '../core/l10n.dart';
 import '../core/theme/app_theme.dart';
 import '../features/dev/gallery_screen.dart';
 
@@ -19,6 +21,13 @@ class CashFlowApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,
+      supportedLocales: supportedAppLocales,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: const GalleryScreen(),
     );
   }

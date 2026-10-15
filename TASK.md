@@ -55,12 +55,12 @@
 |---|---|---|---|
 | T01 | Theme tokens (light + dark), fonts (Inter, Noto Devanagari/Gujarati) | FR-U1, FR-U9, FR-U10 · TRD 14 | 🧪 Phone test pending |
 | T02 | Shared widget library + dev gallery screen (cards, glass nav, sheets, number pad, chips, snackbar, swipe row, empty state…) | FR-U2–U8 · TRD 14 | 🧪 Built · local commit · phone test after T10 |
-| T03 | Localization en/hi/gu + money, date (IST), EMI utilities with tests | §4, §8 · TRD 5, 7, 15 | 🔄 Running |
+| T03 | Localization en/hi/gu + money, date (IST), EMI utilities with tests | §4, §8 · TRD 5, 7, 15 | 🧪 Built · local commit · phone test after T10 |
 
 ### Phase B · Phone brain (offline)
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | ⬜ |
+| T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | 🔄 Running |
 | T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | ⬜ |
 
 ### Phase C · Screens (work offline)

@@ -1,0 +1,1024 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appName => 'CashFlow';
+
+  @override
+  String get tagline => 'Track every rupee';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get continueLabel => 'Continue';
+
+  @override
+  String get notNow => 'Not now';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get required => 'Required';
+
+  @override
+  String get optional => 'optional';
+
+  @override
+  String get now => 'Now';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get comingSoon => 'Coming soon';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get more => 'More';
+
+  @override
+  String get navHome => 'Home';
+
+  @override
+  String get navContacts => 'Contacts';
+
+  @override
+  String get navCharts => 'Charts';
+
+  @override
+  String get navEmi => 'EMI';
+
+  @override
+  String get expense => 'Expense';
+
+  @override
+  String get income => 'Income';
+
+  @override
+  String get lent => 'Lent';
+
+  @override
+  String get borrowed => 'Borrowed';
+
+  @override
+  String get udhar => 'Udhar';
+
+  @override
+  String get addEntry => 'Add';
+
+  @override
+  String get addEmi => 'Add EMI';
+
+  @override
+  String get addBill => 'Add bill';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get upi => 'UPI';
+
+  @override
+  String get card => 'Card';
+
+  @override
+  String get bank => 'Bank';
+
+  @override
+  String get paidVia => 'Paid via';
+
+  @override
+  String get receivedIn => 'Received in';
+
+  @override
+  String get choosePayment => 'Choose how you paid';
+
+  @override
+  String get chooseReceived => 'Choose how you received it';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get enterAmount => 'Enter an amount';
+
+  @override
+  String get titleOptional => 'Title (optional)';
+
+  @override
+  String get addTitle => 'Add a title';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get note => 'Note';
+
+  @override
+  String get addNote => 'Add a note';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get premium => 'Premium';
+
+  @override
+  String get premiumTryButton => 'Try Premium · ₹1 for 3 months';
+
+  @override
+  String get premiumFineprint => 'Then ₹20/month. Cancel anytime.';
+
+  @override
+  String get premiumSheetDueTitle => 'Due dates are Premium';
+
+  @override
+  String premiumSheetDueBody(String name) {
+    return 'Set when $name should pay back, and get a reminder before the day.';
+  }
+
+  @override
+  String get premiumSeeAll => 'See all features';
+
+  @override
+  String get premiumSavedWithout => 'Your entry is saved without a due date.';
+
+  @override
+  String get premiumComingLater => 'Premium purchase comes in a later update.';
+
+  @override
+  String get welcomeTitle => 'Your money, clear and calm';
+
+  @override
+  String get welcomeBody =>
+      'Income, expenses, udhar, EMIs and bills in one place. Works offline.';
+
+  @override
+  String get welcomeLogin => 'Log in';
+
+  @override
+  String get welcomeSignUp => 'Create account';
+
+  @override
+  String get welcomeOfflineNote =>
+      'Account and sync come in a later update. For now, your data stays on this phone.';
+
+  @override
+  String get languageTitle => 'Choose your language';
+
+  @override
+  String get languageSubtitle => 'भाषा चुनें · ભાષા પસંદ કરો';
+
+  @override
+  String get languageSearch => 'Search language';
+
+  @override
+  String get languageLater => 'You can change this anytime in Settings';
+
+  @override
+  String get pinCreateTitle => 'Create a 4-digit PIN';
+
+  @override
+  String get pinCreateBody => 'You\'ll use it to open CashFlow.';
+
+  @override
+  String get pinConfirmTitle => 'Enter the PIN again';
+
+  @override
+  String get pinConfirmBody => 'Just to be sure.';
+
+  @override
+  String get pinMismatch => 'PINs don\'t match. Try again.';
+
+  @override
+  String get pinEnterTitle => 'Enter your PIN';
+
+  @override
+  String pinWrong(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tries left',
+      one: '1 try left',
+    );
+    return 'Wrong PIN. $_temp0';
+  }
+
+  @override
+  String pinLocked(int seconds) {
+    return 'Too many tries. Try again in $seconds s';
+  }
+
+  @override
+  String get pinForgot => 'Forgot PIN?';
+
+  @override
+  String get pinForgotBody =>
+      'Log in again with your account to set a new PIN. This comes with account login.';
+
+  @override
+  String get useFingerprint => 'Use fingerprint';
+
+  @override
+  String get fingerprintTitle => 'Unlock with fingerprint?';
+
+  @override
+  String get fingerprintBody =>
+      'Open CashFlow with your finger. Your PIN still works.';
+
+  @override
+  String get fingerprintEnable => 'Use fingerprint';
+
+  @override
+  String get fingerprintNotSetTitle => 'Set up fingerprint first';
+
+  @override
+  String get fingerprintNotSetBody =>
+      'Add a fingerprint in your phone\'s settings, then turn it on in CashFlow Settings.';
+
+  @override
+  String get fingerprintReason => 'Unlock CashFlow';
+
+  @override
+  String get fingerprintFailed => 'Fingerprint not recognised. Use your PIN.';
+
+  @override
+  String get openingTitle => 'How much money do you have now?';
+
+  @override
+  String get openingBody => 'This is your starting balance. You can enter 0.';
+
+  @override
+  String get openingCash => 'Cash in hand';
+
+  @override
+  String get openingOnline => 'In bank / UPI';
+
+  @override
+  String get openingTotal => 'Total';
+
+  @override
+  String get skipForNow => 'Skip for now';
+
+  @override
+  String get contactsPermTitle => 'Track udhar with your contacts';
+
+  @override
+  String get contactsPermBody =>
+      'Pick a person in one tap when you lend or borrow money.';
+
+  @override
+  String get contactsPermPoint1 => 'Find people fast';
+
+  @override
+  String get contactsPermPoint1Sub => 'No typing names and numbers';
+
+  @override
+  String get contactsPermPoint2 => 'Contacts stay on your phone';
+
+  @override
+  String get contactsPermPoint2Sub => 'We read them only on this device';
+
+  @override
+  String get contactsPermPoint3 => 'Only people you add are saved';
+
+  @override
+  String get contactsPermPoint3Sub => 'Name and number only';
+
+  @override
+  String get contactsPermAllow => 'Allow contacts';
+
+  @override
+  String get greetingMorning => 'Good morning';
+
+  @override
+  String get greetingAfternoon => 'Good afternoon';
+
+  @override
+  String get greetingEvening => 'Good evening';
+
+  @override
+  String balanceEndOf(String month) {
+    return 'Balance at end of $month';
+  }
+
+  @override
+  String cashBalance(String amount) {
+    return 'Cash $amount';
+  }
+
+  @override
+  String onlineBalance(String amount) {
+    return 'Online $amount';
+  }
+
+  @override
+  String get netThisMonth => 'Net this month';
+
+  @override
+  String get transactions => 'Transactions';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get noEntriesTitle => 'No entries yet';
+
+  @override
+  String get noEntriesBody =>
+      'Add your first income or expense. It takes 5 seconds.';
+
+  @override
+  String get tapPlusToAdd => 'Tap + to add';
+
+  @override
+  String get deleteEntryTitle => 'Delete this entry?';
+
+  @override
+  String get deleteEntryBody =>
+      'It will be removed from your balance and charts.';
+
+  @override
+  String entryDeleted(String title) {
+    return '\"$title\" deleted';
+  }
+
+  @override
+  String get hideAmounts => 'Hide amounts';
+
+  @override
+  String get showAmounts => 'Show amounts';
+
+  @override
+  String get addExpenseTitle => 'Add expense';
+
+  @override
+  String get addIncomeTitle => 'Add income';
+
+  @override
+  String get editEntryTitle => 'Edit entry';
+
+  @override
+  String get saveExpense => 'Save expense';
+
+  @override
+  String get saveIncome => 'Save income';
+
+  @override
+  String get categoryExpenseTitle => 'Expense category';
+
+  @override
+  String get categoryIncomeTitle => 'Income category';
+
+  @override
+  String get categoryRecent => 'Recent';
+
+  @override
+  String get categoryAll => 'All categories';
+
+  @override
+  String get categorySearch => 'Search or create category';
+
+  @override
+  String categoryCreate(String name) {
+    return 'Create \"$name\"';
+  }
+
+  @override
+  String get categoryCreateSub => 'New category, saved for next time';
+
+  @override
+  String get catFood => 'Food';
+
+  @override
+  String get catGroceries => 'Groceries';
+
+  @override
+  String get catTravel => 'Travel';
+
+  @override
+  String get catFuel => 'Fuel';
+
+  @override
+  String get catShopping => 'Shopping';
+
+  @override
+  String get catBills => 'Bills';
+
+  @override
+  String get catRent => 'Rent';
+
+  @override
+  String get catHealth => 'Health';
+
+  @override
+  String get catEducation => 'Education';
+
+  @override
+  String get catFun => 'Fun';
+
+  @override
+  String get catRecharge => 'Recharge';
+
+  @override
+  String get catGifts => 'Gifts';
+
+  @override
+  String get catPersonal => 'Personal';
+
+  @override
+  String get catEmi => 'EMI';
+
+  @override
+  String get catOthers => 'Others';
+
+  @override
+  String get catSalary => 'Salary';
+
+  @override
+  String get catBusiness => 'Business';
+
+  @override
+  String get catFreelance => 'Freelance';
+
+  @override
+  String get catInterest => 'Interest';
+
+  @override
+  String get catGift => 'Gift';
+
+  @override
+  String get catRefund => 'Refund';
+
+  @override
+  String get contactsTitle => 'Contacts';
+
+  @override
+  String get toReceive => 'To receive';
+
+  @override
+  String get toPay => 'To pay';
+
+  @override
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people',
+      one: '1 person',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recentPeople => 'Recent';
+
+  @override
+  String get searchPeople => 'Search people';
+
+  @override
+  String get allContacts => 'All contacts';
+
+  @override
+  String get contactsOffTitle => 'Contacts are off';
+
+  @override
+  String get contactsOffBody =>
+      'Turn on to pick people in one tap. Or add a person by name and number.';
+
+  @override
+  String get turnOn => 'Turn on';
+
+  @override
+  String get addPerson => 'Add person';
+
+  @override
+  String get personName => 'Name';
+
+  @override
+  String get personPhone => 'Phone number (optional)';
+
+  @override
+  String owesYou(String name) {
+    return '$name owes you';
+  }
+
+  @override
+  String youOwe(String name) {
+    return 'You owe $name';
+  }
+
+  @override
+  String get allClear => 'All clear';
+
+  @override
+  String lentRepaid(String lent, String repaid) {
+    return 'Lent $lent · Repaid $repaid';
+  }
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get repayment => 'Repayment';
+
+  @override
+  String get repaymentReceived => 'Repayment received';
+
+  @override
+  String get repaymentPaid => 'Repayment paid';
+
+  @override
+  String repaidOf(String repaid, String total) {
+    return '$repaid of $total repaid';
+  }
+
+  @override
+  String amountLeft(String amount) {
+    return '$amount left';
+  }
+
+  @override
+  String get settled => 'Settled';
+
+  @override
+  String dueInDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Due in $days days',
+      one: 'Due tomorrow',
+      zero: 'Due today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String overdueDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days late',
+      one: '1 day late',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get toReceiveLabel => 'to receive';
+
+  @override
+  String get toPayLabel => 'to pay';
+
+  @override
+  String noUdharTitle(String name) {
+    return 'No udhar with $name yet';
+  }
+
+  @override
+  String get noUdharBody => 'Tap Lent or Borrowed to add one.';
+
+  @override
+  String get noPeopleTitle => 'No people yet';
+
+  @override
+  String get noPeopleBody => 'Add a person to track money you lend or borrow.';
+
+  @override
+  String get addLentTitle => 'Lent money';
+
+  @override
+  String get addBorrowedTitle => 'Borrowed money';
+
+  @override
+  String get person => 'Person';
+
+  @override
+  String get choosePerson => 'Choose a person';
+
+  @override
+  String get dueDate => 'Due date';
+
+  @override
+  String get noDueDate => 'No due date';
+
+  @override
+  String get remindMe => 'Remind me';
+
+  @override
+  String get onDueDay => 'On due day';
+
+  @override
+  String daysBefore(int days) {
+    return '$days days before';
+  }
+
+  @override
+  String get saveLent => 'Save lent';
+
+  @override
+  String get saveBorrowed => 'Save borrowed';
+
+  @override
+  String get repaymentTitle => 'Repayment';
+
+  @override
+  String repaymentFrom(String name) {
+    return 'From $name';
+  }
+
+  @override
+  String repaymentTo(String name) {
+    return 'To $name';
+  }
+
+  @override
+  String remainingNow(String amount) {
+    return '$amount remaining';
+  }
+
+  @override
+  String get savePayment => 'Save payment';
+
+  @override
+  String get paymentSaved => 'Payment saved';
+
+  @override
+  String get udharRepaid => 'Udhar repaid';
+
+  @override
+  String get extraAmount => 'Extra';
+
+  @override
+  String get totalAmount => 'Total';
+
+  @override
+  String extraAsBorrowed(String amount) {
+    return '$amount extra. Add it as borrowed?';
+  }
+
+  @override
+  String extraAsLent(String amount) {
+    return '$amount extra. Add it as lent?';
+  }
+
+  @override
+  String extraNotAddedLent(String amount) {
+    return '$amount extra not added · Add as lent';
+  }
+
+  @override
+  String extraNotAddedBorrowed(String amount) {
+    return '$amount extra not added · Add as borrowed';
+  }
+
+  @override
+  String get udharDueToday => 'Udhar due today';
+
+  @override
+  String get didYouGetIt => 'Did you get it?';
+
+  @override
+  String get didYouPayBack => 'Did you pay it back?';
+
+  @override
+  String gotFull(String amount) {
+    return 'Got full $amount';
+  }
+
+  @override
+  String paidFull(String amount) {
+    return 'Paid full $amount';
+  }
+
+  @override
+  String get gotSome => 'Got some';
+
+  @override
+  String get paidSome => 'Paid some';
+
+  @override
+  String get notYet => 'Not yet';
+
+  @override
+  String get changeDueDate => 'Change due date';
+
+  @override
+  String get howMuchGot => 'How much did you get?';
+
+  @override
+  String get howMuchPaid => 'How much did you pay?';
+
+  @override
+  String stillLeft(String amount) {
+    return '$amount will still be left';
+  }
+
+  @override
+  String dueDateChanged(String from, String to) {
+    return 'Due date changed: $from → $to';
+  }
+
+  @override
+  String get emiBillsTitle => 'EMI & Bills';
+
+  @override
+  String get emis => 'EMIs';
+
+  @override
+  String get bills => 'Bills';
+
+  @override
+  String get dueThisMonth => 'Due this month';
+
+  @override
+  String emiCountNext(int count, String date) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count EMIs',
+      one: '1 EMI',
+    );
+    return '$_temp0 · next on $date';
+  }
+
+  @override
+  String get emiName => 'Name';
+
+  @override
+  String get emiNameHint => 'Bike loan';
+
+  @override
+  String get lenderOptional => 'Lender (optional)';
+
+  @override
+  String get itemPrice => 'Item price';
+
+  @override
+  String get downPayment => 'Down payment';
+
+  @override
+  String get loanAmount => 'Loan amount';
+
+  @override
+  String get interestYearly => 'Interest (yearly)';
+
+  @override
+  String get firstEmiDate => 'First EMI';
+
+  @override
+  String get iKnowThe => 'I know the';
+
+  @override
+  String get months => 'Months';
+
+  @override
+  String get emiAmount => 'EMI amount';
+
+  @override
+  String get numberOfMonths => 'Number of months';
+
+  @override
+  String get yourEmi => 'Your EMI';
+
+  @override
+  String get perMonth => '/month';
+
+  @override
+  String get totalInterest => 'Total interest';
+
+  @override
+  String get totalToPay => 'Total to pay';
+
+  @override
+  String get lastEmi => 'Last EMI';
+
+  @override
+  String get endsOn => 'Ends';
+
+  @override
+  String get itWillTake => 'It will take';
+
+  @override
+  String monthsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count months',
+      one: '1 month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get notPossible => 'Not possible';
+
+  @override
+  String get notPossibleTitle => 'EMI is less than the monthly interest';
+
+  @override
+  String notPossibleBody(String interest) {
+    return 'Interest alone is $interest a month. Enter more than $interest, or choose months.';
+  }
+
+  @override
+  String get saveEmi => 'Save EMI';
+
+  @override
+  String get emiNameMissing => 'Give this EMI a name';
+
+  @override
+  String get loanMissing => 'Enter the loan amount';
+
+  @override
+  String get emiTermMissing => 'Enter months or the EMI amount';
+
+  @override
+  String paidOfTotal(int paid, int total) {
+    return '$paid of $total paid';
+  }
+
+  @override
+  String leftCount(int count) {
+    return '$count left';
+  }
+
+  @override
+  String remainingAmount(String amount) {
+    return '$amount remaining';
+  }
+
+  @override
+  String get remainingToPay => 'Remaining to pay';
+
+  @override
+  String endsMonth(String month) {
+    return 'Ends $month';
+  }
+
+  @override
+  String get emiLabel => 'EMI';
+
+  @override
+  String get loanLabel => 'Loan';
+
+  @override
+  String get interestLabel => 'Interest';
+
+  @override
+  String get installments => 'Installments';
+
+  @override
+  String earlierPaid(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count earlier paid',
+      one: '1 earlier paid',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get paidOnTime => 'Paid on time';
+
+  @override
+  String paidOnDate(String date) {
+    return 'Paid on $date';
+  }
+
+  @override
+  String inclInterest(String amount) {
+    return 'incl. $amount interest';
+  }
+
+  @override
+  String get markPaid => 'Mark paid';
+
+  @override
+  String get markAsPaid => 'Mark as paid';
+
+  @override
+  String get markUnpaid => 'Mark as unpaid';
+
+  @override
+  String installmentOf(int n, int total, String date) {
+    return 'Installment $n of $total · due $date';
+  }
+
+  @override
+  String get paidOn => 'Paid on';
+
+  @override
+  String expenseAddedIn(String amount, String category) {
+    return 'An expense of $amount is added in $category category.';
+  }
+
+  @override
+  String installmentPaid(int n) {
+    return 'Installment $n paid';
+  }
+
+  @override
+  String expenseAddedLeft(int count) {
+    return 'Expense added · $count left';
+  }
+
+  @override
+  String get emiDueToday => 'EMI due today';
+
+  @override
+  String get paidOrNot => 'Paid or not?';
+
+  @override
+  String get paid => 'Paid';
+
+  @override
+  String get paidAddsExpense => '\"Paid\" adds the expense and updates the EMI';
+
+  @override
+  String get closed => 'Closed';
+
+  @override
+  String get emiClosed => 'Loan closed';
+
+  @override
+  String get noEmisTitle => 'No EMIs yet';
+
+  @override
+  String get noEmisBody =>
+      'Add a loan or phone EMI. We work out every installment and remind you.';
+
+  @override
+  String get emiLockTitle => 'Never miss an EMI or bill';
+
+  @override
+  String get emiLockBody =>
+      'Track every installment, get a reminder before the due date, and add the payment in one tap.';
+
+  @override
+  String get deleteEmiTitle => 'Delete this EMI?';
+
+  @override
+  String get deleteEmiBody =>
+      'All its installments are removed. Expenses already added stay.';
+
+  @override
+  String get billsComingSoon => 'Bills come in the next update.';
+
+  @override
+  String get chartsComingSoon => 'Charts and budget come in a later update.';
+
+  @override
+  String get devPremiumToggle => 'Premium (dev only)';
+
+  @override
+  String get devGallery => 'Widget gallery (dev)';
+}
