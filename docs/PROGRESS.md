@@ -105,3 +105,7 @@
 - [Verify] on device build: APK contains `libsqlite3mc.so` for arm64-v8a, armeabi-v7a, x86_64.
 - Tests: 57 pass. On-disk test: file header is not "SQLite format 3", a stored secret is not readable in the bytes, wrong key fails, same key reused, all tables exist, wipe removes files and keys, outbox batch/undo/rollback.
 - **Build fix:** `kotlin.incremental=false` in `android/gradle.properties` (Kotlin incremental cache breaks when plugins are on C: and the build on D:).
+
+## 2026-10-16: T05 · Calculation engine (built, phone test after T10)
+- `data/repositories/calculations.dart`: SQL aggregates only (TRD 7). `month(y, m)` → income, expense, new lent, new borrowed, repayments received/paid, split cash/online; Monthly Net; cash, online and total balance at month end (opening + everything before + this month). `watchMonth` re-emits on any money-table change. `people()` / `watchPeople()` → Contact Net per person; `debtRemaining`; `expenseInMonth` (budgets, udhar excluded). Months use IST ranges; deleted rows and other users never count.
+- Tests: 8 new (Monthly Net 13,500; repayments in net; Contact Net 3,000; balances by mode across months; IST month edge 23:59/00:00; deleted/other user excluded; budget per category; live stream). Total 65 pass.

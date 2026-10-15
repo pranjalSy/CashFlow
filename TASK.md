@@ -61,12 +61,12 @@
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
 | T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | 🧪 Built · local commit · phone test after T10 |
-| T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | 🔄 Running |
+| T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | 🧪 Built · local commit · phone test after T10 |
 
 ### Phase C · Screens (work offline)
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | ⬜ |
+| T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | 🔄 Running |
 | T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | ⬜ |
 | T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | ⬜ |
 | T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | ⬜ |
