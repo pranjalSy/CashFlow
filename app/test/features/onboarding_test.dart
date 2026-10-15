@@ -57,6 +57,7 @@ void main() {
     expect(await h.db.flag(ProfileRepository.onboardingFlag), 'true');
     expect(await h.db.select(h.db.syncOutbox).get(), isNotEmpty);
     expect(h.contacts.requests, 0);
+    await closeApp(tester);
   });
 
   testWidgets('"Allow contacts" asks the system permission', (tester) async {
@@ -71,6 +72,7 @@ void main() {
     await settle(tester);
     expect(h.contacts.requests, 1);
     expect(find.text('Home'), findsWidgets);
+    await closeApp(tester);
   });
 
   testWidgets('language choice applies immediately (Hindi)', (tester) async {
@@ -86,6 +88,7 @@ void main() {
     await tester.tap(find.text('आगे बढ़ें'));
     await settle(tester);
     expect(find.text('4 अंकों का PIN बनाएं'), findsOneWidget);
+    await closeApp(tester);
   });
 
   testWidgets('PIN mismatch asks again', (tester) async {
@@ -97,6 +100,7 @@ void main() {
     await settle(tester);
     expect(find.text("PINs don't match. Try again."), findsOneWidget);
     expect(find.text('Create a 4-digit PIN'), findsOneWidget);
+    await closeApp(tester);
   });
 
   testWidgets('enrolled fingerprint is offered; enabling needs one successful scan', (tester) async {
@@ -113,6 +117,7 @@ void main() {
     expect(h.biometrics.prompts, 1);
     expect(h.biometrics.enabled, isTrue);
     expect(find.text('How much money do you have now?'), findsOneWidget);
+    await closeApp(tester);
   });
 
   testWidgets('sensor without a finger shows "Set up fingerprint first"', (tester) async {
@@ -124,6 +129,7 @@ void main() {
     await typeDigits(tester, '4829');
     await settle(tester);
     expect(find.text('Set up fingerprint first'), findsOneWidget);
+    await closeApp(tester);
   });
 
   testWidgets('returning user: lock screen; wrong PIN counts down, right PIN opens Home', (tester) async {
@@ -138,6 +144,7 @@ void main() {
     await typeDigits(tester, '4829');
     await settle(tester);
     expect(find.text('Home'), findsWidgets);
+    await closeApp(tester);
   });
 
   testWidgets('returning user with fingerprint is asked for it first', (tester) async {
@@ -149,5 +156,6 @@ void main() {
     await settle(tester);
     expect(h.biometrics.prompts, 1);
     expect(find.text('Home'), findsWidgets);
+    await closeApp(tester);
   });
 }

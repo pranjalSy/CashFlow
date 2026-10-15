@@ -93,7 +93,9 @@ class Harness {
     return ProviderScope(overrides: overrides, child: CashFlowApp(themeMode: themeMode));
   }
 
-  Future<void> dispose() => db.close();
+  /// In-memory database: closing it from a widget test would wait on fake-clock timers forever,
+  /// so it is left to be freed with the test process.
+  Future<void> dispose() async {}
 }
 
 /// Taps digits on the number pad.
@@ -102,4 +104,25 @@ Future<void> typeDigits(WidgetTester tester, String digits) async {
     await tester.tap(find.text(d).last);
     await tester.pump();
   }
+}
+
+/// Starts the app as a returning user and unlocks it with PIN 4829, ending on Home.
+Future<void> openUnlockedHome(WidgetTester tester, Harness h, {ThemeMode themeMode = ThemeMode.light}) async {
+  await h.db.setFlag('onboarding_done', 'true');
+  await PinService(iterations: 1000, offThread: false).setPin('4829');
+  tester.view.physicalSize = const Size(390 * 3, 844 * 3);
+  tester.view.devicePixelRatio = 3;
+  addTearDown(tester.view.reset);
+  await tester.pumpWidget(h.app(themeMode: themeMode));
+  await tester.pump(const Duration(seconds: 1));
+  await tester.pumpAndSettle();
+  await typeDigits(tester, '4829');
+  await tester.pump(const Duration(milliseconds: 500));
+  await tester.pumpAndSettle();
+}
+
+/// Unmounts the app so database stream timers finish inside the test (drift + fake async).
+Future<void> closeApp(WidgetTester tester) async {
+  await tester.pumpWidget(const SizedBox.shrink());
+  await tester.pump(Duration.zero);
 }

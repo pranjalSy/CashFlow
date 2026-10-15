@@ -120,5 +120,6 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
     await h.dispose();
+    await closeApp(tester);
   });
 }

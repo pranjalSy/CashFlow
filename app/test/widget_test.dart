@@ -26,6 +26,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
+    await closeApp(tester);
     await h.dispose();
   });
 }

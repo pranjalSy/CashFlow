@@ -45,6 +45,36 @@ class PlusMenu extends StatelessWidget {
               ),
             ),
           ),
+          // The "+" stays above the dim layer and turns into "×" (D3).
+          Positioned(
+            right: 14,
+            bottom: 18 + bottom,
+            child: AnimatedOpacity(
+              opacity: open ? 1 : 0,
+              duration: const Duration(milliseconds: 180),
+              child: Semantics(
+                button: true,
+                label: MaterialLocalizations.of(context).closeButtonTooltip,
+                child: GestureDetector(
+                  onTap: onClose,
+                  child: AnimatedRotation(
+                    turns: open ? 0.125 : 0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOutBack,
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).brightness == Brightness.dark ? c.raised : c.text,
+                      ),
+                      child: Icon(Icons.add_rounded, size: 30, color: c.onButton),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned(
             right: 14,
             bottom: 92 + bottom,
@@ -61,10 +91,7 @@ class PlusMenu extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    for (var i = 0; i < items.length; i++) ...[
-                      if (i > 0) const SizedBox(height: 8),
-                      _MenuButton(item: items[i]),
-                    ],
+                    for (var i = 0; i < items.length; i++) ...[if (i > 0) const SizedBox(height: 8), _MenuButton(item: items[i])],
                   ],
                 ),
               ),
@@ -85,29 +112,35 @@ class _MenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final shape = AppShapes.squircle(22, side: BorderSide(color: c.border));
-    return Material(
-      color: c.sheet,
-      shape: shape,
-      elevation: 6,
-      shadowColor: Colors.black.withValues(alpha: 0.3),
-      child: InkWell(
-        onTap: item.onTap,
-        customBorder: shape,
-        child: SizedBox(
-          height: 52,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 8),
-            child: Row(
-              children: [
-                Expanded(child: Text(item.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleMedium)),
-                SizedBox.square(
-                  dimension: 34,
-                  child: DecoratedBox(
-                    decoration: ShapeDecoration(color: item.tint, shape: AppShapes.squircle(12)),
-                    child: Icon(item.icon, size: 18, color: item.color),
+    return DecoratedBox(
+      decoration: ShapeDecoration(
+        shape: shape,
+        shadows: [BoxShadow(color: Colors.black.withValues(alpha: 0.18), blurRadius: 24, offset: const Offset(0, 10), spreadRadius: -10)],
+      ),
+      child: Material(
+        color: c.sheet,
+        shape: shape,
+        child: InkWell(
+          onTap: item.onTap,
+          customBorder: shape,
+          child: SizedBox(
+            height: 52,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(item.label, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleMedium),
                   ),
-                ),
-              ],
+                  SizedBox.square(
+                    dimension: 34,
+                    child: DecoratedBox(
+                      decoration: ShapeDecoration(color: item.tint, shape: AppShapes.squircle(12)),
+                      child: Icon(item.icon, size: 18, color: item.color),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
