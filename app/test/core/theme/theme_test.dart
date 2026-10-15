@@ -5,6 +5,7 @@ import 'package:cashflow/core/theme/app_shapes.dart';
 import 'package:cashflow/core/theme/app_theme.dart';
 import 'package:cashflow/core/theme/app_typography.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// WCAG contrast ratio between two opaque colours.
@@ -112,18 +113,9 @@ void main() {
 
   testWidgets('app follows dark mode and paints a black page', (tester) async {
     FlavorConfig.init(Flavor.dev);
-    await tester.pumpWidget(const CashFlowApp(themeMode: ThemeMode.dark));
-    final context = tester.element(find.text('CashFlow Dev'));
+    await tester.pumpWidget(const ProviderScope(child: CashFlowApp(themeMode: ThemeMode.dark)));
+    final context = tester.element(find.byType(Scaffold).first);
     expect(Theme.of(context).brightness, Brightness.dark);
     expect(context.colors.page, const Color(0xFF000000));
-  });
-
-  testWidgets('preview fits a small phone without overflow', (tester) async {
-    FlavorConfig.init(Flavor.dev);
-    tester.view.physicalSize = const Size(320 * 3, 640 * 3);
-    tester.view.devicePixelRatio = 3;
-    addTearDown(tester.view.reset);
-    await tester.pumpWidget(const CashFlowApp(themeMode: ThemeMode.light));
-    expect(tester.takeException(), isNull);
   });
 }

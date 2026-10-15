@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| **Running** | — (T01 done) |
-| **Waiting for owner** | Go-ahead for **T02 · Widget library** plan |
+| **Running** | 🔄 T02–T10 in a row (owner: build up to T10, test all together at the end) |
+| **Waiting for owner** | Nothing (packages approved); phone test after T10 |
 | **Next** | ⏳ T02 · Widget library + gallery (PLAN first) |
-| **Git** | Repo https://github.com/pranjalSy/CashFlow · local branch: **`experiment`** · `experiment` pushed with T00b + T01 + docs + designs · `main` = README only (merge only on owner's yes) |
+| **Git** | Repo https://github.com/pranjalSy/CashFlow · local branch: **`experiment`** · `experiment` pushed with T00b + T01 + docs + designs (pushed before the phone test, by mistake; main untouched) · `main` = README only (merge only on owner's yes) |
 
 ---
 
@@ -29,14 +29,13 @@
 | DOC2 | TRD v2.0 (approved) | `doc/TRD.md` | 14 Oct |
 | DOC3 | AGENTS.md (agent rules) + this TASK.md | root | 15 Oct |
 | G1 | GitHub repo `pranjalSy/CashFlow` (public) with `main` + `experiment` | README only | 15 Oct |
-| T00b | App setup fixes (INTERNET, data-extraction rules, iOS name, colours) | Owner tested · pushed to `experiment` | 15 Oct |
-| T01 | Theme: tokens light/dark, Inter + Noto fonts, squircle, spacing, preview; 17 tests pass | Owner tested · pushed to `experiment` | 15 Oct |
 
 ## 🔄 Running / 🧪 Owner testing
 
 | # | Task | Status | What is left |
 |---|---|---|---|
-| — | — | — | — |
+| T00b | App setup fixes (INTERNET, data-extraction rules, iOS name, colours) | 🧪 Built + pushed to `experiment`; **phone test pending** | Owner tests together with T02–T10 |
+| T01 | Theme: tokens light/dark, Inter + Noto fonts, squircle, spacing, preview; 17 tests pass | 🧪 Built + pushed to `experiment`; **phone test pending** | Same |
 
 ## ⏸ Paused
 
@@ -54,9 +53,9 @@
 ### Phase A · Frontend foundation
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T01 | Theme tokens (light + dark), fonts (Inter, Noto Devanagari/Gujarati) | FR-U1, FR-U9, FR-U10 · TRD 14 | ✅ Done |
-| T02 | Shared widget library + dev gallery screen (cards, glass nav, sheets, number pad, chips, snackbar, swipe row, empty state…) | FR-U2–U8 · TRD 14 | ⬜ |
-| T03 | Localization en/hi/gu + money, date (IST), EMI utilities with tests | §4, §8 · TRD 5, 7, 15 | ⬜ |
+| T01 | Theme tokens (light + dark), fonts (Inter, Noto Devanagari/Gujarati) | FR-U1, FR-U9, FR-U10 · TRD 14 | 🧪 Phone test pending |
+| T02 | Shared widget library + dev gallery screen (cards, glass nav, sheets, number pad, chips, snackbar, swipe row, empty state…) | FR-U2–U8 · TRD 14 | 🧪 Built · local commit · phone test after T10 |
+| T03 | Localization en/hi/gu + money, date (IST), EMI utilities with tests | §4, §8 · TRD 5, 7, 15 | 🔄 Running |
 
 ### Phase B · Phone brain (offline)
 | # | Task | PRD / TRD | Status |

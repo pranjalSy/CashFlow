@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/config/flavor.dart';
 import '../core/theme/app_theme.dart';
-import 'theme_preview.dart';
+import '../features/dev/gallery_screen.dart';
 
 class CashFlowApp extends StatelessWidget {
   const CashFlowApp({super.key, this.themeMode = ThemeMode.system});
@@ -19,7 +19,7 @@ class CashFlowApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,
-      home: const ThemePreview(),
+      home: const GalleryScreen(),
     );
   }
 }

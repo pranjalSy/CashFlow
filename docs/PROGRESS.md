@@ -74,6 +74,20 @@
 - Tests: 15 new (token values, contrast ≥ 4.5 for button text and amounts on page/card/glass/sheet, muted ≥ 3.0, tints, ThemeData, tabular digits, squircle, dark black page, small-phone no overflow) + 2 old = **17 pass**; analyze clean; dev APK built. Real-font screenshots (light and dark) checked: ₹, Hindi, Gujarati render.
 - **Deviation:** the contrast test found light muted `#8A97A8` = 2.77 on the page; app uses `#808EA0` (3.12). Mockups unchanged.
 - No packages added.
-- **Owner tested on phone (T00b + T01) and approved** the darker muted colour (A5). Owner said yes to commit + push to `experiment` (not `main`).
+- Owner approved the darker muted colour (A5) and said yes to push to `experiment`. **Correction:** the owner had NOT tested on the phone yet (I misread "test kar liya, sab theek he??"). Phone test of T00b + T01 is still pending; `main` untouched.
+- Owner decision: build **T02 → T10 in a row**, phone test all together at the end.
 
 **Next:** T02 · Widget library + gallery (PLAN first).
+- Pushed: commit `ff6a132` (T00b + T01 + docs + designs) and merge `0f3c16b` (GitHub README) on **`experiment`** → https://github.com/pranjalSy/CashFlow/tree/experiment. GitHub login got the `workflow` scope (needed to upload `ci.yml`). `main` untouched (README only). CI run started on GitHub (first run ever).
+
+## 2026-10-15: Approvals for T02–T10
+- Owner: build T02 → T10 in a row; phone test all together at the end.
+- Packages approved (versions checked on pub.dev, all fit Flutter 3.44.7 / Dart 3.12.2): flutter_riverpod 3.4.3, go_router 18.1.0, drift 2.35.2, sqlite3 3.7.1, path_provider 2.1.6, path 1.9.1, flutter_secure_storage 11.2.0, cryptography 2.9.0, local_auth 3.0.2, flutter_contacts 2.6.0, shared_preferences 2.5.6, intl 0.20.3, flutter_localizations (SDK), uuid 4.6.0; dev: drift_dev 2.35.1, build_runner 2.17.1.
+- [Verify] Drift encryption (official docs): drift ≥ 2.32 + sqlite3 3.x with `hooks: user_defines: sqlite3: source: sqlite3mc`; key via `PRAGMA key` in `NativeDatabase` setup; check `PRAGMA cipher`; do NOT add sqlcipher_flutter_libs or encrypted_drift. `drift_flutter` not used (NativeDatabase + path_provider directly).
+- Owner allowed **local checkpoint commits** after each task (no push, no main) until the phone test.
+
+## 2026-10-15: T02 · Widget library + gallery (built, phone test after T10)
+- Packages added and pinned (approved): flutter_riverpod 3.4.3, go_router 18.1.0, drift 2.35.2, sqlite3 3.5.2, path_provider 2.1.6, path 1.9.1, flutter_secure_storage 11.2.0, cryptography 2.9.0, local_auth 3.0.2, flutter_contacts 2.6.0, shared_preferences 2.5.6, intl 0.20.2, uuid 4.6.0, flutter_localizations; dev: drift_dev 2.35.1, build_runner 2.15.1. **Deviations:** sqlite3 3.7.1 needs a newer Flutter (meta 1.19) → 3.5.2; build_runner 2.17.1 conflicts with drift_dev → 2.15.1; intl 0.20.3 → 0.20.2 (pinned by flutter_localizations). `hooks: user_defines: sqlite3: source: sqlite3mc` added (verified in sqlite3 3.5.2 `doc/hook.md`).
+- `lib/shared/widgets/`: glass (GlassSurface, reduceGlassProvider), app_page (Marble / black + glow), app_card, amount_text, app_button (never disabled, ≥ 48 dp), basics (IconTile, SectionLabel, AppChip, SegmentedSwitch, AppToggle, ListRowTile), number_pad, overlays (solid sheet + popup with one blur scrim, CompactSnackbar 54 px), swipe_row (60% full swipe → delete callback), states (EmptyState, OfflineBar, PremiumLockCard), glass_nav_bar (4 tabs + "+"), plus_menu.
+- Dev gallery `lib/features/dev/gallery_screen.dart` is the app home for now; ProviderScope in bootstrap. Theme preview removed.
+- Tests: 44 pass (11 new widget tests: tap size, amount fit at 2× text, glass on/off/reduced, nav bar, number pad, swipe thresholds, gallery on 320 px light/dark). A test found the nav bar overflowing on 320 px phones → active tab label now shrinks. Real-font screenshots (light/dark) match the mockups.
