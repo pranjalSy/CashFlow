@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Release builds need internet for sync (debug/profile manifests add it only for development). -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Fingerprint unlock (local_auth) and reading contacts on the phone (flutter_contacts). -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <!-- No backup or device-to-device copy of app data: fullBackupContent covers Android 11 and lower,
          dataExtractionRules covers Android 12+ (allowBackup alone does not stop device transfer). -->
     <application

@@ -66,9 +66,9 @@
 ### Phase C · Screens (work offline)
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | 🔄 Running |
-| T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | ⬜ |
-| T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | ⬜ |
+| T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | 🧪 Built · local commit · phone test after T10 |
+| T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | 🧪 Built (lock screen, timer, lockout) · Settings parts in T14 |
+| T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | 🔄 Running |
 | T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | ⬜ |
 | T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | ⬜ |
 | T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | ⬜ |

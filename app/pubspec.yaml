@@ -109,6 +109,9 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
+  assets:
+    - assets/images/logo.png
+
   # Bundled fonts (OFL licences in assets/fonts). Inter for Latin, digits and ₹;
   # Noto Sans Devanagari / Gujarati are fallbacks for Hindi and Gujarati text.
   fonts:

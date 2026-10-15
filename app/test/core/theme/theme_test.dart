@@ -1,12 +1,11 @@
-import 'package:cashflow/app/app.dart';
-import 'package:cashflow/core/config/flavor.dart';
 import 'package:cashflow/core/theme/app_colors.dart';
 import 'package:cashflow/core/theme/app_shapes.dart';
 import 'package:cashflow/core/theme/app_theme.dart';
 import 'package:cashflow/core/theme/app_typography.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../helpers/harness.dart';
 
 /// WCAG contrast ratio between two opaque colours.
 double contrast(Color a, Color b) {
@@ -112,10 +111,14 @@ void main() {
   });
 
   testWidgets('app follows dark mode and paints a black page', (tester) async {
-    FlavorConfig.init(Flavor.dev);
-    await tester.pumpWidget(const ProviderScope(child: CashFlowApp(themeMode: ThemeMode.dark)));
+    final h = Harness();
+    await h.init();
+    await tester.pumpWidget(h.app(themeMode: ThemeMode.dark));
     final context = tester.element(find.byType(Scaffold).first);
     expect(Theme.of(context).brightness, Brightness.dark);
     expect(context.colors.page, const Color(0xFF000000));
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+    await h.dispose();
   });
 }
