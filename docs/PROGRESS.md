@@ -126,3 +126,7 @@
 - Shared: `payment_picker.dart`, `person_avatar.dart`; "+" menu now keeps a "×" above the dim layer and has soft shadows (screenshot check).
 - Tests: 94 pass (9 repository + 4 Home/entry flow tests: payment required then saved, full swipe → confirm → delete → Undo, income with a new typed category, dark Home). Test-infra fix: widget tests no longer close the in-memory DB (drift stream timers on the fake clock made tearDown hang) and unmount the app at the end.
 - Real-font screenshots (light/dark Home, + menu, Add entry) match screens 10 and 11.
+
+## 2026-10-16: T09 · Contacts + udhar (in progress, paused by usage limit)
+- Done: `plan_repository.dart` (plan cache; dev-only Premium switch on the Settings placeholder), `debt_repository.dart` (add lent/borrowed with Premium-only due date/reminders, repayment capped at remaining + extra remembered, "Yes" → opposite udhar, extend due date with history, delete, person history stream, due-popup list + "Not yet" snooze) with 8 passing tests; Contacts tab, Person detail, Add Lent/Borrowed form (person picker, Premium tag + small paywall sheet), Repayment sheet (summary, stays open "Payment saved", extra snackbar with Yes); routes.
+- Left: udhar due popup on Home open (G9), T09 widget-flow tests, screenshot check. Then T10 (EMI).

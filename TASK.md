@@ -10,7 +10,7 @@
 
 | | |
 |---|---|
-| **Running** | 🔄 T02–T10 in a row (owner: build up to T10, test all together at the end) |
+| **Running** | 🔄 T09 (left: udhar due popup on Home, T09 UI tests) → then T10 EMI |
 | **Waiting for owner** | Nothing (packages approved); phone test after T10 |
 | **Next** | ⏳ T02 · Widget library + gallery (PLAN first) |
 | **Git** | Repo https://github.com/pranjalSy/CashFlow · local branch: **`experiment`** · `experiment` pushed with T00b + T01 + docs + designs (pushed before the phone test, by mistake; main untouched) · `main` = README only (merge only on owner's yes) |
@@ -69,7 +69,7 @@
 | T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | 🧪 Built · local commit · phone test after T10 |
 | T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | 🧪 Built (lock screen, timer, lockout) · Settings parts in T14 |
 | T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | 🧪 Built · local commit · phone test after T10 |
-| T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | 🔄 Running |
+| T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | 🔄 Mostly built (due popup + UI tests left) · local commit |
 | T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | ⬜ |
 | T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | ⬜ |
 | T12 | Charts + Budget | FR-C1, FR-BG1–BG5 | ⬜ |

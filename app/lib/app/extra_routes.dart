@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/config/flavor.dart';
 import '../core/l10n.dart';
+import '../data/repositories/plan_repository.dart';
+import '../features/contacts/contacts_controller.dart';
+import '../features/contacts/person_detail_screen.dart';
+import '../features/contacts/udhar_form_screen.dart';
 import '../features/entry/entry_form_screen.dart';
 import '../shared/widgets/app_card.dart';
 import '../shared/widgets/app_page.dart';
+import '../shared/widgets/basics.dart';
 import '../shared/widgets/states.dart';
 import '../shared/widgets/tab_page.dart';
 
@@ -12,21 +19,54 @@ import '../shared/widgets/tab_page.dart';
 final List<RouteBase> extraRoutes = [
   GoRoute(path: '/entry/new', builder: (_, s) => EntryFormScreen(kind: s.uri.queryParameters['kind'] == 'income' ? 'income' : 'expense')),
   GoRoute(path: '/entry/:id', builder: (_, s) => EntryFormScreen(entryId: s.pathParameters['id'])),
+  GoRoute(path: '/person/contact', builder: (_, s) => PersonDetailScreen(person: _refFrom(s.uri.queryParameters))),
+  GoRoute(
+    path: '/person/:id',
+    builder: (_, s) => PersonDetailScreen(person: PersonRef(id: s.pathParameters['id'], name: s.uri.queryParameters['name'] ?? '')),
+  ),
+  GoRoute(
+    path: '/udhar/new',
+    builder: (_, s) {
+      final q = s.uri.queryParameters;
+      final hasPerson = q['person'] != null || q['name'] != null;
+      return UdharFormScreen(direction: q['direction'] == 'borrowed' ? 'borrowed' : 'lent', person: hasPerson ? _refFrom(q, id: q['person']) : null);
+    },
+  ),
   GoRoute(path: '/settings', builder: (_, _) => const _ComingSoonPage()),
 ];
 
+PersonRef _refFrom(Map<String, String> q, {String? id}) => PersonRef(id: id, name: q['name'] ?? '', phone: q['phone'], contactId: q['cid']);
+
 /// Settings arrive in T14; the avatar already opens this page.
-class _ComingSoonPage extends StatelessWidget {
+/// In the dev flavor it also has the Premium switch used to test Premium screens before billing (T20).
+class _ComingSoonPage extends ConsumerWidget {
   const _ComingSoonPage();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
+    final premium = ref.watch(isPremiumProvider).value ?? false;
     return AppPage(
       child: Stack(children: [
         TabPage(children: [
           const SizedBox(height: 48),
           AppCard(child: EmptyState(icon: Icons.settings_rounded, title: l.comingSoon, message: l.welcomeOfflineNote)),
+          if (FlavorConfig.instance.isDev) ...[
+            const SizedBox(height: 12),
+            AppCard(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              child: ListRowTile(
+                leading: const Icon(Icons.workspace_premium_rounded),
+                title: l.devPremiumToggle,
+                trailing: AppToggle(value: premium, onChanged: (v) => ref.read(planRepositoryProvider).setPremiumForDev(v)),
+              ),
+            ),
+            const SizedBox(height: 12),
+            AppCard(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              child: ListRowTile(leading: const Icon(Icons.widgets_rounded), title: l.devGallery, onTap: () => context.push('/dev/gallery')),
+            ),
+          ],
         ]),
         SafeArea(child: BackButton(onPressed: () => context.pop())),
       ]),
