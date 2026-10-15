@@ -3,9 +3,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
 import 'core/config/flavor.dart';
+import 'data/local/local_store.dart';
+import 'data/providers.dart';
+import 'data/repositories/local_writer.dart';
 
-void bootstrap(Flavor flavor) {
+Future<void> bootstrap(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig.init(flavor);
-  runApp(const ProviderScope(child: CashFlowApp()));
+  final store = LocalStore();
+  final db = await store.open();
+  final userId = await localUserId(db);
+  runApp(ProviderScope(
+    overrides: [
+      localStoreProvider.overrideWithValue(store),
+      databaseProvider.overrideWithValue(db),
+      userIdProvider.overrideWithValue(userId),
+    ],
+    child: const CashFlowApp(),
+  ));
 }

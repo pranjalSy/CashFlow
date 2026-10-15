@@ -60,8 +60,8 @@
 ### Phase B · Phone brain (offline)
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | 🔄 Running |
-| T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | ⬜ |
+| T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | 🧪 Built · local commit · phone test after T10 |
+| T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | 🔄 Running |
 
 ### Phase C · Screens (work offline)
 | # | Task | PRD / TRD | Status |
