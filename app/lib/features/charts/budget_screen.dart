@@ -157,7 +157,7 @@ class _Overview extends StatelessWidget {
     if (left < 0) {
       footer = l.amountOver(Money.format(-left));
     } else if (current) {
-      footer = l.leftDaysPerDay(Money.format(left), daysLeft, Money.format(left ~/ daysLeft));
+      footer = l.leftDaysPerDay(Money.format(left), daysLeft, Money.format(left ~/ daysLeft ~/ 100 * 100)); // whole rupees, rounded down
     } else {
       footer = l.amountLeft(Money.format(left));
     }

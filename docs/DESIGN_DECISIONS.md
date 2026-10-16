@@ -115,6 +115,7 @@ Last updated: 14 Oct 2026
 | K3 | Dark text/amount colours: text `#E8EDF5`, secondary `#A3B1C4`, income `#4ADE80`, expense `#F87171`, lent `#8EA2FF`, borrowed `#F472B6`, due `#FB923C`, premium `#FBBF24`. Buttons (white text, contrast 4.5+): brand `#4263EB`, income `#15803D`, expense `#DC2626`, premium `#B45309` | Naya |
 | K4 | "Reduce glass effects" ya low-end phone: glass ki jagah solid `#111114` (same layout) | Same rule |
 | K5 | Saari 31 dark screens ek token map se bani: `design/screens/dark/index.html`, tokens `00_dark_tokens.html` | Naya |
+| K6 | **Light mockup hi design hai.** App ka har screen light HTML mockup jaisa (layout, size, spacing, components). Dark mode mein **sirf rang** badlenge, design nahi (owner, 17 Oct 2026) | Owner |
 
 ## H. Backend / privacy (discussion, final nahi)
 

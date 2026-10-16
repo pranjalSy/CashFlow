@@ -277,8 +277,13 @@ class _TrendsState extends ConsumerState<_Trends> {
     final months = ref.watch(trendProvider((year: widget.year, month: widget.month))).value;
     if (months == null) return const SizedBox(height: 200);
     final sel = months[_selected];
-    final avgIncome = (months.fold(0, (a, m) => a + m.income) / months.length).round();
-    final avgExpense = (months.fold(0, (a, m) => a + m.expense) / months.length).round();
+    // Averages over the months that have entries, in whole rupees (empty months would pull them down).
+    int average(int Function(MonthTotals) f) {
+      final used = months.where((m) => m.income > 0 || m.expense > 0).toList();
+      return used.isEmpty ? 0 : (used.fold(0, (a, m) => a + f(m)) / used.length / 100).round() * 100;
+    }
+    final avgIncome = average((m) => m.income);
+    final avgExpense = average((m) => m.expense);
     final best = months.map((m) => m.saved).fold(0, (a, b) => a > b ? a : b);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       FadeSlideIn(
