@@ -126,3 +126,10 @@ Future<void> closeApp(WidgetTester tester) async {
   await tester.pumpWidget(const SizedBox.shrink());
   await tester.pump(Duration.zero);
 }
+
+/// Turns on the system "remove animations" setting for this test. Screens with looping motion
+/// (fingerprint rings, floating icons) then stand still, so pumpAndSettle can finish.
+void reduceMotion(WidgetTester tester) {
+  tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(disableAnimations: true);
+  addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+}

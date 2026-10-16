@@ -210,3 +210,30 @@
 - Checked on the owner's phone (release dev build, over adb): all 6 confirmed. The test EMI was deleted, Premium switched off and the balance is back to ₹500.
 - Noticed, not changed: the Home avatar is 42 dp, under the 48 dp tap-target rule (AGENTS §6).
 
+## 2026-10-17: UI polish + premium motion (owner request)
+- Why: the owner felt the phone lacked the "spark" of the HTML mockups. A side-by-side check (`docs/compare/home_mockup_vs_phone.png`) found:
+  - filled, heavy icons (the mockups use thin line icons);
+  - a round dark glow that tinted the whole page purple (the mockups use flat ellipses near the top only);
+  - flat glass cards;
+  - plain tile icon boxes;
+  - a cut greeting ("Good eve…") caused by a wide month picker;
+  - no mockup animations.
+- Polish:
+  - Outlined icons everywhere (built-in Material outlined icons; no package). The Lucide package was offered but not approved.
+  - `AppPage` dark glow redrawn as the mockup's ellipses in one `CustomPainter` (no blur, painted once).
+  - Glass cards get the mockup's 160° sheen (.085 → .035).
+  - Home tiles get tinted icon boxes with a coloured edge.
+  - Header: the greeting never cuts (it shrinks slightly instead). The month pill is compact, with two invisible ~60×48 dp halves for previous/next. The avatar and search have 48 dp targets (fixes the 42 dp note).
+- Motion (`shared/widgets/motion.dart`). Rules: ≤ 350 ms, transform/opacity only, `RepaintBoundary` on loops, everything off with the system "remove animations":
+  - `Pressable`: press-scale with spring back, plus a light haptic on coloured buttons. Used by AppButton, tappable AppCard, number pad keys (0.93) and chips.
+  - `FadeSlideIn`: fade + rise with a 40 ms stagger, no timers. Used on Home (summary and rows; new rows rise in), Contacts, EMI list, person history, Welcome, and the Contacts permission points.
+  - `CountUpAmount`: money counts to its new value (450 ms): Home balance, tiles and net.
+  - Chips animate colour and play a selection haptic.
+  - `SegmentedSwitch` gets a sliding pill (same gentle bounce as the bottom bar).
+  - Tabs: fade-through (opacity + 98.5% scale).
+  - Screens: Android 15 `FadeForwardsPageTransitionsBuilder`; iOS native slide.
+  - Mockup animations: Welcome stagger (02), fingerprint breathing rings (07), floating contacts icon (09).
+  - Not done: Home header glass on scroll and the Charts animation (T12).
+- Tests: 4 motion tests (press scale, stagger, count-up, remove-animations). A `reduceMotion()` helper is used in onboarding tests, since looping animations never "settle". Suite **137 passing**, analyze clean.
+- Phone check (release dev build on the owner's Realme): Home, Contacts, EMI tab, Add entry and the + menu checked. The new Home matches the mockup closely (`docs/compare/home_mockup_vs_phone_after_polish.png`). The only gap left is the name in the header (the app does not ask for a name; not in the PRD).
+

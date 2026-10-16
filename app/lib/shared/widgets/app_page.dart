@@ -33,45 +33,40 @@ class AppPage extends StatelessWidget {
   }
 }
 
+/// The dark page glow from the mockups (00_dark_tokens): flat ellipses near the top and a faint one
+/// at the bottom, so the page stays black behind the cards. Painted once; no blur.
 class _DarkGlow extends StatelessWidget {
   const _DarkGlow();
 
-  static const _blue = Color(0x8C4263EB); // rgba(66,99,235,.55)
-  static const _purple = Color(0x6B8B5CF6); // rgba(139,92,246,.42)
-  static const _pink = Color(0x33EC4899); // rgba(236,72,153,.20)
-  static const _bottom = Color(0x474263EB); // rgba(66,99,235,.28)
-
   @override
-  Widget build(BuildContext context) {
-    return const Stack(
-      fit: StackFit.expand,
-      children: [
-        _Glow(alignment: Alignment(-0.8, -1.05), color: _blue, radius: 0.9),
-        _Glow(alignment: Alignment(1.0, -0.8), color: _purple, radius: 0.8),
-        _Glow(alignment: Alignment(0.2, -0.15), color: _pink, radius: 0.7),
-        _Glow(alignment: Alignment(0.0, 1.15), color: _bottom, radius: 0.9),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => const RepaintBoundary(child: CustomPaint(painter: _GlowPainter()));
 }
 
-class _Glow extends StatelessWidget {
-  const _Glow({required this.alignment, required this.color, required this.radius});
+class _GlowPainter extends CustomPainter {
+  const _GlowPainter();
 
-  final Alignment alignment;
-  final Color color;
-  final double radius;
+  // (centre x, centre y, radius x, radius y) as fractions of the screen, and colour.
+  static const _glows = [
+    (0.10, 0.00, 0.70, 0.34, Color(0x8C4263EB)), // blue, top left
+    (1.00, 0.10, 0.60, 0.30, Color(0x6B8B5CF6)), // purple, top right
+    (0.60, 0.42, 0.55, 0.26, Color(0x33EC4899)), // pink, middle
+    (0.50, 1.05, 0.70, 0.22, Color(0x474263EB)), // blue, bottom
+  ];
 
   @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: RadialGradient(
-          center: alignment,
-          radius: radius,
-          colors: [color, color.withValues(alpha: 0)],
-        ),
-      ),
-    );
+  void paint(Canvas canvas, Size size) {
+    for (final (x, y, rx, ry, color) in _glows) {
+      canvas.save();
+      canvas.translate(x * size.width, y * size.height);
+      canvas.scale(rx * size.width, ry * size.height);
+      final paint = Paint()
+        ..shader = RadialGradient(colors: [color, color.withValues(alpha: 0)], stops: const [0, 0.72])
+            .createShader(Rect.fromCircle(center: Offset.zero, radius: 1));
+      canvas.drawCircle(Offset.zero, 1, paint);
+      canvas.restore();
+    }
   }
+
+  @override
+  bool shouldRepaint(_GlowPainter oldDelegate) => false;
 }

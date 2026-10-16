@@ -90,9 +90,9 @@ class PaymentPicker extends StatelessWidget {
         ]),
       ),
       Row(children: [
-        option('cash', Icons.payments_rounded, l.cash),
+        option('cash', Icons.payments_outlined, l.cash),
         const SizedBox(width: AppSpacing.xs),
-        option('online', Icons.smartphone_rounded, l.online),
+        option('online', Icons.smartphone_outlined, l.online),
       ]),
       if (mode == 'online') ...[
         const SizedBox(height: AppSpacing.xs),

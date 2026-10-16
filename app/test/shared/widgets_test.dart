@@ -8,6 +8,7 @@ import 'package:cashflow/shared/widgets/app_button.dart';
 import 'package:cashflow/shared/widgets/app_card.dart';
 import 'package:cashflow/shared/widgets/glass.dart';
 import 'package:cashflow/shared/widgets/glass_nav_bar.dart';
+import 'package:cashflow/shared/widgets/motion.dart';
 import 'package:cashflow/shared/widgets/number_pad.dart';
 import 'package:cashflow/shared/widgets/overlays.dart';
 import 'package:cashflow/shared/widgets/swipe_row.dart';
@@ -225,6 +226,49 @@ void main() {
     });
   });
 
+  group('Motion', () {
+    testWidgets('a pressed button shrinks a little, then springs back', (tester) async {
+      await tester.pumpWidget(host(AppButton(label: 'Save', onPressed: () {})));
+      double scale() => tester.widget<AnimatedScale>(find.byType(AnimatedScale)).scale;
+      final g = await tester.startGesture(tester.getCenter(find.text('Save')));
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(scale(), lessThan(1));
+      await g.up();
+      await tester.pumpAndSettle();
+      expect(scale(), 1);
+    });
+
+    testWidgets('list items fade and rise in, later ones a little later', (tester) async {
+      await tester.pumpWidget(host(const Column(children: [FadeSlideIn(child: Text('a')), FadeSlideIn(index: 3, child: Text('b'))])));
+      double opacity(String t) => tester.widget<Opacity>(find.ancestor(of: find.text(t), matching: find.byType(Opacity)).first).opacity;
+      await tester.pump(const Duration(milliseconds: 120));
+      expect(opacity('a'), greaterThan(opacity('b')));
+      await tester.pumpAndSettle();
+      expect(opacity('a'), 1);
+      expect(opacity('b'), 1);
+    });
+
+    testWidgets('money counts up to its value', (tester) async {
+      await tester.pumpWidget(host(const CountUpAmount(paise: 4500000)));
+      await tester.pump(const Duration(milliseconds: 150));
+      expect(find.text('₹45,000'), findsNothing); // still counting
+      await tester.pumpAndSettle();
+      expect(find.text('₹45,000'), findsOneWidget);
+    });
+
+    testWidgets('with "remove animations" everything is shown at once', (tester) async {
+      reduce(tester);
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.light(),
+        home: const Scaffold(body: Column(children: [CountUpAmount(paise: 4500000), FadeSlideIn(index: 5, child: Text('b')), BreathingRings(color: Colors.blue, child: Text('ring'))])),
+      ));
+      await tester.pump();
+      expect(find.text('₹45,000'), findsOneWidget);
+      expect(tester.widget<Opacity>(find.ancestor(of: find.text('b'), matching: find.byType(Opacity)).first).opacity, 1);
+      await tester.pumpAndSettle(); // the rings do not loop
+    });
+  });
+
   group('NumberPad', () {
     testWidgets('sends digits, dot and backspace', (tester) async {
       final keys = <String>[];
@@ -289,4 +333,9 @@ void main() {
 class _ReduceOn extends ReduceGlass {
   @override
   bool build() => true;
+}
+
+void reduce(WidgetTester tester) {
+  tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(disableAnimations: true);
+  addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
 }

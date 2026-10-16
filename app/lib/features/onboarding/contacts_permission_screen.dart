@@ -8,6 +8,7 @@ import '../../core/services.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
 import '../../data/repositories/profile_repository.dart';
+import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/app_button.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
@@ -46,7 +47,7 @@ class ContactsPermissionScreen extends ConsumerWidget {
       child: Column(
         children: [
           const SizedBox(height: AppSpacing.lg),
-          const HeroIcon(icon: Icons.people_alt_rounded),
+          const Floating(child: HeroIcon(icon: Icons.people_alt_outlined)),
           const SizedBox(height: AppSpacing.lg),
           Text(l.contactsPermTitle, textAlign: TextAlign.center, style: t.headlineSmall),
           const SizedBox(height: AppSpacing.xs),
@@ -60,9 +61,9 @@ class ContactsPermissionScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 4),
             child: Column(
               children: [
-                point(Icons.touch_app_rounded, l.contactsPermPoint1, l.contactsPermPoint1Sub),
-                point(Icons.smartphone_rounded, l.contactsPermPoint2, l.contactsPermPoint2Sub),
-                point(Icons.cloud_outlined, l.contactsPermPoint3, l.contactsPermPoint3Sub),
+                FadeSlideIn(index: 1, child: point(Icons.touch_app_outlined, l.contactsPermPoint1, l.contactsPermPoint1Sub)),
+                FadeSlideIn(index: 2, child: point(Icons.smartphone_outlined, l.contactsPermPoint2, l.contactsPermPoint2Sub)),
+                FadeSlideIn(index: 3, child: point(Icons.cloud_outlined, l.contactsPermPoint3, l.contactsPermPoint3Sub)),
               ],
             ),
           ),

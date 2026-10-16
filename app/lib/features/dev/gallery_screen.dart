@@ -47,10 +47,10 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
         plusOpen: _plusOpen,
         plusLabel: 'Add',
         items: const [
-          NavItem(icon: Icons.home_rounded, label: 'Home'),
-          NavItem(icon: Icons.people_alt_rounded, label: 'Contacts'),
-          NavItem(icon: Icons.pie_chart_rounded, label: 'Charts'),
-          NavItem(icon: Icons.calendar_month_rounded, label: 'EMI'),
+          NavItem(icon: Icons.home_outlined, label: 'Home'),
+          NavItem(icon: Icons.people_alt_outlined, label: 'Contacts'),
+          NavItem(icon: Icons.pie_chart_outline_rounded, label: 'Charts'),
+          NavItem(icon: Icons.calendar_month_outlined, label: 'EMI'),
         ],
       ),
       floating: PlusMenu(
@@ -108,7 +108,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
               deleteLabel: 'Delete',
               onEdit: () => _snack('Edit tapped'),
               onDelete: _confirmDelete,
-              child: _entry(Icons.shopping_cart_rounded, 'Groceries', 'Food · UPI · 6:40 PM', '−₹2,450', c.expense, c.expenseTint),
+              child: _entry(Icons.shopping_cart_outlined, 'Groceries', 'Food · UPI · 6:40 PM', '−₹2,450', c.expense, c.expenseTint),
             ),
             const SizedBox(height: AppSpacing.xs),
             SwipeActionRow(
@@ -116,7 +116,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
               deleteLabel: 'Delete',
               onEdit: () => _snack('Edit tapped'),
               onDelete: _confirmDelete,
-              child: _entry(Icons.work_rounded, 'Salary', 'Salary · Online · 9:15 AM', '+₹45,000', c.income, c.incomeTint),
+              child: _entry(Icons.work_outline_rounded, 'Salary', 'Salary · Online · 9:15 AM', '+₹45,000', c.income, c.incomeTint),
             ),
             const SectionLabel('Buttons'),
             AppButton(label: 'Save expense', onPressed: () {}, kind: AppButtonKind.danger),

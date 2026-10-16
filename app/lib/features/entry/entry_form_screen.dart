@@ -240,7 +240,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
                         child: Column(children: [
                           _FieldRow(
-                            icon: Icons.edit_rounded,
+                            icon: Icons.edit_outlined,
                             label: l.titleOptional,
                             child: TextField(
                               controller: _title,
@@ -251,7 +251,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                           ),
                           Divider(height: 1, color: c.border),
                           _FieldRow(
-                            icon: Icons.calendar_today_rounded,
+                            icon: Icons.calendar_today_outlined,
                             label: l.date,
                             onTap: _pickDate,
                             child: _NowValue(text: day == null ? '${l.today}, ${shortDate(context, Ist.today())}' : (day == Ist.today() ? '${l.today}, ${shortDate(context, day)}' : longDate(context, day)), now: when == null, nowLabel: l.now),

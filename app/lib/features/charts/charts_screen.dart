@@ -15,7 +15,7 @@ class ChartsScreen extends StatelessWidget {
     return TabPage(
       title: l.navCharts,
       children: [
-        AppCard(child: EmptyState(icon: Icons.pie_chart_rounded, title: l.navCharts, message: l.chartsComingSoon)),
+        AppCard(child: EmptyState(icon: Icons.pie_chart_outline_rounded, title: l.navCharts, message: l.chartsComingSoon)),
       ],
     );
   }

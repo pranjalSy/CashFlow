@@ -94,7 +94,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
     final l = context.l10n;
     showPremiumSheet(
       context,
-      icon: Icons.calendar_today_rounded,
+      icon: Icons.calendar_today_outlined,
       title: l.premiumSheetDueTitle,
       body: l.premiumSheetDueBody(_person?.name.split(' ').first ?? l.person),
       footnote: l.premiumSavedWithout,
@@ -131,7 +131,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
                 onTap: _pickPerson,
                 child: ListRowTile(
                   leading: _person == null
-                      ? IconTile(icon: Icons.person_add_alt_rounded, color: color, tint: tint)
+                      ? IconTile(icon: Icons.person_add_alt_outlined, color: color, tint: tint)
                       : PersonAvatar(name: _person!.name, color: color, tint: tint, circle: true),
                   title: _person?.name ?? l.choosePerson,
                   subtitle: _person == null ? l.person : _person!.phone,
@@ -151,7 +151,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
                 child: Column(children: [
                   ListRowTile(
-                    leading: IconTile(icon: Icons.calendar_today_rounded, color: c.textSecondary, tint: c.raised, size: 34),
+                    leading: IconTile(icon: Icons.calendar_today_outlined, color: c.textSecondary, tint: c.raised, size: 34),
                     title: day == Ist.today() ? '${l.today}, ${shortDate(context, day)}' : longDate(context, day),
                     subtitle: l.date,
                     onTap: () async {
@@ -162,7 +162,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
                   ),
                   Divider(height: 1, color: c.border),
                   ListRowTile(
-                    leading: IconTile(icon: Icons.event_available_rounded, color: c.textSecondary, tint: c.raised, size: 34),
+                    leading: IconTile(icon: Icons.event_available_outlined, color: c.textSecondary, tint: c.raised, size: 34),
                     title: _due == null ? l.noDueDate : longDate(context, _due!),
                     subtitle: l.dueDate,
                     trailing: premium ? null : const PremiumTag(),
@@ -285,7 +285,7 @@ class _PersonPickerState extends ConsumerState<_PersonPicker> {
           child: ListView(shrinkWrap: true, children: [
             if (q.isNotEmpty)
               ListRowTile(
-                leading: IconTile(icon: Icons.person_add_alt_rounded, color: c.brandText, tint: c.brandTint),
+                leading: IconTile(icon: Icons.person_add_alt_outlined, color: c.brandText, tint: c.brandTint),
                 title: '${l.addPerson}: ${_q.trim()}',
                 onTap: () => Navigator.pop(context, PersonRef(name: _q.trim())),
               ),

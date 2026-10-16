@@ -7,6 +7,7 @@ import '../../core/security/biometric_service.dart';
 import '../../core/services.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
+import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/app_button.dart';
 import 'onboarding_scaffold.dart';
 
@@ -73,7 +74,10 @@ class _FingerprintScreenState extends ConsumerState<FingerprintScreen> {
       child: Column(
         children: [
           const SizedBox(height: AppSpacing.xl),
-          const HeroIcon(icon: Icons.fingerprint_rounded, size: 110),
+          if (ready)
+            BreathingRings(color: c.brandText, child: const HeroIcon(icon: Icons.fingerprint_rounded, size: 110))
+          else
+            const HeroIcon(icon: Icons.fingerprint_rounded, size: 110),
           const SizedBox(height: AppSpacing.lg),
           Text(ready ? l.fingerprintTitle : l.fingerprintNotSetTitle, textAlign: TextAlign.center, style: t.headlineSmall),
           const SizedBox(height: AppSpacing.xs),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
+import 'motion.dart';
 
 /// Solid number pad (DESIGN_DECISIONS B2). Emits '0'–'9', '.' and backspace.
 class NumberPad extends StatelessWidget {
@@ -34,16 +35,13 @@ class NumberPad extends StatelessWidget {
   }
 
   Widget _row(List<Widget> keys) => Padding(
-        padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-        child: Row(
-          children: [
-            for (var i = 0; i < keys.length; i++) ...[
-              if (i > 0) const SizedBox(width: AppSpacing.xs),
-              Expanded(child: keys[i]),
-            ],
-          ],
-        ),
-      );
+    padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+    child: Row(
+      children: [
+        for (var i = 0; i < keys.length; i++) ...[if (i > 0) const SizedBox(width: AppSpacing.xs), Expanded(child: keys[i])],
+      ],
+    ),
+  );
 }
 
 class _Key extends StatelessWidget {
@@ -64,21 +62,24 @@ class _Key extends StatelessWidget {
       button: true,
       label: semanticLabel ?? label,
       excludeSemantics: true,
-      child: Material(
-        color: plain ? Colors.transparent : c.raised,
-        shape: shape,
-        child: InkWell(
-          customBorder: shape,
-          onTap: () {
-            HapticFeedback.selectionClick();
-            onTap();
-          },
-          child: SizedBox(
-            height: height < 48 ? 48 : height,
-            child: Center(
-              child: label != null
-                  ? Text(label!, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600))
-                  : Icon(icon, color: c.text, size: 22),
+      child: Pressable(
+        scale: 0.93,
+        child: Material(
+          color: plain ? Colors.transparent : c.raised,
+          shape: shape,
+          child: InkWell(
+            customBorder: shape,
+            onTap: () {
+              HapticFeedback.selectionClick();
+              onTap();
+            },
+            child: SizedBox(
+              height: height < 48 ? 48 : height,
+              child: Center(
+                child: label != null
+                    ? Text(label!, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600))
+                    : Icon(icon, color: c.text, size: 22),
+              ),
             ),
           ),
         ),

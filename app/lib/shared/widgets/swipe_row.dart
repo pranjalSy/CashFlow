@@ -122,7 +122,7 @@ class _SwipeActionRowState extends State<SwipeActionRow> with SingleTickerProvid
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    _ActionButton(width: editW, color: c.brandButton, icon: Icons.edit_rounded, label: widget.editLabel, scale: scale, radius: widget.radius, onTap: () {
+                    _ActionButton(width: editW, color: c.brandButton, icon: Icons.edit_outlined, label: widget.editLabel, scale: scale, radius: widget.radius, onTap: () {
                       close();
                       widget.onEdit();
                     }),

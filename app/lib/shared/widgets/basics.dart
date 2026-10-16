@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
+import 'motion.dart';
 
 /// Rounded icon box used in lists and tiles.
 class IconTile extends StatelessWidget {
@@ -59,19 +61,28 @@ class AppChip extends StatelessWidget {
     final c = context.colors;
     final bg = selected ? (selectedColor ?? c.brandButton) : c.card;
     final shape = AppShapes.squircle(AppRadii.pill, side: BorderSide(color: selected ? bg : c.border, width: 1.5));
-    return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 40),
-      child: Material(
-        color: bg,
-        shape: shape,
-        child: InkWell(
-          onTap: onTap,
-          customBorder: shape,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(color: selected ? c.onButton : c.textSecondary, fontWeight: FontWeight.w700),
+    return Pressable(
+      scale: 0.95,
+      child: AnimatedContainer(
+        duration: Motion.medium,
+        curve: Motion.enter,
+        constraints: const BoxConstraints(minHeight: 40),
+        decoration: ShapeDecoration(color: bg, shape: shape),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () {
+              if (!selected) HapticFeedback.selectionClick();
+              onTap();
+            },
+            customBorder: shape,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+              child: AnimatedDefaultTextStyle(
+                duration: Motion.medium,
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(color: selected ? c.onButton : c.textSecondary, fontWeight: FontWeight.w700),
+                child: Text(label),
+              ),
             ),
           ),
         ),
@@ -95,54 +106,69 @@ class SegmentedSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final dark = Theme.of(context).brightness == Brightness.dark;
+    final style = Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w700);
+    final scaler = MediaQuery.textScalerOf(context);
+    // Equal segments (the widest label decides) so one pill can slide between them, like the bottom bar.
+    var w = 64.0;
+    for (final o in options) {
+      final tp = TextPainter(text: TextSpan(text: o, style: style), textScaler: scaler, maxLines: 1, textDirection: TextDirection.ltr)..layout();
+      w = w < tp.width + 32 ? tp.width + 32 : w;
+      tp.dispose();
+    }
+    final active = activeColors?[index] ?? c.card;
+    return LayoutBuilder(builder: (context, box) {
+      final segment = box.maxWidth.isFinite && w * options.length > box.maxWidth - 8 ? (box.maxWidth - 8) / options.length : w;
+      return _track(context, dark, segment, active, style);
+    });
+  }
+
+  Widget _track(BuildContext context, bool dark, double w, Color active, TextStyle style) {
+    final c = context.colors;
     return DecoratedBox(
       decoration: ShapeDecoration(color: dark ? c.raised : const Color(0xFFE6ECF6), shape: AppShapes.squircle(AppRadii.pill)),
       child: Padding(
         padding: const EdgeInsets.all(4),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (var i = 0; i < options.length; i++)
-              _Segment(
-                label: options[i],
-                selected: i == index,
-                color: activeColors?[i],
-                onTap: () => onChanged(i),
+        child: SizedBox(
+          width: w * options.length,
+          height: 40,
+          child: Stack(children: [
+            AnimatedPositioned(
+              duration: Motion.off(context) ? Duration.zero : Motion.slow,
+              curve: const Cubic(0.3, 1.25, 0.6, 1), // gentle bounce, same as the bottom bar
+              left: w * index,
+              top: 0,
+              bottom: 0,
+              width: w,
+              child: AnimatedContainer(
+                duration: Motion.medium,
+                decoration: ShapeDecoration(color: active, shape: AppShapes.squircle(AppRadii.pill)),
               ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Segment extends StatelessWidget {
-  const _Segment({required this.label, required this.selected, required this.onTap, this.color});
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    final bg = selected ? (color ?? (Theme.of(context).brightness == Brightness.dark ? c.card : c.card)) : Colors.transparent;
-    final fg = selected ? (color != null ? c.onButton : c.text) : c.textSecondary;
-    return Semantics(
-      selected: selected,
-      button: true,
-      child: GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
-          curve: Curves.easeOutCubic,
-          constraints: const BoxConstraints(minHeight: 40, minWidth: 64),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          alignment: Alignment.center,
-          decoration: ShapeDecoration(color: bg, shape: AppShapes.squircle(AppRadii.pill)),
-          child: Text(label, style: Theme.of(context).textTheme.labelMedium?.copyWith(color: fg, fontWeight: FontWeight.w700)),
+            ),
+            Row(children: [
+              for (var i = 0; i < options.length; i++)
+                SizedBox(
+                  width: w,
+                  child: Semantics(
+                    selected: i == index,
+                    button: true,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        if (i != index) HapticFeedback.selectionClick();
+                        onChanged(i);
+                      },
+                      child: Center(
+                        child: AnimatedDefaultTextStyle(
+                          duration: Motion.medium,
+                          style: style.copyWith(color: i == index ? (activeColors != null ? c.onButton : c.text) : c.textSecondary),
+                          child: Text(options[i], maxLines: 1, overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ]),
+          ]),
         ),
       ),
     );

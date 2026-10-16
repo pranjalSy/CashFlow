@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -32,6 +33,11 @@ abstract final class AppTheme {
       brightness: brightness,
       colorScheme: scheme,
       scaffoldBackgroundColor: c.page,
+      // Screen changes: Android 15 fade-forward (smooth, light on low-end phones); iOS native slide.
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+        TargetPlatform.android: FadeForwardsPageTransitionsBuilder(backgroundColor: c.page),
+        TargetPlatform.iOS: const CupertinoPageTransitionsBuilder(),
+      }),
       fontFamily: AppTypography.fontFamily,
       fontFamilyFallback: AppTypography.fontFallback,
       textTheme: text,

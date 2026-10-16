@@ -7,27 +7,27 @@ import '../utils/dates.dart';
 
 /// Icon for a category icon key (stored as text so it syncs).
 IconData categoryIcon(String key) => switch (key) {
-      'food' => Icons.restaurant_rounded,
-      'groceries' => Icons.shopping_cart_rounded,
-      'travel' => Icons.directions_bus_rounded,
-      'fuel' => Icons.local_gas_station_rounded,
-      'shopping' => Icons.shopping_bag_rounded,
-      'bills' => Icons.bolt_rounded,
-      'rent' => Icons.house_rounded,
-      'health' => Icons.favorite_rounded,
-      'education' => Icons.menu_book_rounded,
-      'fun' => Icons.movie_rounded,
-      'recharge' => Icons.smartphone_rounded,
-      'gifts' => Icons.card_giftcard_rounded,
-      'personal' => Icons.auto_awesome_rounded,
+      'food' => Icons.restaurant_outlined,
+      'groceries' => Icons.shopping_cart_outlined,
+      'travel' => Icons.directions_bus_outlined,
+      'fuel' => Icons.local_gas_station_outlined,
+      'shopping' => Icons.shopping_bag_outlined,
+      'bills' => Icons.bolt_outlined,
+      'rent' => Icons.house_outlined,
+      'health' => Icons.favorite_outline_rounded,
+      'education' => Icons.menu_book_outlined,
+      'fun' => Icons.movie_outlined,
+      'recharge' => Icons.smartphone_outlined,
+      'gifts' => Icons.card_giftcard_outlined,
+      'personal' => Icons.auto_awesome_outlined,
       'emi' => Icons.event_repeat_rounded,
-      'salary' => Icons.work_rounded,
-      'business' => Icons.storefront_rounded,
-      'freelance' => Icons.laptop_mac_rounded,
-      'interest' => Icons.savings_rounded,
+      'salary' => Icons.work_outline_rounded,
+      'business' => Icons.storefront_outlined,
+      'freelance' => Icons.laptop_mac_outlined,
+      'interest' => Icons.savings_outlined,
       'refund' => Icons.replay_rounded,
       'others' => Icons.more_horiz_rounded,
-      _ => Icons.label_rounded,
+      _ => Icons.label_outline_rounded,
     };
 
 /// Icons offered for an EMI (FR-E1), stored as their key.
@@ -35,12 +35,12 @@ const emiIconKeys = ['bike', 'car', 'phone', 'home', 'laptop', 'tv', 'other'];
 
 IconData emiIcon(String key) => switch (key) {
       'bike' => Icons.two_wheeler_rounded,
-      'car' => Icons.directions_car_rounded,
-      'phone' => Icons.smartphone_rounded,
-      'home' => Icons.home_rounded,
-      'laptop' => Icons.laptop_rounded,
-      'tv' => Icons.tv_rounded,
-      _ => Icons.account_balance_rounded,
+      'car' => Icons.directions_car_outlined,
+      'phone' => Icons.smartphone_outlined,
+      'home' => Icons.home_outlined,
+      'laptop' => Icons.laptop_outlined,
+      'tv' => Icons.tv_outlined,
+      _ => Icons.account_balance_outlined,
     };
 
 /// Yearly rate in basis points as text ("12", "10.5").

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
+import 'motion.dart';
 
 enum AppButtonKind { primary, success, danger, premium, secondary, soft }
 
@@ -55,22 +56,25 @@ class AppButton extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: height < 48 ? 48 : height, minWidth: 48),
-        child: DecoratedBox(
-          decoration: ShapeDecoration(
-            color: bg,
-            shape: shape,
-            shadows: coloured ? [BoxShadow(color: bg.withValues(alpha: 0.55), blurRadius: 22, offset: const Offset(0, 10), spreadRadius: -8)] : null,
-          ),
-          child: Material(
-            type: MaterialType.transparency,
-            child: InkWell(
-              onTap: onPressed,
-              customBorder: shape,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                child: Center(widthFactor: 1, heightFactor: 1, child: row),
+      child: Pressable(
+        haptic: coloured,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: height < 48 ? 48 : height, minWidth: 48),
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
+              color: bg,
+              shape: shape,
+              shadows: coloured ? [BoxShadow(color: bg.withValues(alpha: 0.55), blurRadius: 22, offset: const Offset(0, 10), spreadRadius: -8)] : null,
+            ),
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+                onTap: onPressed,
+                customBorder: shape,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  child: Center(widthFactor: 1, heightFactor: 1, child: row),
+                ),
               ),
             ),
           ),

@@ -61,7 +61,7 @@ class OfflineBar extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.cloud_off_rounded, size: 15, color: Colors.white),
+          const Icon(Icons.cloud_off_outlined, size: 15, color: Colors.white),
           const SizedBox(width: 7),
           Flexible(
             child: Text(text, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.white)),
@@ -105,7 +105,7 @@ class PremiumLockCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(message, textAlign: TextAlign.center, style: t.bodyMedium?.copyWith(color: c.textSecondary)),
           const SizedBox(height: AppSpacing.md),
-          AppButton(label: buttonLabel, onPressed: onTry, kind: AppButtonKind.premium, icon: Icons.workspace_premium_rounded),
+          AppButton(label: buttonLabel, onPressed: onTry, kind: AppButtonKind.premium, icon: Icons.workspace_premium_outlined),
           const SizedBox(height: AppSpacing.xs),
           Text(fineprint, textAlign: TextAlign.center, style: t.bodySmall?.copyWith(color: c.textMuted)),
         ],

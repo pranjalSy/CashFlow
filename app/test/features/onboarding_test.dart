@@ -21,6 +21,7 @@ void main() {
   }
 
   Future<void> toPinScreen(WidgetTester tester) async {
+    reduceMotion(tester);
     await tester.pumpWidget(h.app(themeMode: ThemeMode.light));
     await settle(tester);
     await tester.tap(find.text('Create account'));
@@ -76,6 +77,7 @@ void main() {
   });
 
   testWidgets('language choice applies immediately (Hindi)', (tester) async {
+    reduceMotion(tester);
     await tester.pumpWidget(h.app(themeMode: ThemeMode.light));
     await settle(tester);
     await tester.tap(find.text('Log in'));
@@ -135,6 +137,7 @@ void main() {
   testWidgets('returning user: lock screen; wrong PIN counts down, right PIN opens Home', (tester) async {
     await h.db.setFlag(ProfileRepository.onboardingFlag, 'true');
     await PinService(iterations: 1000, offThread: false).setPin('4829');
+    reduceMotion(tester);
     await tester.pumpWidget(h.app(themeMode: ThemeMode.light));
     await settle(tester);
     expect(find.text('Enter your PIN'), findsOneWidget);
@@ -152,6 +155,7 @@ void main() {
     await h.init();
     await h.db.setFlag(ProfileRepository.onboardingFlag, 'true');
     await PinService(iterations: 1000, offThread: false).setPin('4829');
+    reduceMotion(tester);
     await tester.pumpWidget(h.app(themeMode: ThemeMode.light));
     await settle(tester);
     expect(h.biometrics.prompts, 1);

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
 import 'glass.dart';
+import 'motion.dart';
 
 /// Card: solid white in light mode, frosted glass in dark mode (FR-U2, FR-U10).
 class AppCard extends StatelessWidget {
@@ -39,20 +40,20 @@ class AppCard extends StatelessWidget {
           );
     final light = Theme.of(context).brightness == Brightness.light;
     final surface = color != null
-        ? DecoratedBox(decoration: ShapeDecoration(color: color, shape: shape), child: tappable)
+        ? DecoratedBox(
+            decoration: ShapeDecoration(color: color, shape: shape),
+            child: tappable,
+          )
         : GlassSurface(shape: shape, child: tappable);
-    if (!light) return surface;
+    final card = light ? _shadowed(context, shape, surface) : surface;
+    return onTap == null ? card : Pressable(scale: 0.985, child: card);
+  }
+
+  Widget _shadowed(BuildContext context, ShapeBorder shape, Widget surface) {
     return DecoratedBox(
       decoration: ShapeDecoration(
         shape: shape,
-        shadows: [
-          BoxShadow(
-            color: context.colors.text.withValues(alpha: 0.10),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
-            spreadRadius: -10,
-          ),
-        ],
+        shadows: [BoxShadow(color: context.colors.text.withValues(alpha: 0.10), blurRadius: 18, offset: const Offset(0, 6), spreadRadius: -10)],
       ),
       child: surface,
     );

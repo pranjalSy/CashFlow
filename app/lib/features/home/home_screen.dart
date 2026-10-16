@@ -14,9 +14,9 @@ import '../../data/repositories/category_repository.dart';
 import '../../data/repositories/entry_repository.dart';
 import '../../data/repositories/people_repository.dart';
 import '../../data/repositories/profile_repository.dart';
-import '../../shared/widgets/amount_text.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
+import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/overlays.dart';
 import '../../shared/widgets/states.dart';
 import '../../shared/widgets/swipe_row.dart';
@@ -80,7 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return TabPage(
       header: _Header(month: month),
       children: [
-        _SummaryCard(summary: summary, month: monthName(context, month.year, month.month), hide: hide),
+        FadeSlideIn(child: _SummaryCard(summary: summary, month: monthName(context, month.year, month.month), hide: hide)),
         const SizedBox(height: AppSpacing.md),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -126,9 +126,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         for (final day in groups.keys) ...[
           SectionLabel(dayLabel(context, day)),
           for (final e in groups[day]!)
-            Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-              child: _row(context, e, categories[e.categoryId], people[e.personId], hide),
+            // Rows rise in one after another on open; a new entry rises in when it is added.
+            FadeSlideIn(
+              key: ValueKey(e.id),
+              index: shown.indexOf(e),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+                child: _row(context, e, categories[e.categoryId], people[e.personId], hide),
+              ),
             ),
         ],
       ],
@@ -180,18 +185,31 @@ class _Header extends ConsumerWidget {
           label: l.settings,
           child: GestureDetector(
             onTap: () => context.push('/settings'),
-            child: Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: c.brandButton, border: Border.all(color: c.card, width: 2)),
-              child: Icon(Icons.person_rounded, color: c.onButton, size: 22),
+            behavior: HitTestBehavior.opaque,
+            child: SizedBox.square(
+              dimension: 48,
+              child: Center(
+                child: Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: c.brandButton, border: Border.all(color: c.onButton.withValues(alpha: 0.9), width: 2)),
+                  child: Icon(Icons.person_outline_rounded, color: c.onButton, size: 22),
+                ),
+              ),
             ),
           ),
         ),
-        const SizedBox(width: 10),
-        Expanded(child: Text(_greeting(l), maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleMedium)),
-        _RoundButton(icon: Icons.search_rounded, label: l.search, onTap: () => CompactSnackbar.show(context, message: l.comingSoon)),
         const SizedBox(width: 6),
+        // Never cut: long greetings (Hindi, Gujarati, big text) shrink a little instead.
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(_greeting(l), maxLines: 1, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+          ),
+        ),
+        _RoundButton(icon: Icons.search_rounded, label: l.search, onTap: () => CompactSnackbar.show(context, message: l.comingSoon)),
+        const SizedBox(width: 2),
         _MonthPicker(month: month),
       ]),
     );
@@ -208,13 +226,23 @@ class _RoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    // 40 dp circle inside a 48 dp target.
     return Semantics(
       button: true,
       label: label,
-      child: Material(
-        color: c.card,
-        shape: const CircleBorder(),
-        child: InkWell(customBorder: const CircleBorder(), onTap: onTap, child: SizedBox.square(dimension: 40, child: Icon(icon, size: 20, color: c.text))),
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: SizedBox.square(
+          dimension: 48,
+          child: Center(
+            child: Material(
+              color: c.card,
+              shape: const CircleBorder(),
+              child: InkWell(customBorder: const CircleBorder(), onTap: onTap, child: SizedBox.square(dimension: 40, child: Icon(icon, size: 20, color: c.text))),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -229,14 +257,58 @@ class _MonthPicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final notifier = ref.read(homeMonthProvider.notifier);
-    return Material(
-      color: c.card,
-      shape: AppShapes.squircle(AppRadii.pill),
-      child: Row(mainAxisSize: MainAxisSize.min, children: [
-        IconButton(visualDensity: VisualDensity.compact, onPressed: () => notifier.shift(-1), icon: const Icon(Icons.chevron_left_rounded), tooltip: MaterialLocalizations.of(context).previousPageTooltip),
-        Text(monthShort(context, month.year, month.month), style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 13)),
-        IconButton(visualDensity: VisualDensity.compact, onPressed: () => notifier.shift(1), icon: const Icon(Icons.chevron_right_rounded), tooltip: MaterialLocalizations.of(context).nextPageTooltip),
+    final loc = MaterialLocalizations.of(context);
+    // Compact pill like the mockup. Two invisible halves over it (each about 60 × 48 dp) go to the
+    // previous / next month, so the targets stay large while the pill stays small.
+    return SizedBox(
+      height: 48,
+      child: Stack(alignment: Alignment.center, children: [
+        Container(
+          height: 40,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: ShapeDecoration(color: c.card, shape: AppShapes.squircle(AppRadii.pill)),
+          child: Row(mainAxisSize: MainAxisSize.min, children: [
+            Icon(Icons.chevron_left_rounded, size: 18, color: c.textSecondary),
+            const SizedBox(width: 6),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 220),
+              transitionBuilder: (child, a) => FadeTransition(opacity: a, child: child),
+              child: Text(
+                monthShort(context, month.year, month.month),
+                key: ValueKey(month),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 13, fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(width: 6),
+            Icon(Icons.chevron_right_rounded, size: 18, color: c.textSecondary),
+          ]),
+        ),
+        Positioned.fill(
+          child: Row(children: [
+            Expanded(child: _MonthHalf(label: loc.previousPageTooltip, onTap: () => notifier.shift(-1))),
+            Expanded(child: _MonthHalf(label: loc.nextPageTooltip, onTap: () => notifier.shift(1))),
+          ]),
+        ),
       ]),
+    );
+  }
+}
+
+class _MonthHalf extends StatelessWidget {
+  const _MonthHalf({required this.label, required this.onTap});
+
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: label,
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(onTap: onTap, customBorder: AppShapes.squircle(AppRadii.pill)),
+      ),
     );
   }
 }
@@ -256,6 +328,7 @@ class _SummaryCard extends ConsumerWidget {
     final s = summary;
     String m(int paise, {bool plus = false}) => hide ? '₹ •••••' : Money.format(paise, showPlus: plus);
     final net = s?.net ?? 0;
+    final mask = hide ? m(0) : null;
     return AppCard(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
@@ -264,26 +337,26 @@ class _SummaryCard extends ConsumerWidget {
             visualDensity: VisualDensity.compact,
             tooltip: hide ? l.showAmounts : l.hideAmounts,
             onPressed: () => ref.read(profileRepositoryProvider).setHideAmounts(!hide),
-            icon: Icon(hide ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 18, color: c.textMuted),
+            icon: Icon(hide ? Icons.visibility_off_outlined : Icons.visibility_outlined, size: 18, color: c.textMuted),
           ),
         ]),
-        AmountText(m(s?.balance ?? 0), size: 36, color: c.text),
+        CountUpAmount(paise: s?.balance ?? 0, size: 36, color: c.text, masked: hide ? m(0) : null),
         const SizedBox(height: 4),
         Wrap(spacing: 14, children: [
-          _Small(icon: Icons.payments_rounded, text: l.cashBalance(m(s?.cashBalance ?? 0))),
-          _Small(icon: Icons.account_balance_rounded, text: l.onlineBalance(m(s?.onlineBalance ?? 0))),
+          _Small(icon: Icons.payments_outlined, text: l.cashBalance(m(s?.cashBalance ?? 0))),
+          _Small(icon: Icons.account_balance_outlined, text: l.onlineBalance(m(s?.onlineBalance ?? 0))),
         ]),
         const SizedBox(height: AppSpacing.sm),
         Row(children: [
-          Expanded(child: _Tile(label: l.income, amount: m(s?.total.income ?? 0, plus: true), color: c.income, tint: c.incomeTint, icon: Icons.south_west_rounded)),
+          Expanded(child: _Tile(label: l.income, paise: s?.total.income ?? 0, showPlus: true, masked: mask, color: c.income, tint: c.incomeTint, icon: Icons.south_west_rounded)),
           const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.expense, amount: hide ? m(0) : Money.format(-(s?.total.expense ?? 0)), color: c.expense, tint: c.expenseTint, icon: Icons.north_east_rounded)),
+          Expanded(child: _Tile(label: l.expense, paise: -(s?.total.expense ?? 0), masked: mask, color: c.expense, tint: c.expenseTint, icon: Icons.north_east_rounded)),
         ]),
         const SizedBox(height: AppSpacing.xs),
         Row(children: [
-          Expanded(child: _Tile(label: l.lent, amount: m(s?.total.lent ?? 0), color: c.lent, tint: c.lentTint, icon: Icons.east_rounded)),
+          Expanded(child: _Tile(label: l.lent, paise: s?.total.lent ?? 0, masked: mask, color: c.lent, tint: c.lentTint, icon: Icons.east_rounded)),
           const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.borrowed, amount: m(s?.total.borrowed ?? 0), color: c.borrowed, tint: c.borrowedTint, icon: Icons.west_rounded)),
+          Expanded(child: _Tile(label: l.borrowed, paise: s?.total.borrowed ?? 0, masked: mask, color: c.borrowed, tint: c.borrowedTint, icon: Icons.west_rounded)),
         ]),
         Padding(
           padding: const EdgeInsets.only(top: AppSpacing.sm),
@@ -292,7 +365,7 @@ class _SummaryCard extends ConsumerWidget {
         const SizedBox(height: AppSpacing.sm),
         Row(children: [
           Expanded(child: Text(l.netThisMonth, style: t.bodyMedium?.copyWith(color: c.textSecondary))),
-          AmountText(m(net, plus: true), size: 16, color: net >= 0 ? c.income : c.expense, alignment: Alignment.centerRight),
+          CountUpAmount(paise: net, showPlus: true, masked: mask, color: net >= 0 ? c.income : c.expense, alignment: Alignment.centerRight),
         ]),
       ]),
     );
@@ -317,28 +390,38 @@ class _Small extends StatelessWidget {
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.label, required this.amount, required this.color, required this.tint, required this.icon});
+  const _Tile({required this.label, required this.paise, required this.color, required this.tint, required this.icon, this.masked, this.showPlus = false});
 
   final String label;
-  final String amount;
+  final int paise;
+  final String? masked;
+  final bool showPlus;
   final Color color;
   final Color tint;
   final IconData icon;
 
   @override
   Widget build(BuildContext context) {
-    final c = context.colors;
     return DecoratedBox(
       decoration: ShapeDecoration(color: tint, shape: AppShapes.squircle(18)),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(children: [
-          IconTile(icon: icon, color: color, tint: c.card.withValues(alpha: 0.6), size: 30),
+          // Tinted icon box with a soft coloured edge, as in the mockup.
+          Container(
+            width: 30,
+            height: 30,
+            decoration: ShapeDecoration(
+              color: color.withValues(alpha: 0.16),
+              shape: AppShapes.squircle(10, side: BorderSide(color: color.withValues(alpha: 0.32))),
+            ),
+            child: Icon(icon, size: 16, color: color),
+          ),
           const SizedBox(width: 9),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: color)),
-              AmountText(amount, color: color),
+              CountUpAmount(paise: paise, color: color, showPlus: showPlus, masked: masked),
             ]),
           ),
         ]),

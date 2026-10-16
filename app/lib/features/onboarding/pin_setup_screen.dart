@@ -58,7 +58,7 @@ class _PinSetupScreenState extends ConsumerState<PinSetupScreen> {
             children: [
               if (!compact) ...[
                 const SizedBox(height: AppSpacing.md),
-                const HeroIcon(icon: Icons.lock_rounded, size: 72),
+                const HeroIcon(icon: Icons.lock_outline_rounded, size: 72),
                 const SizedBox(height: AppSpacing.md),
               ],
               AnimatedSwitcher(

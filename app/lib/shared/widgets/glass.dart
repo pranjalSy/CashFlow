@@ -74,7 +74,15 @@ class GlassSurface extends ConsumerWidget {
         filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
         child: DecoratedBox(
           decoration: ShapeDecoration(
-            color: fill ?? c.glassCard,
+            color: fill,
+            // Cards: the mockup's 160° sheen, brighter at the top left (.085 → .035).
+            gradient: fill == null
+                ? LinearGradient(
+                    begin: const Alignment(-0.35, -1),
+                    end: const Alignment(0.35, 1),
+                    colors: [c.glassCard, c.glassCard.withValues(alpha: 0.035)],
+                  )
+                : null,
             shape: _withEdge(shape, edge ?? c.glassEdge),
           ),
           child: child,

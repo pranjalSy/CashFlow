@@ -31,7 +31,7 @@ Future<void> showPremiumSheet(BuildContext context, {required IconData icon, req
               width: 24,
               height: 24,
               decoration: BoxDecoration(color: c.premiumButton, shape: BoxShape.circle, border: Border.all(color: c.sheet, width: 2)),
-              child: const Icon(Icons.workspace_premium_rounded, size: 13, color: Colors.white),
+              child: const Icon(Icons.workspace_premium_outlined, size: 13, color: Colors.white),
             ),
           ),
         ]),
@@ -66,7 +66,7 @@ class PremiumTag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: ShapeDecoration(color: c.premiumTint, shape: AppShapes.squircle(AppRadii.pill)),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
-        Icon(Icons.workspace_premium_rounded, size: 11, color: c.premium),
+        Icon(Icons.workspace_premium_outlined, size: 11, color: c.premium),
         const SizedBox(width: 3),
         Text(context.l10n.premium, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: c.premium, fontSize: 10)),
       ]),
