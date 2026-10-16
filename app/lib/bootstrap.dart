@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +12,8 @@ import 'data/repositories/local_writer.dart';
 
 Future<void> bootstrap(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Portrait only (owner, 16 Oct 2026): forms and number pads are designed for it.
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   FlavorConfig.init(flavor);
   final store = LocalStore();
   final db = await store.open();

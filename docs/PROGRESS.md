@@ -178,3 +178,24 @@
 - **Bug fix (owner, 16 Oct): "?" in Contacts.** 6 of 262 phone contacts had no name. Now a contact without a name shows its name parts, nickname or first number. Contacts with no name and no number are left out. Number-only contacts (Android uses the number as the name) are listed after the named ones under "#". The same names are used in the Add lent/borrowed person picker. 2 tests added (`test/features/contacts_test.dart`); suite **129 passing**; installed and checked on the owner's phone: no "?" left.
 - **Found in the phone test, not fixed (needs owner decision):** the app turns to landscape with auto-rotate. In landscape the + menu runs under the status bar and the Add entry number pad covers the whole screen (amount hidden, last key row cut). PRD/TRD say nothing about orientation. Recommendation: lock the app to portrait.
 
+## 2026-10-16: Portrait lock + phone test on the owner's Realme (over adb)
+- Owner approved portrait-only. Done in three places: `SystemChrome.setPreferredOrientations` in `bootstrap.dart`, Android `screenOrientation="portrait"`, iOS iPhone orientations = portrait. Analyze clean; release APK installed.
+- Phone test, done by the agent with adb taps on the dev release build (dark mode, English). All test data was cleaned up afterwards: balance back to ₹500, test EMI deleted, test person "Test Claude" settled at ₹0, Premium switched back off.
+- Passed:
+  - Expense: Save without payment gives a red border and "Choose how you paid"; with Cash it saves (balance −₹240).
+  - Full swipe, Delete confirm, Undo restores the entry.
+  - Lent ₹500: Free shows the due date as Premium with a small paywall. Person picker "Add person" works.
+  - Repayment ₹700 on ₹500: summary (repaid ₹500, extra ₹200) and snackbar. After the snackbar timed out, the card link "₹200 extra not added · Add as borrowed" created Borrowed ₹200.
+  - Premium on: Add EMI ₹90,000 / 12% / 12 months shows ₹7,996.39 and interest ₹5,956.69. EMI ₹800 shows "Not possible" and Save does not save. The list card shows 0 of 12, ₹95,956.69 remaining, "Due today".
+  - Mark paid: the last payment (Cash) is pre-selected. Snackbar "Installment 1 paid · Expense added · 11 left". Undo restores the installment.
+  - App reopen: the "Paid or not?" popup appears. Paid opens the Mark paid sheet, and the expense shows in category EMI on Home. "Mark as unpaid" and Delete EMI work.
+  - Udhar due popup (due today): "Got some" ₹100 shows "₹200 will still be left" and saves.
+  - Bottom bar animation and contacts fix checked on the device.
+- Small issues found (not fixed, listed for the owner):
+  1. Home summary shows "−₹0" for Expense when it is zero.
+  2. The snackbar (Undo / Yes) is not visible to TalkBack.
+  3. EMI detail scrolls on open even when the due installment is already visible, cutting the top card.
+  4. The "Mark paid" button inside the next-due card is not separate for TalkBack.
+  5. The Home avatar is read as "More" by TalkBack.
+  6. Dev-only: the Premium row toggles only on the switch, not on the row.
+
