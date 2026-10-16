@@ -177,7 +177,7 @@ class _Header extends ConsumerWidget {
       child: Row(children: [
         Semantics(
           button: true,
-          label: l.more,
+          label: l.settings,
           child: GestureDetector(
             onTap: () => context.push('/settings'),
             child: Container(
@@ -277,7 +277,7 @@ class _SummaryCard extends ConsumerWidget {
         Row(children: [
           Expanded(child: _Tile(label: l.income, amount: m(s?.total.income ?? 0, plus: true), color: c.income, tint: c.incomeTint, icon: Icons.south_west_rounded)),
           const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.expense, amount: hide ? m(0) : '${Money.minus}${Money.format(s?.total.expense ?? 0)}', color: c.expense, tint: c.expenseTint, icon: Icons.north_east_rounded)),
+          Expanded(child: _Tile(label: l.expense, amount: hide ? m(0) : Money.format(-(s?.total.expense ?? 0)), color: c.expense, tint: c.expenseTint, icon: Icons.north_east_rounded)),
         ]),
         const SizedBox(height: AppSpacing.xs),
         Row(children: [

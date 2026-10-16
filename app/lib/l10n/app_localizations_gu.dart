@@ -78,6 +78,9 @@ class AppLocalizationsGu extends AppLocalizations {
   String get more => 'વધુ';
 
   @override
+  String get settings => 'સેટિંગ્સ';
+
+  @override
   String get navHome => 'હોમ';
 
   @override

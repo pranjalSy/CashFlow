@@ -40,7 +40,9 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
     _scrolled = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final ctx = _dueKey.currentContext;
-      if (ctx != null) Scrollable.ensureVisible(ctx, alignment: 0.3, duration: const Duration(milliseconds: 300));
+      if (ctx == null) return;
+      // Only scrolls when the due one is below the screen, so the top card stays when it fits.
+      Scrollable.ensureVisible(ctx, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd, duration: const Duration(milliseconds: 300));
     });
   }
 
@@ -233,7 +235,9 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
             const SizedBox(height: AppSpacing.xs),
             Row(
               children: [
-                Expanded(child: Align(alignment: Alignment.centerLeft, child: dueTag(context, LocalDate.parse(i.dueDate)))),
+                Expanded(
+                  child: Align(alignment: Alignment.centerLeft, child: dueTag(context, LocalDate.parse(i.dueDate))),
+                ),
                 const SizedBox(width: AppSpacing.xs),
                 AppButton(
                   label: l.markPaid,

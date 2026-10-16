@@ -30,6 +30,8 @@ void main() {
   testWidgets('empty Home, then add an expense: payment is required, Save never disabled', (tester) async {
     await openUnlockedHome(tester, h);
     expect(find.text('No entries yet'), findsOneWidget);
+    expect(find.text('−₹0'), findsNothing); // zero expense has no minus sign (phone test, 16 Oct)
+    expect(find.bySemanticsLabel('Settings'), findsOneWidget); // the avatar opens Settings
 
     await addExpense(tester, '2450');
     expect(find.text('− ₹2,450'), findsOneWidget);

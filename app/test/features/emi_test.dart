@@ -163,4 +163,26 @@ void main() {
     expect(await h.db.select(h.db.transactions).get(), isEmpty);
     await closeApp(tester);
   });
+
+  testWidgets('EMI detail does not scroll on open when the due installment already fits (phone test, 16 Oct)', (tester) async {
+    await PlanRepository(h.db).setPremiumForDev(true);
+    await emis().add(EmiDraft(name: 'Bike loan', icon: 'bike', loanAmount: 9000000, rateBp: 1200, months: 12, emiAmount: 799639, firstDue: Ist.today().addDays(3)));
+    await openUnlockedHome(tester, h);
+    await openEmiTab(tester);
+    await tester.tap(find.text('Bike loan'));
+    await settle(tester);
+    expect(tester.state<ScrollableState>(find.byType(Scrollable).last).position.pixels, 0);
+    expect(find.text('Remaining to pay'), findsOneWidget);
+    await closeApp(tester);
+  });
+
+  testWidgets('dev Premium switch also turns on from the row', (tester) async {
+    await openUnlockedHome(tester, h);
+    await tester.tap(find.bySemanticsLabel('Settings'));
+    await settle(tester);
+    await tester.tap(find.text('Premium (dev only)'));
+    await settle(tester);
+    expect(await PlanRepository(h.db).isPremium(), isTrue);
+    await closeApp(tester);
+  });
 }

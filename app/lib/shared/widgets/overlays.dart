@@ -96,10 +96,7 @@ Future<T?> showAppPopup<T>(BuildContext context, {required WidgetBuilder builder
       return Stack(
         children: [
           Positioned.fill(
-            child: GestureDetector(
-              onTap: dismissible ? () => Navigator.of(context).maybePop() : null,
-              child: _scrim(context, animation),
-            ),
+            child: GestureDetector(onTap: dismissible ? () => Navigator.of(context).maybePop() : null, child: _scrim(context, animation)),
           ),
           Center(
             child: ScaleTransition(
@@ -112,7 +109,10 @@ Future<T?> showAppPopup<T>(BuildContext context, {required WidgetBuilder builder
                     color: context.colors.sheet,
                     shape: AppShapes.squircle(30),
                     clipBehavior: Clip.antiAlias,
-                    child: Padding(padding: const EdgeInsets.fromLTRB(18, 20, 18, 18), child: Builder(builder: builder)),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(18, 20, 18, 18),
+                      child: Builder(builder: builder),
+                    ),
                   ),
                 ),
               ),
@@ -186,49 +186,68 @@ class CompactSnackbarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final t = Theme.of(context).textTheme;
-    return Material(
-      color: c.brandButton,
-      shape: AppShapes.squircle(18),
-      elevation: 8,
-      shadowColor: c.brandButton.withValues(alpha: 0.6),
-      child: SizedBox(
-        height: 54,
-        child: Row(
-          children: [
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(message, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall?.copyWith(color: c.onButton)),
-                  if (detail != null)
-                    Text(detail!, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall?.copyWith(color: c.onButton.withValues(alpha: 0.85))),
-                ],
+    // Live region: TalkBack reads it when it appears; the action is a real button.
+    return Semantics(
+      container: true,
+      liveRegion: true,
+      explicitChildNodes: true,
+      child: Material(
+        color: c.brandButton,
+        shape: AppShapes.squircle(18),
+        elevation: 8,
+        shadowColor: c.brandButton.withValues(alpha: 0.6),
+        child: SizedBox(
+          height: 54,
+          child: Row(
+            children: [
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      message,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: t.titleSmall?.copyWith(color: c.onButton),
+                    ),
+                    if (detail != null)
+                      Text(
+                        detail!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: t.bodySmall?.copyWith(color: c.onButton.withValues(alpha: 0.85)),
+                      ),
+                  ],
+                ),
               ),
-            ),
-            if (actionLabel != null && onAction != null)
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Material(
-                  color: Colors.white,
-                  shape: AppShapes.squircle(AppRadii.pill),
-                  child: InkWell(
-                    onTap: onAction,
-                    customBorder: AppShapes.squircle(AppRadii.pill),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                      child: Text(actionLabel!, style: t.titleSmall?.copyWith(color: const Color(0xFF2B4BC7))),
+              if (actionLabel != null && onAction != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Semantics(
+                    button: true,
+                    child: Material(
+                      color: Colors.white,
+                      shape: AppShapes.squircle(AppRadii.pill),
+                      child: InkWell(
+                        onTap: onAction,
+                        customBorder: AppShapes.squircle(AppRadii.pill),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          child: Text(actionLabel!, style: t.titleSmall?.copyWith(color: const Color(0xFF2B4BC7))),
+                        ),
+                      ),
                     ),
                   ),
                 ),
+              IconButton(
+                onPressed: onClose,
+                icon: Icon(Icons.close_rounded, color: c.onButton, size: 18),
+                tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
               ),
-            IconButton(
-              onPressed: onClose,
-              icon: Icon(Icons.close_rounded, color: c.onButton, size: 18),
-              tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

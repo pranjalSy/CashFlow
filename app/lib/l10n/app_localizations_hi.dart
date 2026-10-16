@@ -78,6 +78,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get more => 'और';
 
   @override
+  String get settings => 'सेटिंग्स';
+
+  @override
   String get navHome => 'होम';
 
   @override

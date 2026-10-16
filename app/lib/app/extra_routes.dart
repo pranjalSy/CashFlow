@@ -63,6 +63,7 @@ class _ComingSoonPage extends ConsumerWidget {
               child: ListRowTile(
                 leading: const Icon(Icons.workspace_premium_rounded),
                 title: l.devPremiumToggle,
+                onTap: () => ref.read(planRepositoryProvider).setPremiumForDev(!premium),
                 trailing: AppToggle(value: premium, onChanged: (v) => ref.read(planRepositoryProvider).setPremiumForDev(v)),
               ),
             ),

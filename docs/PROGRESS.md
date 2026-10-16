@@ -199,3 +199,14 @@
   5. The Home avatar is read as "More" by TalkBack.
   6. Dev-only: the Premium row toggles only on the switch, not on the row.
 
+## 2026-10-17: Fixes for the 6 phone-test issues (owner approved)
+1. Home summary: a zero expense shows "₹0", not "−₹0" (`home_screen.dart`).
+2. Snackbar: it is now a live region (TalkBack reads it) and its action is its own button (`overlays.dart`).
+3. EMI detail: on open it scrolls only when the due installment is below the screen, so the top card stays (`emi_detail_screen.dart`).
+4. `AppButton` is its own button for TalkBack, so "Mark paid" inside the next-due card is separate. This applies to all buttons in the app.
+5. The Home avatar is read as "Settings". New string `settings` in en/hi/gu.
+6. Dev Premium row turns on from the whole row (`extra_routes.dart`).
+- Tests: 5 new (TalkBack snackbar and button-in-card, no "−₹0", avatar label, no scroll on EMI detail open, dev row). Suite **133 passing**, analyze clean.
+- Checked on the owner's phone (release dev build, over adb): all 6 confirmed. The test EMI was deleted, Premium switched off and the balance is back to ₹500.
+- Noticed, not changed: the Home avatar is 42 dp, under the 48 dp tap-target rule (AGENTS §6).
+

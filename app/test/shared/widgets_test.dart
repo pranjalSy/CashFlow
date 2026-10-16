@@ -9,6 +9,7 @@ import 'package:cashflow/shared/widgets/app_card.dart';
 import 'package:cashflow/shared/widgets/glass.dart';
 import 'package:cashflow/shared/widgets/glass_nav_bar.dart';
 import 'package:cashflow/shared/widgets/number_pad.dart';
+import 'package:cashflow/shared/widgets/overlays.dart';
 import 'package:cashflow/shared/widgets/swipe_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -193,6 +194,34 @@ void main() {
       }
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
+    });
+  });
+
+  // Phone test (16 Oct): TalkBack could not see the snackbar action or a button inside a card.
+  group('TalkBack', () {
+    testWidgets('snackbar is a live region and its action is a button', (tester) async {
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.light(),
+        home: Scaffold(
+          body: Builder(builder: (c) => TextButton(onPressed: () => CompactSnackbar.show(c, message: 'Deleted', actionLabel: 'Undo', onAction: () {}), child: const Text('go'))),
+        ),
+      ));
+      await tester.tap(find.text('go'));
+      await tester.pump();
+      expect(tester.getSemantics(find.text('Undo')), matchesSemantics(label: 'Undo', isButton: true, isFocusable: true, hasTapAction: true, hasFocusAction: true));
+      expect(find.byWidgetPredicate((w) => w is Semantics && w.properties.liveRegion == true), findsOneWidget);
+      await tester.pump(const Duration(seconds: 6));
+      handle.dispose();
+    });
+
+    testWidgets('a button inside a card is its own button', (tester) async {
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(host(AppCard(child: Column(mainAxisSize: MainAxisSize.min, children: [const Text('Installment 5'), AppButton(label: 'Mark paid', onPressed: () {})]))));
+      final node = tester.getSemantics(find.text('Mark paid'));
+      expect(node.label, 'Mark paid');
+      expect(node.flagsCollection.isButton, isTrue);
+      handle.dispose();
     });
   });
 
