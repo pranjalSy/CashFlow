@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Exports on Android 9 and older (FR-C2): the app's own Downloads folder, shared through FileProvider. -->
+<paths>
+    <external-files-path name="downloads" path="Download/" />
+    <files-path name="files" path="." />
+</paths>

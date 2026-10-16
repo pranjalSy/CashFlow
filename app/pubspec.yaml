@@ -54,6 +54,8 @@ dependencies:
   uuid: 4.6.0
   # Thin line icons matching the mockups (owner approved 17 Oct 2026; MIT).
   lucide_icons_flutter: 3.1.20
+  # PDF export file (owner approved 17 Oct 2026; Apache-2.0). Pages are drawn by Flutter so Hindi/Gujarati shape correctly.
+  pdf: 3.13.1
 
 dev_dependencies:
   flutter_test:

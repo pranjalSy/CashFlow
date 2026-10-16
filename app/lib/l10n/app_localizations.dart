@@ -1045,7 +1045,7 @@ abstract class AppLocalizations {
   /// No description provided for @peopleCount.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 person} other{{count} people}}'**
+  /// **'People · {count}'**
   String peopleCount(int count);
 
   /// No description provided for @recentPeople.
@@ -2373,6 +2373,324 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'of {limit}'**
   String ofLimit(String limit);
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search entries and people'**
+  String get searchHint;
+
+  /// No description provided for @filterPeople.
+  ///
+  /// In en, this message translates to:
+  /// **'People'**
+  String get filterPeople;
+
+  /// No description provided for @entriesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Entries · {count}'**
+  String entriesCount(int count);
+
+  /// No description provided for @allTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get allTime;
+
+  /// No description provided for @recentSearches.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get recentSearches;
+
+  /// No description provided for @searchTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a name, an amount like 2000, a category or a note.'**
+  String get searchTips;
+
+  /// No description provided for @noResultsFor.
+  ///
+  /// In en, this message translates to:
+  /// **'No results for “{q}”'**
+  String noResultsFor(String q);
+
+  /// No description provided for @noResultsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No entry has this word in the title, note or category.'**
+  String get noResultsBody;
+
+  /// No description provided for @searchInAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in All'**
+  String get searchInAll;
+
+  /// No description provided for @searchPremiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search is Premium'**
+  String get searchPremiumTitle;
+
+  /// No description provided for @searchPremiumBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Find any entry or person in a second, even offline.'**
+  String get searchPremiumBody;
+
+  /// No description provided for @repaymentWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Repayment · {name}'**
+  String repaymentWith(String name);
+
+  /// No description provided for @exportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get exportTitle;
+
+  /// No description provided for @exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export data'**
+  String get exportData;
+
+  /// No description provided for @formatLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Format'**
+  String get formatLabel;
+
+  /// No description provided for @pdfDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy to read & share'**
+  String get pdfDesc;
+
+  /// No description provided for @csvDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'For Excel / Sheets'**
+  String get csvDesc;
+
+  /// No description provided for @dateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Date range'**
+  String get dateRange;
+
+  /// No description provided for @rangeThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get rangeThisMonth;
+
+  /// No description provided for @rangeLastMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Last month'**
+  String get rangeLastMonth;
+
+  /// No description provided for @range3Months.
+  ///
+  /// In en, this message translates to:
+  /// **'3 months'**
+  String get range3Months;
+
+  /// No description provided for @rangeThisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This year'**
+  String get rangeThisYear;
+
+  /// No description provided for @rangeCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get rangeCustom;
+
+  /// No description provided for @includeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Include'**
+  String get includeLabel;
+
+  /// No description provided for @incExpLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Income & expenses'**
+  String get incExpLabel;
+
+  /// No description provided for @udharLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lent & borrowed'**
+  String get udharLabel;
+
+  /// No description provided for @emiBillsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'EMI & bills'**
+  String get emiBillsLabel;
+
+  /// No description provided for @entriesN.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 entry} other{{count} entries}}'**
+  String entriesN(int count);
+
+  /// No description provided for @paymentsN.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment} other{{count} payments}}'**
+  String paymentsN(int count);
+
+  /// No description provided for @exportPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'The file is made on your phone. Only you decide where to share it.'**
+  String get exportPrivacy;
+
+  /// No description provided for @exportButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Export {format} · {count, plural, =1{1 entry} other{{count} entries}}'**
+  String exportButton(String format, int count);
+
+  /// No description provided for @chooseSomething.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose at least one thing to include'**
+  String get chooseSomething;
+
+  /// No description provided for @reportReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Report ready'**
+  String get reportReady;
+
+  /// No description provided for @fileInfoPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} · {pages, plural, =1{1 page} other{{pages} pages}} · {size}'**
+  String fileInfoPdf(String name, int pages, String size);
+
+  /// No description provided for @fileInfoCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} · {size}'**
+  String fileInfoCsv(String name, String size);
+
+  /// No description provided for @savedInDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved in Downloads'**
+  String get savedInDownloads;
+
+  /// No description provided for @openLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get openLabel;
+
+  /// No description provided for @shareLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareLabel;
+
+  /// No description provided for @shareHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens your phone\'s share menu'**
+  String get shareHint;
+
+  /// No description provided for @exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the file. Try again.'**
+  String get exportFailed;
+
+  /// No description provided for @reportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get reportTitle;
+
+  /// No description provided for @periodRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{from} – {to}'**
+  String periodRange(String from, String to);
+
+  /// No description provided for @madeOnPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Made on your phone with CashFlow'**
+  String get madeOnPhone;
+
+  /// No description provided for @pageOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} / {total}'**
+  String pageOf(int n, int total);
+
+  /// No description provided for @colDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get colDate;
+
+  /// No description provided for @colType.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get colType;
+
+  /// No description provided for @colDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get colDetails;
+
+  /// No description provided for @colPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get colPayment;
+
+  /// No description provided for @colAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get colAmount;
+
+  /// No description provided for @colNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get colNote;
+
+  /// No description provided for @spendingByCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Spending by category'**
+  String get spendingByCategory;
+
+  /// No description provided for @billLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bill'**
+  String get billLabel;
+
+  /// No description provided for @exportingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Making the file…'**
+  String get exportingLabel;
 
   /// No description provided for @ratePerYear.
   ///

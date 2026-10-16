@@ -16,6 +16,8 @@ import '../features/charts/budget_screen.dart';
 import '../features/emi/emi_detail_screen.dart';
 import '../features/emi/emi_form_screen.dart';
 import '../features/entry/entry_form_screen.dart';
+import '../features/export/export_screen.dart';
+import '../features/search/search_screen.dart';
 import '../shared/widgets/app_card.dart';
 import '../shared/widgets/app_page.dart';
 import '../shared/widgets/basics.dart';
@@ -52,6 +54,8 @@ final List<RouteBase> extraRoutes = [
   ),
   GoRoute(path: '/bills/:id', builder: (_, s) => BillDetailScreen(billId: s.pathParameters['id']!)),
   GoRoute(path: '/bills/:id/edit', builder: (_, s) => BillFormScreen(billId: s.pathParameters['id'])),
+  GoRoute(path: '/search', builder: (_, _) => const SearchScreen()),
+  GoRoute(path: '/export', builder: (_, _) => const ExportScreen()),
   GoRoute(path: '/budget', builder: (_, _) => const BudgetScreen()),
   GoRoute(path: '/settings', builder: (_, _) => const _ComingSoonPage()),
 ];
@@ -76,6 +80,11 @@ class _ComingSoonPage extends ConsumerWidget {
           AppCard(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: ListRowTile(leading: const Icon(LucideIcons.target), title: l.budget, onTap: () => context.push('/budget')),
+          ),
+          const SizedBox(height: 12),
+          AppCard(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: ListRowTile(leading: const Icon(LucideIcons.download), title: l.exportData, onTap: () => context.push('/export')),
           ),
           if (FlavorConfig.instance.isDev) ...[
             const SizedBox(height: 12),

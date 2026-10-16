@@ -511,13 +511,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String peopleCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count people',
-      one: '1 person',
-    );
-    return '$_temp0';
+    return 'People · $count';
   }
 
   @override
@@ -1349,6 +1343,213 @@ class AppLocalizationsEn extends AppLocalizations {
   String ofLimit(String limit) {
     return 'of $limit';
   }
+
+  @override
+  String get searchHint => 'Search entries and people';
+
+  @override
+  String get filterPeople => 'People';
+
+  @override
+  String entriesCount(int count) {
+    return 'Entries · $count';
+  }
+
+  @override
+  String get allTime => 'All time';
+
+  @override
+  String get recentSearches => 'Recent';
+
+  @override
+  String get searchTips =>
+      'Try a name, an amount like 2000, a category or a note.';
+
+  @override
+  String noResultsFor(String q) {
+    return 'No results for “$q”';
+  }
+
+  @override
+  String get noResultsBody =>
+      'No entry has this word in the title, note or category.';
+
+  @override
+  String get searchInAll => 'Search in All';
+
+  @override
+  String get searchPremiumTitle => 'Search is Premium';
+
+  @override
+  String get searchPremiumBody =>
+      'Find any entry or person in a second, even offline.';
+
+  @override
+  String repaymentWith(String name) {
+    return 'Repayment · $name';
+  }
+
+  @override
+  String get exportTitle => 'Export';
+
+  @override
+  String get exportData => 'Export data';
+
+  @override
+  String get formatLabel => 'Format';
+
+  @override
+  String get pdfDesc => 'Easy to read & share';
+
+  @override
+  String get csvDesc => 'For Excel / Sheets';
+
+  @override
+  String get dateRange => 'Date range';
+
+  @override
+  String get rangeThisMonth => 'This month';
+
+  @override
+  String get rangeLastMonth => 'Last month';
+
+  @override
+  String get range3Months => '3 months';
+
+  @override
+  String get rangeThisYear => 'This year';
+
+  @override
+  String get rangeCustom => 'Custom';
+
+  @override
+  String get includeLabel => 'Include';
+
+  @override
+  String get incExpLabel => 'Income & expenses';
+
+  @override
+  String get udharLabel => 'Lent & borrowed';
+
+  @override
+  String get emiBillsLabel => 'EMI & bills';
+
+  @override
+  String entriesN(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String paymentsN(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exportPrivacy =>
+      'The file is made on your phone. Only you decide where to share it.';
+
+  @override
+  String exportButton(String format, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+    );
+    return 'Export $format · $_temp0';
+  }
+
+  @override
+  String get chooseSomething => 'Choose at least one thing to include';
+
+  @override
+  String get reportReady => 'Report ready';
+
+  @override
+  String fileInfoPdf(String name, int pages, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages pages',
+      one: '1 page',
+    );
+    return '$name · $_temp0 · $size';
+  }
+
+  @override
+  String fileInfoCsv(String name, String size) {
+    return '$name · $size';
+  }
+
+  @override
+  String get savedInDownloads => 'Saved in Downloads';
+
+  @override
+  String get openLabel => 'Open';
+
+  @override
+  String get shareLabel => 'Share';
+
+  @override
+  String get shareHint => 'Opens your phone\'s share menu';
+
+  @override
+  String get exportFailed => 'Could not save the file. Try again.';
+
+  @override
+  String get reportTitle => 'Report';
+
+  @override
+  String periodRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get madeOnPhone => 'Made on your phone with CashFlow';
+
+  @override
+  String pageOf(int n, int total) {
+    return '$n / $total';
+  }
+
+  @override
+  String get colDate => 'Date';
+
+  @override
+  String get colType => 'Type';
+
+  @override
+  String get colDetails => 'Details';
+
+  @override
+  String get colPayment => 'Payment';
+
+  @override
+  String get colAmount => 'Amount';
+
+  @override
+  String get colNote => 'Note';
+
+  @override
+  String get spendingByCategory => 'Spending by category';
+
+  @override
+  String get billLabel => 'Bill';
+
+  @override
+  String get exportingLabel => 'Making the file…';
 
   @override
   String ratePerYear(String rate) {

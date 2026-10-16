@@ -72,6 +72,9 @@ class Harness {
   static const userId = 'test-user';
   late UiPrefs prefs;
 
+  /// More provider overrides for one test (for example a fake file service).
+  List<Override> extraOverrides = [];
+
   Future<void> init({Map<String, Object> prefsValues = const {}}) async {
     driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
     SharedPreferences.setMockInitialValues(prefsValues);
@@ -86,6 +89,7 @@ class Harness {
         pinServiceProvider.overrideWithValue(PinService(iterations: 1000, offThread: false)),
         biometricServiceProvider.overrideWithValue(biometrics),
         contactsAccessProvider.overrideWithValue(contacts),
+        ...extraOverrides,
       ];
 
   Widget app({ThemeMode? themeMode}) {

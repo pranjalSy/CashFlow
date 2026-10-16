@@ -15,11 +15,12 @@ import '../../data/repositories/category_repository.dart';
 import '../../data/repositories/entry_repository.dart';
 import '../../data/repositories/people_repository.dart';
 import '../../data/repositories/profile_repository.dart';
+import '../../data/repositories/plan_repository.dart';
+import '../../shared/widgets/premium_sheet.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/month_pill.dart';
 import '../../shared/widgets/motion.dart';
-import '../../shared/widgets/overlays.dart';
 import '../../shared/widgets/states.dart';
 import '../../shared/widgets/swipe_row.dart';
 import '../../shared/widgets/tab_page.dart';
@@ -69,12 +70,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final profile = ref.watch(profileProvider).value;
     final hide = profile?.hideAmounts ?? false;
 
-    final shown = entries.where((e) => switch (filter) {
-          HomeFilter.all => true,
-          HomeFilter.expense => e.kind == EntryKind.expense,
-          HomeFilter.income => e.kind == EntryKind.income,
-          HomeFilter.udhar => e.isUdhar,
-        }).toList();
+    final shown = entries
+        .where(
+          (e) => switch (filter) {
+            HomeFilter.all => true,
+            HomeFilter.expense => e.kind == EntryKind.expense,
+            HomeFilter.income => e.kind == EntryKind.income,
+            HomeFilter.udhar => e.isUdhar,
+          },
+        )
+        .toList();
 
     final groups = <LocalDate, List<HomeEntry>>{};
     for (final e in shown) {
@@ -84,48 +89,58 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return TabPage(
       header: _Header(month: month),
       children: [
-        FadeSlideIn(child: _SummaryCard(summary: summary, month: monthName(context, month.year, month.month), hide: hide)),
+        FadeSlideIn(
+          child: _SummaryCard(summary: summary, month: monthName(context, month.year, month.month), hide: hide),
+        ),
         const SizedBox(height: AppSpacing.md),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(children: [
-            for (final f in HomeFilter.values) ...[
-              AppChip(
-                label: switch (f) {
-                  HomeFilter.all => l.filterAll,
-                  HomeFilter.expense => l.expense,
-                  HomeFilter.income => l.income,
-                  HomeFilter.udhar => l.udhar,
-                },
-                selected: f == filter,
-                selectedColor: switch (f) {
-                  HomeFilter.expense => c.expenseButton,
-                  HomeFilter.income => c.incomeButton,
-                  _ => null,
-                },
-                onTap: () => ref.read(homeFilterProvider.notifier).set(f),
-              ),
-              const SizedBox(width: 6),
+          child: Row(
+            children: [
+              for (final f in HomeFilter.values) ...[
+                AppChip(
+                  label: switch (f) {
+                    HomeFilter.all => l.filterAll,
+                    HomeFilter.expense => l.expense,
+                    HomeFilter.income => l.income,
+                    HomeFilter.udhar => l.udhar,
+                  },
+                  selected: f == filter,
+                  selectedColor: switch (f) {
+                    HomeFilter.expense => c.expenseButton,
+                    HomeFilter.income => c.incomeButton,
+                    _ => null,
+                  },
+                  onTap: () => ref.read(homeFilterProvider.notifier).set(f),
+                ),
+                const SizedBox(width: 6),
+              ],
             ],
-          ]),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(2, AppSpacing.md, 2, 0),
-          child: Row(children: [
-            Text(l.transactions, style: t.titleLarge),
-            const SizedBox(width: 8),
-            if (shown.isNotEmpty)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: ShapeDecoration(color: c.brandTint, shape: AppShapes.squircle(AppRadii.pill)),
-                child: Text('${shown.length}', style: t.labelSmall?.copyWith(color: c.brandText)),
-              ),
-          ]),
+          child: Row(
+            children: [
+              Text(l.transactions, style: t.titleLarge),
+              const SizedBox(width: 8),
+              if (shown.isNotEmpty)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: ShapeDecoration(color: c.brandTint, shape: AppShapes.squircle(AppRadii.pill)),
+                  child: Text('${shown.length}', style: t.labelSmall?.copyWith(color: c.brandText)),
+                ),
+            ],
+          ),
         ),
         if (shown.isEmpty)
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.lg),
-            child: EmptyState(icon: LucideIcons.indianRupee, title: l.noEntriesTitle, message: entries.isEmpty ? '${l.noEntriesBody}\n${l.tapPlusToAdd}' : l.noEntriesBody),
+            child: EmptyState(
+              icon: LucideIcons.indianRupee,
+              title: l.noEntriesTitle,
+              message: entries.isEmpty ? '${l.noEntriesBody}\n${l.tapPlusToAdd}' : l.noEntriesBody,
+            ),
           ),
         for (final day in groups.keys) ...[
           SectionLabel(dayLabel(context, day)),
@@ -183,39 +198,56 @@ class _Header extends ConsumerWidget {
     final t = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.only(top: AppSpacing.xs, bottom: AppSpacing.sm),
-      child: Row(children: [
-        Semantics(
-          button: true,
-          label: l.settings,
-          child: GestureDetector(
-            onTap: () => context.push('/settings'),
-            behavior: HitTestBehavior.opaque,
-            child: SizedBox.square(
-              dimension: 48,
-              child: Center(
-                child: Container(
-                  width: 42,
-                  height: 42,
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: c.brandButton, border: Border.all(color: c.onButton.withValues(alpha: 0.9), width: 2)),
-                  child: Icon(LucideIcons.user, color: c.onButton, size: 22),
+      child: Row(
+        children: [
+          Semantics(
+            button: true,
+            label: l.settings,
+            child: GestureDetector(
+              onTap: () => context.push('/settings'),
+              behavior: HitTestBehavior.opaque,
+              child: SizedBox.square(
+                dimension: 48,
+                child: Center(
+                  child: Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: c.brandButton,
+                      border: Border.all(color: c.onButton.withValues(alpha: 0.9), width: 2),
+                    ),
+                    child: Icon(LucideIcons.user, color: c.onButton, size: 22),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(width: 6),
-        // Never cut: long greetings (Hindi, Gujarati, big text) shrink a little instead.
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
-            child: Text(_greeting(l), maxLines: 1, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+          const SizedBox(width: 6),
+          // Never cut: long greetings (Hindi, Gujarati, big text) shrink a little instead.
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(_greeting(l), maxLines: 1, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+            ),
           ),
-        ),
-        _RoundButton(icon: LucideIcons.search, label: l.search, onTap: () => CompactSnackbar.show(context, message: l.comingSoon)),
-        const SizedBox(width: 2),
-        _MonthPicker(month: month),
-      ]),
+          _RoundButton(
+            icon: LucideIcons.search,
+            label: l.search,
+            onTap: () async {
+              // Search is Premium (PRD 3); Free users see the small paywall.
+              if (await ref.read(planRepositoryProvider).isPremium()) {
+                if (context.mounted) context.push('/search');
+              } else if (context.mounted) {
+                showPremiumSheet(context, icon: LucideIcons.search, title: l.searchPremiumTitle, body: l.searchPremiumBody);
+              }
+            },
+          ),
+          const SizedBox(width: 2),
+          _MonthPicker(month: month),
+        ],
+      ),
     );
   }
 }
@@ -243,7 +275,11 @@ class _RoundButton extends StatelessWidget {
             child: Material(
               color: c.card,
               shape: const CircleBorder(),
-              child: InkWell(customBorder: const CircleBorder(), onTap: onTap, child: SizedBox.square(dimension: 40, child: Icon(icon, size: 20, color: c.text))),
+              child: InkWell(
+                customBorder: const CircleBorder(),
+                onTap: onTap,
+                child: SizedBox.square(dimension: 40, child: Icon(icon, size: 20, color: c.text)),
+              ),
             ),
           ),
         ),
@@ -258,8 +294,7 @@ class _MonthPicker extends ConsumerWidget {
   final ({int year, int month}) month;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) =>
-      MonthPill(year: month.year, month: month.month, onShift: ref.read(homeMonthProvider.notifier).shift);
+  Widget build(BuildContext context, WidgetRef ref) => MonthPill(year: month.year, month: month.month, onShift: ref.read(homeMonthProvider.notifier).shift);
 }
 
 class _SummaryCard extends ConsumerWidget {
@@ -279,44 +314,90 @@ class _SummaryCard extends ConsumerWidget {
     final net = s?.net ?? 0;
     final mask = hide ? m(0) : null;
     return AppCard(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(children: [
-          Expanded(child: Text(l.balanceEndOf(month), style: t.labelMedium)),
-          IconButton(
-            visualDensity: VisualDensity.compact,
-            tooltip: hide ? l.showAmounts : l.hideAmounts,
-            onPressed: () => ref.read(profileRepositoryProvider).setHideAmounts(!hide),
-            icon: Icon(hide ? LucideIcons.eyeOff : LucideIcons.eye, size: 18, color: c.textMuted),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(child: Text(l.balanceEndOf(month), style: t.labelMedium)),
+              IconButton(
+                visualDensity: VisualDensity.compact,
+                tooltip: hide ? l.showAmounts : l.hideAmounts,
+                onPressed: () => ref.read(profileRepositoryProvider).setHideAmounts(!hide),
+                icon: Icon(hide ? LucideIcons.eyeOff : LucideIcons.eye, size: 18, color: c.textMuted),
+              ),
+            ],
           ),
-        ]),
-        CountUpAmount(paise: s?.balance ?? 0, size: 36, color: c.text, masked: hide ? m(0) : null),
-        const SizedBox(height: 4),
-        Wrap(spacing: 14, children: [
-          _Small(icon: LucideIcons.banknote, text: l.cashBalance(m(s?.cashBalance ?? 0))),
-          _Small(icon: LucideIcons.landmark, text: l.onlineBalance(m(s?.onlineBalance ?? 0))),
-        ]),
-        const SizedBox(height: AppSpacing.sm),
-        Row(children: [
-          Expanded(child: _Tile(label: l.income, paise: s?.total.income ?? 0, showPlus: true, masked: mask, color: c.income, tint: c.incomeTint, icon: LucideIcons.arrowDownLeft)),
-          const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.expense, paise: -(s?.total.expense ?? 0), masked: mask, color: c.expense, tint: c.expenseTint, icon: LucideIcons.arrowUpRight)),
-        ]),
-        const SizedBox(height: AppSpacing.xs),
-        Row(children: [
-          Expanded(child: _Tile(label: l.lent, paise: s?.total.lent ?? 0, masked: mask, color: c.lent, tint: c.lentTint, icon: LucideIcons.arrowRight)),
-          const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.borrowed, paise: s?.total.borrowed ?? 0, masked: mask, color: c.borrowed, tint: c.borrowedTint, icon: LucideIcons.arrowLeft)),
-        ]),
-        Padding(
-          padding: const EdgeInsets.only(top: AppSpacing.sm),
-          child: Divider(color: c.border, height: 1),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        Row(children: [
-          Expanded(child: Text(l.netThisMonth, style: t.bodyMedium?.copyWith(color: c.textSecondary))),
-          CountUpAmount(paise: net, showPlus: true, masked: mask, color: net >= 0 ? c.income : c.expense, alignment: Alignment.centerRight),
-        ]),
-      ]),
+          CountUpAmount(paise: s?.balance ?? 0, size: 36, color: c.text, masked: hide ? m(0) : null),
+          const SizedBox(height: 4),
+          Wrap(
+            spacing: 14,
+            children: [
+              _Small(icon: LucideIcons.banknote, text: l.cashBalance(m(s?.cashBalance ?? 0))),
+              _Small(icon: LucideIcons.landmark, text: l.onlineBalance(m(s?.onlineBalance ?? 0))),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Row(
+            children: [
+              Expanded(
+                child: _Tile(
+                  label: l.income,
+                  paise: s?.total.income ?? 0,
+                  showPlus: true,
+                  masked: mask,
+                  color: c.income,
+                  tint: c.incomeTint,
+                  icon: LucideIcons.arrowDownLeft,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Expanded(
+                child: _Tile(
+                  label: l.expense,
+                  paise: -(s?.total.expense ?? 0),
+                  masked: mask,
+                  color: c.expense,
+                  tint: c.expenseTint,
+                  icon: LucideIcons.arrowUpRight,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Row(
+            children: [
+              Expanded(
+                child: _Tile(label: l.lent, paise: s?.total.lent ?? 0, masked: mask, color: c.lent, tint: c.lentTint, icon: LucideIcons.arrowRight),
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Expanded(
+                child: _Tile(
+                  label: l.borrowed,
+                  paise: s?.total.borrowed ?? 0,
+                  masked: mask,
+                  color: c.borrowed,
+                  tint: c.borrowedTint,
+                  icon: LucideIcons.arrowLeft,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.sm),
+            child: Divider(color: c.border, height: 1),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Row(
+            children: [
+              Expanded(
+                child: Text(l.netThisMonth, style: t.bodyMedium?.copyWith(color: c.textSecondary)),
+              ),
+              CountUpAmount(paise: net, showPlus: true, masked: mask, color: net >= 0 ? c.income : c.expense, alignment: Alignment.centerRight),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -330,11 +411,14 @@ class _Small extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    return Row(mainAxisSize: MainAxisSize.min, children: [
-      Icon(icon, size: 14, color: c.textSecondary),
-      const SizedBox(width: 5),
-      Text(text, style: Theme.of(context).textTheme.bodySmall),
-    ]);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14, color: c.textSecondary),
+        const SizedBox(width: 5),
+        Text(text, style: Theme.of(context).textTheme.bodySmall),
+      ],
+    );
   }
 }
 
@@ -355,25 +439,35 @@ class _Tile extends StatelessWidget {
       decoration: ShapeDecoration(color: tint, shape: AppShapes.squircle(18)),
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: Row(children: [
-          // Tinted icon box with a soft coloured edge, as in the mockup.
-          Container(
-            width: 30,
-            height: 30,
-            decoration: ShapeDecoration(
-              color: color.withValues(alpha: 0.16),
-              shape: AppShapes.squircle(10, side: BorderSide(color: color.withValues(alpha: 0.32))),
+        child: Row(
+          children: [
+            // Tinted icon box with a soft coloured edge, as in the mockup.
+            Container(
+              width: 30,
+              height: 30,
+              decoration: ShapeDecoration(
+                color: color.withValues(alpha: 0.16),
+                shape: AppShapes.squircle(10, side: BorderSide(color: color.withValues(alpha: 0.32))),
+              ),
+              child: Icon(icon, size: 16, color: color),
             ),
-            child: Icon(icon, size: 16, color: color),
-          ),
-          const SizedBox(width: 9),
-          Expanded(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: color)),
-              CountUpAmount(paise: paise, color: color, showPlus: showPlus, masked: masked),
-            ]),
-          ),
-        ]),
+            const SizedBox(width: 9),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(color: color),
+                  ),
+                  CountUpAmount(paise: paise, color: color, showPlus: showPlus, masked: masked),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

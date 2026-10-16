@@ -510,13 +510,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String peopleCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count लोग',
-      one: '1 व्यक्ति',
-    );
-    return '$_temp0';
+    return 'लोग · $count';
   }
 
   @override
@@ -1337,6 +1331,212 @@ class AppLocalizationsHi extends AppLocalizations {
   String ofLimit(String limit) {
     return '$limit में से';
   }
+
+  @override
+  String get searchHint => 'एंट्री और लोग खोजें';
+
+  @override
+  String get filterPeople => 'लोग';
+
+  @override
+  String entriesCount(int count) {
+    return 'एंट्री · $count';
+  }
+
+  @override
+  String get allTime => 'सारा समय';
+
+  @override
+  String get recentSearches => 'हाल की';
+
+  @override
+  String get searchTips => 'नाम, 2000 जैसी रकम, कैटेगरी या नोट लिखकर देखें।';
+
+  @override
+  String noResultsFor(String q) {
+    return '“$q” के लिए कुछ नहीं मिला';
+  }
+
+  @override
+  String get noResultsBody =>
+      'किसी एंट्री के टाइटल, नोट या कैटेगरी में ये शब्द नहीं है।';
+
+  @override
+  String get searchInAll => 'सब में खोजें';
+
+  @override
+  String get searchPremiumTitle => 'सर्च Premium में है';
+
+  @override
+  String get searchPremiumBody =>
+      'कोई भी एंट्री या व्यक्ति एक सेकंड में ढूंढें, ऑफलाइन भी।';
+
+  @override
+  String repaymentWith(String name) {
+    return 'वापसी · $name';
+  }
+
+  @override
+  String get exportTitle => 'एक्सपोर्ट';
+
+  @override
+  String get exportData => 'डेटा एक्सपोर्ट करें';
+
+  @override
+  String get formatLabel => 'फॉर्मेट';
+
+  @override
+  String get pdfDesc => 'पढ़ने और भेजने में आसान';
+
+  @override
+  String get csvDesc => 'Excel / Sheets के लिए';
+
+  @override
+  String get dateRange => 'तारीख';
+
+  @override
+  String get rangeThisMonth => 'इस महीने';
+
+  @override
+  String get rangeLastMonth => 'पिछले महीने';
+
+  @override
+  String get range3Months => '3 महीने';
+
+  @override
+  String get rangeThisYear => 'इस साल';
+
+  @override
+  String get rangeCustom => 'अपनी तारीख';
+
+  @override
+  String get includeLabel => 'शामिल करें';
+
+  @override
+  String get incExpLabel => 'आय और खर्च';
+
+  @override
+  String get udharLabel => 'दिया और लिया';
+
+  @override
+  String get emiBillsLabel => 'EMI और बिल';
+
+  @override
+  String entriesN(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count एंट्री',
+      one: '1 एंट्री',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String paymentsN(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count पेमेंट',
+      one: '1 पेमेंट',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exportPrivacy =>
+      'फाइल आपके फोन पर ही बनती है। कहाँ भेजनी है, आप तय करते हैं।';
+
+  @override
+  String exportButton(String format, int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count एंट्री',
+      one: '1 एंट्री',
+    );
+    return '$format एक्सपोर्ट · $_temp0';
+  }
+
+  @override
+  String get chooseSomething => 'कम से कम एक चीज़ चुनें';
+
+  @override
+  String get reportReady => 'रिपोर्ट तैयार';
+
+  @override
+  String fileInfoPdf(String name, int pages, String size) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages पेज',
+      one: '1 पेज',
+    );
+    return '$name · $_temp0 · $size';
+  }
+
+  @override
+  String fileInfoCsv(String name, String size) {
+    return '$name · $size';
+  }
+
+  @override
+  String get savedInDownloads => 'Downloads में सेव हुई';
+
+  @override
+  String get openLabel => 'खोलें';
+
+  @override
+  String get shareLabel => 'शेयर करें';
+
+  @override
+  String get shareHint => 'फोन का शेयर मेनू खुलेगा';
+
+  @override
+  String get exportFailed => 'फाइल सेव नहीं हुई। फिर से कोशिश करें।';
+
+  @override
+  String get reportTitle => 'रिपोर्ट';
+
+  @override
+  String periodRange(String from, String to) {
+    return '$from – $to';
+  }
+
+  @override
+  String get madeOnPhone => 'CashFlow से आपके फोन पर बनी';
+
+  @override
+  String pageOf(int n, int total) {
+    return '$n / $total';
+  }
+
+  @override
+  String get colDate => 'तारीख';
+
+  @override
+  String get colType => 'प्रकार';
+
+  @override
+  String get colDetails => 'विवरण';
+
+  @override
+  String get colPayment => 'पेमेंट';
+
+  @override
+  String get colAmount => 'रकम';
+
+  @override
+  String get colNote => 'नोट';
+
+  @override
+  String get spendingByCategory => 'कैटेगरी के हिसाब से खर्च';
+
+  @override
+  String get billLabel => 'बिल';
+
+  @override
+  String get exportingLabel => 'फाइल बन रही है…';
 
   @override
   String ratePerYear(String rate) {
