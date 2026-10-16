@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n.dart';
@@ -97,7 +98,7 @@ class _MarkPaidSheetState extends ConsumerState<_MarkPaidSheet> {
         DecoratedBox(
           decoration: ShapeDecoration(color: c.raised, shape: AppShapes.squircle(AppRadii.md)),
           child: ListRowTile(
-            leading: IconTile(icon: Icons.calendar_today_outlined, color: c.textSecondary, tint: c.card, size: 34),
+            leading: IconTile(icon: LucideIcons.calendar, color: c.textSecondary, tint: c.card, size: 34),
             title: _paidOn == today ? '${l.today}, ${shortDate(context, _paidOn)}' : longDate(context, _paidOn),
             subtitle: l.paidOn,
             onTap: () async {

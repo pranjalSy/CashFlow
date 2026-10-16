@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -55,13 +56,13 @@ class _ComingSoonPage extends ConsumerWidget {
       child: Stack(children: [
         TabPage(children: [
           const SizedBox(height: 48),
-          AppCard(child: EmptyState(icon: Icons.settings_outlined, title: l.comingSoon, message: l.welcomeOfflineNote)),
+          AppCard(child: EmptyState(icon: LucideIcons.settings, title: l.comingSoon, message: l.welcomeOfflineNote)),
           if (FlavorConfig.instance.isDev) ...[
             const SizedBox(height: 12),
             AppCard(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: ListRowTile(
-                leading: const Icon(Icons.workspace_premium_outlined),
+                leading: const Icon(LucideIcons.award),
                 title: l.devPremiumToggle,
                 onTap: () => ref.read(planRepositoryProvider).setPremiumForDev(!premium),
                 trailing: AppToggle(value: premium, onChanged: (v) => ref.read(planRepositoryProvider).setPremiumForDev(v)),
@@ -70,7 +71,7 @@ class _ComingSoonPage extends ConsumerWidget {
             const SizedBox(height: 12),
             AppCard(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: ListRowTile(leading: const Icon(Icons.widgets_outlined), title: l.devGallery, onTap: () => context.push('/dev/gallery')),
+              child: ListRowTile(leading: const Icon(LucideIcons.layoutGrid), title: l.devGallery, onTap: () => context.push('/dev/gallery')),
             ),
           ],
         ]),

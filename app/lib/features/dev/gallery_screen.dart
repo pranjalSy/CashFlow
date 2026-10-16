@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -47,20 +48,20 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
         plusOpen: _plusOpen,
         plusLabel: 'Add',
         items: const [
-          NavItem(icon: Icons.home_outlined, label: 'Home'),
-          NavItem(icon: Icons.people_alt_outlined, label: 'Contacts'),
-          NavItem(icon: Icons.pie_chart_outline_rounded, label: 'Charts'),
-          NavItem(icon: Icons.calendar_month_outlined, label: 'EMI'),
+          NavItem(icon: LucideIcons.house, label: 'Home'),
+          NavItem(icon: LucideIcons.users, label: 'Contacts'),
+          NavItem(icon: LucideIcons.chartPie, label: 'Charts'),
+          NavItem(icon: LucideIcons.calendarDays, label: 'EMI'),
         ],
       ),
       floating: PlusMenu(
         open: _plusOpen,
         onClose: () => setState(() => _plusOpen = false),
         items: [
-          PlusMenuItem(label: 'Expense', icon: Icons.north_east_rounded, color: c.expense, tint: c.expenseTint, onTap: () => setState(() => _plusOpen = false)),
-          PlusMenuItem(label: 'Income', icon: Icons.south_west_rounded, color: c.income, tint: c.incomeTint, onTap: () => setState(() => _plusOpen = false)),
-          PlusMenuItem(label: 'Lent', icon: Icons.east_rounded, color: c.lent, tint: c.lentTint, onTap: () => setState(() => _plusOpen = false)),
-          PlusMenuItem(label: 'Borrowed', icon: Icons.west_rounded, color: c.borrowed, tint: c.borrowedTint, onTap: () => setState(() => _plusOpen = false)),
+          PlusMenuItem(label: 'Expense', icon: LucideIcons.arrowUpRight, color: c.expense, tint: c.expenseTint, onTap: () => setState(() => _plusOpen = false)),
+          PlusMenuItem(label: 'Income', icon: LucideIcons.arrowDownLeft, color: c.income, tint: c.incomeTint, onTap: () => setState(() => _plusOpen = false)),
+          PlusMenuItem(label: 'Lent', icon: LucideIcons.arrowRight, color: c.lent, tint: c.lentTint, onTap: () => setState(() => _plusOpen = false)),
+          PlusMenuItem(label: 'Borrowed', icon: LucideIcons.arrowLeft, color: c.borrowed, tint: c.borrowedTint, onTap: () => setState(() => _plusOpen = false)),
         ],
       ),
       child: SafeArea(
@@ -74,7 +75,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
             AppCard(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 4),
               child: ListRowTile(
-                leading: IconTile(icon: Icons.blur_on_rounded, color: c.brandText, tint: c.brandTint, size: 34),
+                leading: IconTile(icon: LucideIcons.sparkles, color: c.brandText, tint: c.brandTint, size: 34),
                 title: 'Reduce glass effects',
                 subtitle: 'Glass → solid surfaces',
                 trailing: AppToggle(value: reduce, onChanged: (v) => ref.read(reduceGlassProvider.notifier).set(v)),
@@ -89,15 +90,15 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
                   AmountText('₹1,20,000', size: 36, color: c.text),
                   const SizedBox(height: AppSpacing.sm),
                   Row(children: [
-                    Expanded(child: _tile('Income', '+₹45,000', c.income, c.incomeTint, Icons.south_west_rounded)),
+                    Expanded(child: _tile('Income', '+₹45,000', c.income, c.incomeTint, LucideIcons.arrowDownLeft)),
                     const SizedBox(width: AppSpacing.xs),
-                    Expanded(child: _tile('Expense', '−₹28,500', c.expense, c.expenseTint, Icons.north_east_rounded)),
+                    Expanded(child: _tile('Expense', '−₹28,500', c.expense, c.expenseTint, LucideIcons.arrowUpRight)),
                   ]),
                   const SizedBox(height: AppSpacing.xs),
                   Row(children: [
-                    Expanded(child: _tile('Lent', '₹5,000', c.lent, c.lentTint, Icons.east_rounded)),
+                    Expanded(child: _tile('Lent', '₹5,000', c.lent, c.lentTint, LucideIcons.arrowRight)),
                     const SizedBox(width: AppSpacing.xs),
-                    Expanded(child: _tile('Borrowed', '₹2,000', c.borrowed, c.borrowedTint, Icons.west_rounded)),
+                    Expanded(child: _tile('Borrowed', '₹2,000', c.borrowed, c.borrowedTint, LucideIcons.arrowLeft)),
                   ]),
                 ],
               ),
@@ -108,7 +109,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
               deleteLabel: 'Delete',
               onEdit: () => _snack('Edit tapped'),
               onDelete: _confirmDelete,
-              child: _entry(Icons.shopping_cart_outlined, 'Groceries', 'Food · UPI · 6:40 PM', '−₹2,450', c.expense, c.expenseTint),
+              child: _entry(LucideIcons.shoppingCart, 'Groceries', 'Food · UPI · 6:40 PM', '−₹2,450', c.expense, c.expenseTint),
             ),
             const SizedBox(height: AppSpacing.xs),
             SwipeActionRow(
@@ -116,12 +117,12 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
               deleteLabel: 'Delete',
               onEdit: () => _snack('Edit tapped'),
               onDelete: _confirmDelete,
-              child: _entry(Icons.work_outline_rounded, 'Salary', 'Salary · Online · 9:15 AM', '+₹45,000', c.income, c.incomeTint),
+              child: _entry(LucideIcons.briefcase, 'Salary', 'Salary · Online · 9:15 AM', '+₹45,000', c.income, c.incomeTint),
             ),
             const SectionLabel('Buttons'),
             AppButton(label: 'Save expense', onPressed: () {}, kind: AppButtonKind.danger),
             const SizedBox(height: AppSpacing.xs),
-            AppButton(label: 'Mark paid', onPressed: () {}, kind: AppButtonKind.success, icon: Icons.check_rounded),
+            AppButton(label: 'Mark paid', onPressed: () {}, kind: AppButtonKind.success, icon: LucideIcons.check),
             const SizedBox(height: AppSpacing.xs),
             AppButton(label: 'Save', onPressed: () {}),
             const SizedBox(height: AppSpacing.xs),
@@ -174,7 +175,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
             const SizedBox(height: AppSpacing.sm),
             AppCard(
               child: EmptyState(
-                icon: Icons.currency_rupee_rounded,
+                icon: LucideIcons.indianRupee,
                 title: 'No entries yet',
                 message: 'Add your first income or expense.',
                 actionLabel: 'Add entry',
@@ -250,7 +251,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconTile(icon: Icons.delete_outline_rounded, color: context.colors.expense, tint: context.colors.expenseTint, size: 56),
+          IconTile(icon: LucideIcons.trash2, color: context.colors.expense, tint: context.colors.expenseTint, size: 56),
           const SizedBox(height: AppSpacing.sm),
           Text('Delete this entry?', style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: AppSpacing.md),
@@ -281,7 +282,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
         const SizedBox(height: AppSpacing.md),
         AmountText('₹7,996.39', size: 40, color: context.colors.expense, alignment: Alignment.center),
         const SizedBox(height: AppSpacing.md),
-        AppButton(label: 'Mark paid', kind: AppButtonKind.success, icon: Icons.check_rounded, onPressed: () => Navigator.pop(context)),
+        AppButton(label: 'Mark paid', kind: AppButtonKind.success, icon: LucideIcons.check, onPressed: () => Navigator.pop(context)),
       ]),
     );
   }
@@ -290,7 +291,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
     showAppPopup<void>(
       context,
       builder: (context) => Column(mainAxisSize: MainAxisSize.min, children: [
-        IconTile(icon: Icons.two_wheeler_rounded, color: context.colors.brandText, tint: context.colors.brandTint, size: 64),
+        IconTile(icon: LucideIcons.bike, color: context.colors.brandText, tint: context.colors.brandTint, size: 64),
         const SizedBox(height: AppSpacing.sm),
         Text('EMI due today', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: context.colors.dueSoon)),
         Text('Bike loan · ₹7,996.39', style: Theme.of(context).textTheme.titleLarge),
@@ -298,7 +299,7 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
         Row(children: [
           Expanded(child: AppButton(label: 'Not yet', kind: AppButtonKind.secondary, onPressed: () => Navigator.pop(context))),
           const SizedBox(width: AppSpacing.sm),
-          Expanded(child: AppButton(label: 'Paid', kind: AppButtonKind.success, icon: Icons.check_rounded, onPressed: () => Navigator.pop(context))),
+          Expanded(child: AppButton(label: 'Paid', kind: AppButtonKind.success, icon: LucideIcons.check, onPressed: () => Navigator.pop(context))),
         ]),
       ]),
     );

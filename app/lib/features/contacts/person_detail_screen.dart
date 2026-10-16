@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -77,7 +78,7 @@ class PersonDetailScreen extends ConsumerWidget {
           children: [
             IconButton(
               onPressed: () => context.pop(),
-              icon: Icon(Icons.arrow_back_rounded, color: c.text),
+              icon: Icon(LucideIcons.arrowLeft, color: c.text),
               tooltip: l.back,
             ),
             const Spacer(),
@@ -118,16 +119,16 @@ class PersonDetailScreen extends ConsumerWidget {
         Row(
           children: [
             Expanded(
-              child: _ActionTile(icon: Icons.east_rounded, label: l.lent, color: c.lent, onTap: () => addUdhar('lent')),
+              child: _ActionTile(icon: LucideIcons.arrowRight, label: l.lent, color: c.lent, onTap: () => addUdhar('lent')),
             ),
             const SizedBox(width: AppSpacing.xs),
             Expanded(
-              child: _ActionTile(icon: Icons.west_rounded, label: l.borrowed, color: c.borrowed, onTap: () => addUdhar('borrowed')),
+              child: _ActionTile(icon: LucideIcons.arrowLeft, label: l.borrowed, color: c.borrowed, onTap: () => addUdhar('borrowed')),
             ),
             const SizedBox(width: AppSpacing.xs),
             Expanded(
               child: _ActionTile(
-                icon: Icons.sync_rounded,
+                icon: LucideIcons.refreshCw,
                 label: l.repayment,
                 color: c.income,
                 onTap: open.isEmpty
@@ -140,7 +141,7 @@ class PersonDetailScreen extends ConsumerWidget {
         SectionLabel(l.history),
         if (debts.isEmpty)
           AppCard(
-            child: EmptyState(icon: Icons.handshake_outlined, title: l.noUdharTitle(first), message: l.noUdharBody),
+            child: EmptyState(icon: LucideIcons.handshake, title: l.noUdharTitle(first), message: l.noUdharBody),
           ),
         for (final (i, d) in debts.indexed)
           FadeSlideIn(
@@ -206,12 +207,12 @@ class _DebtCard extends StatelessWidget {
     final meta = '${shortDate(context, day)} · ${paymentLabel(l, d.paymentMode, d.onlineMethod)}${d.note == null ? '' : ' · ${d.note}'}';
     Widget? tag;
     if (settled) {
-      tag = _Tag(text: l.settled, color: c.income, tint: c.incomeTint, icon: Icons.check_rounded);
+      tag = _Tag(text: l.settled, color: c.income, tint: c.incomeTint, icon: LucideIcons.check);
     } else if (premium && d.dueDate != null) {
       final days = Ist.today().daysUntil(LocalDate.parse(d.dueDate!));
       tag = days < 0
-          ? _Tag(text: l.overdueDays(-days), color: c.expense, tint: c.expenseTint, icon: Icons.schedule_rounded)
-          : _Tag(text: l.dueInDays(days), color: c.dueSoon, tint: c.dueSoonTint, icon: Icons.calendar_today_outlined);
+          ? _Tag(text: l.overdueDays(-days), color: c.expense, tint: c.expenseTint, icon: LucideIcons.clock)
+          : _Tag(text: l.dueInDays(days), color: c.dueSoon, tint: c.dueSoonTint, icon: LucideIcons.calendar);
     }
     final extra = d.extraNotAdded;
     return AppCard(
@@ -222,7 +223,7 @@ class _DebtCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              IconTile(icon: lent ? Icons.east_rounded : Icons.west_rounded, color: color, tint: lent ? c.lentTint : c.borrowedTint),
+              IconTile(icon: lent ? LucideIcons.arrowRight : LucideIcons.arrowLeft, color: color, tint: lent ? c.lentTint : c.borrowedTint),
               const SizedBox(width: 11),
               Expanded(
                 child: Column(

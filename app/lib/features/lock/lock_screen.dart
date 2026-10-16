@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -150,7 +151,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                         if (_fingerprint)
                           TextButton.icon(
                             onPressed: _locked == null ? _tryFingerprint : null,
-                            icon: const Icon(Icons.fingerprint_rounded),
+                            icon: const Icon(LucideIcons.fingerprint),
                             label: Text(l.useFingerprint),
                           ),
                       ],

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -272,7 +273,7 @@ class _PlusButton extends StatelessWidget {
             turns: open ? 0.125 : 0,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOutBack,
-            child: Icon(Icons.add_rounded, size: 30, color: c.onButton),
+            child: Icon(LucideIcons.plus, size: 30, color: c.onButton),
           ),
         ),
       ),

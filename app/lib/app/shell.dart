@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/l10n.dart';
@@ -35,17 +36,17 @@ class _MainShellState extends State<MainShell> {
     final emiTab = widget.shell.currentIndex == 3;
     final items = emiTab
         ? [
-            PlusMenuItem(label: l.addEmi, icon: Icons.two_wheeler_rounded, color: c.lent, tint: c.lentTint, onTap: () => _go('/emi/new')),
-            PlusMenuItem(label: l.addBill, icon: Icons.bolt_outlined, color: c.dueSoon, tint: c.dueSoonTint, onTap: () {
+            PlusMenuItem(label: l.addEmi, icon: LucideIcons.bike, color: c.lent, tint: c.lentTint, onTap: () => _go('/emi/new')),
+            PlusMenuItem(label: l.addBill, icon: LucideIcons.zap, color: c.dueSoon, tint: c.dueSoonTint, onTap: () {
               setState(() => _menu = false);
               CompactSnackbar.show(context, message: l.billsComingSoon); // Add bill arrives in T11
             }),
           ]
         : [
-            PlusMenuItem(label: l.expense, icon: Icons.north_east_rounded, color: c.expense, tint: c.expenseTint, onTap: () => _go('/entry/new?kind=expense')),
-            PlusMenuItem(label: l.income, icon: Icons.south_west_rounded, color: c.income, tint: c.incomeTint, onTap: () => _go('/entry/new?kind=income')),
-            PlusMenuItem(label: l.lent, icon: Icons.east_rounded, color: c.lent, tint: c.lentTint, onTap: () => _go('/udhar/new?direction=lent')),
-            PlusMenuItem(label: l.borrowed, icon: Icons.west_rounded, color: c.borrowed, tint: c.borrowedTint, onTap: () => _go('/udhar/new?direction=borrowed')),
+            PlusMenuItem(label: l.expense, icon: LucideIcons.arrowUpRight, color: c.expense, tint: c.expenseTint, onTap: () => _go('/entry/new?kind=expense')),
+            PlusMenuItem(label: l.income, icon: LucideIcons.arrowDownLeft, color: c.income, tint: c.incomeTint, onTap: () => _go('/entry/new?kind=income')),
+            PlusMenuItem(label: l.lent, icon: LucideIcons.arrowRight, color: c.lent, tint: c.lentTint, onTap: () => _go('/udhar/new?direction=lent')),
+            PlusMenuItem(label: l.borrowed, icon: LucideIcons.arrowLeft, color: c.borrowed, tint: c.borrowedTint, onTap: () => _go('/udhar/new?direction=borrowed')),
           ];
     return PopScope(
       canPop: !_menu,
@@ -63,10 +64,10 @@ class _MainShellState extends State<MainShell> {
           plusOpen: _menu,
           plusLabel: l.add,
           items: [
-            NavItem(icon: Icons.home_outlined, label: l.navHome),
-            NavItem(icon: Icons.people_alt_outlined, label: l.navContacts),
-            NavItem(icon: Icons.pie_chart_outline_rounded, label: l.navCharts),
-            NavItem(icon: Icons.calendar_month_outlined, label: l.navEmi),
+            NavItem(icon: LucideIcons.house, label: l.navHome),
+            NavItem(icon: LucideIcons.users, label: l.navContacts),
+            NavItem(icon: LucideIcons.chartPie, label: l.navCharts),
+            NavItem(icon: LucideIcons.calendarDays, label: l.navEmi),
           ],
         ),
         floating: PlusMenu(open: _menu, items: items, onClose: () => setState(() => _menu = false)),

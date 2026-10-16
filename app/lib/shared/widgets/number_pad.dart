@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -28,7 +29,7 @@ class NumberPad extends StatelessWidget {
         _row([
           showDot ? _Key(label: '.', height: keyHeight, onTap: () => onDigit('.')) : const SizedBox.shrink(),
           _Key(label: '0', height: keyHeight, onTap: () => onDigit('0')),
-          _Key(icon: Icons.backspace_outlined, height: keyHeight, onTap: onBackspace, plain: true, semanticLabel: 'Backspace'),
+          _Key(icon: LucideIcons.delete, height: keyHeight, onTap: onBackspace, plain: true, semanticLabel: 'Backspace'),
         ]),
       ],
     );

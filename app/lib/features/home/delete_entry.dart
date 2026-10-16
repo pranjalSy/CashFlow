@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n.dart';
@@ -20,7 +21,7 @@ Future<bool> confirmAndDeleteEntry(BuildContext context, WidgetRef ref, HomeEntr
       final c = context.colors;
       final t = Theme.of(context).textTheme;
       return Column(mainAxisSize: MainAxisSize.min, children: [
-        IconTile(icon: Icons.delete_outline_rounded, color: c.expense, tint: c.expenseTint, size: 56),
+        IconTile(icon: LucideIcons.trash2, color: c.expense, tint: c.expenseTint, size: 56),
         const SizedBox(height: AppSpacing.sm),
         Text(l.deleteEntryTitle, textAlign: TextAlign.center, style: t.titleLarge),
         const SizedBox(height: 6),

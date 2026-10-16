@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/l10n.dart';
 import '../../core/theme/app_colors.dart';
@@ -90,9 +91,9 @@ class PaymentPicker extends StatelessWidget {
         ]),
       ),
       Row(children: [
-        option('cash', Icons.payments_outlined, l.cash),
+        option('cash', LucideIcons.banknote, l.cash),
         const SizedBox(width: AppSpacing.xs),
-        option('online', Icons.smartphone_outlined, l.online),
+        option('online', LucideIcons.smartphone, l.online),
       ]),
       if (mode == 'online') ...[
         const SizedBox(height: AppSpacing.xs),

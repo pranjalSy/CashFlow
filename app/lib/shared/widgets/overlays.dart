@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
@@ -243,7 +244,7 @@ class CompactSnackbarView extends StatelessWidget {
                 ),
               IconButton(
                 onPressed: onClose,
-                icon: Icon(Icons.close_rounded, color: c.onButton, size: 18),
+                icon: Icon(LucideIcons.x, color: c.onButton, size: 18),
                 tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
               ),
             ],

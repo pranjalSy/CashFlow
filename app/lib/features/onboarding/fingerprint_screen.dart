@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,7 +67,7 @@ class _FingerprintScreenState extends ConsumerState<FingerprintScreen> {
       bottom: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (ready) AppButton(label: l.fingerprintEnable, icon: Icons.fingerprint_rounded, onPressed: _enable),
+          if (ready) AppButton(label: l.fingerprintEnable, icon: LucideIcons.fingerprint, onPressed: _enable),
           if (ready) const SizedBox(height: AppSpacing.xs),
           AppButton(label: ready ? l.notNow : l.continueLabel, kind: AppButtonKind.secondary, onPressed: () => context.go(widget.next)),
         ],
@@ -75,9 +76,9 @@ class _FingerprintScreenState extends ConsumerState<FingerprintScreen> {
         children: [
           const SizedBox(height: AppSpacing.xl),
           if (ready)
-            BreathingRings(color: c.brandText, child: const HeroIcon(icon: Icons.fingerprint_rounded, size: 110))
+            BreathingRings(color: c.brandText, child: const HeroIcon(icon: LucideIcons.fingerprint, size: 110))
           else
-            const HeroIcon(icon: Icons.fingerprint_rounded, size: 110),
+            const HeroIcon(icon: LucideIcons.fingerprint, size: 110),
           const SizedBox(height: AppSpacing.lg),
           Text(ready ? l.fingerprintTitle : l.fingerprintNotSetTitle, textAlign: TextAlign.center, style: t.headlineSmall),
           const SizedBox(height: AppSpacing.xs),

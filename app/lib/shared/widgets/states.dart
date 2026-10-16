@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
@@ -37,7 +38,7 @@ class EmptyState extends StatelessWidget {
           Text(message, textAlign: TextAlign.center, style: t.bodyMedium?.copyWith(color: c.textSecondary)),
           if (actionLabel != null && onAction != null) ...[
             const SizedBox(height: AppSpacing.md),
-            AppButton(label: actionLabel!, onPressed: onAction!, expand: false, icon: Icons.add_rounded),
+            AppButton(label: actionLabel!, onPressed: onAction!, expand: false, icon: LucideIcons.plus),
           ],
         ],
       ),
@@ -61,7 +62,7 @@ class OfflineBar extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.cloud_off_outlined, size: 15, color: Colors.white),
+          const Icon(LucideIcons.cloudOff, size: 15, color: Colors.white),
           const SizedBox(width: 7),
           Flexible(
             child: Text(text, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.labelMedium?.copyWith(color: Colors.white)),
@@ -97,7 +98,7 @@ class PremiumLockCard extends StatelessWidget {
             dimension: 56,
             child: DecoratedBox(
               decoration: ShapeDecoration(color: c.premiumTint, shape: AppShapes.squircle(18)),
-              child: Icon(Icons.lock_outline_rounded, color: c.premium, size: 26),
+              child: Icon(LucideIcons.lock, color: c.premium, size: 26),
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -105,7 +106,7 @@ class PremiumLockCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(message, textAlign: TextAlign.center, style: t.bodyMedium?.copyWith(color: c.textSecondary)),
           const SizedBox(height: AppSpacing.md),
-          AppButton(label: buttonLabel, onPressed: onTry, kind: AppButtonKind.premium, icon: Icons.workspace_premium_outlined),
+          AppButton(label: buttonLabel, onPressed: onTry, kind: AppButtonKind.premium, icon: LucideIcons.award),
           const SizedBox(height: AppSpacing.xs),
           Text(fineprint, textAlign: TextAlign.center, style: t.bodySmall?.copyWith(color: c.textMuted)),
         ],

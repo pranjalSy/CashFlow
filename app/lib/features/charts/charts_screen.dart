@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/l10n.dart';
 import '../../shared/widgets/app_card.dart';
@@ -15,7 +16,7 @@ class ChartsScreen extends StatelessWidget {
     return TabPage(
       title: l.navCharts,
       children: [
-        AppCard(child: EmptyState(icon: Icons.pie_chart_outline_rounded, title: l.navCharts, message: l.chartsComingSoon)),
+        AppCard(child: EmptyState(icon: LucideIcons.chartPie, title: l.navCharts, message: l.chartsComingSoon)),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
@@ -68,7 +69,7 @@ class PlusMenu extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: Theme.of(context).brightness == Brightness.dark ? c.raised : c.text,
                       ),
-                      child: Icon(Icons.add_rounded, size: 30, color: c.onButton),
+                      child: Icon(LucideIcons.plus, size: 30, color: c.onButton),
                     ),
                   ),
                 ),

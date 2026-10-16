@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -44,7 +45,7 @@ class _EmiBillsScreenState extends ConsumerState<EmiBillsScreen> {
           const EmiLockCard()
         else if (_tab == 1)
           AppCard(
-            child: EmptyState(icon: Icons.bolt_outlined, title: l.comingSoon, message: l.billsComingSoon),
+            child: EmptyState(icon: LucideIcons.zap, title: l.comingSoon, message: l.billsComingSoon),
           )
         else
           const _EmiList(),
@@ -61,7 +62,7 @@ class _EmiList extends ConsumerWidget {
     final l = context.l10n;
     final list = ref.watch(emiListProvider).value;
     if (list == null) return const SizedBox.shrink();
-    if (list.isEmpty) return AppCard(child: EmptyState(icon: Icons.event_repeat_rounded, title: l.noEmisTitle, message: l.noEmisBody));
+    if (list.isEmpty) return AppCard(child: EmptyState(icon: LucideIcons.calendarSync, title: l.noEmisTitle, message: l.noEmisBody));
     final active = list.where((e) => !e.closed).toList();
     final closed = list.where((e) => e.closed).toList();
     return Column(
@@ -184,7 +185,7 @@ class EmiCard extends ConsumerWidget {
                 ),
               ),
               if (item.closed)
-                EmiTag(text: l.closed, color: c.income, tint: c.incomeTint, icon: Icons.check_rounded)
+                EmiTag(text: l.closed, color: c.income, tint: c.incomeTint, icon: LucideIcons.check)
               else if (next != null)
                 dueTag(context, LocalDate.parse(next.dueDate), short: true),
             ],
@@ -208,10 +209,10 @@ Widget dueTag(BuildContext context, LocalDate due, {bool short = false}) {
   final l = context.l10n;
   final c = context.colors;
   final days = Ist.today().daysUntil(due);
-  if (days < 0) return EmiTag(text: l.overdueDays(-days), color: c.expense, tint: c.expenseTint, icon: Icons.schedule_rounded);
+  if (days < 0) return EmiTag(text: l.overdueDays(-days), color: c.expense, tint: c.expenseTint, icon: LucideIcons.clock);
   final text = short && days > 1 ? l.dueOnDate(shortDate(context, due)) : l.dueInDays(days);
-  if (days < 7) return EmiTag(text: text, color: c.dueSoon, tint: c.dueSoonTint, icon: Icons.calendar_today_outlined);
-  return EmiTag(text: text, color: c.textSecondary, tint: c.raised, icon: Icons.calendar_today_outlined);
+  if (days < 7) return EmiTag(text: text, color: c.dueSoon, tint: c.dueSoonTint, icon: LucideIcons.calendar);
+  return EmiTag(text: text, color: c.textSecondary, tint: c.raised, icon: LucideIcons.calendar);
 }
 
 class EmiTag extends StatelessWidget {

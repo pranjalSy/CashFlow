@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -248,7 +249,7 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
             child: Row(children: [
-              IconButton(onPressed: () => context.pop(), icon: Icon(Icons.close_rounded, color: c.text), tooltip: l.close),
+              IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
               Expanded(child: Center(child: Text(_editing ? l.editEmi : l.addEmi, style: t.titleLarge))),
               const SizedBox(width: 48),
             ]),
@@ -442,7 +443,7 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
       border: BorderSide(color: c.expense, width: 1.5),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
-          Icon(Icons.error_outline_rounded, color: c.expense, size: 20),
+          Icon(LucideIcons.circleAlert, color: c.expense, size: 20),
           const SizedBox(width: 6),
           Text(l.notPossible, style: t.titleMedium?.copyWith(color: c.expense)),
         ]),

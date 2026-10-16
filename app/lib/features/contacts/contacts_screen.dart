@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -78,11 +79,11 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
         Row(
           children: [
             Expanded(
-              child: _TotalCard(label: l.toReceive, amount: toReceive, count: receiveCount, color: c.lent, tint: c.lentTint, icon: Icons.south_west_rounded),
+              child: _TotalCard(label: l.toReceive, amount: toReceive, count: receiveCount, color: c.lent, tint: c.lentTint, icon: LucideIcons.arrowDownLeft),
             ),
             const SizedBox(width: AppSpacing.xs),
             Expanded(
-              child: _TotalCard(label: l.toPay, amount: toPay, count: payCount, color: c.borrowed, tint: c.borrowedTint, icon: Icons.north_east_rounded),
+              child: _TotalCard(label: l.toPay, amount: toPay, count: payCount, color: c.borrowed, tint: c.borrowedTint, icon: LucideIcons.arrowUpRight),
             ),
           ],
         ),
@@ -91,7 +92,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           onChanged: (v) => setState(() => _query = v),
           decoration: InputDecoration(
             hintText: l.searchPeople,
-            prefixIcon: const Icon(Icons.search_rounded),
+            prefixIcon: const Icon(LucideIcons.search),
             filled: true,
             fillColor: c.card,
             border: OutlineInputBorder(
@@ -130,7 +131,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
           ),
           if (shownContacts.isEmpty && recent.isEmpty)
             AppCard(
-              child: EmptyState(icon: Icons.people_alt_outlined, title: l.noPeopleTitle, message: l.noPeopleBody),
+              child: EmptyState(icon: LucideIcons.users, title: l.noPeopleTitle, message: l.noPeopleBody),
             ),
           for (final (i, x) in shownContacts.indexed) ...[
             if (i == 0 || _letter(shownContacts[i - 1]) != _letter(x))
@@ -318,7 +319,7 @@ class _ContactsOffCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconTile(icon: Icons.person_off_outlined, color: c.brandText, tint: c.brandTint, size: 44),
+          IconTile(icon: LucideIcons.userX, color: c.brandText, tint: c.brandTint, size: 44),
           const SizedBox(width: 12),
           Expanded(
             child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -94,7 +95,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
     final l = context.l10n;
     showPremiumSheet(
       context,
-      icon: Icons.calendar_today_outlined,
+      icon: LucideIcons.calendar,
       title: l.premiumSheetDueTitle,
       body: l.premiumSheetDueBody(_person?.name.split(' ').first ?? l.person),
       footnote: l.premiumSavedWithout,
@@ -118,7 +119,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
             child: Row(children: [
-              IconButton(onPressed: () => context.pop(), icon: Icon(Icons.close_rounded, color: c.text), tooltip: l.close),
+              IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
               Expanded(child: Center(child: Text(_lent ? l.addLentTitle : l.addBorrowedTitle, style: t.titleLarge))),
               const SizedBox(width: 48),
             ]),
@@ -131,11 +132,11 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
                 onTap: _pickPerson,
                 child: ListRowTile(
                   leading: _person == null
-                      ? IconTile(icon: Icons.person_add_alt_outlined, color: color, tint: tint)
+                      ? IconTile(icon: LucideIcons.userPlus, color: color, tint: tint)
                       : PersonAvatar(name: _person!.name, color: color, tint: tint, circle: true),
                   title: _person?.name ?? l.choosePerson,
                   subtitle: _person == null ? l.person : _person!.phone,
-                  trailing: Icon(Icons.expand_more_rounded, color: _tried && _person == null ? c.expense : c.textMuted),
+                  trailing: Icon(LucideIcons.chevronDown, color: _tried && _person == null ? c.expense : c.textMuted),
                 ),
               ),
               if (_tried && _person == null)
@@ -151,7 +152,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
                 child: Column(children: [
                   ListRowTile(
-                    leading: IconTile(icon: Icons.calendar_today_outlined, color: c.textSecondary, tint: c.raised, size: 34),
+                    leading: IconTile(icon: LucideIcons.calendar, color: c.textSecondary, tint: c.raised, size: 34),
                     title: day == Ist.today() ? '${l.today}, ${shortDate(context, day)}' : longDate(context, day),
                     subtitle: l.date,
                     onTap: () async {
@@ -162,7 +163,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
                   ),
                   Divider(height: 1, color: c.border),
                   ListRowTile(
-                    leading: IconTile(icon: Icons.event_available_outlined, color: c.textSecondary, tint: c.raised, size: 34),
+                    leading: IconTile(icon: LucideIcons.calendarCheck, color: c.textSecondary, tint: c.raised, size: 34),
                     title: _due == null ? l.noDueDate : longDate(context, _due!),
                     subtitle: l.dueDate,
                     trailing: premium ? null : const PremiumTag(),
@@ -279,13 +280,13 @@ class _PersonPickerState extends ConsumerState<_PersonPicker> {
         TextField(
           autofocus: true,
           onChanged: (v) => setState(() => _q = v),
-          decoration: InputDecoration(hintText: l.searchPeople, prefixIcon: const Icon(Icons.search_rounded), filled: true, fillColor: c.raised, border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
+          decoration: InputDecoration(hintText: l.searchPeople, prefixIcon: const Icon(LucideIcons.search), filled: true, fillColor: c.raised, border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none)),
         ),
         Flexible(
           child: ListView(shrinkWrap: true, children: [
             if (q.isNotEmpty)
               ListRowTile(
-                leading: IconTile(icon: Icons.person_add_alt_outlined, color: c.brandText, tint: c.brandTint),
+                leading: IconTile(icon: LucideIcons.userPlus, color: c.brandText, tint: c.brandTint),
                 title: '${l.addPerson}: ${_q.trim()}',
                 onTap: () => Navigator.pop(context, PersonRef(name: _q.trim())),
               ),

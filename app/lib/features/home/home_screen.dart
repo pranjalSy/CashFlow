@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -121,7 +122,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         if (shown.isEmpty)
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.lg),
-            child: EmptyState(icon: Icons.currency_rupee_rounded, title: l.noEntriesTitle, message: entries.isEmpty ? '${l.noEntriesBody}\n${l.tapPlusToAdd}' : l.noEntriesBody),
+            child: EmptyState(icon: LucideIcons.indianRupee, title: l.noEntriesTitle, message: entries.isEmpty ? '${l.noEntriesBody}\n${l.tapPlusToAdd}' : l.noEntriesBody),
           ),
         for (final day in groups.keys) ...[
           SectionLabel(dayLabel(context, day)),
@@ -193,7 +194,7 @@ class _Header extends ConsumerWidget {
                   width: 42,
                   height: 42,
                   decoration: BoxDecoration(shape: BoxShape.circle, color: c.brandButton, border: Border.all(color: c.onButton.withValues(alpha: 0.9), width: 2)),
-                  child: Icon(Icons.person_outline_rounded, color: c.onButton, size: 22),
+                  child: Icon(LucideIcons.user, color: c.onButton, size: 22),
                 ),
               ),
             ),
@@ -208,7 +209,7 @@ class _Header extends ConsumerWidget {
             child: Text(_greeting(l), maxLines: 1, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
           ),
         ),
-        _RoundButton(icon: Icons.search_rounded, label: l.search, onTap: () => CompactSnackbar.show(context, message: l.comingSoon)),
+        _RoundButton(icon: LucideIcons.search, label: l.search, onTap: () => CompactSnackbar.show(context, message: l.comingSoon)),
         const SizedBox(width: 2),
         _MonthPicker(month: month),
       ]),
@@ -268,7 +269,7 @@ class _MonthPicker extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           decoration: ShapeDecoration(color: c.card, shape: AppShapes.squircle(AppRadii.pill)),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
-            Icon(Icons.chevron_left_rounded, size: 18, color: c.textSecondary),
+            Icon(LucideIcons.chevronLeft, size: 18, color: c.textSecondary),
             const SizedBox(width: 6),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 220),
@@ -280,7 +281,7 @@ class _MonthPicker extends ConsumerWidget {
               ),
             ),
             const SizedBox(width: 6),
-            Icon(Icons.chevron_right_rounded, size: 18, color: c.textSecondary),
+            Icon(LucideIcons.chevronRight, size: 18, color: c.textSecondary),
           ]),
         ),
         Positioned.fill(
@@ -337,26 +338,26 @@ class _SummaryCard extends ConsumerWidget {
             visualDensity: VisualDensity.compact,
             tooltip: hide ? l.showAmounts : l.hideAmounts,
             onPressed: () => ref.read(profileRepositoryProvider).setHideAmounts(!hide),
-            icon: Icon(hide ? Icons.visibility_off_outlined : Icons.visibility_outlined, size: 18, color: c.textMuted),
+            icon: Icon(hide ? LucideIcons.eyeOff : LucideIcons.eye, size: 18, color: c.textMuted),
           ),
         ]),
         CountUpAmount(paise: s?.balance ?? 0, size: 36, color: c.text, masked: hide ? m(0) : null),
         const SizedBox(height: 4),
         Wrap(spacing: 14, children: [
-          _Small(icon: Icons.payments_outlined, text: l.cashBalance(m(s?.cashBalance ?? 0))),
-          _Small(icon: Icons.account_balance_outlined, text: l.onlineBalance(m(s?.onlineBalance ?? 0))),
+          _Small(icon: LucideIcons.banknote, text: l.cashBalance(m(s?.cashBalance ?? 0))),
+          _Small(icon: LucideIcons.landmark, text: l.onlineBalance(m(s?.onlineBalance ?? 0))),
         ]),
         const SizedBox(height: AppSpacing.sm),
         Row(children: [
-          Expanded(child: _Tile(label: l.income, paise: s?.total.income ?? 0, showPlus: true, masked: mask, color: c.income, tint: c.incomeTint, icon: Icons.south_west_rounded)),
+          Expanded(child: _Tile(label: l.income, paise: s?.total.income ?? 0, showPlus: true, masked: mask, color: c.income, tint: c.incomeTint, icon: LucideIcons.arrowDownLeft)),
           const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.expense, paise: -(s?.total.expense ?? 0), masked: mask, color: c.expense, tint: c.expenseTint, icon: Icons.north_east_rounded)),
+          Expanded(child: _Tile(label: l.expense, paise: -(s?.total.expense ?? 0), masked: mask, color: c.expense, tint: c.expenseTint, icon: LucideIcons.arrowUpRight)),
         ]),
         const SizedBox(height: AppSpacing.xs),
         Row(children: [
-          Expanded(child: _Tile(label: l.lent, paise: s?.total.lent ?? 0, masked: mask, color: c.lent, tint: c.lentTint, icon: Icons.east_rounded)),
+          Expanded(child: _Tile(label: l.lent, paise: s?.total.lent ?? 0, masked: mask, color: c.lent, tint: c.lentTint, icon: LucideIcons.arrowRight)),
           const SizedBox(width: AppSpacing.xs),
-          Expanded(child: _Tile(label: l.borrowed, paise: s?.total.borrowed ?? 0, masked: mask, color: c.borrowed, tint: c.borrowedTint, icon: Icons.west_rounded)),
+          Expanded(child: _Tile(label: l.borrowed, paise: s?.total.borrowed ?? 0, masked: mask, color: c.borrowed, tint: c.borrowedTint, icon: LucideIcons.arrowLeft)),
         ]),
         Padding(
           padding: const EdgeInsets.only(top: AppSpacing.sm),

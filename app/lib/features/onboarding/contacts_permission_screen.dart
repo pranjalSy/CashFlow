@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +48,7 @@ class ContactsPermissionScreen extends ConsumerWidget {
       child: Column(
         children: [
           const SizedBox(height: AppSpacing.lg),
-          const Floating(child: HeroIcon(icon: Icons.people_alt_outlined)),
+          const Floating(child: HeroIcon(icon: LucideIcons.users)),
           const SizedBox(height: AppSpacing.lg),
           Text(l.contactsPermTitle, textAlign: TextAlign.center, style: t.headlineSmall),
           const SizedBox(height: AppSpacing.xs),
@@ -61,9 +62,9 @@ class ContactsPermissionScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 4),
             child: Column(
               children: [
-                FadeSlideIn(index: 1, child: point(Icons.touch_app_outlined, l.contactsPermPoint1, l.contactsPermPoint1Sub)),
-                FadeSlideIn(index: 2, child: point(Icons.smartphone_outlined, l.contactsPermPoint2, l.contactsPermPoint2Sub)),
-                FadeSlideIn(index: 3, child: point(Icons.cloud_outlined, l.contactsPermPoint3, l.contactsPermPoint3Sub)),
+                FadeSlideIn(index: 1, child: point(LucideIcons.pointer, l.contactsPermPoint1, l.contactsPermPoint1Sub)),
+                FadeSlideIn(index: 2, child: point(LucideIcons.smartphone, l.contactsPermPoint2, l.contactsPermPoint2Sub)),
+                FadeSlideIn(index: 3, child: point(LucideIcons.cloud, l.contactsPermPoint3, l.contactsPermPoint3Sub)),
               ],
             ),
           ),

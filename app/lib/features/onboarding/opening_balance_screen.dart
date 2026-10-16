@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -82,7 +83,7 @@ class _OpeningBalanceScreenState extends ConsumerState<OpeningBalanceScreen> {
                         label: l.openingCash,
                         typed: _cash,
                         active: _active == 0,
-                        icon: Icons.payments_outlined,
+                        icon: LucideIcons.banknote,
                         onTap: () => setState(() => _active = 0),
                       ),
                       const SizedBox(height: AppSpacing.xs),
@@ -90,7 +91,7 @@ class _OpeningBalanceScreenState extends ConsumerState<OpeningBalanceScreen> {
                         label: l.openingOnline,
                         typed: _online,
                         active: _active == 1,
-                        icon: Icons.account_balance_outlined,
+                        icon: LucideIcons.landmark,
                         onTap: () => setState(() => _active = 1),
                       ),
                       const SizedBox(height: AppSpacing.sm),

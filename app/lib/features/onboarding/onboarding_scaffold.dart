@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
@@ -37,7 +38,7 @@ class OnboardingScaffold extends StatelessWidget {
                     if (onBack != null)
                       IconButton(
                         onPressed: onBack,
-                        icon: Icon(Icons.arrow_back_rounded, color: c.text),
+                        icon: Icon(LucideIcons.arrowLeft, color: c.text),
                         tooltip: MaterialLocalizations.of(context).backButtonTooltip,
                       )
                     else

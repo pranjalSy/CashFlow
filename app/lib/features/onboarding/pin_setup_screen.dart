@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -58,7 +59,7 @@ class _PinSetupScreenState extends ConsumerState<PinSetupScreen> {
             children: [
               if (!compact) ...[
                 const SizedBox(height: AppSpacing.md),
-                const HeroIcon(icon: Icons.lock_outline_rounded, size: 72),
+                const HeroIcon(icon: LucideIcons.lock, size: 72),
                 const SizedBox(height: AppSpacing.md),
               ],
               AnimatedSwitcher(

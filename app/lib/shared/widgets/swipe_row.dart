@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
@@ -122,12 +123,12 @@ class _SwipeActionRowState extends State<SwipeActionRow> with SingleTickerProvid
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    _ActionButton(width: editW, color: c.brandButton, icon: Icons.edit_outlined, label: widget.editLabel, scale: scale, radius: widget.radius, onTap: () {
+                    _ActionButton(width: editW, color: c.brandButton, icon: LucideIcons.squarePen, label: widget.editLabel, scale: scale, radius: widget.radius, onTap: () {
                       close();
                       widget.onEdit();
                     }),
                     if (editW > 0) const SizedBox(width: SwipeActionRow.gap),
-                    _ActionButton(width: deleteW, color: c.expenseButton, icon: Icons.delete_outline_rounded, label: widget.deleteLabel, scale: scale, radius: widget.radius, onTap: widget.onDelete),
+                    _ActionButton(width: deleteW, color: c.expenseButton, icon: LucideIcons.trash2, label: widget.deleteLabel, scale: scale, radius: widget.radius, onTap: widget.onDelete),
                   ],
                 ),
               ),

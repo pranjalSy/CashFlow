@@ -243,3 +243,13 @@
   - Checked on the phone: all 4 tabs (`docs/compare/bottom_bar_all_tabs.png`).
   - Note: one install had waited on Realme's USB-install confirm; the second install was verified by the tab bounds on the device.
 
+## 2026-10-17: Lucide icons (owner approved package, option A)
+- **Package:** `lucide_icons_flutter` **3.1.20**, pinned.
+  - [Verify] done on pub.dev and its API: MIT license, verified publisher vqhapp.name.vn, 207 likes, 160 points, `sdk: ^3.0.0`, all platforms. Font icons (`LucideIcons.x`, `IconData`).
+  - Why not 4.0.0: it was published 2026-10-16 (a day old, a new major with breaking changes), and 3.1.25 was 5 days old. 3.1.20 (2026-09-15) was chosen as a month-old stable release.
+- Every Material icon in `lib/` is replaced with its Lucide match (32 files). Examples: house, users, chartPie, calendarDays, search, eye, banknote, landmark, arrowUpRight/DownLeft, award, trash2, squarePen, calendarSync.
+  - Only `Icons.circle` (the small filled payment dot) stays Material, because Lucide has no filled circle.
+  - Category icon keys map to Lucide too.
+- Size: the Lucide font is tree-shaken from 896 KB to 25 KB in the release APK.
+- Suite **138 passing**, analyze clean. Release dev build installed on the owner's Realme; Home, Contacts, + menu and Add entry checked (`docs/compare/home_mockup_vs_phone_lucide.png`).
+

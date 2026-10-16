@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:intl/intl.dart';
 
 import '../../data/local/database.dart';
@@ -7,40 +8,40 @@ import '../utils/dates.dart';
 
 /// Icon for a category icon key (stored as text so it syncs).
 IconData categoryIcon(String key) => switch (key) {
-      'food' => Icons.restaurant_outlined,
-      'groceries' => Icons.shopping_cart_outlined,
-      'travel' => Icons.directions_bus_outlined,
-      'fuel' => Icons.local_gas_station_outlined,
-      'shopping' => Icons.shopping_bag_outlined,
-      'bills' => Icons.bolt_outlined,
-      'rent' => Icons.house_outlined,
-      'health' => Icons.favorite_outline_rounded,
-      'education' => Icons.menu_book_outlined,
-      'fun' => Icons.movie_outlined,
-      'recharge' => Icons.smartphone_outlined,
-      'gifts' => Icons.card_giftcard_outlined,
-      'personal' => Icons.auto_awesome_outlined,
-      'emi' => Icons.event_repeat_rounded,
-      'salary' => Icons.work_outline_rounded,
-      'business' => Icons.storefront_outlined,
-      'freelance' => Icons.laptop_mac_outlined,
-      'interest' => Icons.savings_outlined,
-      'refund' => Icons.replay_rounded,
-      'others' => Icons.more_horiz_rounded,
-      _ => Icons.label_outline_rounded,
+      'food' => LucideIcons.utensils,
+      'groceries' => LucideIcons.shoppingCart,
+      'travel' => LucideIcons.bus,
+      'fuel' => LucideIcons.fuel,
+      'shopping' => LucideIcons.shoppingBag,
+      'bills' => LucideIcons.zap,
+      'rent' => LucideIcons.house,
+      'health' => LucideIcons.heart,
+      'education' => LucideIcons.bookOpen,
+      'fun' => LucideIcons.film,
+      'recharge' => LucideIcons.smartphone,
+      'gifts' => LucideIcons.gift,
+      'personal' => LucideIcons.sparkles,
+      'emi' => LucideIcons.calendarSync,
+      'salary' => LucideIcons.briefcase,
+      'business' => LucideIcons.store,
+      'freelance' => LucideIcons.laptop,
+      'interest' => LucideIcons.piggyBank,
+      'refund' => LucideIcons.rotateCcw,
+      'others' => LucideIcons.ellipsis,
+      _ => LucideIcons.tag,
     };
 
 /// Icons offered for an EMI (FR-E1), stored as their key.
 const emiIconKeys = ['bike', 'car', 'phone', 'home', 'laptop', 'tv', 'other'];
 
 IconData emiIcon(String key) => switch (key) {
-      'bike' => Icons.two_wheeler_rounded,
-      'car' => Icons.directions_car_outlined,
-      'phone' => Icons.smartphone_outlined,
-      'home' => Icons.home_outlined,
-      'laptop' => Icons.laptop_outlined,
-      'tv' => Icons.tv_outlined,
-      _ => Icons.account_balance_outlined,
+      'bike' => LucideIcons.bike,
+      'car' => LucideIcons.car,
+      'phone' => LucideIcons.smartphone,
+      'home' => LucideIcons.house,
+      'laptop' => LucideIcons.laptop,
+      'tv' => LucideIcons.tv,
+      _ => LucideIcons.landmark,
     };
 
 /// Yearly rate in basis points as text ("12", "10.5").

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -111,7 +112,7 @@ class _LanguageScreenState extends ConsumerState<LanguageScreen> {
                 onChanged: (v) => setState(() => _query = v),
                 decoration: InputDecoration(
                   hintText: l.languageSearch,
-                  prefixIcon: const Icon(Icons.search_rounded),
+                  prefixIcon: const Icon(LucideIcons.search),
                   filled: true,
                   fillColor: c.card,
                   border: OutlineInputBorder(
@@ -201,7 +202,7 @@ class _LanguageRow extends StatelessWidget {
                   )
                 else
                   Icon(
-                    selected ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
+                    selected ? LucideIcons.circleCheck : LucideIcons.circle,
                     color: selected ? c.brandButton : c.textMuted,
                   ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -56,7 +57,7 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconTile(icon: Icons.delete_outline_rounded, color: c.expense, tint: c.expenseTint, size: 56),
+            IconTile(icon: LucideIcons.trash2, color: c.expense, tint: c.expenseTint, size: 56),
             const SizedBox(height: AppSpacing.sm),
             Text(l.deleteEmiTitle, textAlign: TextAlign.center, style: t.titleLarge),
             const SizedBox(height: 6),
@@ -114,7 +115,7 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
                     children: [
                       IconButton(
                         onPressed: () => context.pop(),
-                        icon: Icon(Icons.arrow_back_rounded, color: c.text),
+                        icon: Icon(LucideIcons.arrowLeft, color: c.text),
                         tooltip: l.back,
                       ),
                       Expanded(
@@ -127,7 +128,7 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
                       ),
                       PopupMenuButton<int>(
                         tooltip: l.more,
-                        icon: Icon(Icons.more_horiz_rounded, color: c.text),
+                        icon: Icon(LucideIcons.ellipsis, color: c.text),
                         color: c.sheet,
                         onSelected: (v) => v == 0 ? context.push('/emi/${e.id}/edit') : _delete(e),
                         itemBuilder: (_) => [
@@ -175,12 +176,12 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
                       ),
                       if (earlier.isNotEmpty && !_expanded)
                         _Row(
-                          leading: Icon(Icons.done_all_rounded, color: c.income, size: 20),
+                          leading: Icon(LucideIcons.checkCheck, color: c.income, size: 20),
                           title: l.earlierPaid(earlier.length),
                           subtitle:
                               '${shortDate(context, LocalDate.parse(earlier.first.dueDate))} – ${shortDate(context, LocalDate.parse(earlier.last.dueDate))} · '
                               '${Money.format(earlier.fold(0, (a, i) => a + i.amount))}',
-                          trailing: Icon(Icons.expand_more_rounded, color: c.textMuted),
+                          trailing: Icon(LucideIcons.chevronDown, color: c.textMuted),
                           onTap: () => setState(() => _expanded = true),
                         ),
                       if (_expanded)
@@ -204,7 +205,7 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
     final due = LocalDate.parse(i.dueDate);
     final paidOn = i.paidAt == null ? due : Ist.dateOf(i.paidAt!);
     return _Row(
-      leading: Icon(Icons.check_circle_rounded, color: c.income, size: 22),
+      leading: Icon(LucideIcons.circleCheck, color: c.income, size: 22),
       title: longDate(context, due),
       subtitle: paidOn == due ? l.paidOnTime : l.paidOnDate(shortDate(context, paidOn)),
       trailing: Column(

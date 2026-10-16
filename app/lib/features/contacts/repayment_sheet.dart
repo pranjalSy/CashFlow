@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n.dart';
@@ -130,7 +131,7 @@ class _RepaymentSheetState extends ConsumerState<_RepaymentSheet> {
         const SizedBox(height: AppSpacing.xs),
         AppButton(
           label: _saved ? l.paymentSaved : l.savePayment,
-          icon: _saved ? Icons.check_rounded : null,
+          icon: _saved ? LucideIcons.check : null,
           kind: AppButtonKind.success,
           onPressed: _saved ? () => Navigator.pop(context) : _save,
         ),

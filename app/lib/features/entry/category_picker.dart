@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n.dart';
@@ -61,7 +62,7 @@ class _CategoryPickerState extends ConsumerState<_CategoryPicker> {
               onChanged: (v) => setState(() => _query = v),
               decoration: InputDecoration(
                 hintText: l.categorySearch,
-                prefixIcon: const Icon(Icons.search_rounded),
+                prefixIcon: const Icon(LucideIcons.search),
                 filled: true,
                 fillColor: c.raised,
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
@@ -76,7 +77,7 @@ class _CategoryPickerState extends ConsumerState<_CategoryPicker> {
                       color: c.raised,
                       shape: AppShapes.squircle(AppRadii.md),
                       child: ListRowTile(
-                        leading: IconTile(icon: Icons.add_rounded, color: c.brandText, tint: c.brandTint, size: 44),
+                        leading: IconTile(icon: LucideIcons.plus, color: c.brandText, tint: c.brandTint, size: 44),
                         title: l.categoryCreate(_query.trim()),
                         subtitle: l.categoryCreateSub,
                         onTap: () async {

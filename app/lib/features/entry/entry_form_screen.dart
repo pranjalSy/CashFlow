@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -153,7 +154,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
                   child: Row(children: [
-                    IconButton(onPressed: () => context.pop(), icon: Icon(Icons.close_rounded, color: c.text), tooltip: l.close),
+                    IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
                     Expanded(
                       child: Center(
                         child: SegmentedSwitch(
@@ -171,7 +172,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                     if (_editing)
                       IconButton(
                         tooltip: l.delete,
-                        icon: Icon(Icons.delete_outline_rounded, color: c.expense),
+                        icon: Icon(LucideIcons.trash2, color: c.expense),
                         onPressed: () async {
                           final entry = HomeEntry(
                             id: widget.entryId!,
@@ -229,7 +230,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                                 const SizedBox(width: 8),
                                 Text(cat == null ? l.category : categoryName(l, cat), style: t.titleSmall),
                                 const SizedBox(width: 4),
-                                Icon(Icons.expand_more_rounded, size: 18, color: c.textMuted),
+                                Icon(LucideIcons.chevronDown, size: 18, color: c.textMuted),
                               ]),
                             ),
                           ),
@@ -240,7 +241,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
                         child: Column(children: [
                           _FieldRow(
-                            icon: Icons.edit_outlined,
+                            icon: LucideIcons.squarePen,
                             label: l.titleOptional,
                             child: TextField(
                               controller: _title,
@@ -251,14 +252,14 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                           ),
                           Divider(height: 1, color: c.border),
                           _FieldRow(
-                            icon: Icons.calendar_today_outlined,
+                            icon: LucideIcons.calendar,
                             label: l.date,
                             onTap: _pickDate,
                             child: _NowValue(text: day == null ? '${l.today}, ${shortDate(context, Ist.today())}' : (day == Ist.today() ? '${l.today}, ${shortDate(context, day)}' : longDate(context, day)), now: when == null, nowLabel: l.now),
                           ),
                           Divider(height: 1, color: c.border),
                           _FieldRow(
-                            icon: Icons.schedule_rounded,
+                            icon: LucideIcons.clock,
                             label: l.time,
                             onTap: _pickTime,
                             child: _NowValue(text: timeLabel(context, when ?? DateTime.now()), now: when == null, nowLabel: l.now),
@@ -282,7 +283,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                       AppCard(
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
                         child: _FieldRow(
-                          icon: Icons.notes_rounded,
+                          icon: LucideIcons.stickyNote,
                           label: l.note,
                           child: TextField(
                             controller: _note,
@@ -342,7 +343,7 @@ class _FieldRow extends StatelessWidget {
               child,
             ]),
           ),
-          if (onTap != null) Icon(Icons.chevron_right_rounded, color: c.textMuted),
+          if (onTap != null) Icon(LucideIcons.chevronRight, color: c.textMuted),
         ]),
       ),
     );
