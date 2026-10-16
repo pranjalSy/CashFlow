@@ -163,3 +163,14 @@
   - An EMI expense on Home can still be edited or deleted by hand, which does not change the installment.
   - Reminders for EMI arrive in T19.
 
+## 2026-10-16: Bottom bar liquid glass animation (owner request)
+- Owner asked for an iOS 26 / Instagram-style tab bar: one selection pill that slides in a line to the tapped tab. Approved in chat (16 Oct 2026). Under FR-U7, premium animations.
+- `shared/widgets/glass_nav_bar.dart`:
+  - One pill slides from tab to tab (340 ms, easeOutBack: small bounce at the end). It stretches and flattens mid-way (liquid feel).
+  - Tabs grow from icon-only to icon + name as the pill arrives; the name fades in and the icon pops a little.
+  - Selection haptic on tap. With system "remove animations" the pill jumps.
+  - Only transforms, sizes and opacity inside a `RepaintBoundary` (TRD 14). No new package.
+- Not added (not approved): dragging the finger along the bar; Hero / card-expand transitions; the other mockup animations (Welcome, Fingerprint, Contacts, Home). These are noted for the owner to decide.
+- Tests: 3 new (the pill passes the tabs in between and ends on the tapped one; jumps with remove-animations; no overflow at 320 px and 2.0× text while moving). Suite **126 passing**, analyze clean.
+- Real-font frames (light and dark) checked. Dev release APK installed on the owner's Realme over USB.
+

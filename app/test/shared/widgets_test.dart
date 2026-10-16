@@ -109,6 +109,73 @@ void main() {
       await tester.tap(find.byIcon(Icons.pie_chart_rounded));
       expect(tapped, 2);
     });
+
+    const tabs = [
+      NavItem(icon: Icons.home_rounded, label: 'Home'),
+      NavItem(icon: Icons.people_alt_rounded, label: 'Contacts'),
+      NavItem(icon: Icons.pie_chart_rounded, label: 'Charts'),
+      NavItem(icon: Icons.calendar_month_rounded, label: 'EMI'),
+    ];
+
+    Widget bar({required ValueNotifier<int> index, bool noMotion = false, double width = 360, double textScale = 1}) => MaterialApp(
+          theme: AppTheme.light(),
+          home: MediaQuery(
+            data: MediaQueryData(size: Size(width, 780), disableAnimations: noMotion, textScaler: TextScaler.linear(textScale)),
+            child: Scaffold(
+              body: Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  width: width,
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: index,
+                    builder: (_, i, _) => GlassNavBar(items: tabs, index: i, onTap: (n) => index.value = n, onPlus: () {}, plusLabel: 'Add'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+
+    // The selection pill is the first Positioned in the tab stack.
+    double pillLeft(WidgetTester tester) =>
+        tester.widget<Positioned>(find.descendant(of: find.byType(GlassNavBar), matching: find.byType(Positioned)).first).left!;
+
+    testWidgets('the pill slides through the tabs in between and ends on the tapped tab', (tester) async {
+      final index = ValueNotifier(0);
+      await tester.pumpWidget(ProviderScope(child: bar(index: index)));
+      final start = pillLeft(tester);
+      await tester.tap(find.byIcon(Icons.calendar_month_rounded));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 120));
+      final mid = pillLeft(tester);
+      await tester.pumpAndSettle();
+      final end = pillLeft(tester);
+      expect(mid, greaterThan(start));
+      expect(mid, lessThan(end));
+      expect(find.text('EMI'), findsOneWidget);
+      expect(find.text('Home'), findsNothing);
+    });
+
+    testWidgets('with "remove animations" the pill jumps', (tester) async {
+      final index = ValueNotifier(0);
+      await tester.pumpWidget(ProviderScope(child: bar(index: index, noMotion: true)));
+      await tester.tap(find.byIcon(Icons.calendar_month_rounded));
+      await tester.pump();
+      final now = pillLeft(tester);
+      await tester.pumpAndSettle();
+      expect(pillLeft(tester), now);
+    });
+
+    testWidgets('no overflow on a 320 px phone at 2.0× text, while moving too', (tester) async {
+      final index = ValueNotifier(0);
+      await tester.pumpWidget(ProviderScope(child: bar(index: index, width: 320, textScale: 2)));
+      await tester.tap(find.byIcon(Icons.people_alt_rounded));
+      for (var i = 0; i < 6; i++) {
+        await tester.pump(const Duration(milliseconds: 60));
+      }
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    });
   });
 
   group('NumberPad', () {

@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
@@ -12,8 +15,10 @@ class NavItem {
 }
 
 /// Floating glass pill with 4 tabs + separate "+" button (DESIGN_DECISIONS D1, FR-U6).
-/// The active tab shows its name. "+" turns into "×" while its menu is open.
-class GlassNavBar extends StatelessWidget {
+/// The active tab shows its name. One selection pill slides to the tapped tab and stretches a
+/// little on the way, like liquid glass (owner, 16 Oct 2026; FR-U7). "+" turns into "×" while
+/// its menu is open. With the system "remove animations" setting the pill jumps.
+class GlassNavBar extends StatefulWidget {
   const GlassNavBar({
     super.key,
     required this.items,
@@ -30,6 +35,44 @@ class GlassNavBar extends StatelessWidget {
   final VoidCallback onPlus;
   final String plusLabel;
   final bool plusOpen;
+
+  @override
+  State<GlassNavBar> createState() => _GlassNavBarState();
+}
+
+class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStateMixin {
+  static const _idle = 52.0; // a tab showing only its icon
+  static const _activeExtra = 21.0 + 7.0 + 24.0; // icon + gap + side padding next to the name
+
+  late final AnimationController _move = AnimationController(vsync: this, duration: const Duration(milliseconds: 340), value: 1);
+  late double _from = widget.index.toDouble();
+  late double _now = widget.index.toDouble();
+
+  /// Where the pill is, as a tab position (1.4 = between tabs 1 and 2). Overshoots a little at the end.
+  double get _t => _from + (widget.index - _from) * Curves.easeOutBack.transform(_move.value);
+
+  @override
+  void didUpdateWidget(GlassNavBar old) {
+    super.didUpdateWidget(old);
+    if (old.index == widget.index) return;
+    _from = _now;
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _move.value = 1;
+    } else {
+      _move.forward(from: 0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _move.dispose();
+    super.dispose();
+  }
+
+  void _tap(int i) {
+    if (i != widget.index) HapticFeedback.selectionClick();
+    widget.onTap(i);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,41 +94,101 @@ class GlassNavBar extends StatelessWidget {
                 height: 62,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      for (var i = 0; i < items.length; i++)
-                        if (i == index)
-                          // Only the active tab shows its name; it shrinks on narrow phones.
-                          Flexible(child: _Tab(item: items[i], selected: true, onTap: () => onTap(i)))
-                        else
-                          _Tab(item: items[i], selected: false, onTap: () => onTap(i)),
-                    ],
+                  child: LayoutBuilder(
+                    builder: (context, box) => RepaintBoundary(
+                      child: AnimatedBuilder(animation: _move, builder: (context, _) => _tabs(context, box.maxWidth)),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           const SizedBox(width: 8),
-          _PlusButton(open: plusOpen, onTap: onPlus, label: plusLabel),
+          _PlusButton(open: widget.plusOpen, onTap: widget.onPlus, label: widget.plusLabel),
         ],
       ),
     );
   }
+
+  Widget _tabs(BuildContext context, double width) {
+    final c = context.colors;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final style = Theme.of(context).textTheme.titleSmall;
+    final scaler = MediaQuery.textScalerOf(context);
+    final items = widget.items;
+    final n = items.length;
+    final t = _t;
+    _now = t;
+    final at = t.clamp(0.0, n - 1.0);
+    double on(int i) => (1 - (at - i).abs()).clamp(0.0, 1.0);
+
+    // Each tab grows from icon-only to icon + name as the pill arrives; it shrinks on narrow phones.
+    final maxActive = math.max(_idle, width - _idle * (n - 1));
+    final widths = [
+      for (var i = 0; i < n; i++)
+        () {
+          final name = TextPainter(text: TextSpan(text: items[i].label, style: style), textScaler: scaler, maxLines: 1, textDirection: TextDirection.ltr)..layout();
+          final full = (_activeExtra + name.width).clamp(_idle, maxActive);
+          name.dispose();
+          return _idle + (full - _idle) * on(i);
+        }(),
+    ];
+    final gap = n < 2 ? 0.0 : math.max(0.0, (width - widths.fold(0.0, (a, w) => a + w)) / (n - 1));
+    final lefts = <double>[];
+    var x = 0.0;
+    for (final w in widths) {
+      lefts.add(x);
+      x += w + gap;
+    }
+
+    // The pill sits between the two tabs it is passing: longer and a bit flatter mid-way.
+    final k = at.floor().clamp(0, n - 1);
+    final next = math.min(k + 1, n - 1);
+    final f = at - k;
+    final mid = _move.isAnimating ? math.sin(f * math.pi) : 0.0;
+    final stretch = 18 * mid;
+    final height = 48 - 6 * mid;
+    final left = lefts[k] + (lefts[next] - lefts[k]) * f - stretch / 2 + (t - at) * 40;
+
+    return Stack(children: [
+      Positioned(
+        left: left,
+        width: widths[k] + (widths[next] - widths[k]) * f + stretch,
+        top: (62 - height) / 2,
+        height: height,
+        child: DecoratedBox(
+          decoration: ShapeDecoration(
+            color: dark ? Colors.white.withValues(alpha: 0.14) : c.card,
+            shape: AppShapes.squircle(AppRadii.pill),
+            shadows: dark ? null : [BoxShadow(color: c.text.withValues(alpha: 0.10), blurRadius: 12, offset: const Offset(0, 4), spreadRadius: -4)],
+          ),
+        ),
+      ),
+      for (var i = 0; i < n; i++)
+        Positioned(
+          left: lefts[i],
+          width: widths[i],
+          top: 7,
+          height: 48,
+          child: _Tab(item: items[i], selected: i == widget.index, on: on(i), onTap: () => _tap(i)),
+        ),
+    ]);
+  }
 }
 
 class _Tab extends StatelessWidget {
-  const _Tab({required this.item, required this.selected, required this.onTap});
+  const _Tab({required this.item, required this.selected, required this.on, required this.onTap});
 
   final NavItem item;
   final bool selected;
+
+  /// 0 = icon only, 1 = the pill is here and the name shows.
+  final double on;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final dark = Theme.of(context).brightness == Brightness.dark;
-    final pill = selected ? (dark ? Colors.white.withValues(alpha: 0.14) : c.card) : Colors.transparent;
     return Semantics(
       selected: selected,
       button: true,
@@ -94,23 +197,25 @@ class _Tab extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 260),
-          curve: Curves.easeOutBack,
-          height: 48,
-          constraints: const BoxConstraints(minWidth: 44),
-          padding: EdgeInsets.symmetric(horizontal: selected ? 12 : 10),
-          decoration: ShapeDecoration(color: pill, shape: AppShapes.squircle(AppRadii.pill)),
+        child: ClipRect(
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(item.icon, size: 21, color: selected ? c.text : c.textSecondary),
-              if (selected) ...[
-                const SizedBox(width: 7),
+              // A small pop while the pill passes over the icon.
+              Transform.scale(
+                scale: 1 + 0.32 * on * (1 - on),
+                child: Icon(item.icon, size: 21, color: Color.lerp(c.textSecondary, c.text, on)),
+              ),
+              if (on > 0.02)
                 Flexible(
-                  child: Text(item.label, maxLines: 1, overflow: TextOverflow.fade, softWrap: false, style: Theme.of(context).textTheme.titleSmall),
+                  child: Opacity(
+                    opacity: on,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 7),
+                      child: Text(item.label, maxLines: 1, overflow: TextOverflow.fade, softWrap: false, style: Theme.of(context).textTheme.titleSmall),
+                    ),
+                  ),
                 ),
-              ],
             ],
           ),
         ),
