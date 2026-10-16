@@ -127,6 +127,10 @@
 - Tests: 94 pass (9 repository + 4 Home/entry flow tests: payment required then saved, full swipe → confirm → delete → Undo, income with a new typed category, dark Home). Test-infra fix: widget tests no longer close the in-memory DB (drift stream timers on the fake clock made tearDown hang) and unmount the app at the end.
 - Real-font screenshots (light/dark Home, + menu, Add entry) match screens 10 and 11.
 
-## 2026-10-16: T09 · Contacts + udhar (in progress, paused by usage limit)
+## 2026-10-16: T09 · Contacts + udhar (built, phone test after T10)
 - Done: `plan_repository.dart` (plan cache; dev-only Premium switch on the Settings placeholder), `debt_repository.dart` (add lent/borrowed with Premium-only due date/reminders, repayment capped at remaining + extra remembered, "Yes" → opposite udhar, extend due date with history, delete, person history stream, due-popup list + "Not yet" snooze) with 8 passing tests; Contacts tab, Person detail, Add Lent/Borrowed form (person picker, Premium tag + small paywall sheet), Repayment sheet (summary, stays open "Payment saved", extra snackbar with Yes); routes.
-- Left: udhar due popup on Home open (G9), T09 widget-flow tests, screenshot check. Then T10 (EMI).
+- Due popup (FR-D11, G9, screen 14b): `features/contacts/udhar_due_popup.dart`, shown after Home's first frame, Premium only, one after another for several due udhar. Got full (asks Cash/Online, settles), Got some (in-popup number pad, "₹X will still be left", keep or change due date, more than remaining → extra snackbar as in FR-D3), Not yet (asks again tomorrow), Change due date (new date with history, G10). 5 new strings in en/hi/gu.
+- Tests: `test/features/udhar_test.dart` (5 widget flows: Free add lent + Premium tag sheet + overpayment extra as borrowed; Premium popup Got some / Got full / Not yet; Free sees no popup). Full suite 107 passing, `flutter analyze` clean.
+- Fix found by tests: premium and person name are read once from the database (a stream `.first` did not finish), so the popup appears reliably.
+- Real-font screenshots of the popup (light ask, dark "Got some") match mockup 14b.
+- Deviation: none. Next: T10 (EMI).

@@ -21,6 +21,7 @@ import '../../shared/widgets/overlays.dart';
 import '../../shared/widgets/states.dart';
 import '../../shared/widgets/swipe_row.dart';
 import '../../shared/widgets/tab_page.dart';
+import '../contacts/udhar_due_popup.dart';
 import 'delete_entry.dart';
 import 'entry_tile.dart';
 import 'home_controller.dart';
@@ -38,6 +39,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     ref.read(categoryRepositoryProvider).ensureDefaults();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) askDueUdhar(context, ref);
+    });
   }
 
   @override

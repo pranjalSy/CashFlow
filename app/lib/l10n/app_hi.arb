@@ -239,6 +239,11 @@
   "howMuchPaid": "कितने दिए?",
   "stillLeft": "{amount} फिर भी बाकी रहेंगे",
   "dueDateChanged": "ड्यू डेट बदली: {from} → {to}",
+  "lentOnDate": "{date} को {amount} दिए",
+  "borrowedOnDate": "{date} को {amount} लिए",
+  "alreadyBack": "{amount} वापस आ चुके",
+  "dueKeepOrChange": "ड्यू डेट: {date} रखें या बदलें",
+  "saveAmount": "{amount} सेव करें",
 
   "emiBillsTitle": "EMI और बिल",
   "emis": "EMI",

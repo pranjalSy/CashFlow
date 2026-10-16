@@ -767,6 +767,31 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String lentOnDate(String amount, String date) {
+    return 'Lent $amount on $date';
+  }
+
+  @override
+  String borrowedOnDate(String amount, String date) {
+    return 'Borrowed $amount on $date';
+  }
+
+  @override
+  String alreadyBack(String amount) {
+    return '$amount already back';
+  }
+
+  @override
+  String dueKeepOrChange(String date) {
+    return 'Due date: keep $date or change';
+  }
+
+  @override
+  String saveAmount(String amount) {
+    return 'Save $amount';
+  }
+
+  @override
   String get emiBillsTitle => 'EMI & Bills';
 
   @override

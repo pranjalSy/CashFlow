@@ -1432,6 +1432,36 @@ abstract class AppLocalizations {
   /// **'Due date changed: {from} → {to}'**
   String dueDateChanged(String from, String to);
 
+  /// No description provided for @lentOnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Lent {amount} on {date}'**
+  String lentOnDate(String amount, String date);
+
+  /// No description provided for @borrowedOnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Borrowed {amount} on {date}'**
+  String borrowedOnDate(String amount, String date);
+
+  /// No description provided for @alreadyBack.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} already back'**
+  String alreadyBack(String amount);
+
+  /// No description provided for @dueKeepOrChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Due date: keep {date} or change'**
+  String dueKeepOrChange(String date);
+
+  /// No description provided for @saveAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Save {amount}'**
+  String saveAmount(String amount);
+
   /// No description provided for @emiBillsTitle.
   ///
   /// In en, this message translates to:

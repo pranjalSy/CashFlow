@@ -766,6 +766,31 @@ class AppLocalizationsGu extends AppLocalizations {
   }
 
   @override
+  String lentOnDate(String amount, String date) {
+    return '$dateએ $amount આપ્યા';
+  }
+
+  @override
+  String borrowedOnDate(String amount, String date) {
+    return '$dateએ $amount લીધા';
+  }
+
+  @override
+  String alreadyBack(String amount) {
+    return '$amount પાછા આવી ગયા';
+  }
+
+  @override
+  String dueKeepOrChange(String date) {
+    return 'ડ્યુ ડેટ: $date રાખો અથવા બદલો';
+  }
+
+  @override
+  String saveAmount(String amount) {
+    return '$amount સેવ કરો';
+  }
+
+  @override
   String get emiBillsTitle => 'EMI અને બિલ';
 
   @override
