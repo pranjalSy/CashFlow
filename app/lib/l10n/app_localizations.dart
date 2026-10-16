@@ -1864,6 +1864,312 @@ abstract class AppLocalizations {
   /// **'Bills come in the next update.'**
   String get billsComingSoon;
 
+  /// No description provided for @billWhich.
+  ///
+  /// In en, this message translates to:
+  /// **'Which bill?'**
+  String get billWhich;
+
+  /// No description provided for @billWhichSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a type. You can change the name later.'**
+  String get billWhichSub;
+
+  /// No description provided for @billElectricity.
+  ///
+  /// In en, this message translates to:
+  /// **'Electricity'**
+  String get billElectricity;
+
+  /// No description provided for @billGas.
+  ///
+  /// In en, this message translates to:
+  /// **'Gas'**
+  String get billGas;
+
+  /// No description provided for @billMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile'**
+  String get billMobile;
+
+  /// No description provided for @billInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Internet'**
+  String get billInternet;
+
+  /// No description provided for @billDth.
+  ///
+  /// In en, this message translates to:
+  /// **'DTH / Cable'**
+  String get billDth;
+
+  /// No description provided for @billWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get billWater;
+
+  /// No description provided for @billInsurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance'**
+  String get billInsurance;
+
+  /// No description provided for @billOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get billOther;
+
+  /// No description provided for @billTypeBill.
+  ///
+  /// In en, this message translates to:
+  /// **'{type} bill'**
+  String billTypeBill(String type);
+
+  /// No description provided for @popular.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get popular;
+
+  /// No description provided for @everyNMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{every month} other{every {count} months}}'**
+  String everyNMonths(int count);
+
+  /// No description provided for @billName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get billName;
+
+  /// No description provided for @billNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get billNameHint;
+
+  /// No description provided for @customerIdOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer ID (optional)'**
+  String get customerIdOptional;
+
+  /// No description provided for @customerIdHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add for your reference'**
+  String get customerIdHint;
+
+  /// No description provided for @comesEvery.
+  ///
+  /// In en, this message translates to:
+  /// **'Comes every (months)'**
+  String get comesEvery;
+
+  /// No description provided for @nextDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Next due date'**
+  String get nextDueDate;
+
+  /// No description provided for @chooseNextDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the next due date'**
+  String get chooseNextDue;
+
+  /// No description provided for @thenDates.
+  ///
+  /// In en, this message translates to:
+  /// **'Then {dates}…'**
+  String thenDates(String dates);
+
+  /// No description provided for @usualAmountOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Usual amount (optional)'**
+  String get usualAmountOptional;
+
+  /// No description provided for @saveBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Save bill'**
+  String get saveBill;
+
+  /// No description provided for @editBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit bill'**
+  String get editBill;
+
+  /// No description provided for @billsThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Bills this month'**
+  String get billsThisMonth;
+
+  /// No description provided for @billsPaidLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{paid} paid · {left} left'**
+  String billsPaidLeft(int paid, int left);
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get thisMonth;
+
+  /// No description provided for @later.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get later;
+
+  /// No description provided for @lastBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Last bill {amount}'**
+  String lastBill(String amount);
+
+  /// No description provided for @noBillsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No bills yet'**
+  String get noBillsTitle;
+
+  /// No description provided for @noBillsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add electricity, gas, mobile and other bills. We remind you on the due day.'**
+  String get noBillsBody;
+
+  /// No description provided for @billDueToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Bill due today'**
+  String get billDueToday;
+
+  /// No description provided for @billDueInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Due {date} · {every}'**
+  String billDueInfo(String date, String every);
+
+  /// No description provided for @didYouPayBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you pay this bill?'**
+  String get didYouPayBill;
+
+  /// No description provided for @yesPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, paid'**
+  String get yesPaid;
+
+  /// No description provided for @notYetTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet = we ask again tomorrow'**
+  String get notYetTomorrow;
+
+  /// No description provided for @howMuchWasIt.
+  ///
+  /// In en, this message translates to:
+  /// **'How much was it?'**
+  String get howMuchWasIt;
+
+  /// No description provided for @monthBill.
+  ///
+  /// In en, this message translates to:
+  /// **'{month} bill'**
+  String monthBill(String month);
+
+  /// No description provided for @usualLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Usual'**
+  String get usualLabel;
+
+  /// No description provided for @otherAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Other amount'**
+  String get otherAmount;
+
+  /// No description provided for @addedToCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to Expenses · {category}'**
+  String addedToCategory(String category);
+
+  /// No description provided for @pauseBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause bill'**
+  String get pauseBill;
+
+  /// No description provided for @resumeBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume bill'**
+  String get resumeBill;
+
+  /// No description provided for @pausedTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get pausedTag;
+
+  /// No description provided for @deleteBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete bill'**
+  String get deleteBill;
+
+  /// No description provided for @deleteBillTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this bill?'**
+  String get deleteBillTitle;
+
+  /// No description provided for @deleteBillBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Its payment history is removed. Expenses already added stay.'**
+  String get deleteBillBody;
+
+  /// No description provided for @payments.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get payments;
+
+  /// No description provided for @noPaymentsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No payments yet'**
+  String get noPaymentsYet;
+
+  /// No description provided for @nextDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Next due'**
+  String get nextDue;
+
+  /// No description provided for @billPausedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: no reminders or popups until you resume it.'**
+  String get billPausedNote;
+
   /// No description provided for @chartsComingSoon.
   ///
   /// In en, this message translates to:

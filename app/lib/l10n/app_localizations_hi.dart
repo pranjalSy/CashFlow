@@ -1030,6 +1030,184 @@ class AppLocalizationsHi extends AppLocalizations {
   String get billsComingSoon => 'बिल अगले अपडेट में आएंगे।';
 
   @override
+  String get billWhich => 'कौन सा बिल?';
+
+  @override
+  String get billWhichSub => 'टाइप चुनें। नाम बाद में बदल सकते हैं।';
+
+  @override
+  String get billElectricity => 'बिजली';
+
+  @override
+  String get billGas => 'गैस';
+
+  @override
+  String get billMobile => 'मोबाइल';
+
+  @override
+  String get billInternet => 'इंटरनेट';
+
+  @override
+  String get billDth => 'DTH / केबल';
+
+  @override
+  String get billWater => 'पानी';
+
+  @override
+  String get billInsurance => 'बीमा';
+
+  @override
+  String get billOther => 'अन्य';
+
+  @override
+  String billTypeBill(String type) {
+    return '$type बिल';
+  }
+
+  @override
+  String get popular => 'लोकप्रिय';
+
+  @override
+  String everyNMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'हर $count महीने',
+      one: 'हर महीने',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get billName => 'नाम';
+
+  @override
+  String get billNameHint => 'कंपनी का नाम';
+
+  @override
+  String get customerIdOptional => 'कस्टमर ID (वैकल्पिक)';
+
+  @override
+  String get customerIdHint => 'याद रखने के लिए';
+
+  @override
+  String get comesEvery => 'हर कितने महीने में आता है';
+
+  @override
+  String get nextDueDate => 'अगली ड्यू डेट';
+
+  @override
+  String get chooseNextDue => 'अगली ड्यू डेट चुनें';
+
+  @override
+  String thenDates(String dates) {
+    return 'फिर $dates…';
+  }
+
+  @override
+  String get usualAmountOptional => 'आम रकम (वैकल्पिक)';
+
+  @override
+  String get saveBill => 'बिल सेव करें';
+
+  @override
+  String get editBill => 'बिल बदलें';
+
+  @override
+  String get billsThisMonth => 'इस महीने के बिल';
+
+  @override
+  String billsPaidLeft(int paid, int left) {
+    return '$paid भरे · $left बाकी';
+  }
+
+  @override
+  String get thisMonth => 'इस महीने';
+
+  @override
+  String get later => 'बाद में';
+
+  @override
+  String lastBill(String amount) {
+    return 'पिछला बिल $amount';
+  }
+
+  @override
+  String get noBillsTitle => 'अभी कोई बिल नहीं';
+
+  @override
+  String get noBillsBody =>
+      'बिजली, गैस, मोबाइल और दूसरे बिल जोड़ें। ड्यू के दिन याद दिलाएंगे।';
+
+  @override
+  String get billDueToday => 'आज बिल ड्यू है';
+
+  @override
+  String billDueInfo(String date, String every) {
+    return 'ड्यू $date · $every';
+  }
+
+  @override
+  String get didYouPayBill => 'क्या ये बिल भर दिया?';
+
+  @override
+  String get yesPaid => 'हाँ, भर दिया';
+
+  @override
+  String get notYetTomorrow => 'अभी नहीं = कल फिर पूछेंगे';
+
+  @override
+  String get howMuchWasIt => 'कितना आया?';
+
+  @override
+  String monthBill(String month) {
+    return '$month बिल';
+  }
+
+  @override
+  String get usualLabel => 'आम';
+
+  @override
+  String get otherAmount => 'दूसरी रकम';
+
+  @override
+  String addedToCategory(String category) {
+    return 'खर्च · $category में जुड़ेगा';
+  }
+
+  @override
+  String get pauseBill => 'बिल रोकें';
+
+  @override
+  String get resumeBill => 'बिल फिर शुरू करें';
+
+  @override
+  String get pausedTag => 'रुका हुआ';
+
+  @override
+  String get deleteBill => 'बिल हटाएं';
+
+  @override
+  String get deleteBillTitle => 'ये बिल हटाएं?';
+
+  @override
+  String get deleteBillBody =>
+      'इसकी पेमेंट हिस्ट्री हट जाएगी। जो खर्च जुड़ चुके हैं वो रहेंगे।';
+
+  @override
+  String get payments => 'पेमेंट';
+
+  @override
+  String get noPaymentsYet => 'अभी कोई पेमेंट नहीं';
+
+  @override
+  String get nextDue => 'अगली ड्यू';
+
+  @override
+  String get billPausedNote =>
+      'रुका हुआ: फिर शुरू करने तक कोई याद या पॉपअप नहीं।';
+
+  @override
   String get chartsComingSoon => 'चार्ट और बजट बाद के अपडेट में आएंगे।';
 
   @override

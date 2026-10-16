@@ -1042,6 +1042,184 @@ class AppLocalizationsEn extends AppLocalizations {
   String get billsComingSoon => 'Bills come in the next update.';
 
   @override
+  String get billWhich => 'Which bill?';
+
+  @override
+  String get billWhichSub => 'Pick a type. You can change the name later.';
+
+  @override
+  String get billElectricity => 'Electricity';
+
+  @override
+  String get billGas => 'Gas';
+
+  @override
+  String get billMobile => 'Mobile';
+
+  @override
+  String get billInternet => 'Internet';
+
+  @override
+  String get billDth => 'DTH / Cable';
+
+  @override
+  String get billWater => 'Water';
+
+  @override
+  String get billInsurance => 'Insurance';
+
+  @override
+  String get billOther => 'Other';
+
+  @override
+  String billTypeBill(String type) {
+    return '$type bill';
+  }
+
+  @override
+  String get popular => 'Popular';
+
+  @override
+  String everyNMonths(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'every $count months',
+      one: 'every month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get billName => 'Name';
+
+  @override
+  String get billNameHint => 'Company name';
+
+  @override
+  String get customerIdOptional => 'Customer ID (optional)';
+
+  @override
+  String get customerIdHint => 'Add for your reference';
+
+  @override
+  String get comesEvery => 'Comes every (months)';
+
+  @override
+  String get nextDueDate => 'Next due date';
+
+  @override
+  String get chooseNextDue => 'Choose the next due date';
+
+  @override
+  String thenDates(String dates) {
+    return 'Then $dates…';
+  }
+
+  @override
+  String get usualAmountOptional => 'Usual amount (optional)';
+
+  @override
+  String get saveBill => 'Save bill';
+
+  @override
+  String get editBill => 'Edit bill';
+
+  @override
+  String get billsThisMonth => 'Bills this month';
+
+  @override
+  String billsPaidLeft(int paid, int left) {
+    return '$paid paid · $left left';
+  }
+
+  @override
+  String get thisMonth => 'This month';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String lastBill(String amount) {
+    return 'Last bill $amount';
+  }
+
+  @override
+  String get noBillsTitle => 'No bills yet';
+
+  @override
+  String get noBillsBody =>
+      'Add electricity, gas, mobile and other bills. We remind you on the due day.';
+
+  @override
+  String get billDueToday => 'Bill due today';
+
+  @override
+  String billDueInfo(String date, String every) {
+    return 'Due $date · $every';
+  }
+
+  @override
+  String get didYouPayBill => 'Did you pay this bill?';
+
+  @override
+  String get yesPaid => 'Yes, paid';
+
+  @override
+  String get notYetTomorrow => 'Not yet = we ask again tomorrow';
+
+  @override
+  String get howMuchWasIt => 'How much was it?';
+
+  @override
+  String monthBill(String month) {
+    return '$month bill';
+  }
+
+  @override
+  String get usualLabel => 'Usual';
+
+  @override
+  String get otherAmount => 'Other amount';
+
+  @override
+  String addedToCategory(String category) {
+    return 'Added to Expenses · $category';
+  }
+
+  @override
+  String get pauseBill => 'Pause bill';
+
+  @override
+  String get resumeBill => 'Resume bill';
+
+  @override
+  String get pausedTag => 'Paused';
+
+  @override
+  String get deleteBill => 'Delete bill';
+
+  @override
+  String get deleteBillTitle => 'Delete this bill?';
+
+  @override
+  String get deleteBillBody =>
+      'Its payment history is removed. Expenses already added stay.';
+
+  @override
+  String get payments => 'Payments';
+
+  @override
+  String get noPaymentsYet => 'No payments yet';
+
+  @override
+  String get nextDue => 'Next due';
+
+  @override
+  String get billPausedNote =>
+      'Paused: no reminders or popups until you resume it.';
+
+  @override
   String get chartsComingSoon => 'Charts and budget come in a later update.';
 
   @override

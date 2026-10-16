@@ -17,6 +17,7 @@ import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/states.dart';
 import '../../shared/widgets/tab_page.dart';
+import '../bills/bills_list.dart';
 import 'emi_lock.dart';
 
 final emiListProvider = StreamProvider<List<EmiWithInstallments>>((ref) => ref.watch(emiRepositoryProvider).watchAll());
@@ -44,9 +45,7 @@ class _EmiBillsScreenState extends ConsumerState<EmiBillsScreen> {
         if (!premium)
           const EmiLockCard()
         else if (_tab == 1)
-          AppCard(
-            child: EmptyState(icon: LucideIcons.zap, title: l.comingSoon, message: l.billsComingSoon),
-          )
+          const BillsList()
         else
           const _EmiList(),
       ],

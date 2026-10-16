@@ -7,7 +7,6 @@ import '../core/theme/app_colors.dart';
 import '../shared/widgets/app_page.dart';
 import '../shared/widgets/glass_nav_bar.dart';
 import '../shared/widgets/motion.dart';
-import '../shared/widgets/overlays.dart';
 import '../shared/widgets/plus_menu.dart';
 
 /// Four tabs in a glass pill + "+" menu (D1, D3). On the EMI & Bills tab "+" offers only
@@ -37,10 +36,7 @@ class _MainShellState extends State<MainShell> {
     final items = emiTab
         ? [
             PlusMenuItem(label: l.addEmi, icon: LucideIcons.bike, color: c.lent, tint: c.lentTint, onTap: () => _go('/emi/new')),
-            PlusMenuItem(label: l.addBill, icon: LucideIcons.zap, color: c.dueSoon, tint: c.dueSoonTint, onTap: () {
-              setState(() => _menu = false);
-              CompactSnackbar.show(context, message: l.billsComingSoon); // Add bill arrives in T11
-            }),
+            PlusMenuItem(label: l.addBill, icon: LucideIcons.zap, color: c.dueSoon, tint: c.dueSoonTint, onTap: () => _go('/bills/new')),
           ]
         : [
             PlusMenuItem(label: l.expense, icon: LucideIcons.arrowUpRight, color: c.expense, tint: c.expenseTint, onTap: () => _go('/entry/new?kind=expense')),

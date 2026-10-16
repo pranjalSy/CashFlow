@@ -321,18 +321,7 @@ class EmiRepository {
           .get())
       .length;
 
-  Future<String?> _emiCategoryId() async {
-    Future<Category?> find() => (_db.select(_db.categories)
-          ..where((c) => c.userId.equals(_w.userId) & c.deletedAt.isNull() & c.kind.equals('expense') & c.nameKey.equals('catEmi'))
-          ..limit(1))
-        .getSingleOrNull();
-    var c = await find();
-    if (c == null) {
-      await CategoryRepository(_w).ensureDefaults();
-      c = await find();
-    }
-    return c?.id;
-  }
+  Future<String?> _emiCategoryId() => CategoryRepository(_w).idForKey('expense', 'catEmi');
 
   static String? _blankToNull(String? s) => (s == null || s.trim().isEmpty) ? null : s.trim();
 }

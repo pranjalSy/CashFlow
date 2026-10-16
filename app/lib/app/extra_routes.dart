@@ -9,6 +9,9 @@ import '../data/repositories/plan_repository.dart';
 import '../features/contacts/contacts_controller.dart';
 import '../features/contacts/person_detail_screen.dart';
 import '../features/contacts/udhar_form_screen.dart';
+import '../features/bills/bill_detail_screen.dart';
+import '../features/bills/bill_form_screen.dart';
+import '../features/bills/bill_type_screen.dart';
 import '../features/emi/emi_detail_screen.dart';
 import '../features/emi/emi_form_screen.dart';
 import '../features/entry/entry_form_screen.dart';
@@ -38,6 +41,16 @@ final List<RouteBase> extraRoutes = [
   GoRoute(path: '/emi/new', builder: (_, _) => const EmiFormScreen()),
   GoRoute(path: '/emi/:id', builder: (_, s) => EmiDetailScreen(emiId: s.pathParameters['id']!)),
   GoRoute(path: '/emi/:id/edit', builder: (_, s) => EmiFormScreen(emiId: s.pathParameters['id'])),
+  GoRoute(path: '/bills/new', builder: (_, _) => const BillTypeScreen()),
+  GoRoute(
+    path: '/bills/new/form',
+    builder: (_, s) {
+      final q = s.uri.queryParameters;
+      return BillFormScreen(type: q['type'] ?? 'other', name: q['name'], gap: int.tryParse(q['gap'] ?? ''));
+    },
+  ),
+  GoRoute(path: '/bills/:id', builder: (_, s) => BillDetailScreen(billId: s.pathParameters['id']!)),
+  GoRoute(path: '/bills/:id/edit', builder: (_, s) => BillFormScreen(billId: s.pathParameters['id'])),
   GoRoute(path: '/settings', builder: (_, _) => const _ComingSoonPage()),
 ];
 

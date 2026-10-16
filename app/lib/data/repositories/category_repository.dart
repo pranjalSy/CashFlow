@@ -89,6 +89,20 @@ class CategoryRepository {
     });
   }
 
+  /// Id of a default category by its name key (for example `catEmi`, `catBills`), adding the defaults first if needed.
+  Future<String?> idForKey(String kind, String nameKey) async {
+    Future<Category?> find() => (_db.select(_db.categories)
+          ..where((c) => c.userId.equals(_w.userId) & c.deletedAt.isNull() & c.kind.equals(kind) & c.nameKey.equals(nameKey))
+          ..limit(1))
+        .getSingleOrNull();
+    var c = await find();
+    if (c == null) {
+      await ensureDefaults();
+      c = await find();
+    }
+    return c?.id;
+  }
+
   Stream<List<Category>> watchKind(String kind) =>
       (_mine()..where((c) => c.kind.equals(kind))..orderBy([(c) => OrderingTerm.asc(c.sortOrder), (c) => OrderingTerm.asc(c.name)])).watch();
 
