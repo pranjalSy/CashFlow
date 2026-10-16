@@ -268,7 +268,7 @@ class _PersonPickerState extends ConsumerState<_PersonPicker> {
     final matchesPeople = people.where((p) => q.isEmpty || p.name.toLowerCase().contains(q)).toList();
     final matchesContacts = contacts
         .where((x) => !savedPhones.contains(PeopleRepository.normalizePhone(x.phones.isEmpty ? null : x.phones.first.number)))
-        .where((x) => q.isEmpty || (x.displayName ?? '').toLowerCase().contains(q))
+        .where((x) => q.isEmpty || contactName(x)!.toLowerCase().contains(q))
         .take(60)
         .toList();
     return ConstrainedBox(
@@ -298,10 +298,10 @@ class _PersonPickerState extends ConsumerState<_PersonPicker> {
               ),
             for (final x in matchesContacts)
               ListRowTile(
-                leading: PersonAvatar(name: x.displayName ?? '?', color: c.textSecondary, tint: c.raised, circle: true),
-                title: x.displayName ?? '?',
+                leading: PersonAvatar(name: contactName(x)!, color: c.textSecondary, tint: c.raised, circle: true),
+                title: contactName(x)!,
                 subtitle: x.phones.isEmpty ? null : x.phones.first.number,
-                onTap: () => Navigator.pop(context, PersonRef(name: x.displayName ?? '?', phone: x.phones.isEmpty ? null : x.phones.first.number, contactId: x.id)),
+                onTap: () => Navigator.pop(context, PersonRef(name: contactName(x)!, phone: x.phones.isEmpty ? null : x.phones.first.number, contactId: x.id)),
               ),
           ]),
         ),

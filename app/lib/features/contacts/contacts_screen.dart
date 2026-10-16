@@ -64,7 +64,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
     final phoneList = contacts.value;
     final shownContacts = phoneList == null
         ? const <Contact>[]
-        : phoneList.where((x) => q.isEmpty || (x.displayName ?? '').toLowerCase().contains(q) || x.phones.any((p) => p.number.replaceAll(' ', '').contains(q))).toList();
+        : phoneList.where((x) => q.isEmpty || contactName(x)!.toLowerCase().contains(q) || x.phones.any((p) => p.number.replaceAll(' ', '').contains(q))).toList();
 
     return TabPage(
       title: l.contactsTitle,
@@ -120,7 +120,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
               child: Builder(builder: (context) {
                 final phone = x.phones.isEmpty ? null : x.phones.first.number;
                 final saved = byPhone[PeopleRepository.normalizePhone(phone)];
-                final ref0 = PersonRef(id: saved?.id, name: x.displayName ?? phone ?? '?', phone: phone, contactId: x.id);
+                final ref0 = PersonRef(id: saved?.id, name: contactName(x)!, phone: phone, contactId: x.id);
                 return _PersonRow(
                   name: ref0.name,
                   subtitle: phone,
@@ -139,7 +139,8 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
 
   static String _letter(Contact c) {
     final n = (c.displayName ?? '').trim();
-    return n.isEmpty ? '#' : n.characters.first.toUpperCase();
+    final first = n.isEmpty ? '' : n.characters.first.toUpperCase();
+    return RegExp(r'\p{L}', unicode: true).hasMatch(first) ? first : '#';
   }
 
   Future<void> _addPerson(BuildContext context) async {
