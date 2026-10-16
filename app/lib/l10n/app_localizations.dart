@@ -1858,12 +1858,6 @@ abstract class AppLocalizations {
   /// **'All its installments are removed. Expenses already added stay.'**
   String get deleteEmiBody;
 
-  /// No description provided for @billsComingSoon.
-  ///
-  /// In en, this message translates to:
-  /// **'Bills come in the next update.'**
-  String get billsComingSoon;
-
   /// No description provided for @billWhich.
   ///
   /// In en, this message translates to:
@@ -2170,11 +2164,215 @@ abstract class AppLocalizations {
   /// **'Paused: no reminders or popups until you resume it.'**
   String get billPausedNote;
 
-  /// No description provided for @chartsComingSoon.
+  /// No description provided for @spending.
   ///
   /// In en, this message translates to:
-  /// **'Charts and budget come in a later update.'**
-  String get chartsComingSoon;
+  /// **'Spending'**
+  String get spending;
+
+  /// No description provided for @trends.
+  ///
+  /// In en, this message translates to:
+  /// **'Trends'**
+  String get trends;
+
+  /// No description provided for @budget.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget'**
+  String get budget;
+
+  /// No description provided for @budgetOfLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'{spent} of {limit}'**
+  String budgetOfLimit(String spent, String limit);
+
+  /// No description provided for @spentIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent in {month}'**
+  String spentIn(String month);
+
+  /// No description provided for @vsMonthDown.
+  ///
+  /// In en, this message translates to:
+  /// **'↓ {pct}% vs {month}'**
+  String vsMonthDown(int pct, String month);
+
+  /// No description provided for @vsMonthUp.
+  ///
+  /// In en, this message translates to:
+  /// **'↑ {pct}% vs {month}'**
+  String vsMonthUp(int pct, String month);
+
+  /// No description provided for @includeUdhar.
+  ///
+  /// In en, this message translates to:
+  /// **'Include udhar'**
+  String get includeUdhar;
+
+  /// No description provided for @noSpendingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No spending this month'**
+  String get noSpendingTitle;
+
+  /// No description provided for @noSpendingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expenses to see where your money goes.'**
+  String get noSpendingBody;
+
+  /// No description provided for @lastSixMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 6 months'**
+  String get lastSixMonths;
+
+  /// No description provided for @avgIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg income'**
+  String get avgIncome;
+
+  /// No description provided for @avgExpense.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg expense'**
+  String get avgExpense;
+
+  /// No description provided for @savedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get savedLabel;
+
+  /// No description provided for @bestMonthSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Best month for saving'**
+  String get bestMonthSaving;
+
+  /// No description provided for @chartsLockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See where your money goes'**
+  String get chartsLockTitle;
+
+  /// No description provided for @chartsLockBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Spending by category, 6-month trends and monthly budget.'**
+  String get chartsLockBody;
+
+  /// No description provided for @setMonthlyBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a monthly budget'**
+  String get setMonthlyBudget;
+
+  /// No description provided for @budgetSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggestion: {amount} (average of the last 3 months)'**
+  String budgetSuggestion(String amount);
+
+  /// No description provided for @spentThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this month'**
+  String get spentThisMonth;
+
+  /// No description provided for @leftDaysPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'{left} left · {days, plural, =1{1 day} other{{days} days}} · {perDay}/day'**
+  String leftDaysPerDay(String left, int days, String perDay);
+
+  /// No description provided for @amountOver.
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} over'**
+  String amountOver(String amount);
+
+  /// No description provided for @categoryLimits.
+  ///
+  /// In en, this message translates to:
+  /// **'Category limits'**
+  String get categoryLimits;
+
+  /// No description provided for @addCategoryLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Add category limit'**
+  String get addCategoryLimit;
+
+  /// No description provided for @categoryLimitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} limit'**
+  String categoryLimitTitle(String name);
+
+  /// No description provided for @monthlyBudgetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly budget'**
+  String get monthlyBudgetTitle;
+
+  /// No description provided for @everyMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Every month'**
+  String get everyMonth;
+
+  /// No description provided for @avgThreeMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg 3 months · {amount}'**
+  String avgThreeMonths(String amount);
+
+  /// No description provided for @alertMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert me'**
+  String get alertMe;
+
+  /// No description provided for @alertAt.
+  ///
+  /// In en, this message translates to:
+  /// **'At 80% and 100%'**
+  String get alertAt;
+
+  /// No description provided for @removeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get removeLabel;
+
+  /// No description provided for @saveLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Save limit'**
+  String get saveLimit;
+
+  /// No description provided for @pickCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a category'**
+  String get pickCategory;
+
+  /// No description provided for @percentOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}%'**
+  String percentOf(int pct);
+
+  /// No description provided for @ofLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'of {limit}'**
+  String ofLimit(String limit);
 
   /// No description provided for @ratePerYear.
   ///

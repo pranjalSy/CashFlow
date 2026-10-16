@@ -1027,9 +1027,6 @@ class AppLocalizationsHi extends AppLocalizations {
       'इसकी सभी किस्तें हट जाएंगी। पहले जुड़े खर्च रहेंगे।';
 
   @override
-  String get billsComingSoon => 'बिल अगले अपडेट में आएंगे।';
-
-  @override
   String get billWhich => 'कौन सा बिल?';
 
   @override
@@ -1208,7 +1205,138 @@ class AppLocalizationsHi extends AppLocalizations {
       'रुका हुआ: फिर शुरू करने तक कोई याद या पॉपअप नहीं।';
 
   @override
-  String get chartsComingSoon => 'चार्ट और बजट बाद के अपडेट में आएंगे।';
+  String get spending => 'खर्च';
+
+  @override
+  String get trends => 'ट्रेंड';
+
+  @override
+  String get budget => 'बजट';
+
+  @override
+  String budgetOfLimit(String spent, String limit) {
+    return '$limit में से $spent';
+  }
+
+  @override
+  String spentIn(String month) {
+    return '$month में खर्च';
+  }
+
+  @override
+  String vsMonthDown(int pct, String month) {
+    return '↓ $pct% $month से';
+  }
+
+  @override
+  String vsMonthUp(int pct, String month) {
+    return '↑ $pct% $month से';
+  }
+
+  @override
+  String get includeUdhar => 'उधार भी जोड़ें';
+
+  @override
+  String get noSpendingTitle => 'इस महीने कोई खर्च नहीं';
+
+  @override
+  String get noSpendingBody => 'खर्च जोड़ें और देखें पैसा कहाँ जा रहा है।';
+
+  @override
+  String get lastSixMonths => 'पिछले 6 महीने';
+
+  @override
+  String get avgIncome => 'औसत आय';
+
+  @override
+  String get avgExpense => 'औसत खर्च';
+
+  @override
+  String get savedLabel => 'बचत';
+
+  @override
+  String get bestMonthSaving => 'बचत का सबसे अच्छा महीना';
+
+  @override
+  String get chartsLockTitle => 'देखें पैसा कहाँ जा रहा है';
+
+  @override
+  String get chartsLockBody =>
+      'कैटेगरी के हिसाब से खर्च, 6 महीने का ट्रेंड और मासिक बजट।';
+
+  @override
+  String get setMonthlyBudget => 'मासिक बजट तय करें';
+
+  @override
+  String budgetSuggestion(String amount) {
+    return 'सुझाव: $amount (पिछले 3 महीने का औसत)';
+  }
+
+  @override
+  String get spentThisMonth => 'इस महीने खर्च';
+
+  @override
+  String leftDaysPerDay(String left, int days, String perDay) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days दिन',
+      one: '1 दिन',
+    );
+    return '$left बाकी · $_temp0 · $perDay/दिन';
+  }
+
+  @override
+  String amountOver(String amount) {
+    return '$amount ज़्यादा';
+  }
+
+  @override
+  String get categoryLimits => 'कैटेगरी लिमिट';
+
+  @override
+  String get addCategoryLimit => 'कैटेगरी लिमिट जोड़ें';
+
+  @override
+  String categoryLimitTitle(String name) {
+    return '$name लिमिट';
+  }
+
+  @override
+  String get monthlyBudgetTitle => 'मासिक बजट';
+
+  @override
+  String get everyMonth => 'हर महीने';
+
+  @override
+  String avgThreeMonths(String amount) {
+    return '3 महीने का औसत · $amount';
+  }
+
+  @override
+  String get alertMe => 'मुझे बताएं';
+
+  @override
+  String get alertAt => '80% और 100% पर';
+
+  @override
+  String get removeLabel => 'हटाएं';
+
+  @override
+  String get saveLimit => 'लिमिट सेव करें';
+
+  @override
+  String get pickCategory => 'कैटेगरी चुनें';
+
+  @override
+  String percentOf(int pct) {
+    return '$pct%';
+  }
+
+  @override
+  String ofLimit(String limit) {
+    return '$limit में से';
+  }
 
   @override
   String ratePerYear(String rate) {

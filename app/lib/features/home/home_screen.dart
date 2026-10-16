@@ -17,6 +17,7 @@ import '../../data/repositories/people_repository.dart';
 import '../../data/repositories/profile_repository.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
+import '../../shared/widgets/month_pill.dart';
 import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/overlays.dart';
 import '../../shared/widgets/states.dart';
@@ -257,63 +258,8 @@ class _MonthPicker extends ConsumerWidget {
   final ({int year, int month}) month;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = context.colors;
-    final notifier = ref.read(homeMonthProvider.notifier);
-    final loc = MaterialLocalizations.of(context);
-    // Compact pill like the mockup. Two invisible halves over it (each about 60 × 48 dp) go to the
-    // previous / next month, so the targets stay large while the pill stays small.
-    return SizedBox(
-      height: 48,
-      child: Stack(alignment: Alignment.center, children: [
-        Container(
-          height: 40,
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: ShapeDecoration(color: c.card, shape: AppShapes.squircle(AppRadii.pill)),
-          child: Row(mainAxisSize: MainAxisSize.min, children: [
-            Icon(LucideIcons.chevronLeft, size: 18, color: c.textSecondary),
-            const SizedBox(width: 6),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 220),
-              transitionBuilder: (child, a) => FadeTransition(opacity: a, child: child),
-              child: Text(
-                monthShort(context, month.year, month.month),
-                key: ValueKey(month),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 13, fontWeight: FontWeight.w700),
-              ),
-            ),
-            const SizedBox(width: 6),
-            Icon(LucideIcons.chevronRight, size: 18, color: c.textSecondary),
-          ]),
-        ),
-        Positioned.fill(
-          child: Row(children: [
-            Expanded(child: _MonthHalf(label: loc.previousPageTooltip, onTap: () => notifier.shift(-1))),
-            Expanded(child: _MonthHalf(label: loc.nextPageTooltip, onTap: () => notifier.shift(1))),
-          ]),
-        ),
-      ]),
-    );
-  }
-}
-
-class _MonthHalf extends StatelessWidget {
-  const _MonthHalf({required this.label, required this.onTap});
-
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      label: label,
-      child: Material(
-        type: MaterialType.transparency,
-        child: InkWell(onTap: onTap, customBorder: AppShapes.squircle(AppRadii.pill)),
-      ),
-    );
-  }
+  Widget build(BuildContext context, WidgetRef ref) =>
+      MonthPill(year: month.year, month: month.month, onShift: ref.read(homeMonthProvider.notifier).shift);
 }
 
 class _SummaryCard extends ConsumerWidget {

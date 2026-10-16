@@ -12,6 +12,7 @@ import '../features/contacts/udhar_form_screen.dart';
 import '../features/bills/bill_detail_screen.dart';
 import '../features/bills/bill_form_screen.dart';
 import '../features/bills/bill_type_screen.dart';
+import '../features/charts/budget_screen.dart';
 import '../features/emi/emi_detail_screen.dart';
 import '../features/emi/emi_form_screen.dart';
 import '../features/entry/entry_form_screen.dart';
@@ -51,6 +52,7 @@ final List<RouteBase> extraRoutes = [
   ),
   GoRoute(path: '/bills/:id', builder: (_, s) => BillDetailScreen(billId: s.pathParameters['id']!)),
   GoRoute(path: '/bills/:id/edit', builder: (_, s) => BillFormScreen(billId: s.pathParameters['id'])),
+  GoRoute(path: '/budget', builder: (_, _) => const BudgetScreen()),
   GoRoute(path: '/settings', builder: (_, _) => const _ComingSoonPage()),
 ];
 
@@ -70,6 +72,11 @@ class _ComingSoonPage extends ConsumerWidget {
         TabPage(children: [
           const SizedBox(height: 48),
           AppCard(child: EmptyState(icon: LucideIcons.settings, title: l.comingSoon, message: l.welcomeOfflineNote)),
+          const SizedBox(height: 12),
+          AppCard(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: ListRowTile(leading: const Icon(LucideIcons.target), title: l.budget, onTap: () => context.push('/budget')),
+          ),
           if (FlavorConfig.instance.isDev) ...[
             const SizedBox(height: 12),
             AppCard(

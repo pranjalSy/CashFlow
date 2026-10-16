@@ -103,8 +103,12 @@ class CategoryRepository {
     return c?.id;
   }
 
-  Stream<List<Category>> watchKind(String kind) =>
-      (_mine()..where((c) => c.kind.equals(kind))..orderBy([(c) => OrderingTerm.asc(c.sortOrder), (c) => OrderingTerm.asc(c.name)])).watch();
+  SimpleSelectStatement<$CategoriesTable, Category> _ofKind(String kind) =>
+      _mine()..where((c) => c.kind.equals(kind))..orderBy([(c) => OrderingTerm.asc(c.sortOrder), (c) => OrderingTerm.asc(c.name)]);
+
+  Stream<List<Category>> watchKind(String kind) => _ofKind(kind).watch();
+
+  Future<List<Category>> ofKind(String kind) => _ofKind(kind).get();
 
   Stream<Map<String, Category>> watchAll() => _mine().watch().map((list) => {for (final c in list) c.id: c});
 

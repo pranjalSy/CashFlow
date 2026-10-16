@@ -1039,9 +1039,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'All its installments are removed. Expenses already added stay.';
 
   @override
-  String get billsComingSoon => 'Bills come in the next update.';
-
-  @override
   String get billWhich => 'Which bill?';
 
   @override
@@ -1220,7 +1217,138 @@ class AppLocalizationsEn extends AppLocalizations {
       'Paused: no reminders or popups until you resume it.';
 
   @override
-  String get chartsComingSoon => 'Charts and budget come in a later update.';
+  String get spending => 'Spending';
+
+  @override
+  String get trends => 'Trends';
+
+  @override
+  String get budget => 'Budget';
+
+  @override
+  String budgetOfLimit(String spent, String limit) {
+    return '$spent of $limit';
+  }
+
+  @override
+  String spentIn(String month) {
+    return 'Spent in $month';
+  }
+
+  @override
+  String vsMonthDown(int pct, String month) {
+    return '↓ $pct% vs $month';
+  }
+
+  @override
+  String vsMonthUp(int pct, String month) {
+    return '↑ $pct% vs $month';
+  }
+
+  @override
+  String get includeUdhar => 'Include udhar';
+
+  @override
+  String get noSpendingTitle => 'No spending this month';
+
+  @override
+  String get noSpendingBody => 'Add expenses to see where your money goes.';
+
+  @override
+  String get lastSixMonths => 'Last 6 months';
+
+  @override
+  String get avgIncome => 'Avg income';
+
+  @override
+  String get avgExpense => 'Avg expense';
+
+  @override
+  String get savedLabel => 'Saved';
+
+  @override
+  String get bestMonthSaving => 'Best month for saving';
+
+  @override
+  String get chartsLockTitle => 'See where your money goes';
+
+  @override
+  String get chartsLockBody =>
+      'Spending by category, 6-month trends and monthly budget.';
+
+  @override
+  String get setMonthlyBudget => 'Set a monthly budget';
+
+  @override
+  String budgetSuggestion(String amount) {
+    return 'Suggestion: $amount (average of the last 3 months)';
+  }
+
+  @override
+  String get spentThisMonth => 'Spent this month';
+
+  @override
+  String leftDaysPerDay(String left, int days, String perDay) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '$left left · $_temp0 · $perDay/day';
+  }
+
+  @override
+  String amountOver(String amount) {
+    return '$amount over';
+  }
+
+  @override
+  String get categoryLimits => 'Category limits';
+
+  @override
+  String get addCategoryLimit => 'Add category limit';
+
+  @override
+  String categoryLimitTitle(String name) {
+    return '$name limit';
+  }
+
+  @override
+  String get monthlyBudgetTitle => 'Monthly budget';
+
+  @override
+  String get everyMonth => 'Every month';
+
+  @override
+  String avgThreeMonths(String amount) {
+    return 'Avg 3 months · $amount';
+  }
+
+  @override
+  String get alertMe => 'Alert me';
+
+  @override
+  String get alertAt => 'At 80% and 100%';
+
+  @override
+  String get removeLabel => 'Remove';
+
+  @override
+  String get saveLimit => 'Save limit';
+
+  @override
+  String get pickCategory => 'Pick a category';
+
+  @override
+  String percentOf(int pct) {
+    return '$pct%';
+  }
+
+  @override
+  String ofLimit(String limit) {
+    return 'of $limit';
+  }
 
   @override
   String ratePerYear(String rate) {
