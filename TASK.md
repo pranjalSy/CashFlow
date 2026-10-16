@@ -10,9 +10,9 @@
 
 | | |
 |---|---|
-| **Running** | 🔄 T10 EMI |
-| **Waiting for owner** | Nothing (packages approved); phone test after T10 |
-| **Next** | ⏳ Owner phone test of T00b–T10 after T10 |
+| **Running** | Nothing (T00b–T10 built) |
+| **Waiting for owner** | 🧪 Phone test of T00b–T10 (dev APK built), then commit/push yes/no |
+| **Next** | ⏳ T11 Bills (after the owner's phone test) |
 | **Git** | Repo https://github.com/pranjalSy/CashFlow · local branch: **`experiment`** · `experiment` pushed with T00b + T01 + docs + designs (pushed before the phone test, by mistake; main untouched) · `main` = README only (merge only on owner's yes) |
 
 ---
@@ -70,7 +70,7 @@
 | T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | 🧪 Built (lock screen, timer, lockout) · Settings parts in T14 |
 | T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | 🧪 Built · local commit · phone test after T10 |
 | T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | 🧪 Built · local commit · phone test after T10 |
-| T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | 🔄 Running |
+| T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | 🧪 Built · local commit · phone test pending |
 | T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | ⬜ |
 | T12 | Charts + Budget | FR-C1, FR-BG1–BG5 | ⬜ |
 | T13 | Export (PDF/CSV) + Search | FR-C2, FR-C3 | ⬜ |

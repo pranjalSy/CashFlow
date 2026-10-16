@@ -84,7 +84,8 @@ class GlassSurface extends ConsumerWidget {
   }
 
   static ShapeBorder _withEdge(ShapeBorder shape, Color edge) {
-    if (shape is OutlinedBorder) return shape.copyWith(side: BorderSide(color: edge));
+    // Keep an outline the caller asked for (for example the orange next-due border).
+    if (shape is OutlinedBorder && shape.side == BorderSide.none) return shape.copyWith(side: BorderSide(color: edge));
     return shape;
   }
 }

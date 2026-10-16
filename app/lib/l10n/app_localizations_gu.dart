@@ -1030,6 +1030,42 @@ class AppLocalizationsGu extends AppLocalizations {
   String get chartsComingSoon => 'ચાર્ટ અને બજેટ પછીના અપડેટમાં આવશે.';
 
   @override
+  String ratePerYear(String rate) {
+    return '$rate% વાર્ષિક';
+  }
+
+  @override
+  String get noCost => 'નો-કૉસ્ટ';
+
+  @override
+  String dueOnDate(String date) {
+    return 'ડ્યુ $date';
+  }
+
+  @override
+  String get lastTag => 'છેલ્લો';
+
+  @override
+  String paidCountLabel(int count) {
+    return '$count ભર્યા';
+  }
+
+  @override
+  String get editEmi => 'EMI બદલો';
+
+  @override
+  String get deleteEmi => 'EMI કાઢો';
+
+  @override
+  String get totalsMayDiffer => 'કુલ રકમ લેન્ડરના હિસાબથી થોડી અલગ હોઈ શકે.';
+
+  @override
+  String get emiTermsLocked => 'હપ્તો ભર્યા પછી લોનની વિગતો બદલી શકાતી નથી.';
+
+  @override
+  String get chooseIcon => 'આઇકન પસંદ કરો';
+
+  @override
   String get devPremiumToggle => 'પ્રીમિયમ (ફક્ત ડેવ)';
 
   @override

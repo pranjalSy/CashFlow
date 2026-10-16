@@ -22,6 +22,7 @@ import '../../shared/widgets/states.dart';
 import '../../shared/widgets/swipe_row.dart';
 import '../../shared/widgets/tab_page.dart';
 import '../contacts/udhar_due_popup.dart';
+import '../emi/emi_due_popup.dart';
 import 'delete_entry.dart';
 import 'entry_tile.dart';
 import 'home_controller.dart';
@@ -40,8 +41,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
     ref.read(categoryRepositoryProvider).ensureDefaults();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) askDueUdhar(context, ref);
+      if (mounted) _askDue();
     });
+  }
+
+  /// Due popups after unlock, one at a time (TRD 12): EMI first, then udhar.
+  Future<void> _askDue() async {
+    await askDueEmis(context, ref);
+    if (mounted) await askDueUdhar(context, ref);
   }
 
   @override

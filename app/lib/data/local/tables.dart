@@ -119,6 +119,8 @@ class DebtExtensions extends Table with SyncColumns {
   TextColumn get newDueDate => text()();
 }
 
+/// Named EmiLoan so it does not clash with the `Emi` maths in core/utils.
+@DataClassName('EmiLoan')
 class Emis extends Table with SyncColumns {
   TextColumn get name => text()();
   TextColumn get icon => text().withDefault(const Constant('bike'))();

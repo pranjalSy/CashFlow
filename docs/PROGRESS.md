@@ -134,3 +134,32 @@
 - Fix found by tests: premium and person name are read once from the database (a stream `.first` did not finish), so the popup appears reliably.
 - Real-font screenshots of the popup (light ask, dark "Got some") match mockup 14b.
 - Deviation: none. Next: T10 (EMI).
+
+## 2026-10-16: T10 · EMI (built, phone test pending)
+- Data: `emi_repository.dart`: add an EMI and all its installments in one action. Day 29/30/31 falls back to the month's last day, and the last installment takes the remainder.
+  - Mark paid works only on the next due installment. In one action it marks the installment paid, adds an expense in category EMI (source `emi`), and closes the EMI after the last one. Its upload is held for the 5 s Undo window.
+  - Undo and "Mark as unpaid" (on the last paid one) remove the expense.
+  - Edit: name, icon and lender can always change; loan terms only while nothing is paid (the installments are then rebuilt).
+  - Delete is a soft delete; expenses already added stay.
+  - "Due this month", next date and remaining are SQL sums. Due-popup list included.
+  - The Drift data class is renamed `EmiLoan` (`@DataClassName`) so it does not clash with the `Emi` maths. The schema is unchanged.
+- Screens:
+  - EMI & Bills tab (screen 17): EMIs | Bills, with Bills showing "coming in the next update" until T11. Summary card, EMI cards (progress, remaining, due tag: orange under 7 days, red when late), Closed section. Free users see the locked card.
+  - Add/Edit EMI (screen 18): icon picker, item price − down payment = loan (or type the loan), rate, first EMI date. "I know the: Months | EMI amount" with a live result card. The "Not possible" red card shakes on Save and nothing is saved.
+  - EMI detail (screen 19): fixed header with ⋯ (Edit / Delete with confirm), hero, 3 facts, installments (earlier paid collapsed, last paid, next due with orange border and Mark paid, upcoming dimmed, "Last" tag). Opens scrolled to the due one.
+  - Mark paid sheet: Paid on and Paid via required, last choice pre-selected. Then a snackbar "Installment N paid · Expense added · N left" with Undo. A paid row opens its details, with "Mark as unpaid" on the last paid one.
+  - "Paid or not?" popup on Home open (Premium), shown before the udhar popup. Paid opens the Mark paid sheet; Not yet asks again next open (PRD FR-E7; TRD 12 says "tomorrow", PRD wins).
+- "Add bill" in the + menu shows "Bills come in the next update" until T11, so it cannot open a missing page.
+- Shared widget fixes: `AppCard` gets an optional `border`; `GlassSurface` now keeps a border the caller asks for, which was hidden on dark glass.
+- 10 new strings in en/hi/gu.
+- Tests: `test/data/emi_repository_test.dart` (10, PRD §8 numbers: ₹7,996.39, last ₹7,996.40, interest ₹5,956.69, ₹63,971.13 left after 4 paid, ₹611.86 interest in installment 5) and `test/features/emi_test.dart` (6 flows). Full suite **123 passing**, analyze clean, dev debug APK built.
+- Bugs found by tests or screenshots, all fixed:
+  - The next-due row overflowed with wide text.
+  - The detail header scrolled away when the screen opened at the due installment.
+  - "Next on" showed a past date.
+- Real-font screenshots (light and dark: list, detail, Mark paid, Undo, Add, Not possible) match screens 17–19.
+- Deviation: EMI ₹8,500 gives a last EMI of ₹2,112.97, 1 paisa from PRD ₹2,112.98. This comes from rounding interest each month, the same as noted in T03.
+- Open items for the owner:
+  - An EMI expense on Home can still be edited or deleted by hand, which does not change the installment.
+  - Reminders for EMI arrive in T19.
+

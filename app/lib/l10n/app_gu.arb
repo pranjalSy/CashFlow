@@ -312,6 +312,16 @@
   "deleteEmiBody": "તેના બધા હપ્તા નીકળી જશે. પહેલાં ઉમેરેલા ખર્ચ રહેશે.",
   "billsComingSoon": "બિલ આગલા અપડેટમાં આવશે.",
   "chartsComingSoon": "ચાર્ટ અને બજેટ પછીના અપડેટમાં આવશે.",
+  "ratePerYear": "{rate}% વાર્ષિક",
+  "noCost": "નો-કૉસ્ટ",
+  "dueOnDate": "ડ્યુ {date}",
+  "lastTag": "છેલ્લો",
+  "paidCountLabel": "{count} ભર્યા",
+  "editEmi": "EMI બદલો",
+  "deleteEmi": "EMI કાઢો",
+  "totalsMayDiffer": "કુલ રકમ લેન્ડરના હિસાબથી થોડી અલગ હોઈ શકે.",
+  "emiTermsLocked": "હપ્તો ભર્યા પછી લોનની વિગતો બદલી શકાતી નથી.",
+  "chooseIcon": "આઇકન પસંદ કરો",
 
   "devPremiumToggle": "પ્રીમિયમ (ફક્ત ડેવ)",
   "devGallery": "વિજેટ ગેલેરી (ડેવ)"

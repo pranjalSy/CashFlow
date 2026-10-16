@@ -1042,6 +1042,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chartsComingSoon => 'Charts and budget come in a later update.';
 
   @override
+  String ratePerYear(String rate) {
+    return '$rate% a year';
+  }
+
+  @override
+  String get noCost => 'No-cost';
+
+  @override
+  String dueOnDate(String date) {
+    return 'Due $date';
+  }
+
+  @override
+  String get lastTag => 'Last';
+
+  @override
+  String paidCountLabel(int count) {
+    return '$count paid';
+  }
+
+  @override
+  String get editEmi => 'Edit EMI';
+
+  @override
+  String get deleteEmi => 'Delete EMI';
+
+  @override
+  String get totalsMayDiffer =>
+      'Totals can differ a little from your lender\'s schedule.';
+
+  @override
+  String get emiTermsLocked =>
+      'Loan details can\'t change after an installment is paid.';
+
+  @override
+  String get chooseIcon => 'Choose an icon';
+
+  @override
   String get devPremiumToggle => 'Premium (dev only)';
 
   @override

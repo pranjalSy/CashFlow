@@ -5425,7 +5425,7 @@ class DebtExtensionsCompanion extends UpdateCompanion<DebtExtension> {
   }
 }
 
-class $EmisTable extends Emis with TableInfo<$EmisTable, Emi> {
+class $EmisTable extends Emis with TableInfo<$EmisTable, EmiLoan> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -5634,7 +5634,7 @@ class $EmisTable extends Emis with TableInfo<$EmisTable, Emi> {
   static const String $name = 'emis';
   @override
   VerificationContext validateIntegrity(
-    Insertable<Emi> instance, {
+    Insertable<EmiLoan> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -5770,9 +5770,9 @@ class $EmisTable extends Emis with TableInfo<$EmisTable, Emi> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Emi map(Map<String, dynamic> data, {String? tablePrefix}) {
+  EmiLoan map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Emi(
+    return EmiLoan(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}id'],
@@ -5850,7 +5850,7 @@ class $EmisTable extends Emis with TableInfo<$EmisTable, Emi> {
   }
 }
 
-class Emi extends DataClass implements Insertable<Emi> {
+class EmiLoan extends DataClass implements Insertable<EmiLoan> {
   final String id;
   final String userId;
   final DateTime createdAt;
@@ -5870,7 +5870,7 @@ class Emi extends DataClass implements Insertable<Emi> {
 
   /// `active` or `closed`.
   final String status;
-  const Emi({
+  const EmiLoan({
     required this.id,
     required this.userId,
     required this.createdAt,
@@ -5950,12 +5950,12 @@ class Emi extends DataClass implements Insertable<Emi> {
     );
   }
 
-  factory Emi.fromJson(
+  factory EmiLoan.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Emi(
+    return EmiLoan(
       id: serializer.fromJson<String>(json['id']),
       userId: serializer.fromJson<String>(json['userId']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
@@ -5999,7 +5999,7 @@ class Emi extends DataClass implements Insertable<Emi> {
     };
   }
 
-  Emi copyWith({
+  EmiLoan copyWith({
     String? id,
     String? userId,
     DateTime? createdAt,
@@ -6017,7 +6017,7 @@ class Emi extends DataClass implements Insertable<Emi> {
     int? emiAmount,
     String? firstDueDate,
     String? status,
-  }) => Emi(
+  }) => EmiLoan(
     id: id ?? this.id,
     userId: userId ?? this.userId,
     createdAt: createdAt ?? this.createdAt,
@@ -6036,8 +6036,8 @@ class Emi extends DataClass implements Insertable<Emi> {
     firstDueDate: firstDueDate ?? this.firstDueDate,
     status: status ?? this.status,
   );
-  Emi copyWithCompanion(EmisCompanion data) {
-    return Emi(
+  EmiLoan copyWithCompanion(EmisCompanion data) {
+    return EmiLoan(
       id: data.id.present ? data.id.value : this.id,
       userId: data.userId.present ? data.userId.value : this.userId,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
@@ -6066,7 +6066,7 @@ class Emi extends DataClass implements Insertable<Emi> {
 
   @override
   String toString() {
-    return (StringBuffer('Emi(')
+    return (StringBuffer('EmiLoan(')
           ..write('id: $id, ')
           ..write('userId: $userId, ')
           ..write('createdAt: $createdAt, ')
@@ -6111,7 +6111,7 @@ class Emi extends DataClass implements Insertable<Emi> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Emi &&
+      (other is EmiLoan &&
           other.id == this.id &&
           other.userId == this.userId &&
           other.createdAt == this.createdAt &&
@@ -6131,7 +6131,7 @@ class Emi extends DataClass implements Insertable<Emi> {
           other.status == this.status);
 }
 
-class EmisCompanion extends UpdateCompanion<Emi> {
+class EmisCompanion extends UpdateCompanion<EmiLoan> {
   final Value<String> id;
   final Value<String> userId;
   final Value<DateTime> createdAt;
@@ -6199,7 +6199,7 @@ class EmisCompanion extends UpdateCompanion<Emi> {
        months = Value(months),
        emiAmount = Value(emiAmount),
        firstDueDate = Value(firstDueDate);
-  static Insertable<Emi> custom({
+  static Insertable<EmiLoan> custom({
     Expression<String>? id,
     Expression<String>? userId,
     Expression<DateTime>? createdAt,
@@ -14034,14 +14034,14 @@ class $$EmisTableTableManager
         RootTableManager<
           _$AppDatabase,
           $EmisTable,
-          Emi,
+          EmiLoan,
           $$EmisTableFilterComposer,
           $$EmisTableOrderingComposer,
           $$EmisTableAnnotationComposer,
           $$EmisTableCreateCompanionBuilder,
           $$EmisTableUpdateCompanionBuilder,
-          (Emi, BaseReferences<_$AppDatabase, $EmisTable, Emi>),
-          Emi,
+          (EmiLoan, BaseReferences<_$AppDatabase, $EmisTable, EmiLoan>),
+          EmiLoan,
           PrefetchHooks Function()
         > {
   $$EmisTableTableManager(_$AppDatabase db, $EmisTable table)
@@ -14138,8 +14138,12 @@ class $$EmisTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$EmisTable, Emi>(table),
-                  BaseReferences<_$AppDatabase, $EmisTable, Emi>(db, table, e),
+                  e.readTable<$EmisTable, EmiLoan>(table),
+                  BaseReferences<_$AppDatabase, $EmisTable, EmiLoan>(
+                    db,
+                    table,
+                    e,
+                  ),
                 ),
               )
               .toList(),
@@ -14152,14 +14156,14 @@ typedef $$EmisTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
       $EmisTable,
-      Emi,
+      EmiLoan,
       $$EmisTableFilterComposer,
       $$EmisTableOrderingComposer,
       $$EmisTableAnnotationComposer,
       $$EmisTableCreateCompanionBuilder,
       $$EmisTableUpdateCompanionBuilder,
-      (Emi, BaseReferences<_$AppDatabase, $EmisTable, Emi>),
-      Emi,
+      (EmiLoan, BaseReferences<_$AppDatabase, $EmisTable, EmiLoan>),
+      EmiLoan,
       PrefetchHooks Function()
     >;
 typedef $$EmiInstallmentsTableCreateCompanionBuilder =

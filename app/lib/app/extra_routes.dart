@@ -8,6 +8,8 @@ import '../data/repositories/plan_repository.dart';
 import '../features/contacts/contacts_controller.dart';
 import '../features/contacts/person_detail_screen.dart';
 import '../features/contacts/udhar_form_screen.dart';
+import '../features/emi/emi_detail_screen.dart';
+import '../features/emi/emi_form_screen.dart';
 import '../features/entry/entry_form_screen.dart';
 import '../shared/widgets/app_card.dart';
 import '../shared/widgets/app_page.dart';
@@ -32,6 +34,9 @@ final List<RouteBase> extraRoutes = [
       return UdharFormScreen(direction: q['direction'] == 'borrowed' ? 'borrowed' : 'lent', person: hasPerson ? _refFrom(q, id: q['person']) : null);
     },
   ),
+  GoRoute(path: '/emi/new', builder: (_, _) => const EmiFormScreen()),
+  GoRoute(path: '/emi/:id', builder: (_, s) => EmiDetailScreen(emiId: s.pathParameters['id']!)),
+  GoRoute(path: '/emi/:id/edit', builder: (_, s) => EmiFormScreen(emiId: s.pathParameters['id'])),
   GoRoute(path: '/settings', builder: (_, _) => const _ComingSoonPage()),
 ];
 

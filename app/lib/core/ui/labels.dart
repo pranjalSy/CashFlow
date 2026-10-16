@@ -30,6 +30,27 @@ IconData categoryIcon(String key) => switch (key) {
       _ => Icons.label_rounded,
     };
 
+/// Icons offered for an EMI (FR-E1), stored as their key.
+const emiIconKeys = ['bike', 'car', 'phone', 'home', 'laptop', 'tv', 'other'];
+
+IconData emiIcon(String key) => switch (key) {
+      'bike' => Icons.two_wheeler_rounded,
+      'car' => Icons.directions_car_rounded,
+      'phone' => Icons.smartphone_rounded,
+      'home' => Icons.home_rounded,
+      'laptop' => Icons.laptop_rounded,
+      'tv' => Icons.tv_rounded,
+      _ => Icons.account_balance_rounded,
+    };
+
+/// Yearly rate in basis points as text ("12", "10.5").
+String rateText(int rateBp) {
+  final whole = rateBp ~/ 100;
+  final frac = rateBp % 100;
+  if (frac == 0) return '$whole';
+  return '$whole.${frac.toString().padLeft(2, '0').replaceAll(RegExp(r'0$'), '')}';
+}
+
 /// Localized name of a default category, or the user's own name.
 String categoryName(AppLocalizations l, Category c) => switch (c.nameKey) {
       'catFood' => l.catFood,

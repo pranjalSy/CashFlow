@@ -1864,6 +1864,66 @@ abstract class AppLocalizations {
   /// **'Charts and budget come in a later update.'**
   String get chartsComingSoon;
 
+  /// No description provided for @ratePerYear.
+  ///
+  /// In en, this message translates to:
+  /// **'{rate}% a year'**
+  String ratePerYear(String rate);
+
+  /// No description provided for @noCost.
+  ///
+  /// In en, this message translates to:
+  /// **'No-cost'**
+  String get noCost;
+
+  /// No description provided for @dueOnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due {date}'**
+  String dueOnDate(String date);
+
+  /// No description provided for @lastTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Last'**
+  String get lastTag;
+
+  /// No description provided for @paidCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} paid'**
+  String paidCountLabel(int count);
+
+  /// No description provided for @editEmi.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit EMI'**
+  String get editEmi;
+
+  /// No description provided for @deleteEmi.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete EMI'**
+  String get deleteEmi;
+
+  /// No description provided for @totalsMayDiffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Totals can differ a little from your lender\'s schedule.'**
+  String get totalsMayDiffer;
+
+  /// No description provided for @emiTermsLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Loan details can\'t change after an installment is paid.'**
+  String get emiTermsLocked;
+
+  /// No description provided for @chooseIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an icon'**
+  String get chooseIcon;
+
   /// No description provided for @devPremiumToggle.
   ///
   /// In en, this message translates to:

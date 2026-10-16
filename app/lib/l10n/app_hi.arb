@@ -312,6 +312,16 @@
   "deleteEmiBody": "इसकी सभी किस्तें हट जाएंगी। पहले जुड़े खर्च रहेंगे।",
   "billsComingSoon": "बिल अगले अपडेट में आएंगे।",
   "chartsComingSoon": "चार्ट और बजट बाद के अपडेट में आएंगे।",
+  "ratePerYear": "{rate}% सालाना",
+  "noCost": "नो-कॉस्ट",
+  "dueOnDate": "ड्यू {date}",
+  "lastTag": "आखिरी",
+  "paidCountLabel": "{count} भरी",
+  "editEmi": "EMI बदलें",
+  "deleteEmi": "EMI हटाएं",
+  "totalsMayDiffer": "कुल रकम लेंडर के हिसाब से थोड़ी अलग हो सकती है।",
+  "emiTermsLocked": "किस्त भरने के बाद लोन की जानकारी नहीं बदल सकते।",
+  "chooseIcon": "आइकन चुनें",
 
   "devPremiumToggle": "प्रीमियम (सिर्फ़ डेव)",
   "devGallery": "विजेट गैलरी (डेव)"

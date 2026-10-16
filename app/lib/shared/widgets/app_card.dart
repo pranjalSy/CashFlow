@@ -13,6 +13,7 @@ class AppCard extends StatelessWidget {
     this.radius = AppRadii.lg,
     this.onTap,
     this.color,
+    this.border,
   });
 
   final Widget child;
@@ -23,9 +24,12 @@ class AppCard extends StatelessWidget {
   /// Solid colour instead of card/glass (for example coloured summary cards).
   final Color? color;
 
+  /// Outline, for example red on a form error or orange on the next due installment.
+  final BorderSide? border;
+
   @override
   Widget build(BuildContext context) {
-    final shape = AppShapes.squircle(radius);
+    final shape = AppShapes.squircle(radius, side: border ?? BorderSide.none);
     final content = Padding(padding: padding, child: child);
     final tappable = onTap == null
         ? content

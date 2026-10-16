@@ -1030,6 +1030,44 @@ class AppLocalizationsHi extends AppLocalizations {
   String get chartsComingSoon => 'चार्ट और बजट बाद के अपडेट में आएंगे।';
 
   @override
+  String ratePerYear(String rate) {
+    return '$rate% सालाना';
+  }
+
+  @override
+  String get noCost => 'नो-कॉस्ट';
+
+  @override
+  String dueOnDate(String date) {
+    return 'ड्यू $date';
+  }
+
+  @override
+  String get lastTag => 'आखिरी';
+
+  @override
+  String paidCountLabel(int count) {
+    return '$count भरी';
+  }
+
+  @override
+  String get editEmi => 'EMI बदलें';
+
+  @override
+  String get deleteEmi => 'EMI हटाएं';
+
+  @override
+  String get totalsMayDiffer =>
+      'कुल रकम लेंडर के हिसाब से थोड़ी अलग हो सकती है।';
+
+  @override
+  String get emiTermsLocked =>
+      'किस्त भरने के बाद लोन की जानकारी नहीं बदल सकते।';
+
+  @override
+  String get chooseIcon => 'आइकन चुनें';
+
+  @override
   String get devPremiumToggle => 'प्रीमियम (सिर्फ़ डेव)';
 
   @override
