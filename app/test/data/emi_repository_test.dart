@@ -105,13 +105,13 @@ void main() {
     expect(live, hasLength(11));
   });
 
-  test('summary: still to pay this month (late ones too) and next date, from SQL', () async {
+  test('summary: the next installment of each EMI plus late ones, and the next date (screen 17), from SQL', () async {
     final bikeId = await repo.add(bike);
     await payNext(bikeId, times: 4); // Jul–Oct paid
     await repo.add(const EmiDraft(name: 'Phone EMI', icon: 'phone', lender: 'Bajaj', loanAmount: 2939400, rateBp: 0, months: 6, emiAmount: 489900, firstDue: LocalDate(2026, 10, 18)));
     final s = await repo.watchSummary(const LocalDate(2026, 11, 2)).first;
-    // Nov: bike ₹7,996.39 (5 Nov) + phone 18 Oct (late) and 18 Nov, ₹4,899 each.
-    expect(s.dueThisMonth, 799639 + 2 * 489900);
+    // Bike's next is 5 Nov (₹7,996.39); the phone's next is the late 18 Oct one (₹4,899); 18 Nov is not next yet.
+    expect(s.dueThisMonth, 799639 + 489900);
     expect(s.countThisMonth, 2);
     expect(s.nextDue, const LocalDate(2026, 11, 5));
   });

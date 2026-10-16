@@ -90,22 +90,44 @@ class _MarkPaidSheetState extends ConsumerState<_MarkPaidSheet> {
     final today = Ist.today();
     return SingleChildScrollView(
       child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Text(l.markAsPaid, style: t.titleLarge),
-        Text(l.installmentOf(inst.seq, widget.total, shortDate(context, LocalDate.parse(inst.dueDate))), style: t.bodySmall),
+        Row(children: [
+          IconTile(icon: emiIcon(widget.emi.icon), color: c.brandText, tint: c.brandTint),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(l.markAsPaid, style: t.titleLarge),
+              Text(l.installmentOf(inst.seq, widget.total, shortDate(context, LocalDate.parse(inst.dueDate))), style: t.bodySmall),
+            ]),
+          ),
+        ]),
         const SizedBox(height: AppSpacing.sm),
         AmountText(amount, size: 36, color: c.expense, alignment: Alignment.center),
         const SizedBox(height: AppSpacing.sm),
-        DecoratedBox(
-          decoration: ShapeDecoration(color: c.raised, shape: AppShapes.squircle(AppRadii.md)),
-          child: ListRowTile(
-            leading: IconTile(icon: LucideIcons.calendar, color: c.textSecondary, tint: c.card, size: 34),
-            title: _paidOn == today ? '${l.today}, ${shortDate(context, _paidOn)}' : longDate(context, _paidOn),
-            subtitle: l.paidOn,
+        Material(
+          color: c.raised,
+          shape: AppShapes.squircle(AppRadii.md),
+          child: InkWell(
+            customBorder: AppShapes.squircle(AppRadii.md),
             onTap: () async {
               final now = DateTime.now();
               final d = await showDatePicker(context: context, initialDate: DateTime(_paidOn.year, _paidOn.month, _paidOn.day), firstDate: DateTime(2000), lastDate: now);
               if (d != null) setState(() => _paidOn = LocalDate(d.year, d.month, d.day));
             },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              child: Row(children: [
+                IconTile(icon: LucideIcons.calendar, color: c.textSecondary, tint: c.card, size: 34),
+                const SizedBox(width: 12),
+                // Small label above, the date below (screen 19).
+                Expanded(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(l.paidOn, style: t.labelSmall),
+                    Text(_paidOn == today ? '${l.today}, ${shortDate(context, _paidOn)}' : longDate(context, _paidOn), style: t.titleSmall),
+                  ]),
+                ),
+                Icon(LucideIcons.chevronRight, color: c.textMuted),
+              ]),
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -113,8 +135,9 @@ class _MarkPaidSheetState extends ConsumerState<_MarkPaidSheet> {
           label: l.paidVia,
           mode: _mode,
           method: _method,
-          accent: c.expense,
-          accentTint: c.expenseTint,
+          accent: c.income,
+          accentTint: c.incomeTint,
+          onlineIcon: LucideIcons.landmark,
           errorText: _tried && _mode == null ? l.choosePayment : null,
           onChanged: (m, method) => setState(() {
             _mode = m;
@@ -122,9 +145,9 @@ class _MarkPaidSheetState extends ConsumerState<_MarkPaidSheet> {
           }),
         ),
         const SizedBox(height: AppSpacing.sm),
-        Text(l.expenseAddedIn(amount, l.catEmi), textAlign: TextAlign.center, style: t.bodySmall),
+        _BoldWord(text: l.expenseAddedIn(amount, l.catEmi), bold: l.catEmi, style: t.bodySmall),
         const SizedBox(height: AppSpacing.sm),
-        AppButton(label: l.markPaid, kind: AppButtonKind.success, onPressed: _save),
+        AppButton(label: l.markPaid, icon: LucideIcons.check, kind: AppButtonKind.success, onPressed: _save),
       ]),
     );
   }
@@ -157,4 +180,27 @@ Future<void> showPaidInstallmentSheet(BuildContext context, WidgetRef ref, {requ
         AppButton(label: l.close, kind: AppButtonKind.secondary, onPressed: () => Navigator.pop(context)),
     ]);
   });
+}
+
+/// A centred sentence with one word in bold ("added in **EMI** category", screen 19).
+class _BoldWord extends StatelessWidget {
+  const _BoldWord({required this.text, required this.bold, this.style});
+
+  final String text;
+  final String bold;
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    final at = text.indexOf(bold);
+    if (at < 0) return Text(text, textAlign: TextAlign.center, style: style);
+    return Text.rich(
+      TextSpan(style: style, children: [
+        TextSpan(text: text.substring(0, at)),
+        TextSpan(text: bold, style: TextStyle(fontWeight: FontWeight.w800, color: context.colors.text)),
+        TextSpan(text: text.substring(at + bold.length)),
+      ]),
+      textAlign: TextAlign.center,
+    );
+  }
 }

@@ -16,6 +16,7 @@ class PaymentPicker extends StatelessWidget {
     required this.accent,
     required this.accentTint,
     this.errorText,
+    this.onlineIcon = LucideIcons.smartphone,
   });
 
   final String label;
@@ -27,6 +28,9 @@ class PaymentPicker extends StatelessWidget {
   final Color accent;
   final Color accentTint;
   final String? errorText;
+
+  /// Phone on entry forms (screen 11); a bank on the EMI Mark paid sheet (screen 19).
+  final IconData onlineIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +97,7 @@ class PaymentPicker extends StatelessWidget {
       Row(children: [
         option('cash', LucideIcons.banknote, l.cash),
         const SizedBox(width: AppSpacing.xs),
-        option('online', LucideIcons.smartphone, l.online),
+        option('online', onlineIcon, l.online),
       ]),
       if (mode == 'online') ...[
         const SizedBox(height: AppSpacing.xs),

@@ -6,6 +6,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../core/l10n.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
+import '../../core/ui/labels.dart';
 import '../../core/utils/dates.dart';
 import '../../core/utils/money.dart';
 import '../../data/repositories/bill_repository.dart';
@@ -14,8 +15,10 @@ import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/states.dart';
+import '../../shared/widgets/summary_hero.dart';
 import '../emi/emi_bills_screen.dart';
 import 'bill_labels.dart';
+import 'pay_bill_sheet.dart';
 
 final billListProvider = StreamProvider<List<BillWithPayments>>((ref) => ref.watch(billRepositoryProvider).watchAll());
 
@@ -55,19 +58,16 @@ class _Summary extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final c = context.colors;
-    final t = Theme.of(context).textTheme;
     return StreamBuilder<BillSummary>(
       stream: ref.watch(billRepositoryProvider).watchSummary(Ist.today()),
       builder: (context, snap) {
         final s = snap.data;
-        return AppCard(
-          color: c.brandButton,
-          radius: AppRadii.lg,
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(l.billsThisMonth, style: t.bodyMedium?.copyWith(color: c.onButton.withValues(alpha: 0.9))),
-            CountUpAmount(paise: s?.total ?? 0, size: 30, color: c.onButton),
-            Text(l.billsPaidLeft(s?.paid ?? 0, s?.left ?? 0), style: t.bodySmall?.copyWith(color: c.onButton.withValues(alpha: 0.85))),
-          ]),
+        return SummaryHero(
+          color: c.borrowed,
+          label: l.billsThisMonth,
+          paise: s?.total ?? 0,
+          subtitle: l.billsPaidLeft(s?.paid ?? 0, s?.left ?? 0),
+          icon: LucideIcons.zap,
         );
       },
     );
@@ -89,25 +89,38 @@ class BillCard extends StatelessWidget {
     final (fg, bg) = billColors(context, b.billType);
     final today = Ist.today();
     final amount = item.lastAmount;
+    final dueToday = !b.paused && !item.nextDue.isAfter(today);
+    final paidNow = item.paidIn(today) && item.nextDue.isAfter(LocalDate(today.year, today.month, LocalDate.daysInMonth(today.year, today.month)));
+    // FR-B7 tags: Due today (orange solid), Due in X days / Due 20 Oct (plain), Paid (green).
     final Widget tag;
     if (b.paused) {
       tag = EmiTag(text: l.pausedTag, color: c.textSecondary, tint: c.raised);
-    } else if (item.paidIn(today) && item.nextDue.isAfter(LocalDate(today.year, today.month, LocalDate.daysInMonth(today.year, today.month)))) {
+    } else if (paidNow) {
       tag = EmiTag(text: l.paid, color: c.income, tint: c.incomeTint, icon: LucideIcons.check);
+    } else if (dueToday) {
+      final late = today.daysUntil(item.nextDue) < 0;
+      tag = EmiTag(text: late ? l.overdueDays(-today.daysUntil(item.nextDue)) : l.dueInDays(0), color: c.onButton, tint: late ? c.expenseButton : c.dueSoon);
     } else {
-      tag = dueTag(context, item.nextDue, short: true);
+      final days = today.daysUntil(item.nextDue);
+      tag = EmiTag(text: days == 1 ? l.dueInDays(1) : l.dueOnDate(shortDate(context, item.nextDue)), color: c.textSecondary, tint: c.raised, icon: LucideIcons.calendar);
     }
     return AppCard(
-      radius: AppRadii.md,
-      padding: const EdgeInsets.all(AppSpacing.sm),
-      onTap: () => context.push('/bills/${b.id}'),
+      radius: AppRadii.lg,
+      padding: const EdgeInsets.all(14),
+      // A bill due today opens "How much was it?" straight away ("tap Paid to confirm").
+      onTap: () => dueToday ? showPayBillSheet(context, bill: b) : context.push('/bills/${b.id}'),
       child: Row(children: [
         IconTile(icon: billIcon(b.billType), color: fg, tint: bg),
         const SizedBox(width: 11),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(billTypeName(l, b.billType), maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall),
-            Text('${b.name} · ${l.everyNMonths(b.everyMonths)}', maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall),
+            Text('${b.name} · ${l.everyNMonths(b.everyMonths)}', maxLines: 2, overflow: TextOverflow.ellipsis, style: t.bodySmall),
+            if (dueToday && amount != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(l.billTapPaid(Money.format(amount)), style: t.bodySmall?.copyWith(color: c.dueSoon, fontWeight: FontWeight.w600)),
+              ),
           ]),
         ),
         const SizedBox(width: 8),

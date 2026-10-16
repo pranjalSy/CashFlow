@@ -222,17 +222,16 @@ class EmiRepository {
 
   Stream<EmiWithInstallments?> watchOne(String id) => watchAll().map((list) => list.where((e) => e.emi.id == id).firstOrNull);
 
-  /// Still to pay this month (IST), late ones included, and the next date from today, as SQL.
+  /// The card on top of the EMI tab (screen 17, "₹12,895 · 2 EMIs · next on 5 Nov"): the next installment of
+  /// every active EMI plus any late ones, how many EMIs that is, and the next date from today. SQL.
   Stream<EmiSummary> watchSummary(LocalDate today) {
-    final end = LocalDate(today.year, today.month, LocalDate.daysInMonth(today.year, today.month)).toIso();
     return _db.customSelect(
-      'SELECT '
-      'COALESCE(SUM(CASE WHEN i.due_date <= ?1 THEN i.amount END), 0) AS due_sum, '
-      'COUNT(DISTINCT CASE WHEN i.due_date <= ?1 THEN i.emi_id END) AS due_count, '
-      'MIN(CASE WHEN i.due_date >= ?2 THEN i.due_date END) AS next_due '
+      'SELECT COALESCE(SUM(i.amount), 0) AS due_sum, COUNT(DISTINCT i.emi_id) AS due_count, '
+      'MIN(CASE WHEN i.due_date >= ?1 THEN i.due_date END) AS next_due '
       'FROM emi_installments i JOIN emis e ON e.id = i.emi_id '
-      "WHERE i.user_id = ?3 AND i.deleted_at IS NULL AND e.deleted_at IS NULL AND e.status = 'active' AND i.status = 'due'",
-      variables: [Variable.withString(end), Variable.withString(today.toIso()), Variable.withString(_w.userId)],
+      "WHERE i.user_id = ?2 AND i.deleted_at IS NULL AND e.deleted_at IS NULL AND e.status = 'active' AND i.status = 'due' "
+      "AND (i.due_date < ?1 OR i.seq = (SELECT MIN(x.seq) FROM emi_installments x WHERE x.emi_id = i.emi_id AND x.deleted_at IS NULL AND x.status = 'due'))",
+      variables: [Variable.withString(today.toIso()), Variable.withString(_w.userId)],
       readsFrom: {_db.emis, _db.emiInstallments},
     ).watchSingle().map((r) {
       final next = r.readNullable<String>('next_due');

@@ -821,6 +821,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lenderOptional => 'Lender (optional)';
 
   @override
+  String get lenderShort => 'Lender';
+
+  @override
   String get itemPrice => 'Item price';
 
   @override
@@ -886,8 +889,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notPossibleTitle => 'EMI is less than the monthly interest';
 
   @override
-  String notPossibleBody(String interest) {
-    return 'Interest alone is $interest a month. Enter more than $interest, or choose months.';
+  String notPossibleBody(String interest, String loan, String rate) {
+    return 'Interest alone is $interest a month on $loan at $rate%. Enter more than $interest, or choose months.';
   }
 
   @override
@@ -1133,6 +1136,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String lastBill(String amount) {
     return 'Last bill $amount';
+  }
+
+  @override
+  String billTapPaid(String amount) {
+    return 'Last bill $amount · tap Paid to confirm';
   }
 
   @override

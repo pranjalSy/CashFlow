@@ -1516,6 +1516,12 @@ abstract class AppLocalizations {
   /// **'Lender (optional)'**
   String get lenderOptional;
 
+  /// No description provided for @lenderShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Lender'**
+  String get lenderShort;
+
   /// No description provided for @itemPrice.
   ///
   /// In en, this message translates to:
@@ -1633,8 +1639,8 @@ abstract class AppLocalizations {
   /// No description provided for @notPossibleBody.
   ///
   /// In en, this message translates to:
-  /// **'Interest alone is {interest} a month. Enter more than {interest}, or choose months.'**
-  String notPossibleBody(String interest);
+  /// **'Interest alone is {interest} a month on {loan} at {rate}%. Enter more than {interest}, or choose months.'**
+  String notPossibleBody(String interest, String loan, String rate);
 
   /// No description provided for @saveEmi.
   ///
@@ -2031,6 +2037,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last bill {amount}'**
   String lastBill(String amount);
+
+  /// No description provided for @billTapPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Last bill {amount} · tap Paid to confirm'**
+  String billTapPaid(String amount);
 
   /// No description provided for @noBillsTitle.
   ///

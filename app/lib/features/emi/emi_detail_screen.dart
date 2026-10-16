@@ -113,11 +113,7 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
                   padding: const EdgeInsets.fromLTRB(AppSpacing.md, 4, AppSpacing.md, 0),
                   child: Row(
                     children: [
-                      IconButton(
-                        onPressed: () => context.pop(),
-                        icon: Icon(LucideIcons.arrowLeft, color: c.text),
-                        tooltip: l.back,
-                      ),
+                      HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
                       Expanded(
                         child: Column(
                           children: [
@@ -128,8 +124,8 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
                       ),
                       PopupMenuButton<int>(
                         tooltip: l.more,
-                        icon: Icon(LucideIcons.ellipsis, color: c.text),
                         color: c.sheet,
+                        child: HeaderButton(icon: LucideIcons.ellipsis, tooltip: l.more),
                         onSelected: (v) => v == 0 ? context.push('/emi/${e.id}/edit') : _delete(e),
                         itemBuilder: (_) => [
                           PopupMenuItem(value: 0, child: Text(l.editEmi)),
@@ -165,29 +161,39 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(2, AppSpacing.md, 2, AppSpacing.xs),
+                        padding: const EdgeInsets.fromLTRB(4, AppSpacing.md, 4, AppSpacing.xs),
                         child: Row(
                           children: [
-                            Text(l.installments, style: t.titleLarge),
-                            const SizedBox(width: 8),
-                            if (paid.isNotEmpty) EmiTag(text: l.paidCountLabel(paid.length), color: c.income, tint: c.incomeTint),
+                            Expanded(child: Text(l.installments, style: t.labelMedium)),
+                            if (paid.isNotEmpty)
+                              InkWell(
+                                onTap: earlier.isEmpty ? null : () => setState(() => _expanded = !_expanded),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(l.paidCountLabel(paid.length), style: t.labelMedium),
+                                    Icon(_expanded ? LucideIcons.chevronUp : LucideIcons.chevronDown, size: 16, color: c.textSecondary),
+                                  ],
+                                ),
+                              ),
                           ],
                         ),
                       ),
                       if (earlier.isNotEmpty && !_expanded)
                         _Row(
-                          leading: Icon(LucideIcons.checkCheck, color: c.income, size: 20),
+                          dashed: true,
+                          leading: const _Check(),
                           title: l.earlierPaid(earlier.length),
                           subtitle:
                               '${shortDate(context, LocalDate.parse(earlier.first.dueDate))} – ${shortDate(context, LocalDate.parse(earlier.last.dueDate))} · '
                               '${Money.format(earlier.fold(0, (a, i) => a + i.amount))}',
-                          trailing: Icon(LucideIcons.chevronDown, color: c.textMuted),
+                          trailing: Icon(LucideIcons.chevronRight, color: c.textMuted),
                           onTap: () => setState(() => _expanded = true),
                         ),
                       if (_expanded)
                         for (final i in earlier) _paidRow(context, item, i),
                       if (lastPaid != null) _paidRow(context, item, lastPaid),
-                      for (final i in upcoming) i.id == next?.id ? _dueRow(context, item, i) : Opacity(opacity: 0.55, child: _upcomingRow(context, item, i)),
+                      for (final i in upcoming) i.id == next?.id ? _dueRow(context, item, i) : _upcomingRow(context, item, i),
                     ],
                   ),
                 ),
@@ -205,7 +211,7 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
     final due = LocalDate.parse(i.dueDate);
     final paidOn = i.paidAt == null ? due : Ist.dateOf(i.paidAt!);
     return _Row(
-      leading: Icon(LucideIcons.circleCheck, color: c.income, size: 22),
+      leading: const _Check(),
       title: longDate(context, due),
       subtitle: paidOn == due ? l.paidOnTime : l.paidOnDate(shortDate(context, paidOn)),
       trailing: Column(
@@ -227,27 +233,19 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
       key: _dueKey,
       padding: const EdgeInsets.only(bottom: AppSpacing.xs),
       child: AppCard(
-        radius: AppRadii.md,
-        padding: const EdgeInsets.all(AppSpacing.sm),
-        border: BorderSide(color: c.dueSoon, width: 1.5),
+        radius: AppRadii.lg,
+        padding: const EdgeInsets.all(14),
+        border: BorderSide(color: c.dueSoon.withValues(alpha: 0.45), width: 1.5),
         child: Column(
           children: [
-            _rowContent(context, item, i),
-            const SizedBox(height: AppSpacing.xs),
-            Row(
-              children: [
-                Expanded(
-                  child: Align(alignment: Alignment.centerLeft, child: dueTag(context, LocalDate.parse(i.dueDate))),
-                ),
-                const SizedBox(width: AppSpacing.xs),
-                AppButton(
-                  label: l.markPaid,
-                  kind: AppButtonKind.success,
-                  expand: false,
-                  height: 40,
-                  onPressed: () => showMarkPaidSheet(context, emi: item.emi, installment: i, total: item.total),
-                ),
-              ],
+            _rowContent(context, item, i, due: true),
+            const SizedBox(height: AppSpacing.sm),
+            AppButton(
+              label: l.markPaid,
+              icon: LucideIcons.check,
+              kind: AppButtonKind.success,
+              height: 46,
+              onPressed: () => showMarkPaidSheet(context, emi: item.emi, installment: i, total: item.total),
             ),
           ],
         ),
@@ -257,28 +255,35 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
 
   Widget _upcomingRow(BuildContext context, EmiWithInstallments item, EmiInstallment i) => Padding(
     padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-    child: AppCard(radius: AppRadii.md, padding: const EdgeInsets.all(AppSpacing.sm), child: _rowContent(context, item, i)),
+    child: AppCard(radius: AppRadii.lg, padding: const EdgeInsets.all(14), child: _rowContent(context, item, i)),
   );
 
-  Widget _rowContent(BuildContext context, EmiWithInstallments item, EmiInstallment i) {
+  Widget _rowContent(BuildContext context, EmiWithInstallments item, EmiInstallment i, {bool due = false}) {
     final l = context.l10n;
     final c = context.colors;
     final t = Theme.of(context).textTheme;
     return Row(
       children: [
-        SizedBox.square(
-          dimension: 34,
-          child: DecoratedBox(
-            decoration: ShapeDecoration(color: c.raised, shape: AppShapes.squircle(AppRadii.sm)),
-            child: Center(child: Text('${i.seq}', style: t.titleSmall)),
+        Container(
+          width: 32,
+          height: 32,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: due ? c.dueSoonTint : c.raised,
+            border: due ? Border.all(color: c.dueSoon.withValues(alpha: 0.5)) : null,
+          ),
+          child: Text(
+            '${i.seq}',
+            style: t.labelMedium?.copyWith(color: due ? c.dueSoon : c.textSecondary, fontWeight: FontWeight.w700),
           ),
         ),
-        const SizedBox(width: 11),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(longDate(context, LocalDate.parse(i.dueDate)), style: t.titleSmall),
+              Text(longDate(context, LocalDate.parse(i.dueDate)), style: t.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
               Text(l.inclInterest(Money.format(i.interestPart)), style: t.bodySmall),
             ],
           ),
@@ -288,10 +293,27 @@ class _EmiDetailScreenState extends ConsumerState<EmiDetailScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             AmountText(Money.format(i.amount), size: 14, alignment: Alignment.centerRight),
-            if (i.seq == item.total) EmiTag(text: l.lastTag, color: c.textSecondary, tint: c.raised),
+            if (due) ...[const SizedBox(height: 3), dueTag(context, LocalDate.parse(i.dueDate), next: true)],
+            if (!due && i.seq == item.total) EmiTag(text: l.lastTag, color: c.textSecondary, tint: c.raised),
           ],
         ),
       ],
+    );
+  }
+}
+
+/// Filled green circle with a white tick (paid installments, screen 19).
+class _Check extends StatelessWidget {
+  const _Check();
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(shape: BoxShape.circle, color: c.incomeButton),
+      child: Icon(LucideIcons.check, size: 18, color: c.onButton),
     );
   }
 }
@@ -309,40 +331,77 @@ class _Hero extends ConsumerWidget {
     final closed = item.closed;
     final on = c.onButton;
     final end = item.lastDue;
-    return AppCard(
-      color: closed ? c.incomeButton : c.brandButton,
-      radius: AppRadii.lg,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(closed ? l.emiClosed : l.remainingToPay, style: t.bodyMedium?.copyWith(color: on.withValues(alpha: 0.9))),
-          StreamBuilder<int>(
-            stream: ref.watch(emiRepositoryProvider).watchRemaining(item.emi.id),
-            builder: (context, snap) => AmountText(Money.format(snap.data ?? 0), size: 32, color: on),
-          ),
-          const SizedBox(height: AppSpacing.xs),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: LinearProgressIndicator(
-              value: item.total == 0 ? 0 : item.paidCount / item.total,
-              minHeight: 6,
-              color: on,
-              backgroundColor: on.withValues(alpha: 0.25),
-            ),
-          ),
-          const SizedBox(height: 6),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  '${l.paidOfTotal(item.paidCount, item.total)} · ${l.leftCount(item.total - item.paidCount)}',
-                  style: t.bodySmall?.copyWith(color: on.withValues(alpha: 0.9)),
+    final color = closed ? c.incomeButton : c.brandButton;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    return DecoratedBox(
+      decoration: ShapeDecoration(
+        color: color,
+        shape: AppShapes.squircle(AppRadii.lg),
+        shadows: dark ? null : [BoxShadow(color: color.withValues(alpha: 0.45), blurRadius: 24, offset: const Offset(0, 10), spreadRadius: -10)],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(18, 18, 16, 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(closed ? l.emiClosed : l.remainingToPay, style: t.bodySmall?.copyWith(color: on.withValues(alpha: 0.9))),
+                      const SizedBox(height: 4),
+                      StreamBuilder<int>(
+                        stream: ref.watch(emiRepositoryProvider).watchRemaining(item.emi.id),
+                        builder: (context, snap) => AmountText(Money.format(snap.data ?? 0), size: 30, color: on),
+                      ),
+                    ],
+                  ),
                 ),
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: ShapeDecoration(color: on.withValues(alpha: 0.18), shape: AppShapes.squircle(AppRadii.sm)),
+                  child: Icon(emiIcon(item.emi.icon), color: on, size: 20),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: LinearProgressIndicator(
+                value: item.total == 0 ? 0 : item.paidCount / item.total,
+                minHeight: 6,
+                color: on,
+                backgroundColor: on.withValues(alpha: 0.25),
               ),
-              Text(l.endsMonth(monthShort(context, end.year, end.month)), style: t.bodySmall?.copyWith(color: on.withValues(alpha: 0.9))),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: l.paidOfTotal(item.paidCount, item.total),
+                          style: t.bodySmall?.copyWith(color: on, fontWeight: FontWeight.w700),
+                        ),
+                        TextSpan(
+                          text: ' · ${l.leftCount(item.total - item.paidCount)}',
+                          style: t.bodySmall?.copyWith(color: on.withValues(alpha: 0.9)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Text(l.endsMonth(monthShort(context, end.year, end.month)), style: t.bodySmall?.copyWith(color: on.withValues(alpha: 0.9))),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -372,7 +431,7 @@ class _FactBox extends StatelessWidget {
 }
 
 class _Row extends StatelessWidget {
-  const _Row({required this.leading, required this.title, required this.subtitle, required this.trailing, required this.onTap});
+  const _Row({required this.leading, required this.title, required this.subtitle, required this.trailing, required this.onTap, this.dashed = false});
 
   final Widget leading;
   final String title;
@@ -380,32 +439,46 @@ class _Row extends StatelessWidget {
   final Widget trailing;
   final VoidCallback onTap;
 
+  /// The collapsed "earlier paid" row has a dashed outline on a lighter fill (screen 19).
+  final bool dashed;
+
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     final t = Theme.of(context).textTheme;
+    final row = Row(
+      children: [
+        leading,
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: t.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+              Text(subtitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall),
+            ],
+          ),
+        ),
+        trailing,
+      ],
+    );
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-      child: AppCard(
-        radius: AppRadii.md,
-        padding: const EdgeInsets.all(AppSpacing.sm),
-        onTap: onTap,
-        child: Row(
-          children: [
-            SizedBox(width: 34, child: Center(child: leading)),
-            const SizedBox(width: 11),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: t.titleSmall),
-                  Text(subtitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall),
-                ],
+      child: dashed
+          ? DashedOutline(
+              color: c.border,
+              radius: AppRadii.lg,
+              child: Material(
+                color: c.card.withValues(alpha: 0.5),
+                shape: AppShapes.squircle(AppRadii.lg),
+                child: InkWell(
+                  onTap: onTap,
+                  customBorder: AppShapes.squircle(AppRadii.lg),
+                  child: Padding(padding: const EdgeInsets.all(14), child: row),
+                ),
               ),
-            ),
-            trailing,
-          ],
-        ),
-      ),
+            )
+          : AppCard(radius: AppRadii.lg, padding: const EdgeInsets.all(14), onTap: onTap, child: row),
     );
   }
 }

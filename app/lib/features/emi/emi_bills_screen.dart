@@ -16,6 +16,7 @@ import '../../shared/widgets/amount_text.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/states.dart';
+import '../../shared/widgets/summary_hero.dart';
 import '../../shared/widgets/tab_page.dart';
 import '../bills/bills_list.dart';
 import 'emi_lock.dart';
@@ -40,7 +41,7 @@ class _EmiBillsScreenState extends ConsumerState<EmiBillsScreen> {
     return TabPage(
       title: l.emiBillsTitle,
       children: [
-        SegmentedSwitch(options: [l.emis, l.bills], index: _tab, onChanged: (i) => setState(() => _tab = i)),
+        SegmentedSwitch(options: [l.emis, l.bills], index: _tab, expand: true, onChanged: (i) => setState(() => _tab = i)),
         const SizedBox(height: AppSpacing.md),
         if (!premium)
           const EmiLockCard()
@@ -98,26 +99,16 @@ class _Summary extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final c = context.colors;
-    final t = Theme.of(context).textTheme;
-    return StreamBuilder<EmiSummary>(
+        return StreamBuilder<EmiSummary>(
       stream: ref.watch(emiRepositoryProvider).watchSummary(Ist.today()),
       builder: (context, snap) {
         final s = snap.data;
-        return AppCard(
+        return SummaryHero(
           color: c.brandButton,
-          radius: AppRadii.lg,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(l.dueThisMonth, style: t.bodyMedium?.copyWith(color: c.onButton.withValues(alpha: 0.9))),
-              AmountText(Money.format(s?.dueThisMonth ?? 0), size: 30, color: c.onButton),
-              if (s?.nextDue != null)
-                Text(
-                  l.emiCountNext(s!.countThisMonth, shortDate(context, s.nextDue!)),
-                  style: t.bodySmall?.copyWith(color: c.onButton.withValues(alpha: 0.85)),
-                ),
-            ],
-          ),
+          label: l.dueThisMonth,
+          paise: s?.dueThisMonth ?? 0,
+          subtitle: s?.nextDue == null ? null : l.emiCountNext(s!.countThisMonth, shortDate(context, s.nextDue!)),
+          icon: LucideIcons.bell,
         );
       },
     );
@@ -137,12 +128,12 @@ class EmiCard extends ConsumerWidget {
     final t = Theme.of(context).textTheme;
     final e = item.emi;
     final rate = e.rateBp == 0 ? l.noCost : l.ratePerYear(rateText(e.rateBp));
-    final sub = [rate, ?e.lender].join(' · ');
+    final sub = [?e.lender, rate].join(' · ');
     final progress = item.total == 0 ? 0.0 : item.paidCount / item.total;
     final next = item.nextDue;
     return AppCard(
-      radius: AppRadii.md,
-      padding: const EdgeInsets.all(AppSpacing.sm),
+      radius: AppRadii.lg,
+      padding: const EdgeInsets.all(14),
       onTap: () => context.push('/emi/${e.id}'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,9 +169,11 @@ class EmiCard extends ConsumerWidget {
           Row(
             children: [
               Expanded(
-                child: Text(
-                  item.closed ? l.emiClosed : '${l.paidOfTotal(item.paidCount, item.total)} · ${l.leftCount(item.total - item.paidCount)}',
-                  style: t.bodySmall,
+                child: Text.rich(
+                  TextSpan(children: [
+                    TextSpan(text: item.closed ? l.emiClosed : l.paidOfTotal(item.paidCount, item.total), style: t.bodySmall?.copyWith(color: c.text, fontWeight: FontWeight.w700)),
+                    if (!item.closed) TextSpan(text: ' · ${l.leftCount(item.total - item.paidCount)}', style: t.bodySmall),
+                  ]),
                 ),
               ),
               if (item.closed)
@@ -194,7 +187,7 @@ class EmiCard extends ConsumerWidget {
               stream: ref.watch(emiRepositoryProvider).watchRemaining(e.id),
               builder: (context, snap) => Padding(
                 padding: const EdgeInsets.only(top: 2),
-                child: Text(l.remainingAmount(Money.format(snap.data ?? 0)), style: t.labelMedium?.copyWith(color: c.text)),
+                child: Text(l.remainingAmount(Money.formatWhole(snap.data ?? 0)), style: t.titleSmall?.copyWith(fontSize: 13.5, fontWeight: FontWeight.w700)),
               ),
             ),
         ],
@@ -204,13 +197,14 @@ class EmiCard extends ConsumerWidget {
 }
 
 /// Due tag: orange under 7 days, red when late, plain otherwise (FR-E5).
-Widget dueTag(BuildContext context, LocalDate due, {bool short = false}) {
+/// [next]: the next installment on EMI detail is always orange (screen 19).
+Widget dueTag(BuildContext context, LocalDate due, {bool short = false, bool next = false}) {
   final l = context.l10n;
   final c = context.colors;
   final days = Ist.today().daysUntil(due);
   if (days < 0) return EmiTag(text: l.overdueDays(-days), color: c.expense, tint: c.expenseTint, icon: LucideIcons.clock);
   final text = short && days > 1 ? l.dueOnDate(shortDate(context, due)) : l.dueInDays(days);
-  if (days < 7) return EmiTag(text: text, color: c.dueSoon, tint: c.dueSoonTint, icon: LucideIcons.calendar);
+  if (days < 7 || next) return EmiTag(text: text, color: c.dueSoon, tint: c.dueSoonTint, icon: next ? null : LucideIcons.calendar);
   return EmiTag(text: text, color: c.textSecondary, tint: c.raised, icon: LucideIcons.calendar);
 }
 

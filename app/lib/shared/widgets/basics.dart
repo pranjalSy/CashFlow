@@ -93,7 +93,7 @@ class AppChip extends StatelessWidget {
 
 /// Two or more options in a pill track (Expense | Income, EMIs | Bills).
 class SegmentedSwitch extends StatelessWidget {
-  const SegmentedSwitch({super.key, required this.options, required this.index, required this.onChanged, this.activeColors});
+  const SegmentedSwitch({super.key, required this.options, required this.index, required this.onChanged, this.activeColors, this.expand = false});
 
   final List<String> options;
   final int index;
@@ -101,6 +101,9 @@ class SegmentedSwitch extends StatelessWidget {
 
   /// Colour per option when selected (for example red for Expense, green for Income); default white pill.
   final List<Color>? activeColors;
+
+  /// Fill the row with equal halves (EMIs | Bills, Spending | Trends, screens 16–17).
+  final bool expand;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +120,8 @@ class SegmentedSwitch extends StatelessWidget {
     }
     final active = activeColors?[index] ?? c.card;
     return LayoutBuilder(builder: (context, box) {
-      final segment = box.maxWidth.isFinite && w * options.length > box.maxWidth - 8 ? (box.maxWidth - 8) / options.length : w;
+      final full = box.maxWidth.isFinite ? (box.maxWidth - 8) / options.length : w;
+      final segment = expand || (box.maxWidth.isFinite && w * options.length > box.maxWidth - 8) ? full : w;
       return _track(context, dark, segment, active, style);
     });
   }
@@ -141,7 +145,11 @@ class SegmentedSwitch extends StatelessWidget {
               width: w,
               child: AnimatedContainer(
                 duration: Motion.medium,
-                decoration: ShapeDecoration(color: active, shape: AppShapes.squircle(AppRadii.pill)),
+                decoration: ShapeDecoration(
+                  color: active,
+                  shape: AppShapes.squircle(AppRadii.pill),
+                  shadows: dark ? null : [BoxShadow(color: c.text.withValues(alpha: 0.12), blurRadius: 10, offset: const Offset(0, 3), spreadRadius: -3)],
+                ),
               ),
             ),
             Row(children: [
@@ -254,4 +262,73 @@ class ListRowTile extends StatelessWidget {
       ),
     );
   }
+}
+
+/// White rounded-square icon button used in screen headers (back, more) - screens 19, 21.
+class HeaderButton extends StatelessWidget {
+  const HeaderButton({super.key, required this.icon, required this.tooltip, this.onTap});
+
+  final IconData icon;
+  final String tooltip;
+
+  /// Null when a parent (for example a popup menu) handles the tap.
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final box = Container(
+      width: 44,
+      height: 44,
+      decoration: ShapeDecoration(
+        color: c.card,
+        shape: AppShapes.squircle(14),
+        shadows: dark ? null : [BoxShadow(color: c.text.withValues(alpha: 0.08), blurRadius: 12, offset: const Offset(0, 4), spreadRadius: -4)],
+      ),
+      child: Icon(icon, size: 20, color: c.text),
+    );
+    final hit = SizedBox.square(dimension: 48, child: Center(child: box));
+    if (onTap == null) return hit;
+    return Tooltip(
+      message: tooltip,
+      child: Semantics(button: true, label: tooltip, excludeSemantics: true, child: GestureDetector(behavior: HitTestBehavior.opaque, onTap: onTap, child: hit)),
+    );
+  }
+}
+
+/// Dashed rounded outline (the collapsed "earlier paid" row, screen 19).
+class DashedOutline extends StatelessWidget {
+  const DashedOutline({super.key, required this.child, required this.color, this.radius = 18});
+
+  final Widget child;
+  final Color color;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(foregroundPainter: _DashPainter(color, radius), child: child);
+}
+
+class _DashPainter extends CustomPainter {
+  _DashPainter(this.color, this.radius);
+
+  final Color color;
+  final double radius;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final path = Path()..addRRect(RRect.fromRectAndRadius((Offset.zero & size).deflate(0.75), Radius.circular(radius)));
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.3;
+    for (final m in path.computeMetrics()) {
+      for (var d = 0.0; d < m.length; d += 9) {
+        canvas.drawPath(m.extractPath(d, d + 5), paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(_DashPainter o) => o.color != color || o.radius != radius;
 }

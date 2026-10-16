@@ -10,6 +10,9 @@ abstract final class Money {
   static const minus = '−';
 
   /// ₹1,20,000 (whole rupees) or ₹7,996.39 (when there are paise). Negative values show "−₹".
+  /// Rounded to the nearest rupee, for summaries and list cards ("₹63,971 remaining", screen 17).
+  static String formatWhole(int paise) => format((paise / 100).round() * 100);
+
   static String format(int paise, {bool showPlus = false}) {
     final abs = paise.abs();
     final text = abs % 100 == 0 ? _whole.format(abs ~/ 100) : _paise.format(abs / 100);

@@ -69,7 +69,7 @@ void main() {
 
     expect(find.text('Bike loan'), findsOneWidget);
     expect(find.text('0 of 12 paid · 12 left'), findsOneWidget);
-    expect(find.text('₹95,956.69 remaining'), findsOneWidget);
+    expect(find.text('₹95,957 remaining'), findsOneWidget); // whole rupees on the card (screen 17)
 
     await tester.tap(find.text('Bike loan'));
     await settle(tester);

@@ -19,12 +19,12 @@ IconData billIcon(String type) => switch (type) {
 (Color, Color) billColors(BuildContext context, String type) {
   final c = context.colors;
   return switch (type) {
-    'electricity' => (c.dueSoon, c.dueSoonTint),
+    'electricity' => (c.premium, c.premiumTint),
     'gas' => (c.expense, c.expenseTint),
-    'mobile' => (c.lent, c.lentTint),
-    'internet' => (c.brandText, c.brandTint),
+    'mobile' => (c.income, c.incomeTint),
+    'internet' => (c.lent, c.lentTint),
     'dth' => (c.borrowed, c.borrowedTint),
-    'water' => (c.lent, c.lentTint),
+    'water' => (c.brandText, c.brandTint),
     'insurance' => (c.income, c.incomeTint),
     _ => (c.textSecondary, c.raised),
   };

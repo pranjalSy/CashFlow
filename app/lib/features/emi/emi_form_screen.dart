@@ -14,7 +14,6 @@ import '../../core/utils/emi.dart';
 import '../../core/utils/money.dart';
 import '../../data/repositories/emi_repository.dart';
 import '../../data/repositories/plan_repository.dart';
-import '../../shared/widgets/amount_field.dart';
 import '../../shared/widgets/amount_text.dart';
 import '../../shared/widgets/app_button.dart';
 import '../../shared/widgets/app_card.dart';
@@ -115,47 +114,47 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
   }
 
   void _press(String key) => setState(() {
-        switch (_active) {
-          case _Field.price:
-            _price = AmountTyping.press(_price, key);
-          case _Field.down:
-            _down = AmountTyping.press(_down, key);
-          case _Field.loan:
-            if (!_loanTyped) _loan = AmountTyping.fromPaise(_loanPaise);
-            _loanTyped = true;
-            _loan = AmountTyping.press(_loan, key);
-          case _Field.rate:
-            final next = AmountTyping.press(_rate, key);
-            if ((Money.parse(next) ?? 0) <= 9999) _rate = next;
-          case _Field.months:
-            final next = key == '.' ? _months : '$_months$key';
-            if ((int.tryParse(next) ?? 0) <= Emi.maxMonths) _months = next.replaceFirst(RegExp(r'^0+'), '');
-          case _Field.emi:
-            _emi = AmountTyping.press(_emi, key);
-          case null:
-            break;
-        }
-      });
+    switch (_active) {
+      case _Field.price:
+        _price = AmountTyping.press(_price, key);
+      case _Field.down:
+        _down = AmountTyping.press(_down, key);
+      case _Field.loan:
+        if (!_loanTyped) _loan = AmountTyping.fromPaise(_loanPaise);
+        _loanTyped = true;
+        _loan = AmountTyping.press(_loan, key);
+      case _Field.rate:
+        final next = AmountTyping.press(_rate, key);
+        if ((Money.parse(next) ?? 0) <= 9999) _rate = next;
+      case _Field.months:
+        final next = key == '.' ? _months : '$_months$key';
+        if ((int.tryParse(next) ?? 0) <= Emi.maxMonths) _months = next.replaceFirst(RegExp(r'^0+'), '');
+      case _Field.emi:
+        _emi = AmountTyping.press(_emi, key);
+      case null:
+        break;
+    }
+  });
 
   void _backspace() => setState(() {
-        switch (_active) {
-          case _Field.price:
-            _price = AmountTyping.backspace(_price);
-          case _Field.down:
-            _down = AmountTyping.backspace(_down);
-          case _Field.loan:
-            _loanTyped = true;
-            _loan = AmountTyping.backspace(_loan);
-          case _Field.rate:
-            _rate = AmountTyping.backspace(_rate);
-          case _Field.months:
-            _months = AmountTyping.backspace(_months);
-          case _Field.emi:
-            _emi = AmountTyping.backspace(_emi);
-          case null:
-            break;
-        }
-      });
+    switch (_active) {
+      case _Field.price:
+        _price = AmountTyping.backspace(_price);
+      case _Field.down:
+        _down = AmountTyping.backspace(_down);
+      case _Field.loan:
+        _loanTyped = true;
+        _loan = AmountTyping.backspace(_loan);
+      case _Field.rate:
+        _rate = AmountTyping.backspace(_rate);
+      case _Field.months:
+        _months = AmountTyping.backspace(_months);
+      case _Field.emi:
+        _emi = AmountTyping.backspace(_emi);
+      case null:
+        break;
+    }
+  });
 
   void _open(_Field f) {
     if (_termsLocked) {
@@ -202,20 +201,31 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
   }
 
   Future<void> _pickIcon() async {
-    final picked = await showAppSheet<String>(context, builder: (context) {
-      final c = context.colors;
-      return Column(mainAxisSize: MainAxisSize.min, children: [
-        Text(context.l10n.chooseIcon, style: Theme.of(context).textTheme.titleLarge),
-        const SizedBox(height: AppSpacing.sm),
-        Wrap(spacing: 10, runSpacing: 10, alignment: WrapAlignment.center, children: [
-          for (final k in emiIconKeys)
-            InkResponse(
-              onTap: () => Navigator.pop(context, k),
-              child: IconTile(icon: emiIcon(k), color: k == _icon ? c.onButton : c.brandText, tint: k == _icon ? c.brandButton : c.brandTint, size: 52),
+    final picked = await showAppSheet<String>(
+      context,
+      builder: (context) {
+        final c = context.colors;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(context.l10n.chooseIcon, style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: AppSpacing.sm),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              alignment: WrapAlignment.center,
+              children: [
+                for (final k in emiIconKeys)
+                  InkResponse(
+                    onTap: () => Navigator.pop(context, k),
+                    child: IconTile(icon: emiIcon(k), color: k == _icon ? c.onButton : c.brandText, tint: k == _icon ? c.brandButton : c.brandTint, size: 52),
+                  ),
+              ],
             ),
-        ]),
-      ]);
-    });
+          ],
+        );
+      },
+    );
     if (picked != null) setState(() => _icon = picked);
   }
 
@@ -245,190 +255,331 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
 
     return AppPage(
       child: SafeArea(
-        child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
-            child: Row(children: [
-              IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
-              Expanded(child: Center(child: Text(_editing ? l.editEmi : l.addEmi, style: t.titleLarge))),
-              const SizedBox(width: 48),
-            ]),
-          ),
-          if (!premium)
-            const Expanded(child: SingleChildScrollView(padding: EdgeInsets.all(AppSpacing.md), child: EmiLockCard()))
-          else ...[
-            Expanded(
-              child: ListView(padding: const EdgeInsets.all(AppSpacing.md), children: [
-                AppCard(
-                  radius: AppRadii.md,
-                  padding: const EdgeInsets.fromLTRB(12, 10, 14, 10),
-                  border: _tried && _name.text.trim().isEmpty ? BorderSide(color: c.expense, width: 2) : null,
-                  child: Column(children: [
-                    Row(children: [
-                      InkResponse(onTap: _pickIcon, child: IconTile(icon: emiIcon(_icon), color: c.brandText, tint: c.brandTint)),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Text(l.emiName, style: t.labelMedium),
-                          TextField(
-                            controller: _name,
-                            onTap: () => setState(() => _active = null),
-                            onChanged: (_) => setState(() {}),
-                            style: t.titleMedium,
-                            textCapitalization: TextCapitalization.sentences,
-                            decoration: InputDecoration.collapsed(hintText: l.emiNameHint),
-                          ),
-                        ]),
-                      ),
-                    ]),
-                    Divider(height: 18, color: c.border),
-                    TextField(
-                      controller: _lender,
-                      onTap: () => setState(() => _active = null),
-                      style: t.bodyMedium,
-                      textCapitalization: TextCapitalization.words,
-                      decoration: InputDecoration.collapsed(hintText: l.lenderOptional),
-                    ),
-                  ]),
-                ),
-                if (_tried && _name.text.trim().isEmpty) _error(context, l.emiNameMissing),
-                const SizedBox(height: AppSpacing.sm),
-                Row(children: [
-                  Expanded(child: AmountField(label: l.itemPrice, typed: _price, active: _active == _Field.price, onTap: () => _open(_Field.price))),
-                  const SizedBox(width: AppSpacing.xs),
-                  Expanded(child: AmountField(label: l.downPayment, typed: _down, active: _active == _Field.down, onTap: () => _open(_Field.down))),
-                ]),
-                const SizedBox(height: AppSpacing.xs),
-                AmountField(
-                  label: l.loanAmount,
-                  typed: _loanTyped || _price.isEmpty ? _loan : AmountTyping.fromPaise(_loanPaise),
-                  active: _active == _Field.loan,
-                  error: loanMissing,
-                  onTap: () => _open(_Field.loan),
-                ),
-                if (loanMissing) _error(context, l.loanMissing),
-                const SizedBox(height: AppSpacing.xs),
-                Row(children: [
-                  Expanded(child: _ValueField(label: l.interestYearly, value: _rate.isEmpty ? '0' : _rate, suffix: '%', active: _active == _Field.rate, onTap: () => _open(_Field.rate))),
-                  const SizedBox(width: AppSpacing.xs),
-                  Expanded(child: _ValueField(label: l.firstEmiDate, value: longDate(context, _first), active: false, onTap: _pickDate)),
-                ]),
-                if (_termsLocked) ...[
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(l.emiTermsLocked, style: t.bodySmall?.copyWith(color: c.dueSoon, fontWeight: FontWeight.w600)),
-                ],
-                SectionLabel(l.iKnowThe),
-                SegmentedSwitch(
-                  options: [l.months, l.emiAmount],
-                  index: _knowMonths ? 0 : 1,
-                  onChanged: (i) {
-                    if (_termsLocked) return _open(_Field.months);
-                    setState(() {
-                      _knowMonths = i == 0;
-                      _active = _knowMonths ? _Field.months : _Field.emi;
-                    });
-                  },
-                ),
-                const SizedBox(height: AppSpacing.xs),
-                if (_knowMonths)
-                  _ValueField(
-                    label: l.numberOfMonths,
-                    value: _months.isEmpty ? '0' : _months,
-                    suffix: l.months.toLowerCase(),
-                    active: _active == _Field.months,
-                    error: termMissing,
-                    onTap: () => _open(_Field.months),
-                  )
-                else
-                  AmountField(label: l.emiAmount, typed: _emi, active: _active == _Field.emi, error: termMissing, onTap: () => _open(_Field.emi)),
-                if (termMissing) _error(context, l.emiTermMissing),
-                const SizedBox(height: AppSpacing.sm),
-                if (plan != null)
-                  AnimatedBuilder(
-                    animation: _shake,
-                    builder: (context, child) => Transform.translate(offset: Offset(math.sin(_shake.value * math.pi * 6) * 10 * (1 - _shake.value), 0), child: child),
-                    child: plan.impossible ? _notPossible(context) : _result(context, plan.months, plan.emi),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+              child: Row(
+                children: [
+                  HeaderButton(icon: LucideIcons.x, tooltip: l.close, onTap: () => context.pop()),
+                  Expanded(
+                    child: Center(child: Text(_editing ? l.editEmi : l.addEmi, style: t.titleLarge)),
                   ),
-              ]),
-            ),
-            if (_active != null)
-              Material(
-                color: c.sheet,
-                elevation: 12,
-                shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.xl))),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(14, 10, 14, 10 + MediaQuery.paddingOf(context).bottom),
-                  child: Column(mainAxisSize: MainAxisSize.min, children: [
-                    Row(children: [
-                      Padding(padding: const EdgeInsets.only(left: 6), child: Text(_fieldLabel(l, _active!), style: t.labelMedium)),
-                      const Spacer(),
-                      AppButton(label: l.done, onPressed: () => setState(() => _active = null), expand: false, height: 40),
-                    ]),
-                    const SizedBox(height: 8),
-                    NumberPad(keyHeight: MediaQuery.sizeOf(context).height < 700 ? 42 : 50, onDigit: _press, onBackspace: _backspace),
-                  ]),
-                ),
-              )
-            else
-              Padding(
-                padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, AppSpacing.md, AppSpacing.md),
-                child: AppButton(label: l.saveEmi, onPressed: _save),
+                  const SizedBox(width: 48),
+                ],
               ),
+            ),
+            if (!premium)
+              const Expanded(
+                child: SingleChildScrollView(padding: EdgeInsets.all(AppSpacing.md), child: EmiLockCard()),
+              )
+            else ...[
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  children: [
+                    // Name card: icon, name, lender in a small pill on the right (screen 18).
+                    AppCard(
+                      radius: AppRadii.lg,
+                      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                      border: _tried && _name.text.trim().isEmpty ? BorderSide(color: c.expense, width: 2) : null,
+                      child: Row(
+                        children: [
+                          InkResponse(
+                            onTap: _pickIcon,
+                            child: IconTile(icon: emiIcon(_icon), color: c.brandText, tint: c.brandTint),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(l.emiName, style: t.labelSmall),
+                                TextField(
+                                  controller: _name,
+                                  onTap: () => setState(() => _active = null),
+                                  onChanged: (_) => setState(() {}),
+                                  style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                                  textCapitalization: TextCapitalization.sentences,
+                                  decoration: InputDecoration.collapsed(hintText: l.emiNameHint),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 96,
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            decoration: ShapeDecoration(color: c.raised, shape: AppShapes.squircle(AppRadii.pill)),
+                            child: TextField(
+                              controller: _lender,
+                              onTap: () => setState(() => _active = null),
+                              textAlign: TextAlign.center,
+                              style: t.labelMedium?.copyWith(color: c.text, fontWeight: FontWeight.w700),
+                              textCapitalization: TextCapitalization.characters,
+                              decoration: InputDecoration.collapsed(hintText: l.lenderShort),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (_tried && _name.text.trim().isEmpty) _error(context, l.emiNameMissing),
+                    const SizedBox(height: AppSpacing.xs),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _MiniField(
+                            label: l.itemPrice,
+                            value: '₹${Money.formatTyping(_price)}',
+                            active: _active == _Field.price,
+                            onTap: () => _open(_Field.price),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.xs),
+                        Expanded(
+                          child: _MiniField(
+                            label: l.downPayment,
+                            value: '₹${Money.formatTyping(_down)}',
+                            active: _active == _Field.down,
+                            onTap: () => _open(_Field.down),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    // Loan amount: a tinted bar, label left and the amount right in brand blue.
+                    Material(
+                      color: c.brandTint,
+                      shape: AppShapes.squircle(
+                        AppRadii.md,
+                        side: BorderSide(color: loanMissing ? c.expense : (_active == _Field.loan ? c.brandButton : Colors.transparent), width: 2),
+                      ),
+                      child: InkWell(
+                        customBorder: AppShapes.squircle(AppRadii.md),
+                        onTap: () => _open(_Field.loan),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(l.loanAmount, style: t.labelMedium?.copyWith(color: c.brandText)),
+                              ),
+                              AmountText(
+                                '₹${Money.formatTyping(_loanTyped || _price.isEmpty ? _loan : AmountTyping.fromPaise(_loanPaise))}',
+                                size: 16,
+                                color: c.brandText,
+                                alignment: Alignment.centerRight,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (loanMissing) _error(context, l.loanMissing),
+                    const SizedBox(height: AppSpacing.xs),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _MiniField(
+                            label: l.interestYearly,
+                            value: _rate.isEmpty ? '0' : _rate,
+                            suffix: '%',
+                            active: _active == _Field.rate,
+                            onTap: () => _open(_Field.rate),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.xs),
+                        Expanded(
+                          child: _MiniField(label: l.firstEmiDate, value: longDate(context, _first), active: false, onTap: _pickDate),
+                        ),
+                      ],
+                    ),
+                    if (_termsLocked) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        l.emiTermsLocked,
+                        style: t.bodySmall?.copyWith(color: c.dueSoon, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                    const SizedBox(height: AppSpacing.sm),
+                    // "I know the" on the left, a compact switch on the right with the choice in brand blue.
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4),
+                          child: Text(l.iKnowThe, style: t.labelMedium),
+                        ),
+                        const SizedBox(width: 8),
+                        // Shrinks on narrow phones / big text instead of overflowing.
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: SegmentedSwitch(
+                              options: [l.months, l.emiAmount],
+                              index: _knowMonths ? 0 : 1,
+                              activeColors: [c.brandButton, c.brandButton],
+                              onChanged: (i) {
+                                if (_termsLocked) return _open(_Field.months);
+                                setState(() {
+                                  _knowMonths = i == 0;
+                                  _active = _knowMonths ? _Field.months : _Field.emi;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    if (_knowMonths)
+                      _MiniField(
+                        label: l.numberOfMonths,
+                        value: _months.isEmpty ? '0' : _months,
+                        suffix: l.months.toLowerCase(),
+                        active: _active == _Field.months,
+                        error: termMissing,
+                        onTap: () => _open(_Field.months),
+                      )
+                    else
+                      _MiniField(
+                        label: l.emiAmount,
+                        value: '₹${Money.formatTyping(_emi)}',
+                        suffix: l.perMonth,
+                        active: _active == _Field.emi,
+                        error: termMissing,
+                        onTap: () => _open(_Field.emi),
+                      ),
+                    if (termMissing) _error(context, l.emiTermMissing),
+                    const SizedBox(height: AppSpacing.sm),
+                    if (plan != null)
+                      AnimatedBuilder(
+                        animation: _shake,
+                        builder: (context, child) =>
+                            Transform.translate(offset: Offset(math.sin(_shake.value * math.pi * 6) * 10 * (1 - _shake.value), 0), child: child),
+                        child: plan.impossible ? _notPossible(context) : _result(context, plan.months, plan.emi),
+                      ),
+                  ],
+                ),
+              ),
+              if (_active != null)
+                Material(
+                  color: c.sheet,
+                  elevation: 12,
+                  shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.xl))),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(14, 10, 14, 10 + MediaQuery.paddingOf(context).bottom),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 6),
+                              child: Text(_fieldLabel(l, _active!), style: t.labelMedium),
+                            ),
+                            const Spacer(),
+                            AppButton(label: l.done, onPressed: () => setState(() => _active = null), expand: false, height: 40),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        NumberPad(keyHeight: MediaQuery.sizeOf(context).height < 700 ? 42 : 50, onDigit: _press, onBackspace: _backspace),
+                      ],
+                    ),
+                  ),
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, AppSpacing.md, AppSpacing.md),
+                  child: AppButton(label: l.saveEmi, onPressed: _save),
+                ),
+            ],
           ],
-        ]),
+        ),
       ),
     );
   }
 
   String _fieldLabel(AppLocalizations l, _Field f) => switch (f) {
-        _Field.price => l.itemPrice,
-        _Field.down => l.downPayment,
-        _Field.loan => l.loanAmount,
-        _Field.rate => l.interestYearly,
-        _Field.months => l.numberOfMonths,
-        _Field.emi => l.emiAmount,
-      };
+    _Field.price => l.itemPrice,
+    _Field.down => l.downPayment,
+    _Field.loan => l.loanAmount,
+    _Field.rate => l.interestYearly,
+    _Field.months => l.numberOfMonths,
+    _Field.emi => l.emiAmount,
+  };
 
   Widget _error(BuildContext context, String text) => Padding(
-        padding: const EdgeInsets.only(left: 4, top: 6),
-        child: Text(text, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: context.colors.expense, fontWeight: FontWeight.w600)),
-      );
+    padding: const EdgeInsets.only(left: 4, top: 6),
+    child: Text(
+      text,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: context.colors.expense, fontWeight: FontWeight.w600),
+    ),
+  );
 
+  /// Result card (screen 18): dark navy in light mode; the same card in dark-mode colours.
   Widget _result(BuildContext context, int months, int emi) {
     final l = context.l10n;
     final c = context.colors;
     final t = Theme.of(context).textTheme;
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    final bg = dark ? c.raised : c.text;
+    final fg = dark ? c.text : c.onButton;
     final s = Emi.schedule(principal: _loanPaise, rateBp: _rateBp, emi: emi, months: months, firstDue: _first);
     final total = s.fold(0, (a, i) => a + i.amount);
     final interest = total - _loanPaise;
     final last = s.last;
     final big = _knowMonths
-        ? Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            Flexible(child: AmountText(Money.format(emi), size: 30, color: c.brandText)),
-            Padding(padding: const EdgeInsets.only(bottom: 5, left: 4), child: Text(l.perMonth, style: t.bodyMedium)),
-          ])
-        : Text(l.monthsCount(s.length), style: t.headlineSmall?.copyWith(color: c.brandText));
-    return AppCard(
-      radius: AppRadii.lg,
-      color: c.brandTint,
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(_knowMonths ? l.yourEmi : l.itWillTake, style: t.labelMedium),
-        big,
-        const SizedBox(height: AppSpacing.xs),
-        Row(children: [
-          if (_knowMonths) ...[
-            Expanded(child: _Fact(label: l.totalInterest, value: Money.format(interest))),
-            Expanded(child: _Fact(label: l.totalToPay, value: Money.format(total))),
-            Expanded(child: _Fact(label: l.lastEmi, value: longDate(context, last.dueDate), money: false)),
-          ] else ...[
-            Expanded(child: _Fact(label: l.lastEmi, value: Money.format(last.amount))),
-            Expanded(child: _Fact(label: l.totalInterest, value: Money.format(interest))),
-            Expanded(child: _Fact(label: l.endsOn, value: longDate(context, last.dueDate), money: false)),
+        ? Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Flexible(child: AmountText(Money.format(emi), size: 26, color: fg)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4, left: 4),
+                child: Text(l.perMonth, style: t.bodySmall?.copyWith(color: fg.withValues(alpha: 0.75))),
+              ),
+            ],
+          )
+        : Text(l.monthsCount(s.length), style: t.headlineSmall?.copyWith(color: fg));
+    return DecoratedBox(
+      decoration: ShapeDecoration(color: bg, shape: AppShapes.squircle(AppRadii.lg)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(_knowMonths ? l.yourEmi : l.itWillTake, style: t.labelMedium?.copyWith(color: fg.withValues(alpha: 0.8))),
+            big,
+            Divider(height: 22, color: fg.withValues(alpha: 0.15)),
+            Row(
+              children: [
+                if (_knowMonths) ...[
+                  Expanded(
+                    child: _Fact(label: l.totalInterest, value: Money.format(interest), color: fg),
+                  ),
+                  Expanded(
+                    child: _Fact(label: l.totalToPay, value: Money.format(total), color: fg),
+                  ),
+                  Expanded(
+                    child: _Fact(label: l.lastEmi, value: longDate(context, last.dueDate), money: false, color: fg),
+                  ),
+                ] else ...[
+                  Expanded(
+                    child: _Fact(label: l.lastEmi, value: Money.format(last.amount), color: fg),
+                  ),
+                  Expanded(
+                    child: _Fact(label: l.totalInterest, value: Money.format(interest), color: fg),
+                  ),
+                  Expanded(
+                    child: _Fact(label: l.endsOn, value: longDate(context, last.dueDate), money: false, color: fg),
+                  ),
+                ],
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(l.totalsMayDiffer, style: t.bodySmall?.copyWith(color: fg.withValues(alpha: 0.6), fontSize: 11)),
           ],
-        ]),
-        const SizedBox(height: 6),
-        Text(l.totalsMayDiffer, style: t.bodySmall),
-      ]),
+        ),
+      ),
     );
   }
 
@@ -437,28 +588,45 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
     final c = context.colors;
     final t = Theme.of(context).textTheme;
     final interest = Money.format(Emi.firstMonthInterest(principal: _loanPaise, rateBp: _rateBp));
-    return AppCard(
-      radius: AppRadii.lg,
-      color: c.expenseTint,
-      border: BorderSide(color: c.expense, width: 1.5),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(children: [
-          Icon(LucideIcons.circleAlert, color: c.expense, size: 20),
-          const SizedBox(width: 6),
-          Text(l.notPossible, style: t.titleMedium?.copyWith(color: c.expense)),
-        ]),
-        const SizedBox(height: 4),
-        Text(l.notPossibleTitle, style: t.titleSmall),
-        const SizedBox(height: 2),
-        Text(l.notPossibleBody(interest), style: t.bodySmall?.copyWith(color: c.textSecondary)),
-      ]),
+    return DecoratedBox(
+      decoration: ShapeDecoration(
+        color: c.expenseTint,
+        shape: AppShapes.squircle(AppRadii.lg, side: BorderSide(color: c.expense.withValues(alpha: 0.35))),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l.notPossible, style: t.labelMedium?.copyWith(color: c.expense)),
+            Text(
+              l.notPossibleTitle,
+              style: t.titleMedium?.copyWith(color: c.expense, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 6),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 1),
+                  child: Icon(LucideIcons.circleAlert, size: 14, color: c.expense),
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(l.notPossibleBody(interest, Money.format(_loanPaise), rateText(_rateBp)), style: t.bodySmall?.copyWith(color: c.textSecondary)),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-/// A tappable field showing a plain value (rate, months, date) in the same style as [AmountField].
-class _ValueField extends StatelessWidget {
-  const _ValueField({required this.label, required this.value, required this.active, required this.onTap, this.suffix, this.error = false});
+/// A small white field: label above, value (and a suffix) below (screen 18).
+class _MiniField extends StatelessWidget {
+  const _MiniField({required this.label, required this.value, required this.active, required this.onTap, this.suffix, this.error = false});
 
   final String label;
   final String value;
@@ -471,8 +639,7 @@ class _ValueField extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final t = Theme.of(context).textTheme;
-    final border = error ? c.expense : (active ? c.brandButton : c.border);
-    final shape = AppShapes.squircle(AppRadii.md, side: BorderSide(color: border, width: active || error ? 2 : 1));
+    final shape = AppShapes.squircle(AppRadii.md, side: BorderSide(color: error ? c.expense : (active ? c.brandButton : Colors.transparent), width: 2));
     return Material(
       color: c.card,
       shape: shape,
@@ -480,14 +647,29 @@ class _ValueField extends StatelessWidget {
         onTap: onTap,
         customBorder: shape,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.labelMedium),
-            Row(crossAxisAlignment: CrossAxisAlignment.baseline, textBaseline: TextBaseline.alphabetic, children: [
-              Flexible(child: Text(value, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleLarge?.copyWith(fontSize: 20))),
-              if (suffix != null) ...[const SizedBox(width: 4), Text(suffix!, style: t.bodyMedium)],
-            ]),
-          ]),
+          padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.labelSmall),
+              const SizedBox(height: 2),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Flexible(
+                    child: Text(
+                      value,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700, fontFeatures: const [FontFeature.tabularFigures()]),
+                    ),
+                  ),
+                  if (suffix != null) ...[const SizedBox(width: 4), Text(suffix!, style: t.bodySmall)],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -495,18 +677,34 @@ class _ValueField extends StatelessWidget {
 }
 
 class _Fact extends StatelessWidget {
-  const _Fact({required this.label, required this.value, this.money = true});
+  const _Fact({required this.label, required this.value, required this.color, this.money = true});
 
   final String label;
   final String value;
+  final Color color;
   final bool money;
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall),
-      money ? AmountText(value, size: 14) : Text(value, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall),
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: t.labelSmall?.copyWith(color: color.withValues(alpha: 0.7)),
+        ),
+        money
+            ? AmountText(value, size: 13.5, color: color)
+            : Text(
+                value,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: t.titleSmall?.copyWith(color: color, fontSize: 13.5),
+              ),
+      ],
+    );
   }
 }

@@ -814,6 +814,9 @@ class AppLocalizationsGu extends AppLocalizations {
   String get lenderOptional => 'આપનાર (વૈકલ્પિક)';
 
   @override
+  String get lenderShort => 'લેન્ડર';
+
+  @override
   String get itemPrice => 'વસ્તુની કિંમત';
 
   @override
@@ -879,8 +882,8 @@ class AppLocalizationsGu extends AppLocalizations {
   String get notPossibleTitle => 'EMI મહિનાના વ્યાજ કરતાં ઓછી છે';
 
   @override
-  String notPossibleBody(String interest) {
-    return 'ફક્ત વ્યાજ જ $interest મહિને છે. $interest કરતાં વધુ લખો, અથવા મહિના પસંદ કરો.';
+  String notPossibleBody(String interest, String loan, String rate) {
+    return 'ફક્ત વ્યાજ જ $loan પર $rate% થી $interest મહિને છે. $interest થી વધુ લખો, અથવા મહિના પસંદ કરો.';
   }
 
   @override
@@ -1121,6 +1124,11 @@ class AppLocalizationsGu extends AppLocalizations {
   @override
   String lastBill(String amount) {
     return 'છેલ્લું બિલ $amount';
+  }
+
+  @override
+  String billTapPaid(String amount) {
+    return 'છેલ્લું બિલ $amount · ભર્યું હોય તો ટેપ કરો';
   }
 
   @override
