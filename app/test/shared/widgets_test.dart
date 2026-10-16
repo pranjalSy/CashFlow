@@ -156,6 +156,24 @@ void main() {
       expect(find.text('Home'), findsNothing);
     });
 
+    testWidgets('tabs in between are not affected: they never grow or show their name (owner bug, 16 Oct)', (tester) async {
+      final index = ValueNotifier(0);
+      await tester.pumpWidget(ProviderScope(child: bar(index: index)));
+      double width(IconData icon) => tester.getSize(find.ancestor(of: find.byIcon(icon), matching: find.byType(Positioned)).first).width;
+      final contacts = width(Icons.people_alt_rounded);
+      final charts = width(Icons.pie_chart_rounded);
+      await tester.tap(find.byIcon(Icons.calendar_month_rounded));
+      await tester.pump();
+      for (var i = 0; i < 8; i++) {
+        await tester.pump(const Duration(milliseconds: 45));
+        expect(find.text('Contacts'), findsNothing);
+        expect(find.text('Charts'), findsNothing);
+        expect(width(Icons.people_alt_rounded), contacts);
+        expect(width(Icons.pie_chart_rounded), charts);
+      }
+      await tester.pumpAndSettle();
+    });
+
     testWidgets('with "remove animations" the pill jumps', (tester) async {
       final index = ValueNotifier(0);
       await tester.pumpWidget(ProviderScope(child: bar(index: index, noMotion: true)));

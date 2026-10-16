@@ -173,4 +173,6 @@
 - Not added (not approved): dragging the finger along the bar; Hero / card-expand transitions; the other mockup animations (Welcome, Fingerprint, Contacts, Home). These are noted for the owner to decide.
 - Tests: 3 new (the pill passes the tabs in between and ends on the tapped one; jumps with remove-animations; no overflow at 320 px and 2.0× text while moving). Suite **126 passing**, analyze clean.
 - Real-font frames (light and dark) checked. Dev release APK installed on the owner's Realme over USB.
+- **Bug fix (owner, 16 Oct):** while the pill moved, the tabs in between grew, showed their names, and wobbled with the bounce. Now only the old tab (shrinks) and the new tab (grows) change. The layout moves once with no bounce; only the pill has a gentle bounce and stays inside the bar. The old name fades out fast and the new name fades in as the pill arrives. Regression test added: tabs in between never grow or show their name. Suite **127 passing**, installed on the owner's phone and checked there.
+- Seen on the phone, not fixed (separate T09 bug): some phone contacts show as "?" in Contacts → All contacts (name not read).
 

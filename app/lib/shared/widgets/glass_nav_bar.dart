@@ -45,17 +45,15 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
   static const _activeExtra = 21.0 + 7.0 + 24.0; // icon + gap + side padding next to the name
 
   late final AnimationController _move = AnimationController(vsync: this, duration: const Duration(milliseconds: 340), value: 1);
-  late double _from = widget.index.toDouble();
-  late double _now = widget.index.toDouble();
 
-  /// Where the pill is, as a tab position (1.4 = between tabs 1 and 2). Overshoots a little at the end.
-  double get _t => _from + (widget.index - _from) * Curves.easeOutBack.transform(_move.value);
+  /// The tab the pill is leaving. Only this tab and the new one change; the others never grow.
+  late int _from = widget.index;
 
   @override
   void didUpdateWidget(GlassNavBar old) {
     super.didUpdateWidget(old);
     if (old.index == widget.index) return;
-    _from = _now;
+    _from = old.index;
     if (MediaQuery.disableAnimationsOf(context)) {
       _move.value = 1;
     } else {
@@ -110,6 +108,13 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
     );
   }
 
+  /// The old name fades out quickly; the new one fades in as the pill arrives.
+  double _nameOpacity(int i, double p) {
+    if (i == widget.index) return ((p - 0.45) / 0.55).clamp(0.0, 1.0);
+    if (i == _from) return (1 - p / 0.35).clamp(0.0, 1.0);
+    return 0;
+  }
+
   Widget _tabs(BuildContext context, double width) {
     final c = context.colors;
     final dark = Theme.of(context).brightness == Brightness.dark;
@@ -117,22 +122,23 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
     final scaler = MediaQuery.textScalerOf(context);
     final items = widget.items;
     final n = items.length;
-    final t = _t;
-    _now = t;
-    final at = t.clamp(0.0, n - 1.0);
-    double on(int i) => (1 - (at - i).abs()).clamp(0.0, 1.0);
+    final to = widget.index;
 
-    // Each tab grows from icon-only to icon + name as the pill arrives; it shrinks on narrow phones.
+    // Layout moves once, smoothly (no bounce); the pill alone overshoots a little.
+    final p = Curves.easeOutCubic.transform(_move.value);
+    final q = const Cubic(0.3, 1.25, 0.6, 1).transform(_move.value); // gentle bounce at the end
+
+    // Icon-only tabs keep their width; the old tab shrinks while the new one grows to icon + name.
     final maxActive = math.max(_idle, width - _idle * (n - 1));
-    final widths = [
-      for (var i = 0; i < n; i++)
-        () {
-          final name = TextPainter(text: TextSpan(text: items[i].label, style: style), textScaler: scaler, maxLines: 1, textDirection: TextDirection.ltr)..layout();
-          final full = (_activeExtra + name.width).clamp(_idle, maxActive);
-          name.dispose();
-          return _idle + (full - _idle) * on(i);
-        }(),
-    ];
+    double full(int i) {
+      final name = TextPainter(text: TextSpan(text: items[i].label, style: style), textScaler: scaler, maxLines: 1, textDirection: TextDirection.ltr)..layout();
+      final w = (_activeExtra + name.width).clamp(_idle, maxActive);
+      name.dispose();
+      return w;
+    }
+
+    double shown(int i) => i == to ? p : (i == _from ? 1 - p : 0);
+    final widths = [for (var i = 0; i < n; i++) _idle + (shown(i) == 0 ? 0 : (full(i) - _idle) * shown(i))];
     final gap = n < 2 ? 0.0 : math.max(0.0, (width - widths.fold(0.0, (a, w) => a + w)) / (n - 1));
     final lefts = <double>[];
     var x = 0.0;
@@ -141,19 +147,17 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
       x += w + gap;
     }
 
-    // The pill sits between the two tabs it is passing: longer and a bit flatter mid-way.
-    final k = at.floor().clamp(0, n - 1);
-    final next = math.min(k + 1, n - 1);
-    final f = at - k;
-    final mid = _move.isAnimating ? math.sin(f * math.pi) : 0.0;
+    // The pill travels from the old tab to the new one: longer and a bit flatter mid-way.
+    final mid = _move.isAnimating ? math.sin(q.clamp(0.0, 1.0) * math.pi) : 0.0;
     final stretch = 18 * mid;
     final height = 48 - 6 * mid;
-    final left = lefts[k] + (lefts[next] - lefts[k]) * f - stretch / 2 + (t - at) * 40;
+    final pillWidth = widths[_from] + (widths[to] - widths[_from]) * q.clamp(0.0, 1.0) + stretch;
+    final left = (lefts[_from] + (lefts[to] - lefts[_from]) * q - stretch / 2).clamp(0.0, math.max(0.0, width - pillWidth)).toDouble(); // stays inside the bar
 
     return Stack(children: [
       Positioned(
         left: left,
-        width: widths[k] + (widths[next] - widths[k]) * f + stretch,
+        width: pillWidth,
         top: (62 - height) / 2,
         height: height,
         child: DecoratedBox(
@@ -170,20 +174,26 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
           width: widths[i],
           top: 7,
           height: 48,
-          child: _Tab(item: items[i], selected: i == widget.index, on: on(i), onTap: () => _tap(i)),
+          child: _Tab(item: items[i], selected: i == to, on: shown(i), name: _nameOpacity(i, p), pop: i == to && _move.isAnimating ? math.sin(p * math.pi) : 0, onTap: () => _tap(i)),
         ),
     ]);
   }
 }
 
 class _Tab extends StatelessWidget {
-  const _Tab({required this.item, required this.selected, required this.on, required this.onTap});
+  const _Tab({required this.item, required this.selected, required this.on, required this.name, required this.pop, required this.onTap});
 
   final NavItem item;
   final bool selected;
 
   /// 0 = icon only, 1 = the pill is here and the name shows.
   final double on;
+
+  /// Opacity of the name.
+  final double name;
+
+  /// 0…1 while the new tab's icon pops once.
+  final double pop;
   final VoidCallback onTap;
 
   @override
@@ -201,15 +211,14 @@ class _Tab extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // A small pop while the pill passes over the icon.
               Transform.scale(
-                scale: 1 + 0.32 * on * (1 - on),
+                scale: 1 + 0.12 * pop,
                 child: Icon(item.icon, size: 21, color: Color.lerp(c.textSecondary, c.text, on)),
               ),
-              if (on > 0.02)
+              if (on > 0.02 && name > 0)
                 Flexible(
                   child: Opacity(
-                    opacity: on,
+                    opacity: name,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 7),
                       child: Text(item.label, maxLines: 1, overflow: TextOverflow.fade, softWrap: false, style: Theme.of(context).textTheme.titleSmall),
