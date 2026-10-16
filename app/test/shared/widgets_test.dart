@@ -176,6 +176,21 @@ void main() {
       await tester.pumpAndSettle();
     });
 
+    testWidgets('every tab sits in the middle of the pill, Contacts too (owner bug, 17 Oct)', (tester) async {
+      final index = ValueNotifier(0);
+      await tester.pumpWidget(ProviderScope(child: bar(index: index)));
+      const icons = [Icons.home_rounded, Icons.people_alt_rounded, Icons.pie_chart_rounded, Icons.calendar_month_rounded];
+      for (var i = 0; i < tabs.length; i++) {
+        index.value = i;
+        await tester.pumpAndSettle();
+        final pill = tester.getRect(find.descendant(of: find.byType(GlassNavBar), matching: find.byType(DecoratedBox)).at(1));
+        final icon = tester.getRect(find.byIcon(icons[i]));
+        final name = tester.getRect(find.text(tabs[i].label));
+        expect(icon.left - pill.left, greaterThan(8), reason: tabs[i].label);
+        expect(((icon.left - pill.left) - (pill.right - name.right)).abs(), lessThan(2), reason: tabs[i].label);
+      }
+    });
+
     testWidgets('with "remove animations" the pill jumps', (tester) async {
       final index = ValueNotifier(0);
       await tester.pumpWidget(ProviderScope(child: bar(index: index, noMotion: true)));

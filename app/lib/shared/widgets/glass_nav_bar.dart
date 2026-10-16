@@ -41,7 +41,7 @@ class GlassNavBar extends StatefulWidget {
 }
 
 class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStateMixin {
-  static const _idle = 52.0; // a tab showing only its icon
+  static const _idle = 48.0; // a tab showing only its icon (48 dp tap target)
   static const _activeExtra = 21.0 + 7.0 + 24.0; // icon + gap + side padding next to the name
 
   late final AnimationController _move = AnimationController(vsync: this, duration: const Duration(milliseconds: 340), value: 1);
@@ -91,7 +91,7 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
               child: SizedBox(
                 height: 62,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: LayoutBuilder(
                     builder: (context, box) => RepaintBoundary(
                       child: AnimatedBuilder(animation: _move, builder: (context, _) => _tabs(context, box.maxWidth)),
@@ -101,7 +101,7 @@ class _GlassNavBarState extends State<GlassNavBar> with SingleTickerProviderStat
               ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 6),
           _PlusButton(open: widget.plusOpen, onTap: widget.onPlus, label: widget.plusLabel),
         ],
       ),
@@ -208,24 +208,32 @@ class _Tab extends StatelessWidget {
         onTap: onTap,
         behavior: HitTestBehavior.opaque,
         child: ClipRect(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Transform.scale(
-                scale: 1 + 0.12 * pop,
-                child: Icon(item.icon, size: 21, color: Color.lerp(c.textSecondary, c.text, on)),
-              ),
-              if (on > 0.02 && name > 0)
-                Flexible(
-                  child: Opacity(
-                    opacity: name,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 7),
-                      child: Text(item.label, maxLines: 1, overflow: TextOverflow.fade, softWrap: false, style: Theme.of(context).textTheme.titleSmall),
+          // Equal padding on both sides, so icon + name sit in the middle of the pill. A long name
+          // (Contacts, Hindi, big text) gets a little smaller instead of touching the pill's edges.
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12 * on),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Transform.scale(
+                  scale: 1 + 0.12 * pop,
+                  child: Icon(item.icon, size: 21, color: Color.lerp(c.textSecondary, c.text, on)),
+                ),
+                if (on > 0.02 && name > 0)
+                  Flexible(
+                    child: Opacity(
+                      opacity: name,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 7),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(item.label, maxLines: 1, softWrap: false, style: Theme.of(context).textTheme.titleSmall),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

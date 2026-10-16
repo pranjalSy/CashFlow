@@ -236,4 +236,10 @@
   - Not done: Home header glass on scroll and the Charts animation (T12).
 - Tests: 4 motion tests (press scale, stagger, count-up, remove-animations). A `reduceMotion()` helper is used in onboarding tests, since looping animations never "settle". Suite **137 passing**, analyze clean.
 - Phone check (release dev build on the owner's Realme): Home, Contacts, EMI tab, Add entry and the + menu checked. The new Home matches the mockup closely (`docs/compare/home_mockup_vs_phone_after_polish.png`). The only gap left is the name in the header (the app does not ask for a name; not in the PRD).
+- **Bug fix (owner, 17 Oct): bottom bar "Contacts" not centred in its pill.** The longest name had no room left, so its pill was clamped and the icon and name touched the pill edges.
+  - The active tab now has equal 12 dp padding on both sides, and a name that still does not fit shrinks a little instead of touching the edges.
+  - To give more room: icon-only tabs are 48 dp (still the tap-target minimum), the bar's inner padding is 4 dp and the gap to "+" is 6 dp. "Contacts" now fits at full size on the Realme (tab 113 dp).
+  - Regression test: every tab's content is centred in its pill. It was proven to fail without the fix. Suite **138 passing**.
+  - Checked on the phone: all 4 tabs (`docs/compare/bottom_bar_all_tabs.png`).
+  - Note: one install had waited on Realme's USB-install confirm; the second install was verified by the tab bounds on the device.
 
