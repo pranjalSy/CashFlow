@@ -2,7 +2,7 @@
 
 > **Hinglish:** Ye file batati hai ki hum kahan hain. Har session mein agent **sabse pehle ye file padhega**. Har task ki status: ✅ Done · 🔄 Running · 🧪 Owner testing · ⏳ Next · ⬜ Todo · ⏸ Paused. Detail log `docs/PROGRESS.md` mein hai.
 
-**Last updated:** 16 Oct 2026 · **Updated by:** Claude Code (after every task or status change)
+**Last updated:** 17 Oct 2026 · **Updated by:** Claude Code (after every task or status change)
 
 ---
 
@@ -13,7 +13,7 @@
 | **Running** | Nothing (T00b–T10 built) |
 | **Waiting for owner** | 🧪 Phone test of T00b–T10 (dev APK built), then commit/push yes/no |
 | **Next** | ⏳ T11 Bills (after the owner's phone test) |
-| **Git** | Repo https://github.com/pranjalSy/CashFlow · local branch: **`experiment`** · `experiment` pushed with T00b + T01 + docs + designs (pushed before the phone test, by mistake; main untouched) · `main` = README only (merge only on owner's yes) |
+| **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T02–T10 + phone-test fixes **committed locally (owner asked, 17 Oct), not pushed** · on GitHub `experiment` has only T00b + T01 · `main` = README only (push / merge only on owner's yes) |
 
 ---
 
