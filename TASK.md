@@ -10,7 +10,7 @@
 
 | | |
 |---|---|
-| **Running** | Nothing — T15 built on Supabase dev (17 Oct) |
+| **Running** | 🔄 T16 Login (plan first) |
 | **Waiting for owner** | 🧪 Phone test of T14 · review T15 (no phone test needed) |
 | **Next** | ⏳ T16 Login (Google, email + code) + first phone auto-approved |
 | **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T00b–T13 owner-tested and T14 **pushed to `experiment` (17 Oct)** · `main` = README only (merge only on owner's separate yes) |
@@ -36,7 +36,7 @@
 | # | Task | Status | What is left |
 |---|---|---|---|
 | T14 | Settings + empty/offline states | 🧪 Built · pushed to `experiment` (owner's yes, 17 Oct) | Owner phone test; offline bar wiring in T17 |
-| T15 | Supabase schema, RLS, RPCs + SQL tests | 🧪 Applied to dev · 43/43 SQL checks pass · local commit | Owner review; push on owner's yes |
+| T15 | Supabase schema, RLS, RPCs + SQL tests | 🧪 Applied to dev · 43/43 SQL checks pass · pushed to `experiment` (owner's yes, 17 Oct) | — |
 
 ## ⏸ Paused
 
