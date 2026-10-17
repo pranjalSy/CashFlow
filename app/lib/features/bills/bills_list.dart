@@ -31,7 +31,7 @@ class BillsList extends ConsumerWidget {
     final l = context.l10n;
     final list = ref.watch(billListProvider).value;
     if (list == null) return const SizedBox.shrink();
-    if (list.isEmpty) return AppCard(child: EmptyState(icon: billIcon('electricity'), title: l.noBillsTitle, message: l.noBillsBody));
+    if (list.isEmpty) return EmptyState(icon: billIcon('electricity'), title: l.noBillsTitle, message: l.noBillsBody, actionLabel: l.addBill, onAction: () => context.push('/bills/new'));
     final today = Ist.today();
     final end = LocalDate(today.year, today.month, LocalDate.daysInMonth(today.year, today.month));
     bool thisMonth(BillWithPayments b) => !b.nextDue.isAfter(end) || b.paidIn(today);

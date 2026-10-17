@@ -128,7 +128,7 @@ class _Spending extends ConsumerWidget {
           AppToggle(value: udhar, onChanged: onUdhar),
         ]),
       ),
-      if (data.slices.isEmpty) AppCard(child: EmptyState(icon: LucideIcons.chartPie, title: l.noSpendingTitle, message: l.noSpendingBody)),
+      if (data.slices.isEmpty) EmptyState(icon: LucideIcons.chartPie, title: l.noSpendingTitle, message: l.noSpendingBody, badge: false),
       if (data.slices.isNotEmpty)
         FadeSlideIn(
           index: 2,

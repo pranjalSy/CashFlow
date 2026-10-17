@@ -173,6 +173,8 @@ class _GalleryScreenState extends ConsumerState<GalleryScreen> {
             const SectionLabel('States'),
             const OfflineBar(text: 'Offline · 2 changes saved on phone'),
             const SizedBox(height: AppSpacing.sm),
+            const Center(child: BackOnlineToast(text: 'Back online · all synced')),
+            const SizedBox(height: AppSpacing.sm),
             AppCard(
               child: EmptyState(
                 icon: LucideIcons.indianRupee,

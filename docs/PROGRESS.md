@@ -293,3 +293,25 @@
 - Dark mode: the Person detail net card used the light text shade of "lent" as a fill (white text hard to read); now a deeper shade (colours only). Suite **169 passing**.
 - **Owner asked (17 Oct): fill every field of Add Lent and check.** On the phone (Premium on, dark mode): contact AA → Lent → ₹123, Online · UPI, due date picked (28 Oct), Remind me "7 days before", note → Save. The entry showed at once on AA's detail with "Due in 11 days" and the note; then deleted by swipe (balance back to −₹538). The phone database is encrypted, so the saved reminder was proved by a new widget test (form → database: online/upi, due date, reminder days 0,7, note; detail shows "Due in 14 days"). Suite **170 passing**. Reminder **notifications** are not sent yet: that is T19 (FR-R1–R6). Note: in dark the selected UPI/Card/Bank chip is only slightly lighter, the same as the dark mockup (not changed).
 
+## 17 Oct 2026 · T14 Settings + empty states (FR-G1, FR-U8; FR-S8 design only)
+
+**Owner decisions (17 Oct, in chat):** offline bar + "Back online" toast only as designs in the widget gallery; the internet check (`connectivity_plus`) and real counts come with the sync engine in T17. "Reminders not coming?" = guide sheet + "Open phone settings"; Privacy policy row shown, link in T22. Profile card: name/email arrive with login (T16); for now avatar + "CashFlow".
+
+**Built**
+- **Settings (screen 24)** from the Home avatar, light mockup layout (dark = colours only): profile card, plan card (Premium: renews date + Manage → Play subscriptions; Free: amber "Try Premium"), General (Language, Theme System/Light/Dark, Default reminder on due day/3/7, Hide amounts in notifications), Security (App lock sheet: Change PIN + fingerprint on/off; Lock after Immediately/1 min/5 min; Devices row), Data (Sync status = changes saved on phone, Export, Budget), Display & privacy (Reduce glass effects, Share anonymous usage), Help (Reminders not coming? sheet, Privacy policy row), Account (Log out confirm sheet, Delete account row), version line, Developer group in the dev flavor only.
+- Theme applies at once (new `themeModeProvider`); Reduce glass and Lock after are saved on the phone and used at start-up; Default reminder (profile, synced) now preselects the reminder on new udhar due dates and new bills.
+- **Change PIN** screen: current PIN (same tries/wait as the lock screen) → new → confirm.
+- **Empty states (screen 28)**: one style everywhere (raised tile with "+" badge, title, one line, one button, no card behind). EMI → Add EMI, Bills → Add bill, Contacts → Add person. Home "Tap + to add" only until anything was ever added.
+- Gallery: offline bar + new "Back online · all synced" toast.
+- Own Android channel `cashflow/system` (app version, this app's system settings page, open a link); no new package.
+
+**Not connected yet (agreed):** Devices (T18), real Sync (T17), Log out erase + Delete account (T21), Premium purchase (T20), Privacy policy link (T22). The Log out sheet only explains for now; pressing Log out closes it.
+
+**Fixes found by the new tests**
+- EMI form: closing it before any error crashed in debug (shake animation created in dispose). Now created in initState; covered by the EMI empty-state test.
+- Settings rows: a long value (Hindi at 2× text) overflowed; values now keep their width up to 60% of the row and wrap only when needed (`ListRowTile`). Home hint text is flexible.
+
+**[Verify]** Play subscription page link `https://play.google.com/store/account/subscriptions` (Android "manage subscriptions" deep link); recheck with sku/package when billing lands (T20). `FLUTTER_BUILD_NAME` is not a Dart define on Android, so the version is read natively (PackageManager).
+
+**Tests:** new `settings_test.dart` (8) and `empty_states_test.dart` (2). `flutter analyze` clean; **180 passing**. Phone (Realme, release dev build): Settings light + dark, Theme switch live, App lock sheet, Change PIN screen, Log out sheet, Help → phone settings and back, EMI/Bills empty buttons. Theme put back to System after the check.
+

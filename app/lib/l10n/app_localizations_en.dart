@@ -81,6 +81,193 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
+  String get settingsGeneral => 'General';
+
+  @override
+  String get settingsSecurity => 'Security';
+
+  @override
+  String get settingsData => 'Data';
+
+  @override
+  String get settingsDisplay => 'Display & privacy';
+
+  @override
+  String get settingsHelp => 'Help';
+
+  @override
+  String get settingsAccount => 'Account';
+
+  @override
+  String get settingsLanguage => 'Language';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get defaultReminder => 'Default reminder';
+
+  @override
+  String get defaultReminderNote =>
+      'Used for new udhar due dates and bills. You can change it on each item.';
+
+  @override
+  String get hideAmountsNotif => 'Hide amounts in notifications';
+
+  @override
+  String get appLock => 'App lock';
+
+  @override
+  String get pinAndFingerprint => 'PIN + Fingerprint';
+
+  @override
+  String get pinOnly => 'PIN';
+
+  @override
+  String get lockAfter => 'Lock after';
+
+  @override
+  String get lockImmediately => 'Immediately';
+
+  @override
+  String get lockOneMinute => '1 minute';
+
+  @override
+  String get lockFiveMinutes => '5 minutes';
+
+  @override
+  String get devices => 'Devices';
+
+  @override
+  String get devicesSub => 'Phones logged in to your account';
+
+  @override
+  String get syncLabel => 'Sync';
+
+  @override
+  String get allBackedUp => 'All data backed up';
+
+  @override
+  String get pdfOrCsv => 'PDF or CSV';
+
+  @override
+  String get reduceGlass => 'Reduce glass effects';
+
+  @override
+  String get reduceGlassSub => 'Smoother on older phones';
+
+  @override
+  String get shareUsage => 'Share anonymous usage';
+
+  @override
+  String get shareUsageSub => 'No amounts, names or notes';
+
+  @override
+  String get remindersHelp => 'Reminders not coming?';
+
+  @override
+  String get remindersHelpSub => 'Battery & auto-start settings';
+
+  @override
+  String get remindersHelpBody =>
+      'Some phones (Realme, Oppo, Vivo, Xiaomi) stop apps in the background. In CashFlow\'s phone settings:';
+
+  @override
+  String get remindersStepBattery =>
+      'Battery: allow background activity (no restriction)';
+
+  @override
+  String get remindersStepAutoStart => 'Turn on Auto-launch / Auto-start';
+
+  @override
+  String get remindersStepNotifications => 'Allow notifications';
+
+  @override
+  String get openPhoneSettings => 'Open phone settings';
+
+  @override
+  String get privacyPolicy => 'Privacy policy & terms';
+
+  @override
+  String get logOut => 'Log out';
+
+  @override
+  String get logOutTitle => 'Log out?';
+
+  @override
+  String get logOutBodyStrong => 'Everything is erased from this phone';
+
+  @override
+  String get logOutBody =>
+      ': entries, people, keys and reminders. Your data stays safe in your account and comes back when you log in.';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountSub => 'Removes all your data from the cloud';
+
+  @override
+  String get planPremium => 'CashFlow Premium';
+
+  @override
+  String get manage => 'Manage';
+
+  @override
+  String get planFree => 'You are on Free';
+
+  @override
+  String get planFreeSub => 'Reminders, EMI, Charts, Budget, Export';
+
+  @override
+  String get changePin => 'Change PIN';
+
+  @override
+  String get pinCurrentTitle => 'Enter your current PIN';
+
+  @override
+  String get pinNewTitle => 'Choose a new PIN';
+
+  @override
+  String get pinChanged => 'PIN changed';
+
+  @override
+  String get fingerprintUnlock => 'Unlock with fingerprint';
+
+  @override
+  String get developer => 'Developer';
+
+  @override
+  String changesOnPhone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count changes saved on phone',
+      one: '1 change saved on phone',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planRenews(String date) {
+    return 'Renews $date';
+  }
+
+  @override
+  String versionLine(String version) {
+    return 'CashFlow $version · Made in India';
+  }
+
+  @override
   String get navHome => 'Home';
 
   @override

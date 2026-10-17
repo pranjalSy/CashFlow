@@ -1,11 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../core/config/flavor.dart';
-import '../core/l10n.dart';
-import '../data/repositories/plan_repository.dart';
 import '../features/contacts/contacts_controller.dart';
 import '../features/contacts/person_detail_screen.dart';
 import '../features/contacts/udhar_form_screen.dart';
@@ -18,11 +12,8 @@ import '../features/emi/emi_form_screen.dart';
 import '../features/entry/entry_form_screen.dart';
 import '../features/export/export_screen.dart';
 import '../features/search/search_screen.dart';
-import '../shared/widgets/app_card.dart';
-import '../shared/widgets/app_page.dart';
-import '../shared/widgets/basics.dart';
-import '../shared/widgets/states.dart';
-import '../shared/widgets/tab_page.dart';
+import '../features/settings/change_pin_screen.dart';
+import '../features/settings/settings_screen.dart';
 
 /// Pushed screens on top of the tabs.
 final List<RouteBase> extraRoutes = [
@@ -57,55 +48,8 @@ final List<RouteBase> extraRoutes = [
   GoRoute(path: '/search', builder: (_, _) => const SearchScreen()),
   GoRoute(path: '/export', builder: (_, _) => const ExportScreen()),
   GoRoute(path: '/budget', builder: (_, _) => const BudgetScreen()),
-  GoRoute(path: '/settings', builder: (_, _) => const _ComingSoonPage()),
+  GoRoute(path: '/settings', builder: (_, _) => const SettingsScreen()),
+  GoRoute(path: '/settings/pin', builder: (_, _) => const ChangePinScreen()),
 ];
 
 PersonRef _refFrom(Map<String, String> q, {String? id}) => PersonRef(id: id, name: q['name'] ?? '', phone: q['phone'], contactId: q['cid']);
-
-/// Settings arrive in T14; the avatar already opens this page.
-/// In the dev flavor it also has the Premium switch used to test Premium screens before billing (T20).
-class _ComingSoonPage extends ConsumerWidget {
-  const _ComingSoonPage();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = context.l10n;
-    final premium = ref.watch(isPremiumProvider).value ?? false;
-    return AppPage(
-      child: Stack(children: [
-        TabPage(children: [
-          const SizedBox(height: 48),
-          AppCard(child: EmptyState(icon: LucideIcons.settings, title: l.comingSoon, message: l.welcomeOfflineNote)),
-          const SizedBox(height: 12),
-          AppCard(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: ListRowTile(leading: const Icon(LucideIcons.target), title: l.budget, onTap: () => context.push('/budget')),
-          ),
-          const SizedBox(height: 12),
-          AppCard(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: ListRowTile(leading: const Icon(LucideIcons.download), title: l.exportData, onTap: () => context.push('/export')),
-          ),
-          if (FlavorConfig.instance.isDev) ...[
-            const SizedBox(height: 12),
-            AppCard(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: ListRowTile(
-                leading: const Icon(LucideIcons.award),
-                title: l.devPremiumToggle,
-                onTap: () => ref.read(planRepositoryProvider).setPremiumForDev(!premium),
-                trailing: AppToggle(value: premium, onChanged: (v) => ref.read(planRepositoryProvider).setPremiumForDev(v)),
-              ),
-            ),
-            const SizedBox(height: 12),
-            AppCard(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              child: ListRowTile(leading: const Icon(LucideIcons.layoutGrid), title: l.devGallery, onTap: () => context.push('/dev/gallery')),
-            ),
-          ],
-        ]),
-        SafeArea(child: BackButton(onPressed: () => context.pop())),
-      ]),
-    );
-  }
-}

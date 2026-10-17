@@ -6,9 +6,10 @@ import '../../core/theme/app_shapes.dart';
 import 'app_button.dart';
 import 'app_card.dart';
 
-/// One style for every empty list (FR-U8): icon, title, one line, optional button.
+/// One style for every empty list (FR-U8, screen 28): raised icon tile with a small "+" badge,
+/// a title, one line, and an optional button. No card behind it.
 class EmptyState extends StatelessWidget {
-  const EmptyState({super.key, required this.icon, required this.title, required this.message, this.actionLabel, this.onAction});
+  const EmptyState({super.key, required this.icon, required this.title, required this.message, this.actionLabel, this.onAction, this.badge = true});
 
   final IconData icon;
   final String title;
@@ -16,29 +17,53 @@ class EmptyState extends StatelessWidget {
   final String? actionLabel;
   final VoidCallback? onAction;
 
+  /// The blue "+" on the tile; off where nothing can be added (for example no search results).
+  final bool badge;
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final t = Theme.of(context).textTheme;
+    final dark = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox.square(
-            dimension: 84,
-            child: DecoratedBox(
-              decoration: ShapeDecoration(color: c.brandTint, shape: AppShapes.squircle(28)),
-              child: Icon(icon, size: 34, color: c.brandText),
-            ),
+            dimension: 94,
+            child: Stack(clipBehavior: Clip.none, children: [
+              SizedBox.square(
+                dimension: 86,
+                child: DecoratedBox(
+                  decoration: ShapeDecoration(
+                    color: dark ? c.raised : c.card,
+                    shape: AppShapes.squircle(28),
+                    shadows: dark ? null : [BoxShadow(color: c.brandButton.withValues(alpha: 0.45), blurRadius: 30, offset: const Offset(0, 12), spreadRadius: -12)],
+                  ),
+                  child: Icon(icon, size: 34, color: c.brandText),
+                ),
+              ),
+              if (badge)
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: c.brandButton, border: Border.all(color: c.page, width: 3)),
+                    child: Icon(LucideIcons.plus, size: 16, color: c.onButton),
+                  ),
+                ),
+            ]),
           ),
-          const SizedBox(height: AppSpacing.md),
+          const SizedBox(height: AppSpacing.sm),
           Text(title, textAlign: TextAlign.center, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: 6),
           Text(message, textAlign: TextAlign.center, style: t.bodyMedium?.copyWith(color: c.textSecondary)),
           if (actionLabel != null && onAction != null) ...[
-            const SizedBox(height: AppSpacing.md),
-            AppButton(label: actionLabel!, onPressed: onAction!, expand: false, icon: LucideIcons.plus),
+            const SizedBox(height: AppSpacing.sm),
+            AppButton(label: actionLabel!, onPressed: onAction!, expand: false, height: 48, icon: LucideIcons.plus),
           ],
         ],
       ),
@@ -69,6 +94,33 @@ class OfflineBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Green toast "Back online · all synced", shown 2 s after a successful sync (FR-S8, screen 28).
+/// Connected to the internet check and the sync engine in T17.
+class BackOnlineToast extends StatelessWidget {
+  const BackOnlineToast({super.key, required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Container(
+      height: 38,
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      decoration: ShapeDecoration(
+        color: c.incomeButton,
+        shape: AppShapes.squircle(AppRadii.pill),
+        shadows: [BoxShadow(color: c.incomeButton.withValues(alpha: 0.6), blurRadius: 24, offset: const Offset(0, 10), spreadRadius: -10)],
+      ),
+      child: Row(mainAxisSize: MainAxisSize.min, children: [
+        Icon(LucideIcons.check, size: 15, color: c.onButton),
+        const SizedBox(width: 7),
+        Flexible(child: Text(text, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.labelMedium?.copyWith(color: c.onButton))),
+      ]),
     );
   }
 }

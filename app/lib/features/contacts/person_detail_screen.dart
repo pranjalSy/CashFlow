@@ -140,9 +140,7 @@ class PersonDetailScreen extends ConsumerWidget {
         ),
         SectionLabel(l.history),
         if (debts.isEmpty)
-          AppCard(
-            child: EmptyState(icon: LucideIcons.handshake, title: l.noUdharTitle(first), message: l.noUdharBody),
-          ),
+          EmptyState(icon: LucideIcons.handshake, title: l.noUdharTitle(first), message: l.noUdharBody, badge: false),
         for (final (i, d) in debts.indexed)
           FadeSlideIn(
             key: ValueKey(d.debt.id),

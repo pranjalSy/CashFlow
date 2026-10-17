@@ -246,23 +246,30 @@ class ListRowTile extends StatelessWidget {
         constraints: const BoxConstraints(minHeight: 56),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-          child: Row(
-            children: [
-              leading,
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall),
-                    if (subtitle != null)
-                      Text(subtitle!, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall),
-                  ],
+          child: LayoutBuilder(
+            builder: (context, box) => Row(
+              children: [
+                leading,
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall),
+                      if (subtitle != null)
+                        Text(subtitle!, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.bodySmall),
+                    ],
+                  ),
                 ),
-              ),
-              if (trailing != null) ...[const SizedBox(width: AppSpacing.xs), trailing!],
-            ],
+                // The value keeps its own width up to 60% of the row (one line normally); only a very long
+                // value (Hindi at 2× text) is held there and wraps, instead of overflowing.
+                if (trailing != null) ...[
+                  const SizedBox(width: AppSpacing.xs),
+                  ConstrainedBox(constraints: BoxConstraints(maxWidth: box.maxWidth * 0.6), child: trailing!),
+                ],
+              ],
+            ),
           ),
         ),
       ),

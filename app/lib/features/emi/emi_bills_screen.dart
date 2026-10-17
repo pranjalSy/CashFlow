@@ -62,7 +62,7 @@ class _EmiList extends ConsumerWidget {
     final l = context.l10n;
     final list = ref.watch(emiListProvider).value;
     if (list == null) return const SizedBox.shrink();
-    if (list.isEmpty) return AppCard(child: EmptyState(icon: LucideIcons.calendarSync, title: l.noEmisTitle, message: l.noEmisBody));
+    if (list.isEmpty) return EmptyState(icon: LucideIcons.bike, title: l.noEmisTitle, message: l.noEmisBody, actionLabel: l.addEmi, onAction: () => context.push('/emi/new'));
     final active = list.where((e) => !e.closed).toList();
     final closed = list.where((e) => e.closed).toList();
     return Column(

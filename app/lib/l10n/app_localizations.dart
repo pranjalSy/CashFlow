@@ -244,6 +244,348 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
+  /// No description provided for @settingsGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGeneral;
+
+  /// No description provided for @settingsSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get settingsSecurity;
+
+  /// No description provided for @settingsData.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get settingsData;
+
+  /// No description provided for @settingsDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Display & privacy'**
+  String get settingsDisplay;
+
+  /// No description provided for @settingsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get settingsHelp;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguage;
+
+  /// No description provided for @settingsTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsTheme;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @defaultReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Default reminder'**
+  String get defaultReminder;
+
+  /// No description provided for @defaultReminderNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Used for new udhar due dates and bills. You can change it on each item.'**
+  String get defaultReminderNote;
+
+  /// No description provided for @hideAmountsNotif.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide amounts in notifications'**
+  String get hideAmountsNotif;
+
+  /// No description provided for @appLock.
+  ///
+  /// In en, this message translates to:
+  /// **'App lock'**
+  String get appLock;
+
+  /// No description provided for @pinAndFingerprint.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN + Fingerprint'**
+  String get pinAndFingerprint;
+
+  /// No description provided for @pinOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN'**
+  String get pinOnly;
+
+  /// No description provided for @lockAfter.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock after'**
+  String get lockAfter;
+
+  /// No description provided for @lockImmediately.
+  ///
+  /// In en, this message translates to:
+  /// **'Immediately'**
+  String get lockImmediately;
+
+  /// No description provided for @lockOneMinute.
+  ///
+  /// In en, this message translates to:
+  /// **'1 minute'**
+  String get lockOneMinute;
+
+  /// No description provided for @lockFiveMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'5 minutes'**
+  String get lockFiveMinutes;
+
+  /// No description provided for @devices.
+  ///
+  /// In en, this message translates to:
+  /// **'Devices'**
+  String get devices;
+
+  /// No description provided for @devicesSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Phones logged in to your account'**
+  String get devicesSub;
+
+  /// No description provided for @syncLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync'**
+  String get syncLabel;
+
+  /// No description provided for @allBackedUp.
+  ///
+  /// In en, this message translates to:
+  /// **'All data backed up'**
+  String get allBackedUp;
+
+  /// No description provided for @pdfOrCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF or CSV'**
+  String get pdfOrCsv;
+
+  /// No description provided for @reduceGlass.
+  ///
+  /// In en, this message translates to:
+  /// **'Reduce glass effects'**
+  String get reduceGlass;
+
+  /// No description provided for @reduceGlassSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Smoother on older phones'**
+  String get reduceGlassSub;
+
+  /// No description provided for @shareUsage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share anonymous usage'**
+  String get shareUsage;
+
+  /// No description provided for @shareUsageSub.
+  ///
+  /// In en, this message translates to:
+  /// **'No amounts, names or notes'**
+  String get shareUsageSub;
+
+  /// No description provided for @remindersHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders not coming?'**
+  String get remindersHelp;
+
+  /// No description provided for @remindersHelpSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery & auto-start settings'**
+  String get remindersHelpSub;
+
+  /// No description provided for @remindersHelpBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Some phones (Realme, Oppo, Vivo, Xiaomi) stop apps in the background. In CashFlow\'s phone settings:'**
+  String get remindersHelpBody;
+
+  /// No description provided for @remindersStepBattery.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery: allow background activity (no restriction)'**
+  String get remindersStepBattery;
+
+  /// No description provided for @remindersStepAutoStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Auto-launch / Auto-start'**
+  String get remindersStepAutoStart;
+
+  /// No description provided for @remindersStepNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow notifications'**
+  String get remindersStepNotifications;
+
+  /// No description provided for @openPhoneSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open phone settings'**
+  String get openPhoneSettings;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy & terms'**
+  String get privacyPolicy;
+
+  /// No description provided for @logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logOut;
+
+  /// No description provided for @logOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get logOutTitle;
+
+  /// No description provided for @logOutBodyStrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything is erased from this phone'**
+  String get logOutBodyStrong;
+
+  /// No description provided for @logOutBody.
+  ///
+  /// In en, this message translates to:
+  /// **': entries, people, keys and reminders. Your data stays safe in your account and comes back when you log in.'**
+  String get logOutBody;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Removes all your data from the cloud'**
+  String get deleteAccountSub;
+
+  /// No description provided for @planPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'CashFlow Premium'**
+  String get planPremium;
+
+  /// No description provided for @manage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage'**
+  String get manage;
+
+  /// No description provided for @planFree.
+  ///
+  /// In en, this message translates to:
+  /// **'You are on Free'**
+  String get planFree;
+
+  /// No description provided for @planFreeSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders, EMI, Charts, Budget, Export'**
+  String get planFreeSub;
+
+  /// No description provided for @changePin.
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN'**
+  String get changePin;
+
+  /// No description provided for @pinCurrentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your current PIN'**
+  String get pinCurrentTitle;
+
+  /// No description provided for @pinNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new PIN'**
+  String get pinNewTitle;
+
+  /// No description provided for @pinChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN changed'**
+  String get pinChanged;
+
+  /// No description provided for @fingerprintUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock with fingerprint'**
+  String get fingerprintUnlock;
+
+  /// No description provided for @developer.
+  ///
+  /// In en, this message translates to:
+  /// **'Developer'**
+  String get developer;
+
+  /// No description provided for @changesOnPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 change saved on phone} other{{count} changes saved on phone}}'**
+  String changesOnPhone(int count);
+
+  /// No description provided for @planRenews.
+  ///
+  /// In en, this message translates to:
+  /// **'Renews {date}'**
+  String planRenews(String date);
+
+  /// No description provided for @versionLine.
+  ///
+  /// In en, this message translates to:
+  /// **'CashFlow {version} · Made in India'**
+  String versionLine(String version);
+
   /// No description provided for @navHome.
   ///
   /// In en, this message translates to:

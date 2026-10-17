@@ -6,6 +6,7 @@ import 'package:cashflow/core/security/pin_service.dart';
 import 'package:cashflow/core/services.dart';
 import 'package:cashflow/data/local/database.dart';
 import 'package:cashflow/data/providers.dart';
+import 'package:cashflow/shared/widgets/glass.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +87,7 @@ class Harness {
         databaseProvider.overrideWithValue(db),
         userIdProvider.overrideWithValue(userId),
         uiPrefsProvider.overrideWithValue(prefs),
+        reduceGlassProvider.overrideWith(() => ReduceGlass(prefs.reduceGlass)),
         pinServiceProvider.overrideWithValue(PinService(iterations: 1000, offThread: false)),
         biometricServiceProvider.overrideWithValue(biometrics),
         contactsAccessProvider.overrideWithValue(contacts),

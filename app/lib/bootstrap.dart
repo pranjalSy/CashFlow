@@ -9,6 +9,7 @@ import 'core/prefs.dart';
 import 'data/local/local_store.dart';
 import 'data/providers.dart';
 import 'data/repositories/local_writer.dart';
+import 'shared/widgets/glass.dart';
 
 Future<void> bootstrap(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ Future<void> bootstrap(Flavor flavor) async {
       databaseProvider.overrideWithValue(db),
       userIdProvider.overrideWithValue(userId),
       uiPrefsProvider.overrideWithValue(prefs),
+      reduceGlassProvider.overrideWith(() => ReduceGlass(prefs.reduceGlass)),
     ],
     child: const CashFlowApp(),
   ));

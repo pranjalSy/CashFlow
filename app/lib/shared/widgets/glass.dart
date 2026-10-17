@@ -6,12 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/theme/app_colors.dart';
 
 /// "Reduce glass effects" (Settings, PRD 6.13). When on, every glass surface paints solid.
-/// Persisted with the other UI preferences in T14; defaults to off.
+/// Defaults to off; the saved value is passed in at start-up (bootstrap) and saved by Settings.
 final reduceGlassProvider = NotifierProvider<ReduceGlass, bool>(ReduceGlass.new);
 
 class ReduceGlass extends Notifier<bool> {
+  ReduceGlass([this._initial = false]);
+
+  final bool _initial;
+
   @override
-  bool build() => false;
+  bool build() => _initial;
 
   void set(bool value) => state = value;
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/prefs.dart';
+
 /// Locks again after the app was in the background longer than "Lock after" (FR-L5, FR-L8).
-/// Default 1 minute; Settings (T14) lets the user pick immediately / 1 min / 5 min.
+/// Default 1 minute; Settings › Lock after picks immediately / 1 min / 5 min (saved per phone).
 class LockController with WidgetsBindingObserver {
   LockController({DateTime Function()? clock}) : _clock = clock ?? DateTime.now;
 
@@ -47,7 +49,7 @@ class LockController with WidgetsBindingObserver {
 }
 
 final lockControllerProvider = Provider<LockController>((ref) {
-  final c = LockController();
+  final c = LockController()..lockAfter = Duration(seconds: ref.read(uiPrefsProvider).lockAfterSeconds);
   WidgetsBinding.instance.addObserver(c);
   ref.onDispose(() => WidgetsBinding.instance.removeObserver(c));
   return c;

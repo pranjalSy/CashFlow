@@ -130,9 +130,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
             trailing: TextButton(onPressed: () => _addPerson(context), child: Text(l.addPerson)),
           ),
           if (shownContacts.isEmpty && recent.isEmpty)
-            AppCard(
-              child: EmptyState(icon: LucideIcons.users, title: l.noPeopleTitle, message: l.noPeopleBody),
-            ),
+            EmptyState(icon: LucideIcons.users, title: l.noPeopleTitle, message: l.noPeopleBody, actionLabel: l.addPerson, onAction: () => _addPerson(context)),
           for (final (i, x) in shownContacts.indexed) ...[
             if (i == 0 || _letter(shownContacts[i - 1]) != _letter(x))
               Padding(

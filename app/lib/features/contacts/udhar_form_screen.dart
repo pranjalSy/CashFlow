@@ -12,6 +12,7 @@ import '../../core/utils/money.dart';
 import '../../data/repositories/debt_repository.dart';
 import '../../data/repositories/people_repository.dart';
 import '../../data/repositories/plan_repository.dart';
+import '../../data/repositories/profile_repository.dart';
 import '../../shared/widgets/amount_text.dart';
 import '../../shared/widgets/app_button.dart';
 import '../../shared/widgets/app_card.dart';
@@ -47,6 +48,7 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
   final _note = TextEditingController();
   LocalDate? _due;
   /// Remind me: null = Off, else 3 or 7 days before; the due day is always reminded (FR-D5, screen 15).
+  /// Starts from Settings › Default reminder (FR-R2).
   int? _remindBefore = 3;
   bool _tried = false;
 
@@ -54,6 +56,10 @@ class _UdharFormScreenState extends ConsumerState<UdharFormScreen> {
   void initState() {
     super.initState();
     _person = widget.person;
+    ref.read(profileRepositoryProvider).current().then((p) {
+      final days = p?.defaultReminderDays ?? 3;
+      if (mounted) setState(() => _remindBefore = days == 0 ? null : days);
+    });
   }
 
   @override

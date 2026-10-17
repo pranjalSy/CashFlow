@@ -81,6 +81,193 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settings => 'सेटिंग्स';
 
   @override
+  String get settingsGeneral => 'सामान्य';
+
+  @override
+  String get settingsSecurity => 'सुरक्षा';
+
+  @override
+  String get settingsData => 'डेटा';
+
+  @override
+  String get settingsDisplay => 'डिस्प्ले और प्राइवेसी';
+
+  @override
+  String get settingsHelp => 'मदद';
+
+  @override
+  String get settingsAccount => 'अकाउंट';
+
+  @override
+  String get settingsLanguage => 'भाषा';
+
+  @override
+  String get settingsTheme => 'थीम';
+
+  @override
+  String get themeSystem => 'सिस्टम';
+
+  @override
+  String get themeLight => 'लाइट';
+
+  @override
+  String get themeDark => 'डार्क';
+
+  @override
+  String get defaultReminder => 'डिफ़ॉल्ट रिमाइंडर';
+
+  @override
+  String get defaultReminderNote =>
+      'नए उधार की due date और बिल के लिए। हर आइटम पर बदल सकते हैं।';
+
+  @override
+  String get hideAmountsNotif => 'नोटिफ़िकेशन में रकम छुपाएं';
+
+  @override
+  String get appLock => 'ऐप लॉक';
+
+  @override
+  String get pinAndFingerprint => 'PIN + फिंगरप्रिंट';
+
+  @override
+  String get pinOnly => 'PIN';
+
+  @override
+  String get lockAfter => 'इसके बाद लॉक';
+
+  @override
+  String get lockImmediately => 'तुरंत';
+
+  @override
+  String get lockOneMinute => '1 मिनट';
+
+  @override
+  String get lockFiveMinutes => '5 मिनट';
+
+  @override
+  String get devices => 'डिवाइस';
+
+  @override
+  String get devicesSub => 'आपके अकाउंट में लॉगिन फ़ोन';
+
+  @override
+  String get syncLabel => 'सिंक';
+
+  @override
+  String get allBackedUp => 'सारा डेटा बैकअप हो गया';
+
+  @override
+  String get pdfOrCsv => 'PDF या CSV';
+
+  @override
+  String get reduceGlass => 'ग्लास इफ़ेक्ट कम करें';
+
+  @override
+  String get reduceGlassSub => 'पुराने फ़ोन पर ज़्यादा स्मूथ';
+
+  @override
+  String get shareUsage => 'गुमनाम उपयोग शेयर करें';
+
+  @override
+  String get shareUsageSub => 'कोई रकम, नाम या नोट नहीं';
+
+  @override
+  String get remindersHelp => 'रिमाइंडर नहीं आ रहे?';
+
+  @override
+  String get remindersHelpSub => 'बैटरी और ऑटो-स्टार्ट सेटिंग';
+
+  @override
+  String get remindersHelpBody =>
+      'कुछ फ़ोन (Realme, Oppo, Vivo, Xiaomi) बैकग्राउंड में ऐप रोक देते हैं। CashFlow की फ़ोन सेटिंग में:';
+
+  @override
+  String get remindersStepBattery =>
+      'बैटरी: बैकग्राउंड गतिविधि की अनुमति दें (कोई पाबंदी नहीं)';
+
+  @override
+  String get remindersStepAutoStart => 'Auto-launch / Auto-start चालू करें';
+
+  @override
+  String get remindersStepNotifications => 'नोटिफ़िकेशन की अनुमति दें';
+
+  @override
+  String get openPhoneSettings => 'फ़ोन सेटिंग खोलें';
+
+  @override
+  String get privacyPolicy => 'प्राइवेसी पॉलिसी और शर्तें';
+
+  @override
+  String get logOut => 'लॉग आउट';
+
+  @override
+  String get logOutTitle => 'लॉग आउट करें?';
+
+  @override
+  String get logOutBodyStrong => 'इस फ़ोन से सब कुछ मिट जाता है';
+
+  @override
+  String get logOutBody =>
+      ': एंट्री, लोग, keys और रिमाइंडर। आपका डेटा अकाउंट में सुरक्षित रहता है और लॉगिन करते ही वापस आ जाता है।';
+
+  @override
+  String get deleteAccount => 'अकाउंट डिलीट करें';
+
+  @override
+  String get deleteAccountSub => 'क्लाउड से आपका सारा डेटा हटा देता है';
+
+  @override
+  String get planPremium => 'CashFlow Premium';
+
+  @override
+  String get manage => 'मैनेज करें';
+
+  @override
+  String get planFree => 'आप Free प्लान पर हैं';
+
+  @override
+  String get planFreeSub => 'रिमाइंडर, EMI, चार्ट, बजट, एक्सपोर्ट';
+
+  @override
+  String get changePin => 'PIN बदलें';
+
+  @override
+  String get pinCurrentTitle => 'अपना मौजूदा PIN डालें';
+
+  @override
+  String get pinNewTitle => 'नया PIN चुनें';
+
+  @override
+  String get pinChanged => 'PIN बदल गया';
+
+  @override
+  String get fingerprintUnlock => 'फिंगरप्रिंट से खोलें';
+
+  @override
+  String get developer => 'डेवलपर';
+
+  @override
+  String changesOnPhone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count बदलाव फ़ोन में सेव',
+      one: '1 बदलाव फ़ोन में सेव',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planRenews(String date) {
+    return '$date को रिन्यू होगा';
+  }
+
+  @override
+  String versionLine(String version) {
+    return 'CashFlow $version · Made in India';
+  }
+
+  @override
   String get navHome => 'होम';
 
   @override

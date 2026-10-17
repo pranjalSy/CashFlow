@@ -241,7 +241,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       padding: const EdgeInsets.only(top: AppSpacing.lg),
                       child: Column(
                         children: [
-                          EmptyState(icon: LucideIcons.searchX, title: l.noResultsFor(_q), message: l.noResultsBody),
+                          EmptyState(icon: LucideIcons.searchX, title: l.noResultsFor(_q), message: l.noResultsBody, badge: false),
                           if (_filter != _Filter.all) TextButton(onPressed: () => setState(() => _filter = _Filter.all), child: Text(l.searchInAll)),
                         ],
                       ),

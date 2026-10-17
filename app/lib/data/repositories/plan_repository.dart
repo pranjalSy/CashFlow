@@ -14,9 +14,13 @@ class PlanRepository {
   Stream<bool> watchPremium() =>
       (_db.select(_db.planCache)..where((p) => p.id.equals(1))).watchSingleOrNull().map((p) => p?.isPremium ?? false);
 
+  /// When the current Premium period ends ("Renews …" in Settings); null when unknown.
+  Stream<DateTime?> watchActiveUntil() =>
+      (_db.select(_db.planCache)..where((p) => p.id.equals(1))).watchSingleOrNull().map((p) => p?.activeUntil);
+
   Future<bool> isPremium() async => (await (_db.select(_db.planCache)..where((p) => p.id.equals(1))).getSingleOrNull())?.isPremium ?? false;
 
-  /// Dev flavor only (see Settings placeholder). The server decides in Phase D.
+  /// Dev flavor only (Settings › Developer). The server decides in Phase D.
   Future<void> setPremiumForDev(bool on) =>
       _db.into(_db.planCache).insertOnConflictUpdate(PlanCacheCompanion(id: const Value(1), isPremium: Value(on)));
 }
@@ -24,3 +28,5 @@ class PlanRepository {
 final planRepositoryProvider = Provider<PlanRepository>((ref) => PlanRepository(ref.watch(databaseProvider)));
 
 final isPremiumProvider = StreamProvider<bool>((ref) => ref.watch(planRepositoryProvider).watchPremium());
+
+final planActiveUntilProvider = StreamProvider<DateTime?>((ref) => ref.watch(planRepositoryProvider).watchActiveUntil());

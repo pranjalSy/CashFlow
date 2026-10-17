@@ -133,15 +133,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ],
           ),
         ),
-        if (shown.isEmpty)
+        if (shown.isEmpty) ...[
           Padding(
-            padding: const EdgeInsets.only(top: AppSpacing.lg),
-            child: EmptyState(
-              icon: LucideIcons.indianRupee,
-              title: l.noEntriesTitle,
-              message: entries.isEmpty ? '${l.noEntriesBody}\n${l.tapPlusToAdd}' : l.noEntriesBody,
-            ),
+            padding: const EdgeInsets.only(top: AppSpacing.sm),
+            child: EmptyState(icon: LucideIcons.indianRupee, title: l.noEntriesTitle, message: l.noEntriesBody),
           ),
+          // First time only: "Tap + to add" pointing at the + button (screen 28).
+          if (ref.watch(everAddedProvider).value == false)
+            Padding(
+              padding: const EdgeInsets.only(top: AppSpacing.lg, right: AppSpacing.lg),
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.end, children: [
+                Flexible(child: Text(l.tapPlusToAdd, textAlign: TextAlign.end, style: t.labelLarge?.copyWith(color: c.brandText, fontWeight: FontWeight.w600))),
+                const SizedBox(width: 2),
+                Icon(LucideIcons.cornerRightDown, size: 30, color: c.brandText),
+              ]),
+            ),
+        ],
         for (final day in groups.keys) ...[
           SectionLabel(dayLabel(context, day)),
           for (final e in groups[day]!)

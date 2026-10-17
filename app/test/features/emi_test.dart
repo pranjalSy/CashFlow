@@ -180,6 +180,7 @@ void main() {
     await openUnlockedHome(tester, h);
     await tester.tap(find.bySemanticsLabel('Settings'));
     await settle(tester);
+    await tester.scrollUntilVisible(find.text('Premium (dev only)'), 300, scrollable: find.byType(Scrollable).first);
     await tester.tap(find.text('Premium (dev only)'));
     await settle(tester);
     expect(await PlanRepository(h.db).isPremium(), isTrue);

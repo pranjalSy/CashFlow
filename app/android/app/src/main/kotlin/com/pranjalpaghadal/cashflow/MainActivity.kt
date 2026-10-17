@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import androidx.core.content.FileProvider
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -45,6 +46,25 @@ class MainActivity : FlutterFragmentActivity() {
                 }
             } catch (e: Exception) {
                 result.error("files", e.javaClass.simpleName, null)
+            }
+        }
+        // Settings (FR-G1, FR-R5): app version, this app's system settings page, and plain web links.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "cashflow/system").setMethodCallHandler { call, result ->
+            try {
+                when (call.method) {
+                    "appVersion" -> result.success(packageManager.getPackageInfo(packageName, 0).versionName)
+                    "openAppSettings" -> {
+                        startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null)))
+                        result.success(null)
+                    }
+                    "openUrl" -> {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(call.argument<String>("url"))))
+                        result.success(null)
+                    }
+                    else -> result.notImplemented()
+                }
+            } catch (e: Exception) {
+                result.error("system", e.javaClass.simpleName, null)
             }
         }
     }

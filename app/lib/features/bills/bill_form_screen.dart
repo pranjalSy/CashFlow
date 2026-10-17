@@ -10,6 +10,7 @@ import '../../core/ui/labels.dart';
 import '../../core/utils/dates.dart';
 import '../../core/utils/money.dart';
 import '../../data/repositories/bill_repository.dart';
+import '../../data/repositories/profile_repository.dart';
 import '../../shared/widgets/app_button.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_page.dart';
@@ -47,7 +48,18 @@ class _BillFormScreenState extends ConsumerState<BillFormScreen> {
   @override
   void initState() {
     super.initState();
-    if (_editing) _load();
+    if (_editing) {
+      _load();
+    } else {
+      // New bills start from Settings › Default reminder (FR-R2).
+      ref.read(profileRepositoryProvider).current().then((p) {
+        if (mounted && p != null) {
+          setState(() => _remind
+            ..clear()
+            ..add(p.defaultReminderDays));
+        }
+      });
+    }
   }
 
   @override

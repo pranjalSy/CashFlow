@@ -11,7 +11,7 @@ import 'router.dart';
 class CashFlowApp extends ConsumerWidget {
   const CashFlowApp({super.key, this.themeMode});
 
-  /// Forces a theme (tests); otherwise the saved preference, default System (T14 adds the switch).
+  /// Forces a theme (tests); otherwise Settings › Theme, default System.
   final ThemeMode? themeMode;
 
   @override
@@ -22,7 +22,7 @@ class CashFlowApp extends ConsumerWidget {
       debugShowCheckedModeBanner: config.isDev,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
-      themeMode: themeMode ?? ref.watch(uiPrefsProvider).themeMode,
+      themeMode: themeMode ?? ref.watch(themeModeProvider),
       locale: ref.watch(localeProvider),
       supportedLocales: supportedAppLocales,
       localizationsDelegates: const [

@@ -52,13 +52,15 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
   _Field? _active;
   bool _tried = false;
   bool _termsLocked = false;
-  late final AnimationController _shake = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
+  late final AnimationController _shake;
 
   bool get _editing => widget.emiId != null;
 
   @override
   void initState() {
     super.initState();
+    // Made here, not lazily: closing the form before any error would otherwise create it in dispose.
+    _shake = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
     if (_editing) _load();
   }
 

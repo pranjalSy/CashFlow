@@ -42,22 +42,22 @@ class ProfileRepository {
     });
   }
 
-  Future<void> setLanguage(String language) async {
-    final p = await current();
-    if (p == null) return;
-    await _w.action((batch) async {
-      await (_db.update(_db.profiles)..where((t) => t.id.equals(p.id)))
-          .write(ProfilesCompanion(language: Value(language), updatedAt: Value(_w.now()), isSynced: const Value(false)));
-      await _w.queue('profiles', p.id, batch);
-    });
-  }
+  Future<void> setLanguage(String language) => _update(ProfilesCompanion(language: Value(language)));
 
-  Future<void> setHideAmounts(bool hide) async {
+  Future<void> setHideAmounts(bool hide) => _update(ProfilesCompanion(hideAmounts: Value(hide)));
+
+  /// Default reminder lead time for new items (FR-R2): 0 = on the due day, 3 or 7 days before.
+  Future<void> setDefaultReminder(int days) => _update(ProfilesCompanion(defaultReminderDays: Value(days)));
+
+  /// "Share anonymous usage" (never amounts, names or notes).
+  Future<void> setAnalyticsOptIn(bool on) => _update(ProfilesCompanion(analyticsOptIn: Value(on)));
+
+  Future<void> _update(ProfilesCompanion change) async {
     final p = await current();
     if (p == null) return;
     await _w.action((batch) async {
       await (_db.update(_db.profiles)..where((t) => t.id.equals(p.id)))
-          .write(ProfilesCompanion(hideAmounts: Value(hide), updatedAt: Value(_w.now()), isSynced: const Value(false)));
+          .write(change.copyWith(updatedAt: Value(_w.now()), isSynced: const Value(false)));
       await _w.queue('profiles', p.id, batch);
     });
   }

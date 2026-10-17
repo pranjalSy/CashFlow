@@ -113,7 +113,7 @@ class BillDetailScreen extends ConsumerWidget {
                 ),
               ),
               SectionLabel(l.payments),
-              if (item.payments.isEmpty) AppCard(child: EmptyState(icon: LucideIcons.receipt, title: l.noPaymentsYet, message: l.addedToCategory(l.catBills))),
+              if (item.payments.isEmpty) EmptyState(icon: LucideIcons.receipt, title: l.noPaymentsYet, message: l.addedToCategory(l.catBills), badge: false),
               for (final (i, p) in item.payments.indexed)
                 FadeSlideIn(
                   index: i + 1,

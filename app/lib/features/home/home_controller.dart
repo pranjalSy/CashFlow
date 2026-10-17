@@ -43,3 +43,13 @@ final homeEntriesProvider = StreamProvider<List<HomeEntry>>((ref) {
   final m = ref.watch(homeMonthProvider);
   return ref.watch(entryRepositoryProvider).watchMonth(m.year, m.month);
 });
+
+/// True once anything was ever added (deleted rows count too), so the "Tap + to add" hint
+/// shows only the first time (FR-U8).
+final everAddedProvider = StreamProvider<bool>((ref) {
+  final db = ref.watch(databaseProvider);
+  return db
+      .customSelect('SELECT EXISTS(SELECT 1 FROM transactions) OR EXISTS(SELECT 1 FROM debts) AS any_row', readsFrom: {db.transactions, db.debts})
+      .watchSingle()
+      .map((r) => r.read<bool>('any_row'));
+});
