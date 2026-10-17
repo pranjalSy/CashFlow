@@ -128,6 +128,52 @@ void main() {
     await closeApp(tester);
   });
 
+  testWidgets('Premium: every field filled (UPI, due date, 7 days before, note) is saved and shown (owner, 17 Oct)', (tester) async {
+    await PlanRepository(h.db).setPremiumForDev(true);
+    await openUnlockedHome(tester, h);
+    await tester.tap(find.bySemanticsLabel('Add'));
+    await settle(tester);
+    await tester.tap(find.text('Lent').last);
+    await settle(tester);
+    await typeDigits(tester, '123');
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    await tester.tap(find.text('Choose a person').first);
+    await settle(tester);
+    await tester.enterText(find.byType(TextField).last, 'Rahul Sharma');
+    await settle(tester);
+    await tester.tap(find.text('Add person: Rahul Sharma'));
+    await settle(tester);
+    await tester.tap(find.text('Online'));
+    await settle(tester);
+    await tester.tap(find.text('UPI'));
+    await tester.tap(find.text('2 weeks'));
+    await settle(tester);
+    await tester.ensureVisible(find.text('7 days before'));
+    await tester.tap(find.text('7 days before'));
+    await tester.ensureVisible(find.text('Add a note'));
+    await tester.enterText(find.byType(TextField).last, 'Test note');
+    await settle(tester);
+    await tester.tap(find.text('Save lent'));
+    await settle(tester);
+
+    final debt = (await h.db.select(h.db.debts).get()).single;
+    expect(debt.amount, 12300);
+    expect(debt.paymentMode, 'online');
+    expect(debt.onlineMethod, 'upi');
+    expect(debt.dueDate, Ist.today().addDays(14).toString());
+    expect(debt.reminderDays, '0,7'); // the due day plus 7 days before
+    expect(debt.note, 'Test note');
+
+    await tester.tap(find.bySemanticsLabel('Contacts'));
+    await settle(tester);
+    await tester.tap(find.text('Rahul Sharma').first);
+    await settle(tester);
+    expect(find.text('Due in 14 days'), findsOneWidget);
+    expect(find.textContaining('Test note'), findsOneWidget);
+    await closeApp(tester);
+  });
+
   testWidgets('Premium: Got full settles the udhar', (tester) async {
     final id = await dueUdhar();
     await openUnlockedHome(tester, h);
