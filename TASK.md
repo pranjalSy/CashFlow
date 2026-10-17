@@ -10,9 +10,9 @@
 
 | | |
 |---|---|
-| **Running** | Nothing — T14 built (17 Oct) |
-| **Waiting for owner** | 🧪 Phone test of T14 (Settings + empty states) |
-| **Next** | ⏳ T15 Supabase schema (Phase D) |
+| **Running** | Nothing — T15 built on Supabase dev (17 Oct) |
+| **Waiting for owner** | 🧪 Phone test of T14 · review T15 (no phone test needed) |
+| **Next** | ⏳ T16 Login (Google, email + code) + first phone auto-approved |
 | **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T00b–T13 owner-tested and T14 **pushed to `experiment` (17 Oct)** · `main` = README only (merge only on owner's separate yes) |
 
 ---
@@ -36,6 +36,7 @@
 | # | Task | Status | What is left |
 |---|---|---|---|
 | T14 | Settings + empty/offline states | 🧪 Built · pushed to `experiment` (owner's yes, 17 Oct) | Owner phone test; offline bar wiring in T17 |
+| T15 | Supabase schema, RLS, RPCs + SQL tests | 🧪 Applied to dev · 43/43 SQL checks pass · local commit | Owner review; push on owner's yes |
 
 ## ⏸ Paused
 
@@ -79,7 +80,7 @@
 ### Phase D · Backend
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T15 | Supabase schema (fresh), RLS, RPC functions + SQL tests | TRD 6, 13.2 · NFR-3 | ⬜ |
+| T15 | Supabase schema (fresh), RLS, RPC functions + SQL tests | TRD 6, 13.2 · NFR-3 | 🧪 Applied to dev · tests pass |
 | T16 | Login (Google, email + code) | FR-A1 · TRD 9 | ⬜ |
 | T17 | Sync engine (outbox up, cursor down, undo window) | FR-S1–S9 · TRD 8 | ⬜ |
 | T18 | Devices: approval, email code, lost phone, remote wipe | FR-V1–V8 · TRD 10 | ⬜ |

@@ -315,3 +315,24 @@
 
 **Tests:** new `settings_test.dart` (8) and `empty_states_test.dart` (2). `flutter analyze` clean; **180 passing**. Phone (Realme, release dev build): Settings light + dark, Theme switch live, App lock sheet, Change PIN screen, Log out sheet, Help → phone settings and back, EMI/Bills empty buttons. Theme put back to System after the check.
 
+## 17 Oct 2026 · T15 Supabase schema, RLS, RPC functions + SQL tests (TRD 5, 6, 10.2, 13.2 · NFR-3)
+
+**Setup (owner):** dev project `cashflow-dev` (Mumbai, ref `hnclvdvojbdxeupvjjjk`) with Data API on, "automatically expose new tables" off, automatic RLS on. Owner ran `supabase login` and `supabase link` (password typed by the owner). Supabase CLI used through `npx supabase@2.119.0` (owner approved; nothing added to the app or repo packages). `supabase init` added `supabase/config.toml` and `supabase/.gitignore`.
+
+**Owner decision (17 Oct):** the approved-device check is in every RLS policy from now; auto-approving the first phone (FR-V1) comes with login in T16; the rest of device approval in T18.
+
+**Migrations (applied to dev only)**
+- `20261017120000_schema.sql`: 13 synced tables (same columns as Drift), server tables (devices, device_requests, subscriptions, app_settings, notification_log), check constraints for every enum and payment rule, deferrable parent links, TRD 6.2 indexes, server-set `updated_at` trigger.
+- `20261017120100_security.sql`: RLS on all tables; own rows + `private.is_approved_session()` (JWT `session_id` must be an approved device); Premium tables need `private.has_active_plan()` to write, reads stay allowed; no DELETE grant (soft delete only); nothing for `anon`; udhar due date / reminders guard (G3); repayment cap trigger (G8).
+- `20261017120200_actions.sql`: `mark_installment_paid`, `unmark_installment_paid`, `pay_bill`, `record_repayment`, `add_extra_as_debt`, `extend_due_date`, one transaction each, security invoker (RLS still applies), rows passed as the phone's JSON with the same ids, retry-safe.
+- `20261017120300_lock_rls_helper.sql`: the security advisor flagged Supabase's own `public.rls_auto_enable()` (from the automatic-RLS option) as callable; EXECUTE revoked. Checked afterwards that new tables still get RLS automatically.
+
+**[Verify]** Supabase docs (auth/jwt-fields): `session_id` is a required claim in user tokens (string); RLS uses `(select auth.jwt() ->> 'session_id')` and `(select auth.uid())` for the per-statement cache. pgTAP's runner (`supabase test db`) needs Docker, which is not installed, so the tests run with `supabase db query --linked -f` inside one transaction that is rolled back (no test data stays; checked: 0 test users left).
+
+**Tests:** `supabase/tests/database_test.sql`, 43 checks, all PASS on dev: anon blocked; T-DB1 cross-user; T-DB2 pending/removed/unknown phone sees and writes nothing; T-DB3 Premium writes incl. due date and reminders, read-only after the plan; T-DB4 repayment cap, ₹4,000 on ₹3,000 left → ₹1,000 extra → borrowed udhar; T-DB5 `updated_at`; T-DB6 EMI ₹7,996.39 / last ₹7,996.40 closes the EMI, unmark, bill 31 Jan → 28 Feb, retries add nothing twice. Before applying, migrations + tests were run once in a rolled-back trial, and a negative trial (RLS off on `people`) made the tests FAIL as expected. Security advisor: no findings.
+
+Run the tests again:
+`npx supabase@2.119.0 db query --linked -f supabase/tests/database_test.sql`
+
+**Open for later:** the phone's sync engine (T17) must call these RPCs for linked actions and send snake_case JSON; device registration with auto-approve of the first phone (T16).
+
