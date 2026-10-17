@@ -13,7 +13,7 @@
 | **Running** | Nothing — T14 built (17 Oct) |
 | **Waiting for owner** | 🧪 Phone test of T14 (Settings + empty states) |
 | **Next** | ⏳ T15 Supabase schema (Phase D) |
-| **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T00b–T13 owner-tested and **pushed to `experiment` (17 Oct)** · `main` = README only (merge only on owner's separate yes) |
+| **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T00b–T13 owner-tested and T14 **pushed to `experiment` (17 Oct)** · `main` = README only (merge only on owner's separate yes) |
 
 ---
 
@@ -35,7 +35,7 @@
 
 | # | Task | Status | What is left |
 |---|---|---|---|
-| T14 | Settings + empty/offline states | 🧪 Built · local commit · phone test pending | Owner tests Settings; offline bar wiring in T17 |
+| T14 | Settings + empty/offline states | 🧪 Built · pushed to `experiment` (owner's yes, 17 Oct) | Owner phone test; offline bar wiring in T17 |
 
 ## ⏸ Paused
 
