@@ -232,7 +232,7 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
           Expanded(
             child: ListView(padding: const EdgeInsets.all(AppSpacing.md), children: [
               if (!premium)
-                const EmiLockCard()
+                EmiLockCard(title: l.exportLockTitle, message: l.exportLockBody)
               else ...[
                 SectionLabel(l.formatLabel),
                 Row(children: [

@@ -453,6 +453,8 @@
   "searchPremiumBody": "कोई भी एंट्री या व्यक्ति एक सेकंड में ढूंढें, ऑफलाइन भी।",
   "repaymentWith": "वापसी · {name}",
   "exportTitle": "एक्सपोर्ट",
+  "exportLockTitle": "अपना हिसाब PDF या CSV में निकालें",
+  "exportLockBody": "रखने, प्रिंट या शेयर करने के लिए साफ़ रिपोर्ट। आपके फ़ोन पर बनती है।",
   "exportData": "डेटा एक्सपोर्ट करें",
   "formatLabel": "फॉर्मेट",
   "pdfDesc": "पढ़ने और भेजने में आसान",

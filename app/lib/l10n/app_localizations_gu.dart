@@ -1522,6 +1522,13 @@ class AppLocalizationsGu extends AppLocalizations {
   String get exportTitle => 'એક્સપોર્ટ';
 
   @override
+  String get exportLockTitle => 'તમારો હિસાબ PDF કે CSV માં કાઢો';
+
+  @override
+  String get exportLockBody =>
+      'રાખવા, પ્રિન્ટ કે શેર કરવા માટે સરસ રિપોર્ટ. તમારા ફોન પર બને છે.';
+
+  @override
   String get exportData => 'ડેટા એક્સપોર્ટ કરો';
 
   @override

@@ -2704,6 +2704,18 @@ abstract class AppLocalizations {
   /// **'Export'**
   String get exportTitle;
 
+  /// No description provided for @exportLockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export your money as PDF or CSV'**
+  String get exportLockTitle;
+
+  /// No description provided for @exportLockBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A neat report to keep, print or share. Made on your phone.'**
+  String get exportLockBody;
+
   /// No description provided for @exportData.
   ///
   /// In en, this message translates to:

@@ -73,7 +73,7 @@ class BudgetScreen extends ConsumerWidget {
             ),
           ]),
           if (!premium)
-            const EmiLockCard()
+            EmiLockCard(title: l.chartsLockTitle, message: l.chartsLockBody)
           else ...[
             FadeSlideIn(
               child: budget == null

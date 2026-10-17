@@ -528,6 +528,8 @@
   "repaymentWith": "Repayment · {name}",
   "@repaymentWith": {"placeholders": {"name": {"type": "String"}}},
   "exportTitle": "Export",
+  "exportLockTitle": "Export your money as PDF or CSV",
+  "exportLockBody": "A neat report to keep, print or share. Made on your phone.",
   "exportData": "Export data",
   "formatLabel": "Format",
   "pdfDesc": "Easy to read & share",

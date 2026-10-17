@@ -123,7 +123,8 @@ class SegmentedSwitch extends StatelessWidget {
       w = w < tp.width + 32 ? tp.width + 32 : w;
       tp.dispose();
     }
-    final active = activeColors?[index] ?? c.card;
+    // Dark: a lighter glass pill on the track, like the bottom bar (colours only, same design).
+    final active = activeColors?[index] ?? (dark ? Colors.white.withValues(alpha: 0.14) : c.card);
     return LayoutBuilder(builder: (context, box) {
       final full = box.maxWidth.isFinite ? (box.maxWidth - 8) / options.length : w;
       final segment = expand || (box.maxWidth.isFinite && w * options.length > box.maxWidth - 8) ? full : w;

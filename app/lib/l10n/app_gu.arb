@@ -453,6 +453,8 @@
   "searchPremiumBody": "કોઈપણ એન્ટ્રી કે વ્યક્તિ એક સેકન્ડમાં શોધો, ઑફલાઇન પણ.",
   "repaymentWith": "પરત · {name}",
   "exportTitle": "એક્સપોર્ટ",
+  "exportLockTitle": "તમારો હિસાબ PDF કે CSV માં કાઢો",
+  "exportLockBody": "રાખવા, પ્રિન્ટ કે શેર કરવા માટે સરસ રિપોર્ટ. તમારા ફોન પર બને છે.",
   "exportData": "ડેટા એક્સપોર્ટ કરો",
   "formatLabel": "ફોર્મેટ",
   "pdfDesc": "વાંચવા અને મોકલવામાં સરળ",

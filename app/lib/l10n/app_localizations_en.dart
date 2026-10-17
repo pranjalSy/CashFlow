@@ -1538,6 +1538,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exportTitle => 'Export';
 
   @override
+  String get exportLockTitle => 'Export your money as PDF or CSV';
+
+  @override
+  String get exportLockBody =>
+      'A neat report to keep, print or share. Made on your phone.';
+
+  @override
   String get exportData => 'Export data';
 
   @override
