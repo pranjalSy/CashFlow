@@ -4,6 +4,7 @@ import 'package:cashflow/data/repositories/local_writer.dart';
 import 'package:cashflow/data/repositories/people_repository.dart';
 import 'package:cashflow/data/repositories/plan_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../helpers/harness.dart';
@@ -157,6 +158,29 @@ void main() {
     await PlanRepository(h.db).setPremiumForDev(false);
     await openUnlockedHome(tester, h);
     expect(find.text('Udhar due today'), findsNothing);
+    await closeApp(tester);
+  });
+
+  testWidgets('a phone contact with no udhar yet: Lent → Save shows the entry on its detail at once (owner bug, 17 Oct)', (tester) async {
+    h = Harness(contacts: FakeContacts(allowed: true, contacts: const [Contact(id: 'c1', displayName: 'Meera Joshi', phones: [Phone(number: '98250 11223')])]));
+    await h.init();
+    await openUnlockedHome(tester, h);
+    await tester.tap(find.bySemanticsLabel('Contacts'));
+    await settle(tester);
+    await tester.tap(find.text('Meera Joshi').first);
+    await settle(tester);
+    expect(find.text('No udhar with Meera yet'), findsOneWidget);
+    await tester.tap(find.text('Lent').first);
+    await settle(tester);
+    await typeDigits(tester, '700');
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    await tester.tap(find.text('Cash'));
+    await tester.tap(find.text('Save lent'));
+    await settle(tester);
+    // Back on Meera's detail, without leaving and coming back.
+    expect(find.text('Lent ₹700'), findsOneWidget);
+    expect(find.text('No udhar with Meera yet'), findsNothing);
     await closeApp(tester);
   });
 }

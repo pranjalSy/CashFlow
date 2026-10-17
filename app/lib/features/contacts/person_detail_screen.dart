@@ -9,6 +9,7 @@ import '../../core/theme/app_shapes.dart';
 import '../../core/ui/labels.dart';
 import '../../core/utils/dates.dart';
 import '../../core/utils/money.dart';
+import '../../data/local/database.dart';
 import '../../data/repositories/debt_repository.dart';
 import '../../data/repositories/people_repository.dart';
 import '../../data/repositories/plan_repository.dart';
@@ -32,23 +33,23 @@ class PersonDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final id = person.id;
-    final saved = id == null ? null : ref.watch(peopleByIdProvider).value?[id];
+    final people = ref.watch(peopleByIdProvider).value ?? const <String, PeopleData>{};
+    // A phone contact opened before it had any udhar has no id yet; once an udhar is saved the person
+    // exists, so find it by number (or contact id) and show the new entry at once (owner bug, 17 Oct).
+    final phone = PeopleRepository.normalizePhone(person.phone);
+    final id = person.id ??
+        people.values
+            .where((p) => (phone != null && p.phoneNormalized == phone) || (person.contactId != null && p.contactCacheId == person.contactId))
+            .firstOrNull
+            ?.id;
+    final saved = id == null ? null : people[id];
     final name = saved?.name ?? person.name;
     final premium = ref.watch(isPremiumProvider).value ?? false;
-    return AppPage(
-      child: SafeArea(
-        child: id == null
-            ? _body(context, ref, name, const [], premium)
-            : StreamBuilder<List<DebtWithPayments>>(
-                stream: ref.watch(debtRepositoryProvider).watchPerson(id),
-                builder: (context, snap) => _body(context, ref, name, snap.data ?? const [], premium),
-              ),
-      ),
-    );
+    final debts = id == null ? const <DebtWithPayments>[] : (ref.watch(personDebtsProvider(id)).value ?? const <DebtWithPayments>[]);
+    return AppPage(child: SafeArea(child: _body(context, ref, name, debts, premium, id)));
   }
 
-  Widget _body(BuildContext context, WidgetRef ref, String name, List<DebtWithPayments> debts, bool premium) {
+  Widget _body(BuildContext context, WidgetRef ref, String name, List<DebtWithPayments> debts, bool premium, String? id) {
     final l = context.l10n;
     final c = context.colors;
     final t = Theme.of(context).textTheme;
@@ -67,7 +68,7 @@ class PersonDetailScreen extends ConsumerWidget {
     final open = debts.where((d) => d.remaining > 0).toList();
 
     void addUdhar(String direction) {
-      final q = {...person.toQuery(), 'direction': direction, 'name': name, 'person': ?person.id};
+      final q = {...person.toQuery(), 'direction': direction, 'name': name, 'person': ?id};
       context.push(Uri(path: '/udhar/new', queryParameters: q).toString());
     }
 
@@ -93,7 +94,10 @@ class PersonDetailScreen extends ConsumerWidget {
           ),
         const SizedBox(height: AppSpacing.md),
         AppCard(
-          color: net > 0 ? c.lent : (net < 0 ? c.borrowed : c.card),
+          // Dark mode: the same card in a deeper shade, so white text stays readable (colours only).
+          color: net > 0
+              ? (Theme.of(context).brightness == Brightness.dark ? c.brandButton : c.lent)
+              : (net < 0 ? (Theme.of(context).brightness == Brightness.dark ? Color.lerp(c.borrowed, c.page, 0.4)! : c.borrowed) : c.card),
           radius: AppRadii.lg,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -310,3 +314,6 @@ class _Tag extends StatelessWidget {
     );
   }
 }
+
+/// A person's udhar as a kept-alive stream, so the screen updates the moment an entry is saved.
+final personDebtsProvider = StreamProvider.family<List<DebtWithPayments>, String>((ref, id) => ref.watch(debtRepositoryProvider).watchPerson(id));
