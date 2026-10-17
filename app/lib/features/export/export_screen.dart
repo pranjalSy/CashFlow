@@ -158,37 +158,65 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
     int count(ExportGroup g) => rows.where((r) => r.group == g).length;
     final total = _chosen.length;
 
-    Widget formatCard(bool pdf, String title, String sub, IconData icon) {
+    Widget formatCard(bool pdf, String title, String sub, IconData icon, Color color, Color tint) {
       final on = _pdf == pdf;
       return Expanded(
         child: AppCard(
-          radius: AppRadii.md,
-          padding: const EdgeInsets.all(AppSpacing.sm),
-          border: BorderSide(color: on ? c.brandButton : c.border, width: on ? 2 : 1),
+          radius: AppRadii.lg,
+          padding: const EdgeInsets.all(14),
+          border: BorderSide(color: on ? c.brandButton : c.border, width: on ? 1.6 : 1),
           onTap: () => setState(() => _pdf = pdf),
-          child: Row(children: [
-            IconTile(icon: icon, color: on ? c.brandText : c.textSecondary, tint: on ? c.brandTint : c.raised, size: 36),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(title, style: t.titleSmall),
-                Text(sub, maxLines: 2, style: t.bodySmall),
-              ]),
-            ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(children: [
+              IconTile(icon: icon, color: color, tint: tint, size: 40),
+              const Spacer(),
+              if (on)
+                Container(
+                  width: 22,
+                  height: 22,
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: c.brandButton),
+                  child: Icon(LucideIcons.check, size: 14, color: c.onButton),
+                ),
+            ]),
+            const SizedBox(height: 10),
+            Text(title, style: t.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+            Text(sub, maxLines: 2, style: t.bodySmall),
           ]),
         ),
       );
     }
 
-    Widget include(ExportGroup g, String title, String counts, IconData icon) => ListRowTile(
-          leading: IconTile(icon: icon, color: c.textSecondary, tint: c.raised, size: 34),
-          title: title,
-          subtitle: counts,
-          trailing: AppToggle(
-            value: _include.contains(g),
-            onChanged: (v) => setState(() => v ? _include.add(g) : _include.remove(g)),
-          ),
-        );
+    Widget include(ExportGroup g, String title, String counts) {
+      final on = _include.contains(g);
+      return InkWell(
+        onTap: () => setState(() => on ? _include.remove(g) : _include.add(g)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(children: [
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(title, style: t.titleSmall),
+                Text(counts, style: t.bodySmall),
+              ]),
+            ),
+            Semantics(
+              checked: on,
+              label: title,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 160),
+                width: 26,
+                height: 26,
+                decoration: ShapeDecoration(
+                  color: on ? c.brandButton : c.card,
+                  shape: AppShapes.squircle(8, side: BorderSide(color: on ? c.brandButton : c.border, width: 1.5)),
+                ),
+                child: on ? Icon(LucideIcons.check, size: 16, color: c.onButton) : null,
+              ),
+            ),
+          ]),
+        ),
+      );
+    }
 
     return AppPage(
       child: SafeArea(
@@ -197,7 +225,8 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
             child: Row(children: [
               HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
-              Expanded(child: Text(l.exportTitle, style: t.titleLarge)),
+              Expanded(child: Center(child: Text(l.exportTitle, style: t.titleLarge))),
+              const SizedBox(width: 48),
             ]),
           ),
           Expanded(
@@ -207,9 +236,9 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
               else ...[
                 SectionLabel(l.formatLabel),
                 Row(children: [
-                  formatCard(true, 'PDF', l.pdfDesc, LucideIcons.fileText),
+                  formatCard(true, 'PDF', l.pdfDesc, LucideIcons.fileText, c.expense, c.expenseTint),
                   const SizedBox(width: AppSpacing.xs),
-                  formatCard(false, 'CSV', l.csvDesc, LucideIcons.sheet),
+                  formatCard(false, 'CSV', l.csvDesc, LucideIcons.sheet, c.income, c.incomeTint),
                 ]),
                 SectionLabel(l.dateRange),
                 Wrap(spacing: 6, runSpacing: 6, children: [
@@ -233,18 +262,28 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
                       },
                     ),
                 ]),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 4),
-                  child: Text(l.periodRange(longDate(context, from), longDate(context, to)), style: t.bodyMedium?.copyWith(color: c.textSecondary)),
+                const SizedBox(height: AppSpacing.xs),
+                AppCard(
+                  radius: AppRadii.lg,
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                  onTap: _pickCustom,
+                  child: Row(children: [
+                    Icon(LucideIcons.calendar, size: 18, color: c.textSecondary),
+                    const SizedBox(width: 10),
+                    Expanded(child: Text(l.periodRange(longDate(context, from), longDate(context, to)), style: t.titleSmall?.copyWith(fontWeight: FontWeight.w700))),
+                    Icon(LucideIcons.chevronRight, size: 18, color: c.textMuted),
+                  ]),
                 ),
                 SectionLabel(l.includeLabel),
                 AppCard(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   border: _tried && _include.isEmpty ? BorderSide(color: c.expense, width: 2) : null,
                   child: Column(children: [
-                    include(ExportGroup.incomeExpense, l.incExpLabel, l.entriesN(count(ExportGroup.incomeExpense)), LucideIcons.arrowUpRight),
-                    include(ExportGroup.udhar, l.udharLabel, l.entriesN(count(ExportGroup.udhar)), LucideIcons.handshake),
-                    include(ExportGroup.emiBills, l.emiBillsLabel, l.paymentsN(count(ExportGroup.emiBills)), LucideIcons.calendarSync),
+                    include(ExportGroup.incomeExpense, l.incExpLabel, l.entriesN(count(ExportGroup.incomeExpense))),
+                    Divider(height: 1, color: c.border),
+                    include(ExportGroup.udhar, l.udharLabel, l.entriesN(count(ExportGroup.udhar))),
+                    Divider(height: 1, color: c.border),
+                    include(ExportGroup.emiBills, l.emiBillsLabel, l.paymentsN(count(ExportGroup.emiBills))),
                   ]),
                 ),
                 if (_tried && _include.isEmpty)
@@ -254,7 +293,7 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
                   ),
                 const SizedBox(height: AppSpacing.sm),
                 Row(children: [
-                  Icon(LucideIcons.shieldCheck, size: 16, color: c.textMuted),
+                  Icon(LucideIcons.lock, size: 14, color: c.textMuted),
                   const SizedBox(width: 6),
                   Expanded(child: Text(l.exportPrivacy, style: t.bodySmall)),
                 ]),

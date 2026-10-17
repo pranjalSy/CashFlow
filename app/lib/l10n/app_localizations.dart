@@ -2638,6 +2638,30 @@ abstract class AppLocalizations {
   /// **'Try a name, an amount like 2000, a category or a note.'**
   String get searchTips;
 
+  /// No description provided for @trySearching.
+  ///
+  /// In en, this message translates to:
+  /// **'Try searching'**
+  String get trySearching;
+
+  /// No description provided for @tipName.
+  ///
+  /// In en, this message translates to:
+  /// **'A name · “Rahul”'**
+  String get tipName;
+
+  /// No description provided for @tipNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A note or title · “dinner”'**
+  String get tipNote;
+
+  /// No description provided for @tipAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'An amount · “2000”'**
+  String get tipAmount;
+
   /// No description provided for @noResultsFor.
   ///
   /// In en, this message translates to:

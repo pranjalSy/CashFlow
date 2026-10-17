@@ -8,7 +8,6 @@ import 'package:cashflow/data/repositories/local_writer.dart';
 import 'package:cashflow/data/repositories/plan_repository.dart';
 import 'package:cashflow/features/export/export_builder.dart';
 import 'package:cashflow/l10n/app_localizations.dart';
-import 'package:cashflow/shared/widgets/basics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -90,9 +89,8 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Export data'));
     await settle(tester);
-    final toggles = find.byType(AppToggle);
-    for (var i = 0; i < 3; i++) {
-      await tester.tap(toggles.at(i));
+    for (final box in ['Income & expenses', 'Lent & borrowed', 'EMI & bills']) {
+      await tester.tap(find.text(box));
       await tester.pump();
     }
     await tester.tap(find.textContaining('Export PDF'));

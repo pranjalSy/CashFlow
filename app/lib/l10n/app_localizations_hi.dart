@@ -1486,6 +1486,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get searchTips => 'नाम, 2000 जैसी रकम, कैटेगरी या नोट लिखकर देखें।';
 
   @override
+  String get trySearching => 'ऐसे खोजें';
+
+  @override
+  String get tipName => 'नाम · “Rahul”';
+
+  @override
+  String get tipNote => 'नोट या टाइटल · “dinner”';
+
+  @override
+  String get tipAmount => 'रकम · “2000”';
+
+  @override
   String noResultsFor(String q) {
     return '“$q” के लिए कुछ नहीं मिला';
   }

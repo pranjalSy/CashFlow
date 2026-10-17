@@ -1499,6 +1499,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Try a name, an amount like 2000, a category or a note.';
 
   @override
+  String get trySearching => 'Try searching';
+
+  @override
+  String get tipName => 'A name · “Rahul”';
+
+  @override
+  String get tipNote => 'A note or title · “dinner”';
+
+  @override
+  String get tipAmount => 'An amount · “2000”';
+
+  @override
   String noResultsFor(String q) {
     return 'No results for “$q”';
   }

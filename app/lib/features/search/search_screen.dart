@@ -82,11 +82,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final repo = ref.read(searchRepositoryProvider);
     final lower = q.toLowerCase();
     final cats = ref.read(categoriesByIdProvider).value ?? const <String, Category>{};
-    final catIds = {for (final c in cats.values) if (categoryName(l, c).toLowerCase().contains(lower)) c.id};
+    final catIds = {
+      for (final c in cats.values)
+        if (categoryName(l, c).toLowerCase().contains(lower)) c.id,
+    };
     final modes = {
       if (l.cash.toLowerCase().contains(lower)) 'cash',
       if (l.online.toLowerCase().contains(lower)) 'online',
-      for (final m in const ['upi', 'card', 'bank']) if (m.contains(lower)) m,
+      for (final m in const ['upi', 'card', 'bank'])
+        if (m.contains(lower)) m,
     };
     final people = await repo.people(q);
     final hits = await repo.entries(q, categoryIds: catIds, modes: modes, personIds: {for (final p in people) p.id});
@@ -122,100 +126,159 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
     return AppPage(
       child: SafeArea(
-        child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, 8, 0),
-            child: Row(children: [
-              Expanded(
-                child: TextField(
-                  controller: _text,
-                  autofocus: true,
-                  onChanged: _changed,
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                    hintText: l.searchHint,
-                    prefixIcon: const Icon(LucideIcons.search),
-                    filled: true,
-                    fillColor: c.card,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppRadii.pill), borderSide: BorderSide.none),
-                  ),
-                ),
-              ),
-              TextButton(onPressed: () => context.pop(), child: Text(l.cancel)),
-            ]),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 4),
-            child: Row(children: [
-              for (final f in _Filter.values) ...[
-                AppChip(
-                  label: switch (f) {
-                    _Filter.all => l.filterAll,
-                    _Filter.expense => l.expense,
-                    _Filter.income => l.income,
-                    _Filter.udhar => l.udhar,
-                    _Filter.people => l.filterPeople,
-                  },
-                  selected: _filter == f,
-                  onTap: () => setState(() => _filter = f),
-                ),
-                const SizedBox(width: 6),
-              ],
-            ]),
-          ),
-          Expanded(
-            child: ListView(padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, AppSpacing.md, AppSpacing.xl), children: [
-              if (_q.isEmpty) ...[
-                if (_recent.isNotEmpty) ...[
-                  SectionLabel(l.recentSearches),
-                  for (final r in _recent)
-                    ListRowTile(
-                      leading: Icon(LucideIcons.history, color: c.textMuted),
-                      title: r,
-                      onTap: () => _use(r),
-                      trailing: IconButton(
-                        tooltip: l.close,
-                        icon: Icon(LucideIcons.x, size: 18, color: c.textMuted),
-                        onPressed: () async {
-                          await ref.read(searchRepositoryProvider).forget(r);
-                          _loadRecent();
-                        },
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, 8, 0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _text,
+                      autofocus: true,
+                      onChanged: _changed,
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration(
+                        hintText: l.searchHint,
+                        prefixIcon: const Icon(LucideIcons.search),
+                        filled: true,
+                        fillColor: c.card,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.md),
+                          borderSide: BorderSide(color: c.border),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.md),
+                          borderSide: BorderSide(color: c.border),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.md),
+                          borderSide: BorderSide(color: c.brandButton, width: 1.6),
+                        ),
                       ),
                     ),
+                  ),
+                  TextButton(onPressed: () => context.pop(), child: Text(l.cancel)),
                 ],
-                Padding(
-                  padding: const EdgeInsets.only(top: AppSpacing.lg),
-                  child: EmptyState(icon: LucideIcons.search, title: l.searchHint, message: l.searchTips),
-                ),
-              ],
-              if (empty)
-                Padding(
-                  padding: const EdgeInsets.only(top: AppSpacing.lg),
-                  child: Column(children: [
-                    EmptyState(icon: LucideIcons.searchX, title: l.noResultsFor(_q), message: l.noResultsBody),
-                    if (_filter != _Filter.all) TextButton(onPressed: () => setState(() => _filter = _Filter.all), child: Text(l.searchInAll)),
-                  ]),
-                ),
-              if (people.isNotEmpty) ...[
-                SectionLabel(l.peopleCount(people.length)),
-                for (final (i, p) in people.indexed)
-                  FadeSlideIn(key: ValueKey('p${p.id}'), index: i, child: _PersonHit(person: p, q: _q)),
-              ],
-              if (hits.isNotEmpty) ...[
-                Padding(
-                  padding: const EdgeInsets.only(top: AppSpacing.sm, bottom: 6),
-                  child: Row(children: [
-                    Expanded(child: Text(l.entriesCount(hits.length), style: t.labelLarge?.copyWith(color: c.textSecondary))),
-                    Text(l.allTime, style: t.labelSmall),
-                  ]),
-                ),
-                for (final (i, h) in hits.indexed)
-                  FadeSlideIn(key: ValueKey('e${h.kind.name}${h.id}${h.occurredAt}'), index: i, child: _EntryHit(hit: h, q: _q)),
-              ],
-            ]),
-          ),
-        ]),
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, 4),
+              child: Row(
+                children: [
+                  for (final f in _Filter.values) ...[
+                    AppChip(
+                      label: switch (f) {
+                        _Filter.all => l.filterAll,
+                        _Filter.expense => l.expense,
+                        _Filter.income => l.income,
+                        _Filter.udhar => l.udhar,
+                        _Filter.people => l.filterPeople,
+                      },
+                      selected: _filter == f,
+                      onTap: () => setState(() => _filter = f),
+                    ),
+                    const SizedBox(width: 6),
+                  ],
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, AppSpacing.md, AppSpacing.xl),
+                children: [
+                  if (_q.isEmpty) ...[
+                    if (_recent.isNotEmpty) ...[
+                      SectionLabel(l.recentSearches),
+                      AppCard(
+                        radius: AppRadii.lg,
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                        child: Column(
+                          children: [
+                            for (final r in _recent)
+                              ListRowTile(
+                                leading: Icon(LucideIcons.history, color: c.textMuted),
+                                title: r,
+                                onTap: () => _use(r),
+                                trailing: IconButton(
+                                  tooltip: l.close,
+                                  icon: Icon(LucideIcons.x, size: 18, color: c.textMuted),
+                                  onPressed: () async {
+                                    await ref.read(searchRepositoryProvider).forget(r);
+                                    _loadRecent();
+                                  },
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: AppSpacing.sm),
+                    // Tips card (screen 23).
+                    Container(
+                      padding: const EdgeInsets.all(14),
+                      decoration: ShapeDecoration(color: c.brandTint, shape: AppShapes.squircle(AppRadii.lg)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l.trySearching,
+                            style: t.titleSmall?.copyWith(color: c.brandText, fontWeight: FontWeight.w800),
+                          ),
+                          const SizedBox(height: 4),
+                          for (final line in [l.tipName, l.tipNote, l.tipAmount])
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3),
+                              child: Text(line, style: t.bodySmall?.copyWith(color: c.text)),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  if (empty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: AppSpacing.lg),
+                      child: Column(
+                        children: [
+                          EmptyState(icon: LucideIcons.searchX, title: l.noResultsFor(_q), message: l.noResultsBody),
+                          if (_filter != _Filter.all) TextButton(onPressed: () => setState(() => _filter = _Filter.all), child: Text(l.searchInAll)),
+                        ],
+                      ),
+                    ),
+                  if (people.isNotEmpty) ...[
+                    SectionLabel(l.peopleCount(people.length)),
+                    for (final (i, p) in people.indexed)
+                      FadeSlideIn(
+                        key: ValueKey('p${p.id}'),
+                        index: i,
+                        child: _PersonHit(person: p, q: _q),
+                      ),
+                  ],
+                  if (hits.isNotEmpty) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(top: AppSpacing.sm, bottom: 6),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(l.entriesCount(hits.length), style: t.labelLarge?.copyWith(color: c.textSecondary)),
+                          ),
+                          Text(l.allTime, style: t.labelSmall),
+                        ],
+                      ),
+                    ),
+                    for (final (i, h) in hits.indexed)
+                      FadeSlideIn(
+                        key: ValueKey('e${h.kind.name}${h.id}${h.occurredAt}'),
+                        index: i,
+                        child: _EntryHit(hit: h, q: _q),
+                      ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -232,11 +295,20 @@ Widget highlighted(BuildContext context, String text, String q, TextStyle? style
     final at = lower.indexOf(needle, i);
     if (at < 0) break;
     if (at > i) spans.add(TextSpan(text: text.substring(i, at)));
-    spans.add(TextSpan(text: text.substring(at, at + needle.length), style: TextStyle(backgroundColor: c.dueSoonTint, color: c.text, fontWeight: FontWeight.w700)));
+    spans.add(
+      TextSpan(
+        text: text.substring(at, at + needle.length),
+        style: TextStyle(backgroundColor: c.dueSoonTint, color: c.text, fontWeight: FontWeight.w700),
+      ),
+    );
     i = at + needle.length;
   }
   if (i < text.length) spans.add(TextSpan(text: text.substring(i)));
-  return Text.rich(TextSpan(style: style, children: spans), maxLines: maxLines, overflow: TextOverflow.ellipsis);
+  return Text.rich(
+    TextSpan(style: style, children: spans),
+    maxLines: maxLines,
+    overflow: TextOverflow.ellipsis,
+  );
 }
 
 class _PersonHit extends ConsumerWidget {
@@ -259,20 +331,28 @@ class _PersonHit extends ConsumerWidget {
         radius: AppRadii.md,
         padding: const EdgeInsets.all(AppSpacing.sm),
         onTap: () => context.push(Uri(path: '/person/${person.id}', queryParameters: {'name': person.name}).toString()),
-        child: Row(children: [
-          PersonAvatar(name: person.name, color: net < 0 ? c.borrowed : c.lent, tint: net < 0 ? c.borrowedTint : c.lentTint, circle: true),
-          const SizedBox(width: 11),
-          Expanded(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              highlighted(context, person.name, q, t.titleSmall),
-              if (person.phoneNormalized != null) Text(person.phoneNormalized!, style: t.bodySmall),
-            ]),
-          ),
-          Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-            AmountText(Money.format(net.abs()), size: 14, color: color, alignment: Alignment.centerRight),
-            Text(net == 0 ? l.allClear : (net > 0 ? l.toReceiveLabel : l.toPayLabel), style: t.labelSmall?.copyWith(color: color)),
-          ]),
-        ]),
+        child: Row(
+          children: [
+            PersonAvatar(name: person.name, color: net < 0 ? c.borrowed : c.lent, tint: net < 0 ? c.borrowedTint : c.lentTint, circle: true),
+            const SizedBox(width: 11),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  highlighted(context, person.name, q, t.titleSmall),
+                  if (person.phoneNormalized != null) Text(person.phoneNormalized!, style: t.bodySmall),
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                AmountText(Money.format(net.abs()), size: 14, color: color, alignment: Alignment.centerRight),
+                Text(net == 0 ? l.allClear : (net > 0 ? l.toReceiveLabel : l.toPayLabel), style: t.labelSmall?.copyWith(color: color)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -295,7 +375,12 @@ class _EntryHit extends ConsumerWidget {
     final person = hit.personId == null ? null : people[hit.personId]?.name ?? '';
     final (String title, String what, Color color, String sign) = switch (hit.kind) {
       SearchKind.income => (hit.title ?? (cat == null ? l.income : categoryName(l, cat)), cat == null ? l.income : categoryName(l, cat), c.income, '+'),
-      SearchKind.expense => (hit.title ?? (cat == null ? l.catOthers : categoryName(l, cat)), cat == null ? l.catOthers : categoryName(l, cat), c.expense, Money.minus),
+      SearchKind.expense => (
+        hit.title ?? (cat == null ? l.catOthers : categoryName(l, cat)),
+        cat == null ? l.catOthers : categoryName(l, cat),
+        c.expense,
+        Money.minus,
+      ),
       SearchKind.lent => ('${l.lent} · $person', l.udhar, c.lent, ''),
       SearchKind.borrowed => ('${l.borrowed} · $person', l.udhar, c.borrowed, ''),
       SearchKind.repayment => (l.repaymentWith(person ?? ''), l.udhar, hit.lent ? c.income : c.expense, hit.lent ? '+' : Money.minus),
@@ -313,17 +398,19 @@ class _EntryHit extends ConsumerWidget {
         radius: AppRadii.md,
         padding: const EdgeInsets.all(AppSpacing.sm),
         onTap: () => hit.isUdhar ? context.push('/person/${hit.personId}') : context.push('/entry/${hit.id}'),
-        child: Row(children: [
-          IconTile(icon: icon, color: cat == null ? color : Color(cat.color), tint: (cat == null ? color : Color(cat.color)).withValues(alpha: 0.16)),
-          const SizedBox(width: 11),
-          Expanded(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              highlighted(context, title, q, t.titleSmall),
-              highlighted(context, hit.note == null ? meta : '$meta · ${hit.note}', q, t.bodySmall),
-            ]),
-          ),
-          AmountText('$sign${Money.format(hit.amount)}', size: 14, color: color, alignment: Alignment.centerRight),
-        ]),
+        child: Row(
+          children: [
+            IconTile(icon: icon, color: cat == null ? color : Color(cat.color), tint: (cat == null ? color : Color(cat.color)).withValues(alpha: 0.16)),
+            const SizedBox(width: 11),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [highlighted(context, title, q, t.titleSmall), highlighted(context, hit.note == null ? meta : '$meta · ${hit.note}', q, t.bodySmall)],
+              ),
+            ),
+            AmountText('$sign${Money.format(hit.amount)}', size: 14, color: color, alignment: Alignment.centerRight),
+          ],
+        ),
       ),
     );
   }

@@ -1483,6 +1483,18 @@ class AppLocalizationsGu extends AppLocalizations {
   String get searchTips => 'નામ, 2000 જેવી રકમ, કેટેગરી કે નોટ લખીને જુઓ.';
 
   @override
+  String get trySearching => 'આ રીતે શોધો';
+
+  @override
+  String get tipName => 'નામ · “Rahul”';
+
+  @override
+  String get tipNote => 'નોટ કે ટાઇટલ · “dinner”';
+
+  @override
+  String get tipAmount => 'રકમ · “2000”';
+
+  @override
   String noResultsFor(String q) {
     return '“$q” માટે કંઈ મળ્યું નહીં';
   }
