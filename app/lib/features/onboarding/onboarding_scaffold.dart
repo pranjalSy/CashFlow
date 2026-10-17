@@ -3,11 +3,12 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
+import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/app_page.dart';
 
 /// Shared layout for first-run screens: back, progress dashes, content, bottom actions.
 class OnboardingScaffold extends StatelessWidget {
-  const OnboardingScaffold({super.key, required this.child, this.step, this.steps = 4, this.onBack, this.bottom, this.scroll = true});
+  const OnboardingScaffold({super.key, required this.child, this.step, this.steps = 4, this.onBack, this.bottom, this.scroll = true, this.trailing});
 
   final Widget child;
 
@@ -17,6 +18,9 @@ class OnboardingScaffold extends StatelessWidget {
   final VoidCallback? onBack;
   final Widget? bottom;
   final bool scroll;
+
+  /// Top-right action (for example "Skip", screen 08).
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +40,7 @@ class OnboardingScaffold extends StatelessWidget {
                 child: Row(
                   children: [
                     if (onBack != null)
-                      IconButton(
-                        onPressed: onBack,
-                        icon: Icon(LucideIcons.arrowLeft, color: c.text),
-                        tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-                      )
+                      HeaderButton(icon: LucideIcons.chevronLeft, tooltip: MaterialLocalizations.of(context).backButtonTooltip, onTap: onBack)
                     else
                       const SizedBox(width: 48),
                     Expanded(
@@ -62,7 +62,7 @@ class OnboardingScaffold extends StatelessWidget {
                               ],
                             ),
                     ),
-                    const SizedBox(width: 48),
+                    trailing ?? const SizedBox(width: 48),
                   ],
                 ),
               ),

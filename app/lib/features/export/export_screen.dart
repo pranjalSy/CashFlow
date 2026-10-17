@@ -196,7 +196,7 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
             child: Row(children: [
-              IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.arrowLeft, color: c.text), tooltip: l.back),
+              HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
               Expanded(child: Text(l.exportTitle, style: t.titleLarge)),
             ]),
           ),

@@ -68,7 +68,7 @@ class BillDetailScreen extends ConsumerWidget {
             final (fg, bg) = billColors(context, b.billType);
             return ListView(padding: const EdgeInsets.fromLTRB(AppSpacing.md, 4, AppSpacing.md, AppSpacing.xl), children: [
               Row(children: [
-                IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.arrowLeft, color: c.text), tooltip: l.back),
+                HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
                 Expanded(child: Center(child: Text(billTypeName(l, b.billType), style: t.titleLarge))),
                 PopupMenuButton<int>(
                   tooltip: l.more,

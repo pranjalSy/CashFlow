@@ -197,11 +197,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premiumComingLater => 'Premium purchase comes in a later update.';
 
   @override
-  String get welcomeTitle => 'Your money, clear and calm';
+  String get welcomeTitle => 'Your money,\nclearly tracked.';
 
   @override
   String get welcomeBody =>
-      'Income, expenses, udhar, EMIs and bills in one place. Works offline.';
+      'Income, expenses, udhar and EMIs. All in one calm, private place.';
 
   @override
   String get welcomeLogin => 'Log in';
@@ -212,6 +212,24 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get welcomeOfflineNote =>
       'Account and sync come in a later update. For now, your data stays on this phone.';
+
+  @override
+  String get welcomeF1 => 'Never miss a due date';
+
+  @override
+  String get welcomeF1Sub => 'Reminders for udhar, EMIs and bills';
+
+  @override
+  String get welcomeF2 => 'Works offline';
+
+  @override
+  String get welcomeF2Sub => 'Add entries anytime, syncs later';
+
+  @override
+  String get welcomeF3 => 'Private and locked';
+
+  @override
+  String get welcomeF3Sub => 'PIN and fingerprint protected';
 
   @override
   String get languageTitle => 'Choose your language';
@@ -226,10 +244,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageLater => 'You can change this anytime in Settings';
 
   @override
-  String get pinCreateTitle => 'Create a 4-digit PIN';
+  String get pinCreateTitle => 'Create your PIN';
 
   @override
-  String get pinCreateBody => 'You\'ll use it to open CashFlow.';
+  String get pinCreateBody => 'You\'ll use this 4-digit PIN to open CashFlow.';
+
+  @override
+  String get pinAvoidEasy => 'Avoid easy PINs like 1234 or 0000';
+
+  @override
+  String get pinStoredOnPhone =>
+      'Stored only on this phone, never sent anywhere';
 
   @override
   String get pinConfirmTitle => 'Enter the PIN again';
@@ -270,14 +295,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get useFingerprint => 'Use fingerprint';
 
   @override
-  String get fingerprintTitle => 'Unlock with fingerprint?';
+  String get fingerprintTitle => 'Unlock with fingerprint';
 
   @override
   String get fingerprintBody =>
-      'Open CashFlow with your finger. Your PIN still works.';
+      'Open CashFlow with one touch instead of typing your PIN.';
 
   @override
-  String get fingerprintEnable => 'Use fingerprint';
+  String get fingerprintOnTitle => 'Fingerprint is on';
+
+  @override
+  String get fingerprintOnBody =>
+      'Next time, just touch the sensor to open CashFlow.';
+
+  @override
+  String get fingerprintOnNote =>
+      'You can turn this off anytime in Settings › App lock';
+
+  @override
+  String get fpFaster => 'Faster';
+
+  @override
+  String get fpFasterSub => 'Open the app in under a second';
+
+  @override
+  String get fpPinBackup => 'PIN stays as backup';
+
+  @override
+  String get fpPinBackupSub => 'Use your PIN anytime';
+
+  @override
+  String get fpNeverSee => 'We never see your fingerprint';
+
+  @override
+  String get fpNeverSeeSub => 'It stays inside your phone';
+
+  @override
+  String get fingerprintEnable => 'Turn on fingerprint';
 
   @override
   String get fingerprintNotSetTitle => 'Set up fingerprint first';
@@ -293,10 +347,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fingerprintFailed => 'Fingerprint not recognised. Use your PIN.';
 
   @override
-  String get openingTitle => 'How much money do you have now?';
+  String get openingTitle => 'Your starting balance';
 
   @override
-  String get openingBody => 'This is your starting balance. You can enter 0.';
+  String get openingBody =>
+      'How much money do you have right now? Rough numbers are fine.';
+
+  @override
+  String get cashSub => 'In your wallet';
+
+  @override
+  String get onlineSub => 'Bank and UPI';
+
+  @override
+  String get totalBalance => 'Total balance';
+
+  @override
+  String get openingNote =>
+      'Only a starting point. We never connect to your bank. You can change it later in Settings.';
+
+  @override
+  String get next => 'Next';
 
   @override
   String get openingCash => 'Cash in hand';
@@ -662,6 +733,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveBorrowed => 'Save borrowed';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get fromContactsOrNew => 'From contacts or add new';
+
+  @override
+  String get chooseWhoLent => 'Choose who you gave money to';
+
+  @override
+  String get chooseWhoBorrowed => 'Choose who you borrowed from';
+
+  @override
+  String youGave(String name) {
+    return 'You gave $name';
+  }
+
+  @override
+  String youTook(String name) {
+    return 'You took from $name';
+  }
+
+  @override
+  String get youGaveSomeone => 'You gave someone';
+
+  @override
+  String get youTookSomeone => 'You took from someone';
+
+  @override
+  String get oneWeek => '1 week';
+
+  @override
+  String get twoWeeks => '2 weeks';
+
+  @override
+  String get oneMonth => '1 month';
+
+  @override
+  String get pickDate => 'Pick date';
+
+  @override
+  String get remindOff => 'Off';
 
   @override
   String get repaymentTitle => 'Repayment';
@@ -1350,6 +1464,17 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String ofLimit(String limit) {
     return 'of $limit';
+  }
+
+  @override
+  String daysPerDay(int days, String perDay) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days',
+      one: '1 day',
+    );
+    return '$_temp0 · $perDay/day';
   }
 
   @override

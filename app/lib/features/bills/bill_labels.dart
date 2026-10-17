@@ -10,22 +10,22 @@ IconData billIcon(String type) => switch (type) {
       'gas' => LucideIcons.flame,
       'mobile' => LucideIcons.smartphone,
       'internet' => LucideIcons.wifi,
-      'dth' => LucideIcons.tv,
+      'dth' => LucideIcons.monitor,
       'water' => LucideIcons.droplet,
-      'insurance' => LucideIcons.shieldCheck,
-      _ => LucideIcons.receipt,
+      'insurance' => LucideIcons.shield,
+      _ => LucideIcons.ellipsis,
     };
 
 (Color, Color) billColors(BuildContext context, String type) {
   final c = context.colors;
   return switch (type) {
     'electricity' => (c.premium, c.premiumTint),
-    'gas' => (c.expense, c.expenseTint),
+    'gas' => (c.dueSoon, c.dueSoonTint),
     'mobile' => (c.income, c.incomeTint),
     'internet' => (c.lent, c.lentTint),
-    'dth' => (c.borrowed, c.borrowedTint),
+    'dth' => (c.lent, c.lentTint),
     'water' => (c.brandText, c.brandTint),
-    'insurance' => (c.income, c.incomeTint),
+    'insurance' => (c.borrowed, c.borrowedTint),
     _ => (c.textSecondary, c.raised),
   };
 }

@@ -475,13 +475,13 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your money, clear and calm'**
+  /// **'Your money,\nclearly tracked.'**
   String get welcomeTitle;
 
   /// No description provided for @welcomeBody.
   ///
   /// In en, this message translates to:
-  /// **'Income, expenses, udhar, EMIs and bills in one place. Works offline.'**
+  /// **'Income, expenses, udhar and EMIs. All in one calm, private place.'**
   String get welcomeBody;
 
   /// No description provided for @welcomeLogin.
@@ -501,6 +501,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Account and sync come in a later update. For now, your data stays on this phone.'**
   String get welcomeOfflineNote;
+
+  /// No description provided for @welcomeF1.
+  ///
+  /// In en, this message translates to:
+  /// **'Never miss a due date'**
+  String get welcomeF1;
+
+  /// No description provided for @welcomeF1Sub.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders for udhar, EMIs and bills'**
+  String get welcomeF1Sub;
+
+  /// No description provided for @welcomeF2.
+  ///
+  /// In en, this message translates to:
+  /// **'Works offline'**
+  String get welcomeF2;
+
+  /// No description provided for @welcomeF2Sub.
+  ///
+  /// In en, this message translates to:
+  /// **'Add entries anytime, syncs later'**
+  String get welcomeF2Sub;
+
+  /// No description provided for @welcomeF3.
+  ///
+  /// In en, this message translates to:
+  /// **'Private and locked'**
+  String get welcomeF3;
+
+  /// No description provided for @welcomeF3Sub.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN and fingerprint protected'**
+  String get welcomeF3Sub;
 
   /// No description provided for @languageTitle.
   ///
@@ -529,14 +565,26 @@ abstract class AppLocalizations {
   /// No description provided for @pinCreateTitle.
   ///
   /// In en, this message translates to:
-  /// **'Create a 4-digit PIN'**
+  /// **'Create your PIN'**
   String get pinCreateTitle;
 
   /// No description provided for @pinCreateBody.
   ///
   /// In en, this message translates to:
-  /// **'You\'ll use it to open CashFlow.'**
+  /// **'You\'ll use this 4-digit PIN to open CashFlow.'**
   String get pinCreateBody;
+
+  /// No description provided for @pinAvoidEasy.
+  ///
+  /// In en, this message translates to:
+  /// **'Avoid easy PINs like 1234 or 0000'**
+  String get pinAvoidEasy;
+
+  /// No description provided for @pinStoredOnPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Stored only on this phone, never sent anywhere'**
+  String get pinStoredOnPhone;
 
   /// No description provided for @pinConfirmTitle.
   ///
@@ -595,19 +643,73 @@ abstract class AppLocalizations {
   /// No description provided for @fingerprintTitle.
   ///
   /// In en, this message translates to:
-  /// **'Unlock with fingerprint?'**
+  /// **'Unlock with fingerprint'**
   String get fingerprintTitle;
 
   /// No description provided for @fingerprintBody.
   ///
   /// In en, this message translates to:
-  /// **'Open CashFlow with your finger. Your PIN still works.'**
+  /// **'Open CashFlow with one touch instead of typing your PIN.'**
   String get fingerprintBody;
+
+  /// No description provided for @fingerprintOnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fingerprint is on'**
+  String get fingerprintOnTitle;
+
+  /// No description provided for @fingerprintOnBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Next time, just touch the sensor to open CashFlow.'**
+  String get fingerprintOnBody;
+
+  /// No description provided for @fingerprintOnNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You can turn this off anytime in Settings › App lock'**
+  String get fingerprintOnNote;
+
+  /// No description provided for @fpFaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Faster'**
+  String get fpFaster;
+
+  /// No description provided for @fpFasterSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the app in under a second'**
+  String get fpFasterSub;
+
+  /// No description provided for @fpPinBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN stays as backup'**
+  String get fpPinBackup;
+
+  /// No description provided for @fpPinBackupSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Use your PIN anytime'**
+  String get fpPinBackupSub;
+
+  /// No description provided for @fpNeverSee.
+  ///
+  /// In en, this message translates to:
+  /// **'We never see your fingerprint'**
+  String get fpNeverSee;
+
+  /// No description provided for @fpNeverSeeSub.
+  ///
+  /// In en, this message translates to:
+  /// **'It stays inside your phone'**
+  String get fpNeverSeeSub;
 
   /// No description provided for @fingerprintEnable.
   ///
   /// In en, this message translates to:
-  /// **'Use fingerprint'**
+  /// **'Turn on fingerprint'**
   String get fingerprintEnable;
 
   /// No description provided for @fingerprintNotSetTitle.
@@ -637,14 +739,44 @@ abstract class AppLocalizations {
   /// No description provided for @openingTitle.
   ///
   /// In en, this message translates to:
-  /// **'How much money do you have now?'**
+  /// **'Your starting balance'**
   String get openingTitle;
 
   /// No description provided for @openingBody.
   ///
   /// In en, this message translates to:
-  /// **'This is your starting balance. You can enter 0.'**
+  /// **'How much money do you have right now? Rough numbers are fine.'**
   String get openingBody;
+
+  /// No description provided for @cashSub.
+  ///
+  /// In en, this message translates to:
+  /// **'In your wallet'**
+  String get cashSub;
+
+  /// No description provided for @onlineSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank and UPI'**
+  String get onlineSub;
+
+  /// No description provided for @totalBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Total balance'**
+  String get totalBalance;
+
+  /// No description provided for @openingNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Only a starting point. We never connect to your bank. You can change it later in Settings.'**
+  String get openingNote;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
 
   /// No description provided for @openingCash.
   ///
@@ -1281,6 +1413,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save borrowed'**
   String get saveBorrowed;
+
+  /// No description provided for @change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get change;
+
+  /// No description provided for @fromContactsOrNew.
+  ///
+  /// In en, this message translates to:
+  /// **'From contacts or add new'**
+  String get fromContactsOrNew;
+
+  /// No description provided for @chooseWhoLent.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose who you gave money to'**
+  String get chooseWhoLent;
+
+  /// No description provided for @chooseWhoBorrowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose who you borrowed from'**
+  String get chooseWhoBorrowed;
+
+  /// No description provided for @youGave.
+  ///
+  /// In en, this message translates to:
+  /// **'You gave {name}'**
+  String youGave(String name);
+
+  /// No description provided for @youTook.
+  ///
+  /// In en, this message translates to:
+  /// **'You took from {name}'**
+  String youTook(String name);
+
+  /// No description provided for @youGaveSomeone.
+  ///
+  /// In en, this message translates to:
+  /// **'You gave someone'**
+  String get youGaveSomeone;
+
+  /// No description provided for @youTookSomeone.
+  ///
+  /// In en, this message translates to:
+  /// **'You took from someone'**
+  String get youTookSomeone;
+
+  /// No description provided for @oneWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'1 week'**
+  String get oneWeek;
+
+  /// No description provided for @twoWeeks.
+  ///
+  /// In en, this message translates to:
+  /// **'2 weeks'**
+  String get twoWeeks;
+
+  /// No description provided for @oneMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'1 month'**
+  String get oneMonth;
+
+  /// No description provided for @pickDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick date'**
+  String get pickDate;
+
+  /// No description provided for @remindOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get remindOff;
 
   /// No description provided for @repaymentTitle.
   ///
@@ -2385,6 +2595,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'of {limit}'**
   String ofLimit(String limit);
+
+  /// No description provided for @daysPerDay.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{1 day} other{{days} days}} · {perDay}/day'**
+  String daysPerDay(int days, String perDay);
 
   /// No description provided for @searchHint.
   ///

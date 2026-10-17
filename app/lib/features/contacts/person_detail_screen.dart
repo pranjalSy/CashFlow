@@ -76,11 +76,7 @@ class PersonDetailScreen extends ConsumerWidget {
       children: [
         Row(
           children: [
-            IconButton(
-              onPressed: () => context.pop(),
-              icon: Icon(LucideIcons.arrowLeft, color: c.text),
-              tooltip: l.back,
-            ),
+            HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
             const Spacer(),
           ],
         ),

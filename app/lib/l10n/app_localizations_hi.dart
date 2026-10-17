@@ -197,11 +197,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get premiumComingLater => 'प्रीमियम खरीदना अगले अपडेट में आएगा।';
 
   @override
-  String get welcomeTitle => 'आपके पैसे, साफ़ और सुकून से';
+  String get welcomeTitle => 'आपका पैसा,\nसाफ़ हिसाब में।';
 
   @override
   String get welcomeBody =>
-      'आमदनी, खर्च, उधार, EMI और बिल एक जगह। बिना इंटरनेट भी चलता है।';
+      'आमदनी, खर्च, उधार और EMI। सब एक शांत, निजी जगह में।';
 
   @override
   String get welcomeLogin => 'लॉग इन';
@@ -212,6 +212,24 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get welcomeOfflineNote =>
       'अकाउंट और सिंक अगले अपडेट में आएंगे। अभी आपका डेटा इसी फ़ोन में रहेगा।';
+
+  @override
+  String get welcomeF1 => 'कोई ड्यू डेट न छूटे';
+
+  @override
+  String get welcomeF1Sub => 'उधार, EMI और बिल की याद';
+
+  @override
+  String get welcomeF2 => 'बिना इंटरनेट चलता है';
+
+  @override
+  String get welcomeF2Sub => 'कभी भी एंट्री करें, बाद में सिंक';
+
+  @override
+  String get welcomeF3 => 'निजी और लॉक';
+
+  @override
+  String get welcomeF3Sub => 'PIN और फिंगरप्रिंट से सुरक्षित';
 
   @override
   String get languageTitle => 'अपनी भाषा चुनें';
@@ -226,10 +244,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get languageLater => 'आप इसे कभी भी सेटिंग्स में बदल सकते हैं';
 
   @override
-  String get pinCreateTitle => '4 अंकों का PIN बनाएं';
+  String get pinCreateTitle => 'अपना PIN बनाएं';
 
   @override
-  String get pinCreateBody => 'इससे आप CashFlow खोलेंगे।';
+  String get pinCreateBody =>
+      'CashFlow खोलने के लिए आप ये 4 अंकों का PIN इस्तेमाल करेंगे।';
+
+  @override
+  String get pinAvoidEasy => '1234 या 0000 जैसे आसान PIN न रखें';
+
+  @override
+  String get pinStoredOnPhone =>
+      'सिर्फ इसी फ़ोन में रहता है, कहीं नहीं भेजा जाता';
 
   @override
   String get pinConfirmTitle => 'PIN दोबारा डालें';
@@ -277,6 +303,35 @@ class AppLocalizationsHi extends AppLocalizations {
       'उंगली लगाकर CashFlow खोलें। PIN भी चलता रहेगा।';
 
   @override
+  String get fingerprintOnTitle => 'फिंगरप्रिंट चालू है';
+
+  @override
+  String get fingerprintOnBody =>
+      'अगली बार CashFlow खोलने के लिए बस सेंसर छुएं।';
+
+  @override
+  String get fingerprintOnNote =>
+      'इसे कभी भी Settings › App lock में बंद कर सकते हैं';
+
+  @override
+  String get fpFaster => 'तेज़';
+
+  @override
+  String get fpFasterSub => 'एक सेकंड से कम में ऐप खोलें';
+
+  @override
+  String get fpPinBackup => 'PIN बैकअप रहेगा';
+
+  @override
+  String get fpPinBackupSub => 'PIN कभी भी इस्तेमाल करें';
+
+  @override
+  String get fpNeverSee => 'हम आपका फिंगरप्रिंट कभी नहीं देखते';
+
+  @override
+  String get fpNeverSeeSub => 'वो आपके फ़ोन में ही रहता है';
+
+  @override
   String get fingerprintEnable => 'फ़िंगरप्रिंट चालू करें';
 
   @override
@@ -293,10 +348,26 @@ class AppLocalizationsHi extends AppLocalizations {
   String get fingerprintFailed => 'फ़िंगरप्रिंट नहीं पहचाना। PIN डालें।';
 
   @override
-  String get openingTitle => 'अभी आपके पास कितने पैसे हैं?';
+  String get openingTitle => 'आपका शुरुआती बैलेंस';
 
   @override
-  String get openingBody => 'यह आपका शुरुआती बैलेंस है। 0 भी लिख सकते हैं।';
+  String get openingBody => 'अभी आपके पास कितने पैसे हैं? अंदाज़ा भी चलेगा।';
+
+  @override
+  String get cashSub => 'आपके बटुए में';
+
+  @override
+  String get onlineSub => 'बैंक और UPI';
+
+  @override
+  String get totalBalance => 'कुल बैलेंस';
+
+  @override
+  String get openingNote =>
+      'यह सिर्फ शुरुआत है। हम आपके बैंक से कभी नहीं जुड़ते। बाद में Settings में बदल सकते हैं।';
+
+  @override
+  String get next => 'आगे';
 
   @override
   String get openingCash => 'हाथ में नकद';
@@ -661,6 +732,49 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get saveBorrowed => 'उधार सेव करें';
+
+  @override
+  String get change => 'बदलें';
+
+  @override
+  String get fromContactsOrNew => 'कॉन्टैक्ट से या नया जोड़ें';
+
+  @override
+  String get chooseWhoLent => 'किसे पैसे दिए, चुनें';
+
+  @override
+  String get chooseWhoBorrowed => 'किससे लिए, चुनें';
+
+  @override
+  String youGave(String name) {
+    return 'आपने $name को दिए';
+  }
+
+  @override
+  String youTook(String name) {
+    return 'आपने $name से लिए';
+  }
+
+  @override
+  String get youGaveSomeone => 'आपने किसी को दिए';
+
+  @override
+  String get youTookSomeone => 'आपने किसी से लिए';
+
+  @override
+  String get oneWeek => '1 हफ्ता';
+
+  @override
+  String get twoWeeks => '2 हफ्ते';
+
+  @override
+  String get oneMonth => '1 महीना';
+
+  @override
+  String get pickDate => 'तारीख चुनें';
+
+  @override
+  String get remindOff => 'बंद';
 
   @override
   String get repaymentTitle => 'वापसी';
@@ -1338,6 +1452,17 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String ofLimit(String limit) {
     return '$limit में से';
+  }
+
+  @override
+  String daysPerDay(int days, String perDay) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days दिन',
+      one: '1 दिन',
+    );
+    return '$_temp0 · $perDay/दिन';
   }
 
   @override

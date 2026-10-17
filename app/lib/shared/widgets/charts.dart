@@ -187,10 +187,10 @@ class IncomeExpenseBars extends StatelessWidget {
                 onTap: () => onSelect(i),
                 child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
                   Opacity(
-                    opacity: i == selected ? 1 : 0.38,
+                    opacity: i == selected ? 1 : 0.3,
                     child: Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.end, children: [
                       _bar(top == 0 ? 0 : height * income[i] / top * v, c.incomeButton),
-                      const SizedBox(width: 3),
+                      const SizedBox(width: 4),
                       _bar(top == 0 ? 0 : height * expense[i] / top * v, c.expenseButton),
                     ]),
                   ),
@@ -205,7 +205,7 @@ class IncomeExpenseBars extends StatelessWidget {
   }
 
   Widget _bar(double h, Color color) => Container(
-        width: 11,
+        width: 14,
         height: math.max(h, 2),
         decoration: BoxDecoration(color: color, borderRadius: const BorderRadius.vertical(top: Radius.circular(5))),
       );

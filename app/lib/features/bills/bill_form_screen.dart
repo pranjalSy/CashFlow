@@ -10,7 +10,6 @@ import '../../core/ui/labels.dart';
 import '../../core/utils/dates.dart';
 import '../../core/utils/money.dart';
 import '../../data/repositories/bill_repository.dart';
-import '../../shared/widgets/amount_field.dart';
 import '../../shared/widgets/app_button.dart';
 import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_page.dart';
@@ -40,7 +39,7 @@ class _BillFormScreenState extends ConsumerState<BillFormScreen> {
   LocalDate? _due;
   String _usual = '';
   bool _padOpen = false;
-  final Set<int> _remind = {0, 3};
+  final Set<int> _remind = {3};
   bool _tried = false;
 
   bool get _editing => widget.billId != null;
@@ -130,75 +129,136 @@ class _BillFormScreenState extends ConsumerState<BillFormScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
             child: Row(children: [
-              IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
+              HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
               Expanded(child: Center(child: Text(_editing ? l.editBill : l.addBill, style: t.titleLarge))),
               const SizedBox(width: 48),
             ]),
           ),
           Expanded(
             child: ListView(padding: const EdgeInsets.all(AppSpacing.md), children: [
+              // Type + name with "Change" (back to the type list), screen 20 step 2.
               AppCard(
-                radius: AppRadii.md,
-                padding: const EdgeInsets.fromLTRB(12, 10, 14, 10),
-                child: Column(children: [
-                  Row(children: [
-                    IconTile(icon: billIcon(_type), color: fg, tint: bg),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(l.billTypeBill(billTypeName(l, _type)), style: t.labelMedium),
-                        TextField(
-                          controller: _name,
-                          onTap: () => setState(() => _padOpen = false),
-                          style: t.titleMedium,
-                          textCapitalization: TextCapitalization.words,
-                          decoration: InputDecoration.collapsed(hintText: l.billNameHint),
-                        ),
-                      ]),
+                radius: AppRadii.lg,
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                child: Row(children: [
+                  IconTile(icon: billIcon(_type), color: fg, tint: bg),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(l.billTypeBill(billTypeName(l, _type)), style: t.labelSmall),
+                      TextField(
+                        controller: _name,
+                        onTap: () => setState(() => _padOpen = false),
+                        style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                        textCapitalization: TextCapitalization.words,
+                        decoration: InputDecoration.collapsed(hintText: l.billNameHint),
+                      ),
+                    ]),
+                  ),
+                  if (!_editing)
+                    InkWell(
+                      onTap: () => context.pushReplacement('/bills/new'),
+                      customBorder: AppShapes.squircle(AppRadii.pill),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: ShapeDecoration(color: c.brandTint, shape: AppShapes.squircle(AppRadii.pill)),
+                        child: Text(l.change, style: t.labelMedium?.copyWith(color: c.brandText, fontWeight: FontWeight.w700)),
+                      ),
                     ),
-                  ]),
-                  Divider(height: 18, color: c.border),
-                  TextField(
-                    controller: _customer,
-                    onTap: () => setState(() => _padOpen = false),
-                    style: t.bodyMedium,
-                    decoration: InputDecoration.collapsed(hintText: '${l.customerIdOptional} · ${l.customerIdHint}'),
+                ]),
+              ),
+              const SizedBox(height: AppSpacing.xs),
+              AppCard(
+                radius: AppRadii.lg,
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                child: Row(children: [
+                  IconTile(icon: LucideIcons.idCard, color: c.textSecondary, tint: c.raised, size: 34),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(l.customerIdOptional, style: t.labelSmall),
+                      TextField(
+                        controller: _customer,
+                        onTap: () => setState(() => _padOpen = false),
+                        style: t.titleSmall,
+                        decoration: InputDecoration.collapsed(hintText: l.customerIdHint),
+                      ),
+                    ]),
                   ),
                 ]),
               ),
-              SectionLabel(l.comesEvery),
-              Wrap(spacing: 6, runSpacing: 6, children: [
-                for (final g in billGaps) AppChip(label: '$g', selected: _every == g, onTap: () => setState(() => _every = g)),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(4, AppSpacing.sm, 4, 6),
+                child: Text(l.comesEvery, style: t.labelMedium?.copyWith(color: c.text)),
+              ),
+              // Five equal choices in one row.
+              Row(children: [
+                for (final (i, g) in billGaps.indexed) ...[
+                  if (i > 0) const SizedBox(width: 6),
+                  Expanded(
+                    child: SizedBox(
+                      height: 40,
+                      child: AppChip(label: '$g', selected: _every == g, onTap: () => setState(() => _every = g)),
+                    ),
+                  ),
+                ],
               ]),
-              SectionLabel(l.nextDueDate),
+              const SizedBox(height: AppSpacing.xs),
               AppCard(
-                radius: AppRadii.md,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                radius: AppRadii.lg,
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
                 border: _tried && due == null ? BorderSide(color: c.expense, width: 2) : null,
                 onTap: _pickDue,
-                child: ListRowTile(
-                  leading: IconTile(icon: LucideIcons.calendar, color: c.textSecondary, tint: c.raised, size: 34),
-                  title: due == null ? l.chooseNextDue : longDate(context, due),
-                  subtitle: preview == null ? null : l.thenDates(preview),
-                  trailing: Icon(LucideIcons.chevronRight, color: c.textMuted),
-                ),
+                child: Row(children: [
+                  IconTile(icon: LucideIcons.calendar, color: c.textSecondary, tint: c.raised, size: 34),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(l.nextDueDate, style: t.labelSmall),
+                      Text(due == null ? l.chooseNextDue : longDate(context, due), style: t.titleSmall),
+                    ]),
+                  ),
+                  Icon(LucideIcons.chevronRight, size: 18, color: c.textMuted),
+                ]),
               ),
+              if (preview != null)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(6, 8, 6, 0),
+                  child: Row(children: [
+                    Icon(LucideIcons.repeat, size: 14, color: c.brandText),
+                    const SizedBox(width: 6),
+                    Expanded(child: Text(l.thenDates(preview), style: t.labelMedium?.copyWith(color: c.brandText))),
+                  ]),
+                ),
               if (_tried && due == null)
                 Padding(
                   padding: const EdgeInsets.only(left: 4, top: 6),
                   child: Text(l.chooseNextDue, style: t.bodySmall?.copyWith(color: c.expense, fontWeight: FontWeight.w600)),
                 ),
-              const SizedBox(height: AppSpacing.sm),
-              AmountField(
-                label: l.usualAmountOptional,
-                typed: _usual,
-                active: _padOpen,
+              const SizedBox(height: AppSpacing.xs),
+              AppCard(
+                radius: AppRadii.lg,
+                padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                border: _padOpen ? BorderSide(color: c.brandButton, width: 2) : null,
                 onTap: () {
                   FocusScope.of(context).unfocus();
                   setState(() => _padOpen = true);
                 },
+                child: Row(children: [
+                  IconTile(icon: LucideIcons.indianRupee, color: c.textSecondary, tint: c.raised, size: 34),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(l.usualAmountOptional, style: t.labelSmall),
+                      Text('₹${Money.formatTyping(_usual)}', style: t.titleSmall?.copyWith(fontFeatures: const [FontFeature.tabularFigures()])),
+                    ]),
+                  ),
+                ]),
               ),
-              SectionLabel(l.remindMe),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(4, AppSpacing.sm, 4, 6),
+                child: Text(l.remindMe, style: t.labelMedium?.copyWith(color: c.text)),
+              ),
               Wrap(spacing: 6, runSpacing: 6, children: [
                 for (final d in const [0, 3, 7])
                   AppChip(
@@ -212,7 +272,6 @@ class _BillFormScreenState extends ConsumerState<BillFormScreen> {
           if (_padOpen)
             Material(
               color: c.sheet,
-              elevation: 12,
               shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.xl))),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(14, 10, 14, 10 + MediaQuery.paddingOf(context).bottom),

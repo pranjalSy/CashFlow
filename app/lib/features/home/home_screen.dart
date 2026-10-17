@@ -441,14 +441,11 @@ class _Tile extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Row(
           children: [
-            // Tinted icon box with a soft coloured edge, as in the mockup.
+            // White icon box with the coloured icon (screen 10); the card colour in dark mode.
             Container(
               width: 30,
               height: 30,
-              decoration: ShapeDecoration(
-                color: color.withValues(alpha: 0.16),
-                shape: AppShapes.squircle(10, side: BorderSide(color: color.withValues(alpha: 0.32))),
-              ),
+              decoration: ShapeDecoration(color: context.colors.card, shape: AppShapes.squircle(10)),
               child: Icon(icon, size: 16, color: color),
             ),
             const SizedBox(width: 9),

@@ -8,7 +8,16 @@ import 'number_pad.dart';
 
 /// Four PIN dots + number pad. Calls [onComplete] as soon as 4 digits are in (C4).
 class PinPad extends StatefulWidget {
-  const PinPad({super.key, required this.onComplete, this.error, this.enabled = true, this.keyHeight = 58});
+  const PinPad({super.key, required this.onComplete, this.error, this.enabled = true, this.keyHeight = 58, this.hint, this.footnote, this.expand = false});
+
+  /// Grey line under the dots when there is no error ("Avoid easy PINs…", screen 06).
+  final String? hint;
+
+  /// Small line just above the keys ("Stored only on this phone…", screen 06).
+  final Widget? footnote;
+
+  /// Dots at the top and keys at the bottom of the space given (needs a bounded height).
+  final bool expand;
 
   final Future<void> Function(String pin) onComplete;
 
@@ -56,7 +65,7 @@ class PinPadState extends State<PinPad> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: widget.expand ? MainAxisSize.max : MainAxisSize.min,
       children: [
         AnimatedBuilder(
           animation: _shake,
@@ -73,9 +82,9 @@ class PinPadState extends State<PinPad> with SingleTickerProviderStateMixin {
                 for (var i = 0; i < 4; i++)
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 160),
-                    margin: const EdgeInsets.symmetric(horizontal: 9),
-                    width: 16,
-                    height: 16,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    width: 15,
+                    height: 15,
                     decoration: ShapeDecoration(
                       color: i < _pin.length ? c.brandButton : Colors.transparent,
                       shape: CircleBorder(
@@ -94,7 +103,7 @@ class PinPadState extends State<PinPad> with SingleTickerProviderStateMixin {
           height: 40,
           child: Center(
             child: widget.error == null
-                ? null
+                ? (widget.hint == null ? null : Text(widget.hint!, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall))
                 : Text(
                     widget.error!,
                     textAlign: TextAlign.center,
@@ -102,9 +111,11 @@ class PinPadState extends State<PinPad> with SingleTickerProviderStateMixin {
                   ),
           ),
         ),
-        const SizedBox(height: AppSpacing.xs),
+        if (widget.expand) const Spacer() else const SizedBox(height: AppSpacing.xs),
+        if (widget.footnote != null) ...[widget.footnote!, const SizedBox(height: AppSpacing.xs)],
         NumberPad(
           showDot: false,
+          phoneStyle: true,
           keyHeight: widget.keyHeight,
           onDigit: _digit,
           onBackspace: () {

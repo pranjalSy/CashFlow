@@ -34,7 +34,7 @@ class BillTypeScreen extends ConsumerWidget {
       child: SafeArea(
         child: ListView(padding: const EdgeInsets.fromLTRB(AppSpacing.md, 4, AppSpacing.md, AppSpacing.xl), children: [
           Row(children: [
-            IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
+            HeaderButton(icon: LucideIcons.x, tooltip: l.close, onTap: () => context.pop()),
             Expanded(child: Center(child: Text(l.addBill, style: t.titleLarge))),
             const SizedBox(width: 48),
           ]),
@@ -73,24 +73,26 @@ class BillTypeScreen extends ConsumerWidget {
               ],
             ),
             SectionLabel(l.popular),
-            for (final p in popularProviders)
-              Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-                child: AppCard(
-                  radius: AppRadii.md,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  onTap: () => _open(context, p.type, name: p.name, gap: p.gap),
-                  child: ListRowTile(
+            // Popular providers in one card (screen 20 step 1).
+            AppCard(
+              radius: AppRadii.lg,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+              child: Column(children: [
+                for (final (i, p) in popularProviders.indexed) ...[
+                  if (i > 0) Divider(height: 1, color: c.border),
+                  ListRowTile(
                     leading: () {
                       final (fg, bg) = billColors(context, p.type);
-                      return IconTile(icon: billIcon(p.type), color: fg, tint: bg);
+                      return IconTile(icon: billIcon(p.type), color: fg, tint: bg, size: 34);
                     }(),
                     title: p.name,
                     subtitle: '${billTypeName(l, p.type)} · ${l.everyNMonths(p.gap)}',
-                    trailing: Icon(LucideIcons.chevronRight, color: c.textMuted),
+                    trailing: Icon(LucideIcons.chevronRight, size: 18, color: c.textMuted),
+                    onTap: () => _open(context, p.type, name: p.name, gap: p.gap),
                   ),
-                ),
-              ),
+                ],
+              ]),
+            ),
           ],
         ]),
       ),

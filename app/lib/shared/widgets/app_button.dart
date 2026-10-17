@@ -16,10 +16,14 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.expand = true,
     this.height = 52,
+    this.color,
   });
 
   final String label;
   final VoidCallback onPressed;
+
+  /// Fill colour instead of the kind's (Lent blue / Borrowed pink save button, screen 15).
+  final Color? color;
   final AppButtonKind kind;
   final IconData? icon;
   final bool expand;
@@ -28,7 +32,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final (bg, fg) = switch (kind) {
+    final (bg0, fg) = switch (kind) {
       AppButtonKind.primary => (c.brandButton, c.onButton),
       AppButtonKind.success => (c.incomeButton, c.onButton),
       AppButtonKind.danger => (c.expenseButton, c.onButton),
@@ -36,6 +40,7 @@ class AppButton extends StatelessWidget {
       AppButtonKind.secondary => (c.raised, c.text),
       AppButtonKind.soft => (c.expenseTint, c.expense),
     };
+    final bg = color ?? bg0;
     final coloured = kind != AppButtonKind.secondary && kind != AppButtonKind.soft;
     final shape = AppShapes.squircle(AppRadii.pill);
     final text = Text(

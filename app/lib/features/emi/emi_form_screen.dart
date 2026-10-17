@@ -464,7 +464,6 @@ class _EmiFormScreenState extends ConsumerState<EmiFormScreen> with SingleTicker
               if (_active != null)
                 Material(
                   color: c.sheet,
-                  elevation: 12,
                   shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.xl))),
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(14, 10, 14, 10 + MediaQuery.paddingOf(context).bottom),

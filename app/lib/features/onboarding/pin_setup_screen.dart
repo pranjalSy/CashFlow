@@ -55,11 +55,12 @@ class _PinSetupScreenState extends ConsumerState<PinSetupScreen> {
       child: LayoutBuilder(
         builder: (context, box) {
           final compact = box.maxHeight < 600;
+          final c = context.colors;
           return Column(
             children: [
               if (!compact) ...[
-                const SizedBox(height: AppSpacing.md),
-                const HeroIcon(icon: LucideIcons.lock, size: 72),
+                const SizedBox(height: AppSpacing.sm),
+                const HeroIcon(icon: LucideIcons.shieldCheck, size: 68),
                 const SizedBox(height: AppSpacing.md),
               ],
               AnimatedSwitcher(
@@ -72,14 +73,29 @@ class _PinSetupScreenState extends ConsumerState<PinSetupScreen> {
                     Text(
                       confirming ? l.pinConfirmBody : l.pinCreateBody,
                       textAlign: TextAlign.center,
-                      style: t.bodyMedium?.copyWith(color: context.colors.textSecondary),
+                      style: t.bodyMedium?.copyWith(color: c.textSecondary),
                     ),
                   ],
                 ),
               ),
-              const Spacer(),
-              PinPad(key: ValueKey(confirming), onComplete: _onPin, error: _error, keyHeight: compact ? 46 : 58),
-              const SizedBox(height: AppSpacing.sm),
+              const SizedBox(height: AppSpacing.md),
+              // Dots right under the text, keys at the bottom (screen 06).
+              Expanded(
+                child: PinPad(
+                  key: ValueKey(confirming),
+                  onComplete: _onPin,
+                  error: _error,
+                  keyHeight: compact ? 46 : 56,
+                  expand: true,
+                  hint: confirming ? null : l.pinAvoidEasy,
+                  footnote: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Icon(LucideIcons.lock, size: 13, color: c.income),
+                    const SizedBox(width: 6),
+                    Flexible(child: Text(l.pinStoredOnPhone, style: t.labelSmall?.copyWith(color: c.income))),
+                  ]),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.xs),
             ],
           );
         },

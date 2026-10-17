@@ -154,7 +154,7 @@ class _EntryFormScreenState extends ConsumerState<EntryFormScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
                   child: Row(children: [
-                    IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.x, color: c.text), tooltip: l.close),
+                    HeaderButton(icon: LucideIcons.x, tooltip: l.close, onTap: () => context.pop()),
                     Expanded(
                       child: Center(
                         child: SegmentedSwitch(
@@ -391,7 +391,6 @@ class _AmountPad extends StatelessWidget {
     final short = MediaQuery.sizeOf(context).height < 700;
     return Material(
       color: c.sheet,
-      elevation: 12,
       shadowColor: Colors.black.withValues(alpha: 0.25),
       shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.xl))),
       child: Padding(

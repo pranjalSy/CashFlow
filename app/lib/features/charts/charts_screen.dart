@@ -22,6 +22,7 @@ import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/overlays.dart';
 import '../../shared/widgets/states.dart';
 import '../../shared/widgets/tab_page.dart';
+import '../emi/emi_bills_screen.dart';
 import 'charts_controller.dart';
 
 /// Charts (FR-C1, screen 16): Spending | Trends. Premium; Free users see the locked card.
@@ -51,7 +52,7 @@ class _ChartsScreenState extends ConsumerState<ChartsScreen> {
         ]),
       ),
       children: [
-        SegmentedSwitch(options: [l.spending, l.trends], index: _tab, onChanged: (i) => setState(() => _tab = i)),
+        SegmentedSwitch(options: [l.spending, l.trends], index: _tab, expand: true, onChanged: (i) => setState(() => _tab = i)),
         const SizedBox(height: AppSpacing.md),
         if (!premium)
           PremiumLockCard(
@@ -90,7 +91,6 @@ class _Spending extends ConsumerWidget {
     final prev = monthShort(context, month == 1 ? year - 1 : year, month == 1 ? 12 : month - 1).split(' ').first;
     Color colorOf(SpendSlice s) => s.isUdhar ? c.lent : (s.categoryId != null && cats[s.categoryId] != null ? Color(cats[s.categoryId]!.color) : c.textSecondary);
     String nameOf(SpendSlice s) => s.isUdhar ? l.lent : (s.categoryId != null && cats[s.categoryId] != null ? categoryName(l, cats[s.categoryId]!) : l.catOthers);
-    IconData iconOf(SpendSlice s) => s.isUdhar ? LucideIcons.arrowRight : categoryIcon(cats[s.categoryId]?.icon ?? '');
 
     final change = data.previousTotal == 0 ? null : ((data.total - data.previousTotal) * 100 / data.previousTotal).round();
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -99,8 +99,10 @@ class _Spending extends ConsumerWidget {
       FadeSlideIn(
         index: 1,
         child: AppCard(
-          child: Column(children: [
-            DonutChart(
+          radius: AppRadii.lg,
+          padding: const EdgeInsets.symmetric(vertical: 22),
+          child: Center(
+            child: DonutChart(
               key: ValueKey('$year-$month-$udhar-${data.total}'),
               values: [for (final s in data.slices) s.amount],
               colors: [for (final s in data.slices) colorOf(s)],
@@ -115,40 +117,40 @@ class _Spending extends ConsumerWidget {
                   ),
               ]),
             ),
-            const SizedBox(height: AppSpacing.sm),
-            ListRowTile(
-              leading: Icon(LucideIcons.handshake, color: c.textSecondary),
-              title: l.includeUdhar,
-              trailing: AppToggle(value: udhar, onChanged: onUdhar),
-            ),
-          ]),
+          ),
         ),
       ),
-      const SizedBox(height: AppSpacing.sm),
+      // "Include udhar" sits between the donut and the list (screen 16).
+      Padding(
+        padding: const EdgeInsets.fromLTRB(6, 6, 0, 6),
+        child: Row(children: [
+          Expanded(child: Text(l.includeUdhar, style: t.labelMedium)),
+          AppToggle(value: udhar, onChanged: onUdhar),
+        ]),
+      ),
       if (data.slices.isEmpty) AppCard(child: EmptyState(icon: LucideIcons.chartPie, title: l.noSpendingTitle, message: l.noSpendingBody)),
-      for (final (i, s) in data.slices.indexed)
+      if (data.slices.isNotEmpty)
         FadeSlideIn(
-          key: ValueKey('${s.categoryId}-${s.isUdhar}'),
-          index: i + 2,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-            child: _ShareRow(
-              icon: iconOf(s),
-              color: colorOf(s),
-              name: nameOf(s),
-              amount: s.amount,
-              fraction: data.total == 0 ? 0 : s.amount / data.total,
-            ),
+          index: 2,
+          child: AppCard(
+            radius: AppRadii.lg,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+            child: Column(children: [
+              for (final (i, s) in data.slices.indexed) ...[
+                if (i > 0) Divider(height: 1, color: c.border),
+                _ShareRow(color: colorOf(s), name: nameOf(s), amount: s.amount, fraction: data.total == 0 ? 0 : s.amount / data.total),
+              ],
+            ]),
           ),
         ),
     ]);
   }
 }
 
+/// One category in the list (screen 16): colour dot, name, amount, a bar and the share in %.
 class _ShareRow extends StatelessWidget {
-  const _ShareRow({required this.icon, required this.color, required this.name, required this.amount, required this.fraction});
+  const _ShareRow({required this.color, required this.name, required this.amount, required this.fraction});
 
-  final IconData icon;
   final Color color;
   final String name;
   final int amount;
@@ -159,36 +161,30 @@ class _ShareRow extends StatelessWidget {
     final l = context.l10n;
     final c = context.colors;
     final t = Theme.of(context).textTheme;
-    return AppCard(
-      radius: AppRadii.md,
-      padding: const EdgeInsets.all(AppSpacing.sm),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(children: [
-        IconTile(icon: icon, color: color, tint: color.withValues(alpha: 0.16), size: 36),
-        const SizedBox(width: 11),
+        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(3))),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
-              Expanded(child: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall)),
+              Expanded(child: Text(name, maxLines: 1, overflow: TextOverflow.ellipsis, style: t.titleSmall?.copyWith(fontWeight: FontWeight.w700))),
               AmountText(Money.format(amount), size: 14, alignment: Alignment.centerRight),
             ]),
             const SizedBox(height: 6),
-            Row(children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: TweenAnimationBuilder<double>(
-                    tween: Tween(begin: 0, end: fraction),
-                    duration: Motion.off(context) ? Duration.zero : const Duration(milliseconds: 600),
-                    curve: Curves.easeOutCubic,
-                    builder: (context, v, _) => LinearProgressIndicator(value: v, minHeight: 5, color: color, backgroundColor: c.raised),
-                  ),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0, end: fraction),
+                duration: Motion.off(context) ? Duration.zero : const Duration(milliseconds: 600),
+                curve: Curves.easeOutCubic,
+                builder: (context, v, _) => LinearProgressIndicator(value: v, minHeight: 5, color: color, backgroundColor: c.raised),
               ),
-              const SizedBox(width: 8),
-              Text(l.percentOf((fraction * 100).round()), style: t.labelSmall),
-            ]),
+            ),
           ]),
         ),
+        SizedBox(width: 44, child: Text(l.percentOf((fraction * 100).round()), textAlign: TextAlign.right, style: t.labelSmall)),
       ]),
     );
   }
@@ -212,26 +208,33 @@ class _BudgetCard extends ConsumerWidget {
     final spent = spend?.overall ?? 0;
     final band = limit == null ? BudgetBand.ok : budgetBand(spent, limit);
     final color = bandColor(context, band);
+    // Compact card (screen 16): "Budget ₹28,500 of ₹35,000   81% ›" with a bar under it.
     return AppCard(
-      radius: AppRadii.md,
-      padding: const EdgeInsets.all(AppSpacing.sm),
+      radius: AppRadii.lg,
+      padding: const EdgeInsets.fromLTRB(14, 12, 10, 12),
       onTap: () => context.push('/budget'),
-      child: Row(children: [
-        IconTile(icon: LucideIcons.target, color: color, tint: color.withValues(alpha: 0.16), size: 36),
-        const SizedBox(width: 11),
-        Expanded(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(l.budget, style: t.labelMedium),
-            Text(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Row(children: [
+          Text(l.budget, style: t.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
               limit == null ? l.setMonthlyBudget : l.budgetOfLimit(Money.format(spent), Money.format(limit)),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: t.titleSmall,
+              style: t.bodySmall,
             ),
-          ]),
-        ),
-        if (limit != null && limit > 0) Text(l.percentOf((spent * 100 / limit).round()), style: t.titleSmall?.copyWith(color: color)),
-        Icon(LucideIcons.chevronRight, color: c.textMuted),
+          ),
+          if (limit != null && limit > 0) Text(l.percentOf((spent * 100 / limit).round()), style: t.titleSmall?.copyWith(color: color, fontWeight: FontWeight.w800)),
+          Icon(LucideIcons.chevronRight, size: 18, color: c.textMuted),
+        ]),
+        if (limit != null && limit > 0) ...[
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(value: (spent / limit).clamp(0, 1), minHeight: 6, color: color, backgroundColor: c.raised),
+          ),
+        ],
       ]),
     );
   }
@@ -290,10 +293,11 @@ class _TrendsState extends ConsumerState<_Trends> {
         child: AppCard(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
-              Expanded(child: Text(l.lastSixMonths, style: t.titleSmall)),
               _Legend(color: c.incomeButton, label: l.income),
-              const SizedBox(width: 10),
+              const SizedBox(width: 12),
               _Legend(color: c.expenseButton, label: l.expense),
+              const SizedBox(width: 8),
+              Expanded(child: Text(l.lastSixMonths, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.right, style: t.labelSmall)),
             ]),
             const SizedBox(height: AppSpacing.sm),
             IncomeExpenseBars(
@@ -321,8 +325,12 @@ class _TrendsState extends ConsumerState<_Trends> {
         index: 2,
         child: AppCard(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(monthName(context, sel.year, sel.month), style: t.titleMedium),
-            if (sel.saved > 0 && sel.saved == best) Text(l.bestMonthSaving, style: t.labelMedium?.copyWith(color: c.income)),
+            Row(children: [
+              Text(monthName(context, sel.year, sel.month).split(' ').first, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+              const SizedBox(width: 8),
+              const Spacer(),
+              if (sel.saved > 0 && sel.saved == best) Flexible(child: EmiTag(text: l.bestMonthSaving, color: c.income, tint: c.incomeTint)),
+            ]),
             const SizedBox(height: AppSpacing.xs),
             _Line(label: l.income, amount: Money.format(sel.income, showPlus: true), color: c.income),
             _Line(label: l.expense, amount: Money.format(-sel.expense), color: c.expense),

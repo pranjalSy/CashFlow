@@ -201,9 +201,17 @@ class _LanguageRow extends StatelessWidget {
                     child: Text(comingSoon, style: t.labelSmall),
                   )
                 else
-                  Icon(
-                    selected ? LucideIcons.circleCheck : LucideIcons.circle,
-                    color: selected ? c.brandButton : c.textMuted,
+                  // Filled blue circle with a white tick when chosen, an empty ring otherwise (screen 03).
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: selected ? c.brandButton : Colors.transparent,
+                      border: Border.all(color: selected ? c.brandButton : c.textMuted, width: 1.6),
+                    ),
+                    child: selected ? Icon(LucideIcons.check, size: 15, color: c.onButton) : null,
                   ),
               ],
             ),

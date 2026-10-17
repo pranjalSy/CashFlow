@@ -77,11 +77,16 @@ class AppChip extends StatelessWidget {
             },
             customBorder: shape,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-              child: AnimatedDefaultTextStyle(
-                duration: Motion.medium,
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(color: selected ? c.onButton : c.textSecondary, fontWeight: FontWeight.w700),
-                child: Text(label),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+              // Centred when the chip is given more width (equal chips in a row); shrinks otherwise.
+              child: Align(
+                widthFactor: 1,
+                heightFactor: 1,
+                child: AnimatedDefaultTextStyle(
+                  duration: Motion.medium,
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(color: selected ? c.onButton : c.textSecondary, fontWeight: FontWeight.w700),
+                  child: Text(label),
+                ),
               ),
             ),
           ),

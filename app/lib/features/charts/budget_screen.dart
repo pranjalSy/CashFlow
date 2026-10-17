@@ -19,7 +19,6 @@ import '../../shared/widgets/app_card.dart';
 import '../../shared/widgets/app_page.dart';
 import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/charts.dart';
-import '../../shared/widgets/month_pill.dart';
 import '../../shared/widgets/motion.dart';
 import '../../shared/widgets/number_pad.dart';
 import '../../shared/widgets/overlays.dart';
@@ -48,11 +47,31 @@ class BudgetScreen extends ConsumerWidget {
       child: SafeArea(
         child: ListView(padding: const EdgeInsets.fromLTRB(AppSpacing.md, 4, AppSpacing.md, AppSpacing.xl), children: [
           Row(children: [
-            IconButton(onPressed: () => context.pop(), icon: Icon(LucideIcons.arrowLeft, color: c.text), tooltip: l.back),
-            Expanded(child: Text(l.budget, style: t.titleLarge)),
-            MonthPill(year: m.year, month: m.month, onShift: ref.read(chartsMonthProvider.notifier).shift),
+            HeaderButton(icon: LucideIcons.chevronLeft, tooltip: l.back, onTap: () => context.pop()),
+            Expanded(child: Center(child: Text(l.budget, style: t.titleLarge))),
+            if (premium)
+              HeaderButton(
+                icon: LucideIcons.pencil,
+                tooltip: l.monthlyBudgetTitle,
+                onTap: () => showLimitSheet(context, current: budget?.monthlyLimit, alert: budget?.alertEnabled ?? true, average: spend?.overallAverage ?? 0),
+              )
+            else
+              const SizedBox(width: 48),
           ]),
-          const SizedBox(height: AppSpacing.sm),
+          // Month centred under the title: ‹ October 2026 › (screen 21).
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            IconButton(
+              tooltip: MaterialLocalizations.of(context).previousPageTooltip,
+              onPressed: () => ref.read(chartsMonthProvider.notifier).shift(-1),
+              icon: Icon(LucideIcons.chevronLeft, size: 18, color: c.textSecondary),
+            ),
+            Text(monthName(context, m.year, m.month), style: t.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+            IconButton(
+              tooltip: MaterialLocalizations.of(context).nextPageTooltip,
+              onPressed: () => ref.read(chartsMonthProvider.notifier).shift(1),
+              icon: Icon(LucideIcons.chevronRight, size: 18, color: c.textSecondary),
+            ),
+          ]),
           if (!premium)
             const EmiLockCard()
           else ...[
@@ -145,6 +164,7 @@ class _Overview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    final c = context.colors;
     final t = Theme.of(context).textTheme;
     final band = budgetBand(spent, limit);
     final color = bandColor(context, band);
@@ -153,33 +173,44 @@ class _Overview extends StatelessWidget {
     final current = today.year == year && today.month == month;
     final left = limit - spent;
     final daysLeft = LocalDate.daysInMonth(year, month) - today.day + 1;
-    final String footer;
-    if (left < 0) {
-      footer = l.amountOver(Money.format(-left));
-    } else if (current) {
-      footer = l.leftDaysPerDay(Money.format(left), daysLeft, Money.format(left ~/ daysLeft ~/ 100 * 100)); // whole rupees, rounded down
-    } else {
-      footer = l.amountLeft(Money.format(left));
-    }
+    // Card (screen 21): spent + "of limit" with the ring on the right, a bar, then "₹6,500 left" and "17 days · ₹382/day".
     return AppCard(
+      radius: AppRadii.lg,
       onTap: onTap,
-      child: Row(children: [
-        Expanded(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(monthName(context, year, month), style: t.labelMedium),
-            Text(l.spentThisMonth, style: t.bodySmall),
-            CountUpAmount(paise: spent, size: 26),
-            Text(l.ofLimit(Money.format(limit)), style: t.bodySmall),
-            const SizedBox(height: 6),
-            Text(footer, style: t.labelMedium?.copyWith(color: color, fontWeight: FontWeight.w700)),
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Row(children: [
+          Expanded(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(l.spentThisMonth, style: t.bodySmall),
+              CountUpAmount(paise: spent, size: 28),
+              Text(l.ofLimit(Money.format(limit)), style: t.bodySmall),
+            ]),
+          ),
+          ProgressRing(
+            key: ValueKey('$year-$month-$limit'),
+            fraction: limit == 0 ? 0 : spent / limit,
+            color: color,
+            size: 70,
+            stroke: 8,
+            center: Text(l.percentOf(pct), style: t.titleSmall?.copyWith(color: color, fontWeight: FontWeight.w800)),
+          ),
+        ]),
+        const SizedBox(height: 12),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(value: limit == 0 ? 0 : (spent / limit).clamp(0, 1), minHeight: 7, color: color, backgroundColor: c.raised),
         ),
-        ProgressRing(
-          key: ValueKey('$year-$month-$limit'),
-          fraction: limit == 0 ? 0 : spent / limit,
-          color: color,
-          center: Text(l.percentOf(pct), style: t.titleMedium?.copyWith(color: color, fontWeight: FontWeight.w800)),
-        ),
+        const SizedBox(height: 8),
+        Row(children: [
+          Expanded(
+            child: Text(
+              left < 0 ? l.amountOver(Money.format(-left)) : l.amountLeft(Money.format(left)),
+              style: t.labelMedium?.copyWith(color: left < 0 ? c.expense : c.text, fontWeight: FontWeight.w800),
+            ),
+          ),
+          if (current && left > 0)
+            Text(l.daysPerDay(daysLeft, Money.format(left ~/ daysLeft ~/ 100 * 100)), style: t.bodySmall),
+        ]),
       ]),
     );
   }

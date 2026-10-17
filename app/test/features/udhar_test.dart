@@ -48,17 +48,17 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Lent').last);
     await settle(tester);
-    expect(find.text('Lent money'), findsOneWidget);
+    expect(find.text('You gave someone'), findsOneWidget); // Lent | Borrowed switch at the top (screen 15)
 
     await typeDigits(tester, '5000');
     await tester.tap(find.text('Done'));
     await settle(tester);
     await tester.tap(find.text('Save lent'));
     await settle(tester);
-    expect(find.text('Choose a person'), findsWidgets); // red message, nothing saved
+    expect(find.text('Choose who you gave money to'), findsOneWidget); // red message, nothing saved
     expect(await h.db.select(h.db.debts).get(), isEmpty);
 
-    await tester.tap(find.text('Due date'));
+    await tester.tap(find.text('No due date'));
     await settle(tester);
     expect(find.text('Due dates are Premium'), findsOneWidget);
     await tester.tap(find.text('Not now'));

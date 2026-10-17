@@ -37,13 +37,15 @@ void main() {
     await typeDigits(tester, '4829');
     await settle(tester);
     // No fingerprint sensor: that step is skipped automatically (C5).
-    expect(find.text('How much money do you have now?'), findsOneWidget);
+    expect(find.text('Your starting balance'), findsOneWidget);
     await typeDigits(tester, '850');
-    await tester.tap(find.text('In bank / UPI'));
+    await tester.tap(find.text('Bank and UPI'));
     await tester.pump();
     await typeDigits(tester, '111500');
     await tester.pump();
     expect(find.text('₹1,12,350'), findsOneWidget);
+    await tester.tap(find.text('Next')); // online was the last field: the pad closes (screen 08)
+    await settle(tester);
     await tester.tap(find.text('Continue'));
     await settle(tester);
     expect(find.text('Track udhar with your contacts'), findsOneWidget);
@@ -67,7 +69,7 @@ void main() {
     await settle(tester);
     await typeDigits(tester, '4829');
     await settle(tester);
-    await tester.tap(find.text('Skip for now'));
+    await tester.tap(find.text('Skip'));
     await settle(tester);
     await tester.tap(find.text('Allow contacts'));
     await settle(tester);
@@ -89,7 +91,7 @@ void main() {
     expect(h.prefs.language, 'hi');
     await tester.tap(find.text('आगे बढ़ें'));
     await settle(tester);
-    expect(find.text('4 अंकों का PIN बनाएं'), findsOneWidget);
+    expect(find.text('अपना PIN बनाएं'), findsOneWidget);
     await closeApp(tester);
   });
 
@@ -101,7 +103,7 @@ void main() {
     await typeDigits(tester, '1111');
     await settle(tester);
     expect(find.text("PINs don't match. Try again."), findsOneWidget);
-    expect(find.text('Create a 4-digit PIN'), findsOneWidget);
+    expect(find.text('Create your PIN'), findsOneWidget);
     await closeApp(tester);
   });
 
@@ -113,12 +115,15 @@ void main() {
     await settle(tester);
     await typeDigits(tester, '4829');
     await settle(tester);
-    expect(find.text('Unlock with fingerprint?'), findsOneWidget);
-    await tester.tap(find.text('Use fingerprint'));
+    expect(find.text('Unlock with fingerprint'), findsOneWidget);
+    await tester.tap(find.text('Turn on fingerprint'));
     await settle(tester);
     expect(h.biometrics.prompts, 1);
     expect(h.biometrics.enabled, isTrue);
-    expect(find.text('How much money do you have now?'), findsOneWidget);
+    expect(find.text('Fingerprint is on'), findsOneWidget);
+    await tester.tap(find.text('Continue'));
+    await settle(tester);
+    expect(find.text('Your starting balance'), findsOneWidget);
     await closeApp(tester);
   });
 
