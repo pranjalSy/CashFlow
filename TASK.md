@@ -10,10 +10,10 @@
 
 | | |
 |---|---|
-| **Running** | Nothing — T11–T13 + light-mockup UI pass built (17 Oct) |
-| **Waiting for owner** | 🧪 Connect phone → install release build → test T11–T13 and the new UI |
-| **Next** | ⏳ T14 Settings + empty/offline states |
-| **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T02–T10 + phone-test fixes **committed locally (owner asked, 17 Oct), not pushed** · on GitHub `experiment` has only T00b + T01 · `main` = README only (push / merge only on owner's yes) |
+| **Running** | 🔄 T14 Settings + empty/offline states (plan first) |
+| **Waiting for owner** | T14 plan approval |
+| **Next** | ⏳ T15 Supabase schema (Phase D) |
+| **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T00b–T13 owner-tested and **pushed to `experiment` (17 Oct)** · `main` = README only (merge only on owner's separate yes) |
 
 ---
 
@@ -29,13 +29,13 @@
 | DOC2 | TRD v2.0 (approved) | `doc/TRD.md` | 14 Oct |
 | DOC3 | AGENTS.md (agent rules) + this TASK.md | root | 15 Oct |
 | G1 | GitHub repo `pranjalSy/CashFlow` (public) with `main` + `experiment` | README only | 15 Oct |
+| T00b–T13 | App setup, theme, widgets, l10n, database, engine, first run, lock, Home, Contacts/udhar, EMI, Bills, Charts + Budget, Export + Search, light-mockup UI pass | Owner tested on phone · pushed to `experiment` | 17 Oct |
 
 ## 🔄 Running / 🧪 Owner testing
 
 | # | Task | Status | What is left |
 |---|---|---|---|
-| T00b | App setup fixes (INTERNET, data-extraction rules, iOS name, colours) | 🧪 Built + pushed to `experiment`; **phone test pending** | Owner tests together with T02–T10 |
-| T01 | Theme: tokens light/dark, Inter + Noto fonts, squircle, spacing, preview; 17 tests pass | 🧪 Built + pushed to `experiment`; **phone test pending** | Same |
+| T14 | Settings + empty/offline states | 🔄 Plan first (waiting for owner's OK) | — |
 
 ## ⏸ Paused
 
@@ -53,28 +53,28 @@
 ### Phase A · Frontend foundation
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T01 | Theme tokens (light + dark), fonts (Inter, Noto Devanagari/Gujarati) | FR-U1, FR-U9, FR-U10 · TRD 14 | 🧪 Phone test pending |
-| T02 | Shared widget library + dev gallery screen (cards, glass nav, sheets, number pad, chips, snackbar, swipe row, empty state…) | FR-U2–U8 · TRD 14 | 🧪 Built · local commit · phone test after T10 |
-| T03 | Localization en/hi/gu + money, date (IST), EMI utilities with tests | §4, §8 · TRD 5, 7, 15 | 🧪 Built · local commit · phone test after T10 |
+| T01 | Theme tokens (light + dark), fonts (Inter, Noto Devanagari/Gujarati) | FR-U1, FR-U9, FR-U10 · TRD 14 | ✅ Owner tested · pushed 17 Oct |
+| T02 | Shared widget library + dev gallery screen (cards, glass nav, sheets, number pad, chips, snackbar, swipe row, empty state…) | FR-U2–U8 · TRD 14 | ✅ Owner tested · pushed 17 Oct |
+| T03 | Localization en/hi/gu + money, date (IST), EMI utilities with tests | §4, §8 · TRD 5, 7, 15 | ✅ Owner tested · pushed 17 Oct |
 
 ### Phase B · Phone brain (offline)
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | 🧪 Built · local commit · phone test after T10 |
-| T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | 🧪 Built · local commit · phone test after T10 |
+| T04 | Encrypted local database (Drift) + all tables + outbox | NFR-9 · TRD 6, 11.1 | ✅ Owner tested · pushed 17 Oct |
+| T05 | Calculation engine (totals, balance, contact net, budget) | §8 · TRD 7 | ✅ Owner tested · pushed 17 Oct |
 
 ### Phase C · Screens (work offline)
 | # | Task | PRD / TRD | Status |
 |---|---|---|---|
-| T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | 🧪 Built · local commit · phone test after T10 |
-| T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | 🧪 Built (lock screen, timer, lockout) · Settings parts in T14 |
-| T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | 🧪 Built · local commit · phone test after T10 |
-| T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | 🧪 Built · local commit · phone test after T10 |
-| T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | 🧪 Built · local commit · phone test pending |
-| T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | 🧪 Built · local commit · phone test pending |
-| T12 | Charts + Budget | FR-C1, FR-BG1–BG5 | 🧪 Built · local commit · phone test pending |
-| T13 | Export (PDF/CSV) + Search | FR-C2, FR-C3 | 🧪 Built · local commit · phone test pending |
-| T14 | Settings + empty/offline states | FR-G1, FR-S8, FR-U8 | ⬜ |
+| T06 | First run: splash, language, PIN, fingerprint, opening balance, contacts permission | FR-A4, FR-A5, FR-L1–L4, FR-O7 | ✅ Owner tested · pushed 17 Oct |
+| T07 | App lock (PIN, fingerprint, lock-after, wrong-attempt delay) | FR-L5–L10 · TRD 11 | ✅ Owner tested · pushed 17 Oct |
+| T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | ✅ Owner tested · pushed 17 Oct |
+| T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | ✅ Owner tested · pushed 17 Oct |
+| T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | ✅ Owner tested · pushed 17 Oct |
+| T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | ✅ Owner tested · pushed 17 Oct |
+| T12 | Charts + Budget | FR-C1, FR-BG1–BG5 | ✅ Owner tested · pushed 17 Oct |
+| T13 | Export (PDF/CSV) + Search | FR-C2, FR-C3 | ✅ Owner tested · pushed 17 Oct |
+| T14 | Settings + empty/offline states | FR-G1, FR-S8, FR-U8 | 🔄 |
 
 ### Phase D · Backend
 | # | Task | PRD / TRD | Status |
