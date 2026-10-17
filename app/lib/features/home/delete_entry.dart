@@ -7,13 +7,14 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shapes.dart';
 import '../../core/ui/labels.dart';
 import '../../data/local/database.dart';
+import '../../data/repositories/debt_repository.dart';
 import '../../data/repositories/entry_repository.dart';
 import '../../shared/widgets/app_button.dart';
 import '../../shared/widgets/basics.dart';
 import '../../shared/widgets/overlays.dart';
 
 /// "Delete this entry?" (E4): confirm sheet, soft delete, then 5 s Undo.
-Future<bool> confirmAndDeleteEntry(BuildContext context, WidgetRef ref, HomeEntry entry, Category? category) async {
+Future<bool> confirmAndDeleteEntry(BuildContext context, WidgetRef ref, HomeEntry entry, Category? category, {String? personName}) async {
   final l = context.l10n;
   final ok = await showAppSheet<bool>(
     context,
@@ -36,6 +37,14 @@ Future<bool> confirmAndDeleteEntry(BuildContext context, WidgetRef ref, HomeEntr
     },
   );
   if (ok != true || !context.mounted) return false;
+  if (entry.isUdhar) {
+    // Udhar rows swipe too (FR-H3): the udhar and its repayments go, with the same Undo.
+    final debts = ref.read(debtRepositoryProvider);
+    final batch = await debts.delete(entry.id);
+    if (!context.mounted) return true;
+    CompactSnackbar.show(context, message: l.entryDeleted(personName ?? l.udhar), actionLabel: l.undo, onAction: () => debts.undoDelete(entry.id, batch));
+    return true;
+  }
   final repo = ref.read(entryRepositoryProvider);
   final batch = await repo.delete(entry.id);
   if (!context.mounted) return true;

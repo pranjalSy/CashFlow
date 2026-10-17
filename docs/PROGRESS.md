@@ -285,4 +285,8 @@
   - "Due this month" now means the next installment of each EMI plus late ones (screen 17 example).
 - Suite **166 passing**, analyze clean (only the uncommitted local screenshot test has warnings). Dev release APK built (70.6 MB); **not installed: phone not connected**.
 - Not matched yet / open: Settings (T14), Category picker (12), due popups (14b) and Person detail need a closer pass; names in the header still need a name field (not in PRD).
+- **Owner fixes (17 Oct, after the phone test):**
+  1. The Contacts tab flashed "Contacts are off" after an app restart while contacts were re-read. Now the last contact list (name + numbers) is kept in the encrypted phone database (phone-only flag `contacts_cache`, never uploaded, cleared if permission is turned off) and shown at once, then refreshed. The "off" card never shows while loading. Checked on the phone: 5 reads right after a cold start all showed the list.
+  2. Udhar rows on Home did not swipe (PRD FR-H3 says every entry). Now Edit opens the person; Delete shows the confirm sheet, soft-deletes the udhar with its repayments, and offers a 5 s Undo (`DebtRepository.delete` is undoable; new `undoDelete`). Checked on the phone.
+  - Tests: contacts cache + udhar swipe/undo. Suite **168 passing**.
 

@@ -44,7 +44,7 @@ class FakeContacts extends ContactsAccess {
   FakeContacts({this.allowed = false, this.contacts = const []});
 
   bool allowed;
-  final List<Contact> contacts;
+  List<Contact> contacts;
   int requests = 0;
 
   @override

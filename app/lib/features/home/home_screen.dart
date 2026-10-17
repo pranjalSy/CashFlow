@@ -167,13 +167,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       hideAmount: hide,
       onTap: () => e.isUdhar ? context.push('/person/${e.personId}') : context.push('/entry/${e.id}'),
     );
-    if (e.isUdhar) return tile;
     final l = context.l10n;
+    // Every entry swipes (FR-H3); udhar "Edit" opens the person, where its card and repayments are.
     return SwipeActionRow(
       editLabel: l.edit,
       deleteLabel: l.delete,
-      onEdit: () => context.push('/entry/${e.id}'),
-      onDelete: () => confirmAndDeleteEntry(context, ref, e, category),
+      onEdit: () => e.isUdhar ? context.push('/person/${e.personId}') : context.push('/entry/${e.id}'),
+      onDelete: () => confirmAndDeleteEntry(context, ref, e, category, personName: person?.name),
       child: tile,
     );
   }

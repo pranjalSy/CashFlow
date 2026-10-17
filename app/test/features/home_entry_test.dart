@@ -1,3 +1,6 @@
+import 'package:cashflow/data/repositories/debt_repository.dart';
+import 'package:cashflow/data/repositories/local_writer.dart';
+import 'package:cashflow/data/repositories/people_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -107,6 +110,27 @@ void main() {
     await openUnlockedHome(tester, h, themeMode: ThemeMode.dark);
     expect(tester.takeException(), isNull);
     expect(find.text('Home'), findsWidgets);
+    await closeApp(tester);
+  });
+
+  testWidgets('udhar rows swipe too: delete asks, Undo brings the udhar and its repayment back (FR-H3, owner 17 Oct)', (tester) async {
+    final w = LocalWriter(h.db, userId: Harness.userId);
+    final rahul = await PeopleRepository(w).findOrCreate(name: 'Rahul Sharma');
+    final debts = DebtRepository(w);
+    final id = await debts.add(personId: rahul.id, direction: 'lent', amount: 300000, occurredAt: DateTime.now(), paymentMode: 'cash', premium: false);
+    await debts.recordRepayment(debtId: id, amount: 100000, occurredAt: DateTime.now(), paymentMode: 'cash');
+    await openUnlockedHome(tester, h);
+    await tester.drag(find.text('Rahul Sharma').first, const Offset(-300, 0));
+    await settle(tester);
+    expect(find.text('Delete this entry?'), findsOneWidget);
+    await tester.tap(find.text('Delete').last);
+    await settle(tester);
+    expect((await debts.byId(id))!.deletedAt, isNotNull);
+    expect((await h.db.select(h.db.debtPayments).getSingle()).deletedAt, isNotNull);
+    await tester.tap(find.text('Undo'));
+    await settle(tester);
+    expect((await debts.byId(id))!.deletedAt, isNull);
+    expect((await h.db.select(h.db.debtPayments).getSingle()).deletedAt, isNull);
     await closeApp(tester);
   });
 }

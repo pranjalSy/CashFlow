@@ -173,18 +173,30 @@ class DebtRepository {
         await _db.clearFlag('debt_ask_after_$debtId');
       });
 
-  /// Soft delete of an udhar and its repayments.
-  Future<void> delete(String debtId) => _w.action((batch) async {
+  /// Soft delete of an udhar and its repayments, held 5 s for Undo (FR-H4). Returns the batch id.
+  Future<String> delete(String debtId) => _w.action((batch) async {
         final now = _w.now();
         await (_db.update(_db.debts)..where((d) => d.id.equals(debtId)))
             .write(DebtsCompanion(deletedAt: Value(now), updatedAt: Value(now), isSynced: const Value(false)));
-        await _w.queue('debts', debtId, batch, op: 'delete');
+        await _w.queue('debts', debtId, batch, op: 'delete', undoable: true);
         final payments = await (_db.select(_db.debtPayments)..where((p) => p.debtId.equals(debtId) & p.deletedAt.isNull())).get();
         for (final p in payments) {
           await (_db.update(_db.debtPayments)..where((x) => x.id.equals(p.id)))
               .write(DebtPaymentsCompanion(deletedAt: Value(now), updatedAt: Value(now), isSynced: const Value(false)));
-          await _w.queue('debt_payments', p.id, batch, op: 'delete');
+          await _w.queue('debt_payments', p.id, batch, op: 'delete', undoable: true);
         }
+        return batch;
+      });
+
+  /// Undo inside the window: the udhar and the repayments deleted with it come back; nothing uploads.
+  Future<void> undoDelete(String debtId, String batch) => _db.transaction(() async {
+        final d = await byId(debtId);
+        final at = d?.deletedAt;
+        if (at == null) return;
+        await (_db.update(_db.debts)..where((x) => x.id.equals(debtId))).write(const DebtsCompanion(deletedAt: Value(null)));
+        await (_db.update(_db.debtPayments)..where((p) => p.debtId.equals(debtId) & p.deletedAt.equals(at)))
+            .write(const DebtPaymentsCompanion(deletedAt: Value(null)));
+        await _w.dropBatch(batch);
       });
 
   /// A person's udhar, newest first, each with its repayments.

@@ -113,7 +113,7 @@ class _ContactsScreenState extends ConsumerState<ContactsScreen> {
               child: _PersonRow(name: p.name, subtitle: p.phoneNormalized, balance: balances[p.id], onTap: () => context.push('/person/${p.id}')),
             ),
         ],
-        if (phoneList == null)
+        if (phoneList == null && !contacts.isLoading) // never flash "off" while reading
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.sm),
             child: _ContactsOffCard(
