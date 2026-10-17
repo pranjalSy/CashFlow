@@ -10,9 +10,9 @@
 
 | | |
 |---|---|
-| **Running** | Nothing (T00b–T10 built) |
-| **Waiting for owner** | 🧪 Phone test of T00b–T10 (dev APK built), then commit/push yes/no |
-| **Next** | ⏳ T11 Bills (after the owner's phone test) |
+| **Running** | Nothing — T11–T13 + light-mockup UI pass built (17 Oct) |
+| **Waiting for owner** | 🧪 Connect phone → install release build → test T11–T13 and the new UI |
+| **Next** | ⏳ T14 Settings + empty/offline states |
 | **Git** | Repo https://github.com/pranjalSy/CashFlow · branch **`experiment`** · T02–T10 + phone-test fixes **committed locally (owner asked, 17 Oct), not pushed** · on GitHub `experiment` has only T00b + T01 · `main` = README only (push / merge only on owner's yes) |
 
 ---
@@ -71,9 +71,9 @@
 | T08 | Home + Add/edit entry + category picker + swipe/delete confirm | FR-H1–H6, FR-O6, FR-T1–T9 | 🧪 Built · local commit · phone test after T10 |
 | T09 | Contacts + Person detail + Add lent/borrowed + repayment/overpayment + due popup | FR-D1–D11 | 🧪 Built · local commit · phone test after T10 |
 | T10 | EMI: add, list, detail, mark paid, popup | FR-E1–E11 | 🧪 Built · local commit · phone test pending |
-| T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | ⬜ |
-| T12 | Charts + Budget | FR-C1, FR-BG1–BG5 | ⬜ |
-| T13 | Export (PDF/CSV) + Search | FR-C2, FR-C3 | ⬜ |
+| T11 | Bills: add (type, every N months), list, pay popup with suggestions, pause | FR-B1–B7 | 🧪 Built · local commit · phone test pending |
+| T12 | Charts + Budget | FR-C1, FR-BG1–BG5 | 🧪 Built · local commit · phone test pending |
+| T13 | Export (PDF/CSV) + Search | FR-C2, FR-C3 | 🧪 Built · local commit · phone test pending |
 | T14 | Settings + empty/offline states | FR-G1, FR-S8, FR-U8 | ⬜ |
 
 ### Phase D · Backend

@@ -253,3 +253,36 @@
 - Size: the Lucide font is tree-shaken from 896 KB to 25 KB in the release APK.
 - Suite **138 passing**, analyze clean. Release dev build installed on the owner's Realme; Home, Contacts, + menu and Add entry checked (`docs/compare/home_mockup_vs_phone_lucide.png`).
 
+## 2026-10-17: T11 Bills, T12 Charts + Budget, T13 Export + Search (built; phone test pending)
+- **T11 Bills (FR-B1–B7)**
+  - `bill_repository.dart`: add, edit, pause, delete. Mark paid creates a Bills expense and moves the next due date by the gap (15 Nov + 2 months = 15 Jan), in one action.
+  - Suggestions: the last 3 bills, or the usual amount the first time. Due-popup list with "Not yet" (asks again tomorrow). Month summary in SQL.
+  - Screens: type grid with popular providers; form with next-dates preview; Bills list (This month / Later, tags); bill detail with history; pay sheet with amount chips; Home popup "Did you pay this bill?".
+  - Tests: 5 repo + 3 UI.
+- **T12 Charts + Budget (FR-C1, FR-BG1–BG5)**
+  - `charts_repository.dart` (SQL): spending by category, include-udhar slice, 6-month trend, 3-month average. `budget_repository.dart`: monthly and category limits, colour bands, round-number suggestions.
+  - Own painters (`shared/widgets/charts.dart`): donut that sweeps, bars that rise (600 ms, off with remove-animations), percent ring. `fl_chart` was approved but not needed, so it was not added.
+  - Budget screen with per-day left; limit sheet. Alerts switch saved; notifications arrive with T19.
+  - Tests: 6 data + 3 UI.
+- **T13 Search + Export (FR-C3, FR-C2)**
+  - `search_repository.dart`: offline, indexed LIKE (the TRD fallback; FTS5 not needed at phone scale). Covers people by name or number, entries by title, note, category, payment and amount, and udhar and repayments. Recent 4.
+  - Screen with filters, highlight and "Search in All". Free users get the Premium sheet.
+  - Export: `pdf` **3.13.1** (Apache-2.0, owner approved; [Verify] on pub.dev: Dart >=3.12, published 2026-09-19).
+    - PDF pages are drawn by Flutter (`core/utils/offscreen.dart`), so Hindi/Gujarati letters join correctly; checked with a rendered Hindi page.
+    - CSV is UTF-8 with BOM.
+    - Saved to Downloads by the app's own Android channel (MainActivity: MediaStore on Android 10+, app folder + FileProvider on 9 and older) with Open/Share. No `share_plus` or Downloads package was needed.
+  - Tests: 6 data + 5 UI.
+- **Light-mockup UI pass (owner rule K6: the light HTML is the design; dark changes colours only)**
+  - Every built screen was rendered with real fonts and compared side by side with its light mockup, then fixed:
+    - EMI tab, EMI detail, Mark paid, Add EMI
+    - Bills list, Add bill
+    - Home tiles, header buttons
+    - Lent/Borrowed form (Lent|Borrowed switch, Change, "You gave Rahul", due presets, Remind Off/3/7)
+    - Charts (compact budget card, single category card, legend), Budget (centred month, overview)
+    - Onboarding: Welcome (features card), Language tick, PIN (shield, hint, "stored only on this phone", phone-style keys), Fingerprint (points card + "Fingerprint is on" state), Opening balance (rows + Next pad + total), Contacts permission (floating people art)
+    - Export, Search
+  - New shared widgets: `SummaryHero`, `HeaderButton`, `DashedOutline`, `MonthPill`; `AppButton.color`; `PaymentPicker.onlineIcon`; light page glow.
+  - "Due this month" now means the next installment of each EMI plus late ones (screen 17 example).
+- Suite **166 passing**, analyze clean (only the uncommitted local screenshot test has warnings). Dev release APK built (70.6 MB); **not installed: phone not connected**.
+- Not matched yet / open: Settings (T14), Category picker (12), due popups (14b) and Person detail need a closer pass; names in the header still need a name field (not in PRD).
+
